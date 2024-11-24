@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ProfilePage() {
+function BasketPage() {
   return (
     <div>
       <h1 className='w-full flex justify-center py-4'>GameVault</h1>
@@ -61,4 +61,4 @@ function ShopImage({ name, img }) {
       </div>
   )
 }
-export default ProfilePage 
+export default BasketPage 
