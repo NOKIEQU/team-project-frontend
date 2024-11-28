@@ -1,24 +1,75 @@
+import Link from "next/link";
 
-function Navbar() {
-  return (
-    <nav className="flex justify-between items-center p-5 bg-gray-900 text-white">
-      <div className="text-2xl font-bold">GAME VAULT</div>
-      <ul className="flex space-x-8">
-        <li>
-          <a href="#" className="hover:text-purple-500">Home</a>
-        </li>
-        <li>
-          <a href="#" className="hover:text-purple-500">About Us</a>
-        </li>
-        <li>
-          <a href="#" className="hover:text-purple-500">Products</a>
-        </li>
-      </ul>
-      <button className="px-6 py-2 bg-white text-gray-900 font-medium rounded-lg hover:bg-purple-500 hover:text-white transition-all">
-        Log in
-      </button>
-    </nav>
-  );
+function Navbar({ isLoggedIn }) {
+  if (isLoggedIn) {
+    return (
+      <nav className="fixed top-0 left-0 w-full z-10 flex justify-between items-center p-1 bg-gray-900 text-white font-sans">
+        <div className="flex items-center space-x-4">
+          <img src="/logo.svg" alt="logo" className="w-16 h-16" />
+          <div className="text-2xl font-bold">GAME VAULT</div>
+        </div>
+
+        <ul className="flex space-x-12">
+          <li>
+            <Link href="/" className="hover:text-orange-500 transition-all">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/shop" className="hover:text-orange-500 transition-all">
+              Shop
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/profile"
+              className="hover:text-orange-500 transition-all"
+            >
+              Profile
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    );
+  } else {
+    return (
+      <nav className="fixed top-0 left-0 w-full z-10 flex justify-between items-center p-2 bg-gray-900 text-white font-sans">
+        <div className="flex items-center space-x-4">
+          <img src="/logo.svg" alt="logo" className="w-16 h-16" />
+          <div className="text-2xl font-bold">GAME VAULT</div>
+        </div>
+
+        <ul className="flex space-x-12">
+          <li>
+            <Link href="/" className="hover:text-orange-500 transition-all">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/shop" className="hover:text-orange-500 transition-all">
+              Shop
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/login"
+              className="hover:text-orange-500 transition-all"
+            >
+              Log in
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/register"
+              className="hover:text-orange-500 transition-all"
+            >
+              Register
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    );
+  }
 }
 
 export default Navbar;

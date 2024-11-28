@@ -1,7 +1,11 @@
 import React from 'react'
+import Navbar from '../components/navbar'
+import Footer from '../components/Footer'
 
 function ShopPage() {
-    return (
+    return ( 
+        <div>
+        <Navbar isLoggedIn={false}></Navbar>
         <div className='flex flex-row w-full h-full gap-x-4'>
             <div className='flex flex-col w-1/4 h-full p-10 bg-gray-300 gap-y-10'>
                 <div>
@@ -51,6 +55,8 @@ function ShopPage() {
                 <ShopItem name='Game 1' desc='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' img='https://dummyimage.com/400x200/000/fff.png' price='$10' />
 
             </div>
+        </div>
+        <Footer></Footer>
         </div>
     )
 }
