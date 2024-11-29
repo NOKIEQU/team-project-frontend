@@ -18,6 +18,7 @@ export default function Home() {
         <Link href={"/profile"}>Profile</Link>
         <Link href={"/shop"}>Shop</Link>
 
+        <Link href={"/Questionnaire"}>Take Quiz</Link>
 
       </div>
     </div>
