@@ -11,7 +11,7 @@ function RegisterPage() {
         "flex-2 flex flex-col items-center p-8 ml-5";
 
     return (
-        <div className="flex flex-col min-h-screen font-sans bg-[#1c1c1c]">
+        <div className="flex flex-col font-sans bg-[#1c1c1c]">
             <div className="flex flex-1">
                 {/* Left Side of Page */}
                 <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
