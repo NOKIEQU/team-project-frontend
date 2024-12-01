@@ -1,9 +1,19 @@
 "use client";
 
 function RegisterPage() {
+    const input =
+        "w-full px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none";
+    const label = 
+        "text-white font-bold text-sm mb-1 block";
+    const button =
+        "w-full py-3 bg-[#f6a302] text-[#1c1c1c] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#e08c00]";
+    const form = 
+        "flex-2 flex flex-col items-center p-8 ml-5";
+
     return (
         <div className="flex flex-col min-h-screen font-sans bg-[#1c1c1c]">
             <div className="flex flex-1">
+                {/* Left Side of Page */}
                 <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
                     <img
                         src="/left-background.png"
@@ -39,59 +49,68 @@ function RegisterPage() {
                         </p>
                     </div>
                 </div>
-                <div className="flex-2 flex flex-col items-center p-8 ml-5">
+
+                {/* Right Side of Page*/}
+                <div className={form}>
                     <h2 className="text-white text-2xl font-bold mb-4 text-center">
                         CREATE ACCOUNT
-                    </h2>
+                    </h2> 
                     <div className="w-24 h-1 bg-[#f6a302] mx-auto mb-6"></div>
                     <form className="w-full max-w-md">
+                        {/* Names */}
                         <div className="flex gap-4 mb-4">
                             <div className="flex-1">
-                                <label className="text-white font-bold text-sm mb-1 block">First Name</label>
+                                <label className={label}>First Name</label>
                                 <input
                                     type="text"
                                     placeholder="First Name"
-                                    className="w-full px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none"
+                                    className={input}
                                     required
                                 />
                             </div>
                             <div className="flex-1">
-                                <label className="text-white font-bold text-sm mb-1 block">Last Name</label>
+                                <label className={label}>Last Name</label>
                                 <input
                                     type="text"
                                     placeholder="Last Name"
-                                    className="w-full px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none"
+                                    className={input}
                                     required
                                 />
                             </div>
                         </div>
+
+                        {/* Username */}
                         <div className="mb-4">
-                            <label className="text-white font-bold text-sm mb-1 block">Username</label>
+                            <label className={label}>Username</label>
                             <input
                                 type="text"
                                 placeholder="Enter your username"
-                                className="w-full px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none"
+                                className={input}
                                 required
                             />
                         </div>
+
+                        {/* Email */}
                         <div className="mb-4">
-                            <label className="text-white font-bold text-sm mb-1 block">Email</label>
+                            <label className={label}>Email</label>
                             <input
                                 type="email"
                                 placeholder="Enter your email"
-                                className="w-full px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none"
+                                className={input}
                                 required
                             />
                         </div>
+
+                        {/* Date of Birth */}
                         <div className="mb-4">
-                            <label className="text-white font-bold text-sm mb-1 block">Date of Birth</label>
+                            <label className={label}>Date of Birth</label>
                             <div className="flex gap-4">
                                 <input
                                     type="number"
                                     placeholder="Day"
                                     min="1"
                                     max="31"
-                                    className="w-1/3 px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none"
+                                    className={`${input} w-1/3`}
                                     required
                                 />
                                 <input
@@ -99,7 +118,7 @@ function RegisterPage() {
                                     placeholder="Month"
                                     min="1"
                                     max="12"
-                                    className="w-1/3 px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none"
+                                    className={`${input} w-1/3`}
                                     required
                                 />
                                 <input
@@ -107,29 +126,35 @@ function RegisterPage() {
                                     placeholder="Year"
                                     min="1900"
                                     max={new Date().getFullYear()}
-                                    className="w-1/3 px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none"
+                                    className={`${input} w-1/3`}
                                     required
                                 />
                             </div>
                         </div>
+
+                        {/* Password */}
                         <div className="mb-4">
-                            <label className="text-white font-bold text-sm mb-1 block">Password</label>
+                            <label className={label}>Password</label>
                             <input
                                 type="password"
                                 placeholder="Enter your password"
-                                className="w-full px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none"
+                                className={input}
                                 required
                             />
                         </div>
+
+                        {/* Confirm Password */}
                         <div className="mb-4">
-                            <label className="text-white font-bold text-sm mb-1 block">Confirm Password</label>
+                            <label className={label}>Confirm Password</label>
                             <input
                                 type="password"
                                 placeholder="Confirm your password"
-                                className="w-full px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none"
+                                className={input}
                                 required
                             />
                         </div>
+
+                        {/* Optional Checkbox */}
                         <div className="flex items-center mb-4">
                             <input
                                 type="checkbox"
@@ -143,12 +168,13 @@ function RegisterPage() {
                                 I would like to receive news and promotional messages from GameVault.
                             </label>
                         </div>
-                        <button
-                            type="submit"
-                            className="w-full py-3 bg-[#f6a302] text-[#1c1c1c] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#e08c00]"
-                        >
+
+                        {/* Submit Button */}
+                        <button type="submit" className={button}>
                             CREATE ACCOUNT
                         </button>
+
+                        {/* Footer */}
                         <p className="mt-4 text-white text-center text-sm">
                             Already have an account?{" "}
                             <a
