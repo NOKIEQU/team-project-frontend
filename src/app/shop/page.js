@@ -49,8 +49,10 @@ function ShopPage() {
                 <ShopItem name='Game 1' desc='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' img='https://dummyimage.com/400x200/000/fff.png' price='$10' />
                 <ShopItem name='Game 1' desc='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' img='https://dummyimage.com/400x200/000/fff.png' price='$10' />
                 <ShopItem name='Game 1' desc='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' img='https://dummyimage.com/400x200/000/fff.png' price='$10' />
-
+ 
             </div>
+            
+            
         </div>
     )
 }
@@ -63,7 +65,10 @@ function ShopItem({ name, desc, img, price }) {
             <h1 className='text-4xl font-bold'>{name}</h1>
             <p>{desc}</p>
             <p className='text-4xl'>{price}</p>
+           
         </div>
     )
+
+    
 }
 export default ShopPage 

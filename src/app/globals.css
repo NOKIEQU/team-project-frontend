@@ -2,3 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    :root {
+      --background: 240, 12%, 12%;
+      --foreground: 0 1% 18%;
+      
+    }
+}
+   
