@@ -2,10 +2,8 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="flex-grow">
-        {/* Main Content Here */}
-      </div>
+    <div className="flex flex-col flex-grow">
+      
       <footer className="w-full flex justify-between items-center p-2 bg-gray-900 text-white font-sans">
         <div className="flex items-center space-x-4">
           <div className="text-2xl font-bold">GAME VAULT</div>
