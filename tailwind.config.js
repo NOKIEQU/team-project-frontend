@@ -7,6 +7,7 @@ module.exports = {
   ],
   theme: {
     extend: {
+
       colors: {
         text: "text-orange-500",
         background: "hsl(var(--background))",
@@ -15,6 +16,7 @@ module.exports = {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
+
       },
     },
   },

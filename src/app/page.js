@@ -17,6 +17,7 @@ export default function Home() {
           alt="League Image"
         />
 
+
         <div className="absolute top-0 right-0 h-full w-1/2 bg-gray-800 opacity-100%">
           <div className="flex flex-col w-full h-screen  p-40 pt-60 justify-left gap-y-10">
             <h1 className="text-5xl font-bold text-left">
@@ -57,6 +58,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+
 
       {/* The second  part of the page */}
 
@@ -107,6 +109,7 @@ export default function Home() {
 </div>
 
       <Footer />
+
     </div>
   );
 }
