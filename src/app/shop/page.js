@@ -23,37 +23,7 @@ function ShopPage() {
               <input type="checkbox" className="mr-2" />
               <li className="mb-2">Horror</li>
             </div>
-            <div className="flex flex-row items-baseline gap-x-2">
-              <input type="checkbox" className="mr-2" />
-              <li className="mb-2">RPG</li>
-            </div>
-            <div className="flex flex-row items-baseline gap-x-2">
-              <input type="checkbox" className="mr-2" />
-              <li className="mb-2">Category 3</li>
-            </div>
-            <div className="flex flex-row items-baseline gap-x-2">
-              <input type="checkbox" className="mr-2" />
-              <li className="mb-2">Category 4</li>
-            </div>
-          </ul>
-        </div>
-        
-        {/* Price Range Filter */}
-        <div>
-          <h2 className="text-xl font-bold mb-4">Price</h2>
-          <div className="flex flex-row gap-x-2 w-full">
-            <input
-              type="number"
-              placeholder="Min Price"
-              className="p-2 border rounded w-1/2"
-            />
-            <span className="mx-2">-</span>
-            <input
-              type="number"
-              placeholder="Max Price"
-              className="p-2 border rounded w-1/2"
-            />
-          </div>
+
         </div>
 
         {/* Age Category */}
@@ -140,6 +110,8 @@ function ShopPage() {
       </div>
     </div>
   );
+
+ 
 }
 
 function ShopItem({ name, desc, img, price }) {

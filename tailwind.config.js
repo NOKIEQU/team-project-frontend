@@ -7,7 +7,12 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
+      colors: { 
+        customGray: '#1A1A21',
+        primary: {
+        DEFAULT: 'hsl(var(--primary))',
+        foreground: 'hsl(var(--primary-foreground))'
+         },
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
