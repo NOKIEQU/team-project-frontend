@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
   return (
+    
     <div className="flex flex-col w-full h-screen items-center justify-center gap-y-10">
       <Image
         src="/logo.svg"
@@ -22,6 +22,7 @@ export default function Home() {
         <Link href={"/Questionnaire"}>Take Quiz</Link>
 
       </div>
+
     </div>
   );
 }

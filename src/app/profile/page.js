@@ -4,7 +4,7 @@ function ProfilePage() {
   return (
     <div className='flex flex-row w-full h-full'>
       <div className='bg-slate-50 w-1/4 h-full p-10 text-right'>
-        <h1 className='text-5xl font-semibold mb-10'>Welcome, John!</h1>
+        <h1 className='text-5xl font-semibold mb-10'>Welcome, everyone!</h1>
         <div className='flex flex-col w-full h-full gap-y-10'>
           <button className='p-5 text-gray-500 text-lg text-right rounded-md w-full'>Personal Information</button>
           <button className='p-5 text-gray-500 text-lg text-right rounded-md w-full'>Payment Information</button>
