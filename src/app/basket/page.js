@@ -3,14 +3,16 @@ import React from 'react'
 function BasketPage() {
   return (
     <div>
-      <h1 className='w-full flex justify-center py-4'>GameVault</h1>
-      <div className="flex justify-around bg-yellow-500 text-gray-900 text-sm py-2">
-        <div className='border-b-4 border-gray-900'>1. Basket</div>
+
+      <h1 className='w-full flex justify-center py-4 text-white font-black text-lg'>GameVault</h1>
+      <div className="flex justify-around text-black text-base py-3" style={{backgroundColor:"#FFA800"}}>
+        <div className='font-black'>1. Basket</div>
         <div>2. Delivery</div>
         <div>3. Payment</div>
       </div>
-      <div className='p-4'>
-        <table className='border-b border-gray-700 w-full'>
+      <div className='p-4 px-52'>
+        <table className='border-b border-gray-700 w-full text-white'>
+
           <thead >
             <tr>
               <th className='py-2 w-1/4 text-left'>Items</th>
@@ -40,11 +42,12 @@ function BasketPage() {
         </table>
       </div>
 
-    <div className='flex justify-between p-4'>
-      <button className='bg-yellow-500 hover:bg-yellow-600 text-gray-900 py-2 px-4 rounded '>
+    <div className='flex justify-between p-4 px-52 text-base '>
+      <button className=' hover:bg-yellow-100 text-black font-semibold py-2 px-4 rounded ' style={{backgroundColor:"#FFA800"}}>
       Contine Shopping
       </button>
-      <button className='bg-yellow-500 hover:bg-yellow-600 text-gray-900 py-2 px-4 rounded '>
+      <button className=' hover:bg-yellow-100 text-black font-semibold py-2 px-4 rounded ' style={{backgroundColor:"#FFA800"}}>
+        
       Proceed to Checkout
       </button>
     </div>
