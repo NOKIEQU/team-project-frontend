@@ -1,23 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import Navbar from '../components/navbar'
+import Footer from '../components/Footer'
 
 export default function LoginPage() {
     return (
-        <main className="bg-[#16202a] h-screen flex items-center justify-center p-3 relative">
-            {/* This forms the title adds logo and black box containing them */}
-            <div className="absolute top-0 left-0 w-full bg-[#16202a] py-2 px-4 z-10">
-                <div className="text-white text-2xl font-bold flex items-center space-x-4">
-                    <span>GameVault</span>
-                    <Image
-                        src="/logo.svg"
-                        width={50}
-                        height={50}
-                        alt="Logo"
-                    />
-                </div>
-            </div>
-
 
             <div className="grid w-full h-full grid-cols-1 bg-[#16202a] md:grid-cols-3 relative">
                 {/* Orange box, top right for mobile, left side for desktop */}

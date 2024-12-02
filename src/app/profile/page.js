@@ -1,8 +1,13 @@
 import React from 'react'
+import Navbar from '../components/navbar'
 
 function ProfilePage() {
   return (
+    <div>
+      <Navbar isLoggedIn={true}/>
     <div className='flex flex-row w-full h-full'>
+     
+        
       <div className='bg-slate-50 w-1/4 h-full p-10 text-right'>
         <h1 className='text-5xl font-semibold mb-10'>Welcome, everyone!</h1>
         <div className='flex flex-col w-full h-full gap-y-10'>
@@ -25,6 +30,7 @@ function ProfilePage() {
               <button className='p-4 bg-transparent text-gray-500 rounded-md w-1/2'>Reset Password</button>
               <button className='p-4 bg-gray-500 text-white rounded-md w-1/2'>Save</button>
 
+            </div>
             </div>
           </div>
         </div>
