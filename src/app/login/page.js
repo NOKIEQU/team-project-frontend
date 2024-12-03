@@ -6,9 +6,11 @@ import Footer from '../components/Footer'
 
 export default function LoginPage() {
     return (
-
+        
             <div className="grid w-full h-full grid-cols-1 bg-[#16202a] md:grid-cols-3 relative">
+                <Navbar isLoggedIn={"False"}></Navbar>
                 {/* Orange box, top right for mobile, left side for desktop */}
+                
                 <div
                     className="bg-orange-400 flex flex-col p-4 absolute top-0 right-0 md:relative md:top-auto md:right-auto md:col-span-1 md:h-auto h-[25vh] z-0"
                     style={{
@@ -87,6 +89,7 @@ export default function LoginPage() {
                         <button className="mt-4 p-2 w-full md:w-[600px] bg-orange-400 text-white rounded-md">
                             LOGIN
                         </button>
+                        
 
                         {/* Sign up option */}
                         <div className="mt-4 text-center">
@@ -99,12 +102,26 @@ export default function LoginPage() {
                                 <Link href="/register">  {/* register page link*/}
                                     <span className="text-orange-400 hover:underline">Sign up here</span>
                                 </Link>
+                                
                             </p>
+                            <br/>
+                            <p className="text-sm text-white">
+                            
+                                
+                               
+                      
+                                Admin?{' '}
+                                <Link href="/admin">  {/* register page link*/}
+                                    <span className="text-orange-400 hover:underline">Click this link</span>
+                                </Link>
+                                
+                            </p>
+                            
                         </div>
                     </form>
                 </div>
 
             </div>
-        </main>
+        
     );
 }

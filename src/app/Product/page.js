@@ -26,6 +26,7 @@ function Product() {
 
     return (
         <div className="w-full h-screen bg-customGray ">
+            <Navbar isLoggedIn={"True"}></Navbar>
             <div className='w-full flex justify-center py-4 text-white font-black text-lg '>
                 <div className="text-center ">
                     <h1 className="text-1xl font-bold mb-4">All Games -  Halo: The Master Chief Collection</h1>
