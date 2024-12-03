@@ -7,7 +7,7 @@ import GameCard from "./components/gameCard";
 export default function Home() {
   return (
     <div className=" bg-gray-800 text-white h-100% w-100%  min-h-screen ">
-      <Navbar isLoggedIn={true} />
+      <Navbar isLoggedIn={"true"} />
 
       {/* The first part of the page */}
       <div className="relative shadow-xl">
@@ -43,9 +43,9 @@ export default function Home() {
               <Link href={"/Questionnaire"}>
               <button className="m-4 bg-[#FFA800] hover:bg-orange-500 font-bold py-3 px-5 rounded-xl w-40 transition transform hover:scale-110">
                 TAKE QUIZ
-                </button>
-              
-            </Link>
+
+              </button>
+              </Link>
             </div>
 
             <div className="flex w-full items-center justify-left gap-x-6 mt-15 ">

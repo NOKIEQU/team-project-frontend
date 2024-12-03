@@ -1,33 +1,14 @@
 import React from "react";
+import Navbar from "../components/navbar";
 
 function CheckoutPage() {
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-10">
-      {/* Header */}
-      <header className="flex justify-between w-full max-w-5xl items-center mb-10">
-        <div className="flex items-center space-x-2">
-          <img
-            src="/gamevault-logo.png"
-            alt="GameVault Logo"
-            className="w-10 h-10"
-          />
-          <span className="text-yellow-500 font-bold text-2xl">GAMEVAULT</span>
-        </div>
-        <nav className="flex space-x-6 text-white">
-          <a href="/login" className="hover:text-yellow-500">
-            LOG IN
-          </a>
-          <a href="/about-us" className="hover:text-yellow-500">
-            ABOUT US
-          </a>
-          <a href="/signup" className="hover:text-yellow-500">
-            SIGN IN
-          </a>
-        </nav>
-      </header>
-
+      <Navbar isLoggedIn={"False"}></Navbar>
+      
+    
       {/* Checkout Heading */}
-      <h1 className="text-4xl font-bold text-yellow-500 mb-6">CHECKOUT</h1>
+      <h1 className="text-4xl font-bold text-yellow-500 mb-6 pt-10">CHECKOUT</h1>
 
       <div className="flex flex-wrap w-full max-w-5xl gap-8">
         {/* Main Content */}

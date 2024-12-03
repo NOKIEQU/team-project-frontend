@@ -1,12 +1,14 @@
 import React from 'react'
+import Navbar from '../components/navbar'
 import Link from 'next/link'
 
 function BasketPage() {
   return (
     <div>
-
+<Navbar isLoggedIn={"True"}></Navbar>
       <h1 className='w-full flex justify-center py-4 text-white font-black text-lg'>GameVault</h1>
-      <div className="flex justify-around text-black text-base py-3" style={{backgroundColor:"#FFA800"}}>
+      
+      <div className="flex justify-around text-black text-base py-3 bg-[#FFA800]">
         <div className='font-black'>1. Basket</div>
         <div>2. Delivery</div>
         <div>3. Payment</div>
@@ -48,14 +50,10 @@ function BasketPage() {
       <button className=' hover:bg-yellow-100 text-black font-semibold py-2 px-4 rounded ' style={{backgroundColor:"#FFA800"}}>
       Contine Shopping
       </button>
-      </Link>
-
-     
       <button className=' hover:bg-yellow-100 text-black font-semibold py-2 px-4 rounded ' style={{backgroundColor:"#FFA800"}}>
 
       Proceed to Checkout
       </button>
-     
     </div>
     </div>
   )

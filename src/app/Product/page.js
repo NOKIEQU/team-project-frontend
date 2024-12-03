@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Navbar from "../components/navbar";
+
 
 function Product() {
     const [mainImage, setMainImage] = useState("MCC.jpg");
@@ -25,7 +27,8 @@ function Product() {
     };
 
     return (
-        <div className="w-full h-screen bg-customGray ">
+        <div className="w-full h-screen bg-gray-400 ">
+            {/* <Navbar isLoggedIn={"True"}></Navbar> */}
             <div className='w-full flex justify-center py-4 text-white font-black text-lg '>
                 <div className="text-center ">
                     <h1 className="text-1xl font-bold mb-4">All Games -  Halo: The Master Chief Collection</h1>
@@ -95,6 +98,15 @@ function Product() {
             </div>
         </div>
     );
+}
+
+
+function ProductPicture () {
+    return (
+        <div className="">
+            
+        </div>
+    )
 }
 
 export default Product;

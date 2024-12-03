@@ -28,6 +28,22 @@ function Navbar({ isLoggedIn }) {
               Profile
             </Link>
           </li>
+          <li>
+          <Link
+              href="/login"
+              className="hover:text-orange-500 transition-all"
+            >
+              Login
+            </Link>
+          </li>
+          <li>
+          <Link
+              href="/basket"
+              className="hover:text-orange-500 transition-all"
+            >
+              Basket
+            </Link>
+          </li>
         </ul>
       </nav>
     );
