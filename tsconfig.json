@@ -24,10 +24,11 @@
     ]
   },
   "include": [
-    "next-env.d.js",
-    ".next/types/**/*.js",
     "**/*.js",
-    "**/*.jsx"
+    "**/*.jsx",
+    ".next/types/**/*.js",
+    "next-env.d.js",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
