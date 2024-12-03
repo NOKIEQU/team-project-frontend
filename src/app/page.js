@@ -40,9 +40,12 @@ export default function Home() {
                   SEARCH NOW
                 </button>{" "}
               </Link>
+              <Link href={"/Questionnaire"}>
               <button className="m-4 bg-[#FFA800] hover:bg-orange-500 font-bold py-3 px-5 rounded-xl w-40 transition transform hover:scale-110">
                 TAKE QUIZ
-              </button>
+                </button>
+              
+            </Link>
             </div>
 
             <div className="flex w-full items-center justify-left gap-x-6 mt-15 ">

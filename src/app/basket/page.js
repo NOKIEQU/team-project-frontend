@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 function BasketPage() {
   return (
@@ -41,15 +42,20 @@ function BasketPage() {
           </tbody>
         </table>
       </div>
-
+      
     <div className='flex justify-between p-4 px-52 text-base '>
+    <Link href={"/shop"}>
       <button className=' hover:bg-yellow-100 text-black font-semibold py-2 px-4 rounded ' style={{backgroundColor:"#FFA800"}}>
       Contine Shopping
       </button>
+      </Link>
+
+     
       <button className=' hover:bg-yellow-100 text-black font-semibold py-2 px-4 rounded ' style={{backgroundColor:"#FFA800"}}>
-        
+
       Proceed to Checkout
       </button>
+     
     </div>
     </div>
   )

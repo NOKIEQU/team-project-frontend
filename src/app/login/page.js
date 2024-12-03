@@ -6,7 +6,6 @@ import Footer from '../components/Footer'
 
 export default function LoginPage() {
     return (
-
             <div className="grid w-full h-full grid-cols-1 bg-[#16202a] md:grid-cols-3 relative">
                 {/* Orange box, top right for mobile, left side for desktop */}
                 <div
@@ -105,6 +104,6 @@ export default function LoginPage() {
                 </div>
 
             </div>
-        </main>
+        
     );
 }

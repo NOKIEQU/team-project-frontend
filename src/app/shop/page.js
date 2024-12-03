@@ -1,60 +1,31 @@
-
-import React from 'react'
-import Navbar from '../components/navbar'
-import Footer from '../components/Footer'
+import React from 'react';
 
 function ShopPage() {
-    return ( 
+  return (
+    <div className="flex flex-row w-full h-screen gap-x-4 bg-gray-800">
+      <div className="flex flex-col w-1/4 h-full p-10 bg-[#FFA800] gap-y-10">
+        
+        {/* Sort By Dropdown */}
         <div>
-        <Navbar/>
-        <div className='flex flex-row w-full h-full gap-x-4'>
-            <div className='flex flex-col w-1/4 h-full p-10 bg-gray-300 gap-y-10'>
-                <div>
-                    <h2 className='text-xl font-bold mb-4'>Sort By</h2>
-                    <select className='p-2 border rounded w-full'>
-                        <option value='price-low-high'>Price: Low to High</option>
-                        <option value='price-high-low'>Price: High to Low</option>
-                        <option value='date-release'>Date of Release</option>
-                    </select>
-                </div>
-                <div>
-                    <h2 className='text-xl font-bold mb-4'>Categories</h2>
-                    <ul>
-                        <div className='flex flex-row items-baseline gap-x-2'>
-                            <input type='checkbox' className='mr-2' />
-                            <li className='mb-2'>Horror</li>
-                        </div>
-                        <div className='flex flex-row items-baseline gap-x-2'>
-                            <input type='checkbox' className='mr-2' />
-                            <li className='mb-2'>RPG</li>
-                        </div>
-                        <div className='flex flex-row items-baseline gap-x-2'>
-                            <input type='checkbox' className='mr-2' />
-                            <li className='mb-2'>Category 3</li>
-                        </div>
-                        <div className='flex flex-row items-baseline gap-x-2'>
-                            <input type='checkbox' className='mr-2' />
-                            <li className='mb-2'>Category 4</li>
-                        </div>
-                    </ul>
-                </div>
-                <div>
-                    <h2 className='text-xl font-bold mb-4'>Price</h2>
-                    <div className='flex flex-row items-baseline gap-x-2 w-full'>
-                        <input type='number' placeholder='Min Price' className='p-2 border rounded w-full' /> -
-                        <input type='number' placeholder='Max Price' className='p-2 border rounded w-full' />
-                    </div>
-                </div>
-
-
+          <h2 className="text-xl font-bold mb-4">Sort By</h2>
+          <select className="p-2 border rounded w-full">
+            <option value="price-low-high">Price: Low to High</option>
+            <option value="price-high-low">Price: High to Low</option>
+            <option value="date-release">Date of Release</option>
+          </select>
+        </div>
+        
+        {/* Categories */}
+        <div>
+          <h2 className="text-xl font-bold mb-4">Categories</h2>
+          <ul>
+            <div className="flex flex-row items-baseline gap-x-2">
+              <input type="checkbox" className="mr-2" />
+              <li className="mb-2">Horror</li>
             </div>
+            </ul>
 
         </div>
-        <Footer></Footer>
-        </div>
-    )
-}
-
 
         {/* Age Category */}
         <div>
