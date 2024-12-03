@@ -44,25 +44,25 @@ function FooterComponent() {
                     <div>
                         <h3 className="font-semibold text-lg mb-4">Connect With Us</h3>
                         <div className="flex space-x-4">
-                            <button variant="ghost" size="icon" asChild>
+                            <button variant="ghost" size="icon">
                                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                                     <Facebook className="h-5 w-5" />
                                     <span className="sr-only">Facebook</span>
                                 </a>
                             </button>
-                            <button variant="ghost" size="icon" asChild>
+                            <button variant="ghost" size="icon">
                                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
                                     <Twitter className="h-5 w-5" />
                                     <span className="sr-only">Twitter</span>
                                 </a>
                             </button>
-                            <button variant="ghost" size="icon" asChild>
+                            <button variant="ghost" size="icon">
                                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
                                     <Instagram className="h-5 w-5" />
                                     <span className="sr-only">Instagram</span>
                                 </a>
                             </button>
-                            <button variant="ghost" size="icon" asChild>
+                            <button variant="ghost" size="icon">
                                 <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
                                     <Youtube className="h-5 w-5" />
                                     <span className="sr-only">YouTube</span>
