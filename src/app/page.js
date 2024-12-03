@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "./components/navbar";
-import Footer from "./components/Footer";
 import GameCard from "./components/gameCard";
 
 export default function Home() {
@@ -111,7 +110,6 @@ export default function Home() {
 
 </div>
 
-      <Footer />
 
     </div>
   );

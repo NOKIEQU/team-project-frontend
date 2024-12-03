@@ -1,6 +1,6 @@
 import React from 'react'
-import Navbar from '../components/navbar'
 import Link from 'next/link'
+import Navbar from '../components/navbar'
 
 function BasketPage() {
   return (
@@ -50,6 +50,7 @@ function BasketPage() {
       <button className=' hover:bg-yellow-100 text-black font-semibold py-2 px-4 rounded ' style={{backgroundColor:"#FFA800"}}>
       Contine Shopping
       </button>
+      </Link>
       <button className=' hover:bg-yellow-100 text-black font-semibold py-2 px-4 rounded ' style={{backgroundColor:"#FFA800"}}>
 
       Proceed to Checkout

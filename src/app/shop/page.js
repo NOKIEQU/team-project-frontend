@@ -1,42 +1,6 @@
 import React from 'react';
-<<<<<<< HEAD
-
-function ShopPage() {
-  return (
-    <div className="flex flex-row w-full h-screen gap-x-4 bg-gray-800">
-      <div className="flex flex-col w-1/4 h-full p-10 bg-[#FFA800] gap-y-10">
-        
-        {/* Sort By Dropdown */}
-        <div>
-          <h2 className="text-xl font-bold mb-4">Sort By</h2>
-          <select className="p-2 border rounded w-full">
-            <option value="price-low-high">Price: Low to High</option>
-            <option value="price-high-low">Price: High to Low</option>
-            <option value="date-release">Date of Release</option>
-          </select>
-        </div>
-        
-        {/* Categories */}
-        <div>
-          <h2 className="text-xl font-bold mb-4">Categories</h2>
-          <ul>
-            <div className="flex flex-row items-baseline gap-x-2">
-              <input type="checkbox" className="mr-2" />
-              <li className="mb-2">Horror</li>
-            </div>
-            </ul>
-
-        </div>
-
-        {/* Age Category */}
-        <div>
-          <h2 className="text-xl font-bold mb-4">Age Category</h2>
-          <div className="flex flex-row items-baseline gap-x-2">
-            <input type="checkbox" className="mr-2" />
-            <label>Under 12</label>
-=======
 import Navbar from '../components/navbar';
-import Footer from '../components/Footer';
+
 
 function ShopPage() {
   return (
@@ -94,7 +58,6 @@ function ShopPage() {
                 className="p-2 border rounded w-full"
               />
             </div>
->>>>>>> 815295a1cb8181babfac4c3409022c8577e6d1b8
           </div>
 
           {/* Age Category */}
@@ -180,7 +143,6 @@ function ShopPage() {
           />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
