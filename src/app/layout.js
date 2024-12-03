@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import Footer from "./components/Footer";
+import FooterComponent from "./components/footer";
 
 
 export const metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-     <Footer/>
+     <FooterComponent/>
       </body>
     </html>
   );
