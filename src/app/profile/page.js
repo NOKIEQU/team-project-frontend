@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../components/navbar'
+
 
 function ProfilePage() {
   return (
     <div>
-      <Navbar isLoggedIn={true}/>
+
     <div className='flex flex-row w-full h-full'>
      
         

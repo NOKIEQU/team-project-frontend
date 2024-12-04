@@ -1,11 +1,10 @@
 import React from 'react';
-import Navbar from '../components/navbar';
+
 
 
 function ShopPage() {
   return (
     <div>
-      <Navbar isLoggedIn={"True"}/>
       <div className="flex flex-row w-full h-full gap-x-4">
         {/* Sidebar */}
         <div className="flex flex-col w-1/4 h-full p-10 bg-gray-300 gap-y-10">

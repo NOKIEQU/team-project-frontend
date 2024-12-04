@@ -1,6 +1,6 @@
 export default function ProfileLayout({ children }) {
     return (
-        <div className="h-screen overflow-hidden">
+        <div className="pt-12 h-screen overflow-hidden">
             {children}
 
         </div>

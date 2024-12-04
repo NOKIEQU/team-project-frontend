@@ -1,9 +1,6 @@
-import Navbar from "../components/navbar";
-
 function Questionnaire() {
   return (
     <div>
-      <Navbar isLoggedIn={"False"} />
       <div className="min-h-screen bg-gradient-to-b from-gray-800 to-gray-900 text-white text-center">
         <img className="w-20" src="/logo.svg" />
         <h1 className="text-4xl font-serif font-bold pb-5">

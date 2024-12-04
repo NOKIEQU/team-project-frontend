@@ -1,5 +1,4 @@
 "use client";
-import Navbar from "../components/navbar";
 
 function RegisterPage() {
     const input =
@@ -13,7 +12,6 @@ function RegisterPage() {
 
     return (
         <div className="flex flex-col font-sans bg-[#1c1c1c]">
-            <Navbar isLoggedIn={"True"}></Navbar>
             <div className="flex flex-1">
                 {/* Left Side of Page */}
                 <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">

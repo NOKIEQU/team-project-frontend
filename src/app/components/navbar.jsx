@@ -5,16 +5,15 @@ function Navbar({ isLoggedIn }) {
     return (
       <nav className="fixed top-0 left-0 w-full z-10 flex justify-between items-center p-1 bg-gray-900 text-white font-sans">
         <div className="flex items-center space-x-4">
-          <img src="/logo.svg" alt="logo" className="w-16 h-16" />
-          <div className="text-2xl font-bold">GAME VAULT</div>
+          <Link href="/" className="hover:text-orange-500 transition-all">
+            <div className="flex items-center space-x-2">
+              <img src="/logo.svg" alt="logo" className="w-16 h-16" />
+              <span className="text-2xl font-bold">GAME VAULT</span>
+            </div>
+          </Link>
         </div>
 
         <ul className="flex space-x-12">
-          <li>
-            <Link href="/" className="hover:text-orange-500 transition-all">
-              Home
-            </Link>
-          </li>
           <li>
             <Link href="/shop" className="hover:text-orange-500 transition-all">
               Shop
@@ -29,7 +28,7 @@ function Navbar({ isLoggedIn }) {
             </Link>
           </li>
           <li>
-          <Link
+            <Link
               href="/login"
               className="hover:text-orange-500 transition-all"
             >
@@ -37,7 +36,7 @@ function Navbar({ isLoggedIn }) {
             </Link>
           </li>
           <li>
-          <Link
+            <Link
               href="/basket"
               className="hover:text-orange-500 transition-all"
             >

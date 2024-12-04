@@ -1,12 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "./components/navbar";
 import GameCard from "./components/gameCard";
 
 export default function Home() {
   return (
     <div className=" bg-gray-800 text-white h-100% w-100%  min-h-screen ">
-      <Navbar isLoggedIn={"true"} />
 
       {/* The first part of the page */}
       <div className="relative shadow-xl">

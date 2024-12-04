@@ -1,11 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
-import Navbar from '../components/navbar'
+
 
 function BasketPage() {
   return (
     <div>
-<Navbar isLoggedIn={"True"}></Navbar>
       <h1 className='w-full flex justify-center py-4 text-white font-black text-lg'>GameVault</h1>
       
       <div className="flex justify-around text-black text-base py-3 bg-[#FFA800]">
