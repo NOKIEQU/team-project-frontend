@@ -28,7 +28,7 @@ function ProfilePage() {
 
             <div className='flex flex-row gap-x-10 w-1/3'>
               <button className='p-4 bg-transparent text-gray-500 rounded-md w-1/2'>Reset Password</button>
-              <button className='p-4 bg-gray-500 text-white rounded-md w-1/2'>Save</button>
+              <button className='p-4 bg-gray-500 text-white rounded-md w-1/2'>Save Test</button>
 
             </div>
             </div>
