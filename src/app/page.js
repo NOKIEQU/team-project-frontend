@@ -95,14 +95,14 @@ export default function Home() {
   <h1 className="text-6xl font-bold">Our <span className="text-orange-500">TOP</span> games</h1>
   
   <div className="flex flex-wrap justify-center gap-6 mt-10 w-3/4 pt-20">
-    <GameCard image="GameCards/mortalcombat.jpeg" title="Mortal Combat" price="£15" description="An open-world adventure" />
-    <GameCard image="GameCards/assasins.jpg" title="Assasins Creed" price="£15" description="An open-world adventure" />
-    <GameCard image="GameCards/EldenRing.jpg" title="Elden Ring" price="£15" description="An open-world adventure" />
-    <GameCard image="GameCards/halo.jpg" title="" price="£15" description="An open-world adventure" />
-    <GameCard image="GameCards/lastofus.webp" title="Last of Us" price="£15" description="An open-world adventure" />
-    <GameCard image="GameCards/returnal.jpg" title="Returnal" price="£15" description="An open-world adventure" />
-    <GameCard image="GameCards/detroit.jpg" title="Detroit becomes human" price="£15" description="An open-world adventure" />
-    <GameCard image="GameCards/genshin.avif" title="Genshin" price="£15" description="An open-world adventure" />
+    <GameCard image="/GameCards/mortalcombat.jpeg" title="Mortal Combat" price="£15" description="An open-world adventure" />
+    <GameCard image="/GameCards/assasins.jpg" title="Assasins Creed" price="£15" description="An open-world adventure" />
+    <GameCard image="/GameCards/EldenRing.jpg" title="Elden Ring" price="£15" description="An open-world adventure" />
+    <GameCard image="/GameCards/halo.jpg" title="" price="£15" description="An open-world adventure" />
+    <GameCard image="/GameCards/lastofus.webp" title="Last of Us" price="£15" description="An open-world adventure" />
+    <GameCard image="/GameCards/returnal.jpg" title="Returnal" price="£15" description="An open-world adventure" />
+    <GameCard image="/GameCards/detroit.jpg" title="Detroit becomes human" price="£15" description="An open-world adventure" />
+    <GameCard image="/GameCards/genshin.avif" title="Genshin" price="£15" description="An open-world adventure" />
    
    
   </div>
