@@ -6,7 +6,7 @@ import GameCard from "./components/gameCard";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-800 text-white font-oswald">
+    <div className=" min-h-screen bg-gray-800 text-white font-oswald">
     
       <div className="absolute top-5 right-5">
   
@@ -22,8 +22,14 @@ export default function Home() {
         <div className="absolute top-0 right-0 h-full w-1/2 bg-gray-800 opacity-90 ">
           <div className="flex flex-col w-full h-screen p-40 pt-60 justify-start gap-y-10">
             <h1 className="text-5xl font-bold text-left">
-              We are on <span className="text-orange-500">TOP</span> of our game
+           
+              We are on <span className="text-orange-500">TOP</span> of our game <br/> 
+              <div className="bg-[#FFA800] h-2 rounded-full w-1/6 transition-all hover:w-5/6"></div>
+    
+             
             </h1>
+    
+       
 
             <p className="text-lg">
               <span className="text-2xl font-bold">Start Your Journey </span>
@@ -65,24 +71,24 @@ export default function Home() {
       {/* The second  part of the page */}
 
       <div className="flex w-full h-full shadow-xl">
-
-
   <div className="flex flex-col justify-end w-1/2 ">
     <img
       src="fantasy.webp"
-      className="w-3/6 rounded-lg transition-transform hover:scale-110 mt-48 ml-20"
+      className="w-3/6 rounded-lg transition-transform hover:scale-110 mt-40 ml-20"
       alt="Fantasy"
     />
     <img
       src="minecraft.avif"
-      className="w-2/6 rounded-lg transition-transform hover:scale-110 mt-24 ml-80"
+      className="w-2/6 rounded-lg transition-transform hover:scale-110 mt-24 ml-80 mb-10"
       alt="Minecraft"
     />
   </div>
 
 
-  <div className="flex flex-col justify-items-start w-1/2 text-left pt-96 pb-10">
-    <h1 className="text-4xl font-bold text-left">Why we are the best</h1>
+  <div className="flex flex-col justify-items-start w-1/2 text-left pt-40 m-36  ">
+    <h1 className="text-4xl font-bold text-left">WHY WE ARE THE BEST</h1>
+    <br/>
+    <div className="bg-[#FFA800] h-2 rounded-full w-2/6 transition-all hover:w-5/6"></div>
     <p className="pt-10"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquet, magna non tempus gravida, sapien mi facilisis erat, ac maximus augue felis nec ante. Sed ultricies, ipsum sit amet cursus facilisis, lectus lectus malesuada tortor, vel pharetra neque purus non est. Vivamus lobortis tincidunt lorem, a fermentum tortor condimentum ac. Aliquam erat volutpat. Nam convallis urna id nunc tincidunt, non euismod lorem ultricies.</p>
     <p className="pt-10"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquet, magna non tempus gravida, sapien mi facilisis erat, ac maximus augue felis nec ante. Sed ultricies, ipsum sit amet cursus facilisis, lectus lectus malesuada tortor, vel pharetra neque purus non est. Vivamus lobortis tincidunt lorem, a fermentum tortor condimentum ac. Aliquam erat volutpat. Nam convallis urna id nunc tincidunt, non euismod lorem ultricies.</p>
     <p className="pt-10"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquet, magna non tempus gravida, sapien mi facilisis erat, ac maximus augue felis nec ante. Sed ultricies, ipsum sit amet cursus facilisis, lectus lectus malesuada tortor, vel pharetra neque purus non est. Vivamus lobortis tincidunt lorem, a fermentum tortor condimentum ac. Aliquam erat volutpat. Nam convallis urna id nunc tincidunt, non euismod lorem ultricies.</p>
@@ -93,6 +99,10 @@ export default function Home() {
 
   <div className="flex flex-col flex-grow w-full h-full pt-36 items-center  mb-20">
   <h1 className="text-6xl font-bold">Our <span className="text-orange-500">TOP</span> games</h1>
+  <br/>
+
+  <div className="bg-[#FFA800] h-2 rounded-full w-1/6 transition-all hover:w-2/6"></div>
+
   
   <div className="flex flex-wrap justify-center gap-6 mt-10 w-3/4 pt-20">
     <GameCard image="GameCards/mortalcombat.jpeg" title="Mortal Combat" price="£15" description="An open-world adventure" />
