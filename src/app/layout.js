@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import FooterComponent from "./components/footer";
-
+import { CartProvider } from '../context/cart-context';
 
 export const metadata = {
   title: "Game Vault",
@@ -11,11 +11,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-     <FooterComponent/>
+      <body>
+        <CartProvider>
+          {children}
+          <FooterComponent />
+        </CartProvider>
+
       </body>
     </html>
   );
