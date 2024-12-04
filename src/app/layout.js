@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import FooterComponent from "./components/footer";
+import FooterComponent from "../app/components/footer";
 import { CartProvider } from '../context/cart-context';
 
 export const metadata = {
