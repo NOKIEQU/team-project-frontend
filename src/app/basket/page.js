@@ -1,13 +1,9 @@
 "use client";
 import React from 'react'
 import Link from 'next/link'
-<<<<<<< HEAD
-
-=======
 import Navbar from '../components/navbar'
 import { useCart } from '../../context/cart-context'
 import { Menu, Moon, Sun, X, ShoppingCart, Trash2, Minus, Plus } from 'lucide-react'
->>>>>>> 8c37b0256801602d902db579fdfaeb5f9e50764e
 
 function BasketPage() {
 
@@ -15,10 +11,7 @@ function BasketPage() {
 
   return (
     <div>
-<<<<<<< HEAD
-=======
     <Navbar isLoggedIn={"True"}></Navbar>
->>>>>>> 8c37b0256801602d902db579fdfaeb5f9e50764e
       <h1 className='w-full flex justify-center py-4 text-white font-black text-lg'>GameVault</h1>
       
       <div className="flex justify-around text-black text-base py-3 bg-[#FFA800]">

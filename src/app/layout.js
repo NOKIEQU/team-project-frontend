@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import FooterComponent from "./components/Footer";
 import Navbar from "./components/navbar";
+import { CartProvider } from "../context/cart-context";
 
 
 
@@ -13,11 +14,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-
       <body>
-        <Navbar isLoggedIn= {"True"}/>
-        {children}
-        <FooterComponent/>
+        <Navbar isLoggedIn={"True"}></Navbar>
+        <CartProvider>
+          {children}
+          <FooterComponent />
+        </CartProvider>
 
       </body>
       

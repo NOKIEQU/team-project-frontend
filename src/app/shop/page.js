@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-import React from 'react';
 
-=======
 "use client"
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -9,7 +6,6 @@ import { ShoppingCart, Check, ChevronLeft, ChevronRight, Minus, Plus, Filter } f
 import { useCart } from '../../context/cart-context'
 import { useSearchParams } from 'next/navigation'
 import Navbar from '../components/navbar'
->>>>>>> 8c37b0256801602d902db579fdfaeb5f9e50764e
 
 const games = [
   {
@@ -195,20 +191,6 @@ function ShopPage() {
 
   return (
     <div>
-<<<<<<< HEAD
-      <div className="flex flex-row w-full h-full gap-x-4">
-        {/* Sidebar */}
-        <div className="flex flex-col w-1/4 h-full p-10 bg-gray-300 gap-y-10">
-          {/* Sort By */}
-          <div>
-            <h2 className="text-xl font-bold mb-4">Sort By</h2>
-            <select className="p-2 border rounded w-full">
-              <option value="price-low-high">Price: Low to High</option>
-              <option value="price-high-low">Price: High to Low</option>
-              <option value="date-release">Date of Release</option>
-            </select>
-          </div>
-=======
       {/* <Navbar /> */}
       <div className="flex flex-row w-full h-full gap-x-4 px-24">
         <aside className="lg:col-span-1 hidden lg:block">
@@ -273,7 +255,6 @@ function ShopPage() {
                         <span className="mx-2">{cartItem.quantity}</span>
                         <div
                           className='flex items-center space-x-1 bg-black text-white p-2 rounded-lg'
->>>>>>> 8c37b0256801602d902db579fdfaeb5f9e50764e
 
                           onClick={() => updateQuantity(game.id, cartItem.quantity + 1)}
                         >
