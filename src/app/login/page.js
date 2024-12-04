@@ -3,8 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 
-
 export default function LoginPage() {
+
+
     return (
         
             <div className="grid w-full h-full grid-cols-1 bg-[#16202a] md:grid-cols-3 relative">
