@@ -389,7 +389,7 @@ function ShopPage() {
   return (
     <div>
       {/* <Navbar /> */}
-      <div className="flex flex-row w-full h-full gap-x-4 px-24 bg-gray-800 pt-10 ">
+      <div className="flex flex-row w-full min-h-screen gap-x-4 px-24 bg-gray-800 pt-10 ">
         <aside className="lg:col-span-1 hidden lg:block">
           <FilterContent
             genres={genres}

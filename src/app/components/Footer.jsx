@@ -7,7 +7,7 @@ import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react'
 function FooterComponent() {
 
     return (
-        <footer className="bg-black text-white">
+        <footer className="bg-gray-900 text-white">
             <div className="container mx-auto px-4 py-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div className="flex flex-col items-start">
@@ -63,7 +63,7 @@ function FooterComponent() {
                         </div>
                     </div>
                 </div>
-                <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
+                <div className="mt-8 pt-2 border-t text-center text-sm text-muted-foreground">
                     <p>&copy; 2024 GameStore. All rights reserved.</p>
                 </div>
             </div>

@@ -197,7 +197,7 @@ function Product() {
     };
 
     return (
-        <div className="w-full h-screen bg-gray-900 ">
+        <div className="min-h-screen w-full bg-gray-800 ">
             {/* <Navbar isLoggedIn={"True"}></Navbar> */}
             <div className='w-full flex flex-row justify-center gap-x-20  py-10 text-white font-black text-lg'>
                 <div className="text-center ">
