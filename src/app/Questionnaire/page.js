@@ -8,7 +8,7 @@ function Questionnaire() {
         </h1>
 
         <div className="grid grid-cols-3 justify-items-center gap-2 mx-16 md:mx-24">
-          <button className="m-4 bg-[#FFA800] hover:bg-orange-500 font-bold py-2 px-4 rounded-full w-40 transition transform hover:scale-110">
+          <button className="m-4 bg-[#FFA800] hover:bg-[#fa9a00ef] font-bold py-2 px-4 rounded-full w-40 transition transform hover:scale-110">
             Action
           </button>
           <button className="m-4 bg-[#FFA800] hover:bg-orange-500 font-bold py-2 px-4 rounded-full w-40 transition transform hover:scale-110">
