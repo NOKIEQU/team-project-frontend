@@ -94,7 +94,7 @@ function RegisterPage() {
                             GET IN <span className="text-[#f6a302]">TOUCH</span> WITH US
                         </h1>
                         <p className="text-2xl leading-7 text-[#f6a302] mt-40 font-bold">
-                            We would love to hear form you. Fell free to reach out with any questions, comments, or feedback.
+                            We would love to hear form you. Feel free to reach out with any questions, comments, or feedback.
                         </p>
                     </div>
                 </div>
