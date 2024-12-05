@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import FooterComponent from "./components/footer";
+import Footer from "./components/Footer";
 import Navbar from "./components/navbar";
 import { CartProvider } from "../context/cart-context";
 
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
         <Navbar isLoggedIn={"True"}></Navbar>
         <CartProvider>
           {children}
-          <FooterComponent />
+          <Footer/>
         </CartProvider>
 
       </body>
