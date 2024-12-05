@@ -1,18 +1,25 @@
 "use client";
+import Navbar from "../components/navbar";
 
 function RegisterPage() {
     const input =
         "w-full px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none";
-    const label = 
+    const label =
         "text-white font-bold text-sm mb-1 block";
     const button =
-        "w-full py-3 bg-[#f6a302] text-[#1c1c1c] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#e08c00]";
-    const form = 
+        "w-full py-3 bg-[#f6a302] text-[#323232] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#e08c00]";
+    const form =
         "flex-2 flex flex-col items-center p-8 ml-5";
 
     return (
-        <div className="flex flex-col font-sans bg-[#1c1c1c]">
-            <div className="flex flex-1">
+        <div className="flex flex-col font-sans bg-[#0d1b2a] min-h-screen">
+            {/* Navbar */}
+            <div className="relative z-50">
+                <Navbar isLoggedIn={"True"} />
+            </div>
+
+            {/* Main Content */}
+            <div className="flex flex-1 pt-16">
                 {/* Left Side of Page */}
                 <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
                     <img
@@ -50,11 +57,11 @@ function RegisterPage() {
                     </div>
                 </div>
 
-                {/* Right Side of Page*/}
+                {/* Right Side of Page */}
                 <div className={form}>
                     <h2 className="text-white text-2xl font-bold mb-4 text-center">
                         CREATE ACCOUNT
-                    </h2> 
+                    </h2>
                     <div className="w-24 h-1 bg-[#f6a302] mx-auto mb-6"></div>
                     <form className="w-full max-w-md">
                         {/* Names */}
