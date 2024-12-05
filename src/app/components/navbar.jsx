@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GrBasket } from "react-icons/gr";
+import { ShoppingBasket } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 
@@ -43,7 +43,7 @@ import ThemeToggle from "./ThemeToggle";
               <Link
                 href="/basket"
                 className="hover:text-orange-500 transition-all flex items-center space-x-1">
-                <GrBasket />
+                <ShoppingBasket/>
              
               </Link>
             </li>

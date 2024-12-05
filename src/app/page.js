@@ -14,11 +14,16 @@ export default function Home() {
 
       {/* The first part of the page */}
       <div className="relative shadow-xl">
-        <img
-          src="league.jpeg"
-          className="h-full w-full object-cover"
-          alt="League Image"
-        />
+      <video
+  className="h-full w-full object-cover"
+  autoPlay
+  loop
+  muted
+  playsInline
+>
+  <source src="league_video.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
         <div className="absolute top-0 right-0 h-full w-1/2 bg-gray-800 opacity-90 ">
           <div className="flex flex-col w-full h-screen p-40 pt-60 justify-start gap-y-10">
             <h1 className="text-5xl font-bold text-left">
