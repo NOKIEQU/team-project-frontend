@@ -1,8 +1,9 @@
 export default function ShopLayout({ children }) {
     return (
-        <div className=" w-full h-screen " >
+        <div className="pt-12 w-full h-screen " >
             {children}
 
         </div>
     )
 }
+

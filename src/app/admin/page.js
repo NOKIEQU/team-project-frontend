@@ -1,10 +1,10 @@
 "use client";
-import Navbar from "../components/navbar";
+
 
 function AdminPage() {
     return (
         <div className="flex min-h-screen bg-[#1c1c1c] text-white">
-            <Navbar isLoggedIn={"True"}></Navbar>
+    
             {/* Sidebar */}
             <aside className="w-64 bg-black p-6">
                 <div className="text-2xl font-bold text-[#f6a302] mb-10">GameVault Admin</div>

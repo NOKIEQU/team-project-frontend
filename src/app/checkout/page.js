@@ -1,11 +1,9 @@
 import React from "react";
-import Navbar from "../components/navbar";
+
 
 function CheckoutPage() {
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-10">
-      <Navbar isLoggedIn={"False"}></Navbar>
-      
     
       {/* Checkout Heading */}
       <h1 className="text-4xl font-bold text-yellow-500 mb-6 pt-10">CHECKOUT</h1>
