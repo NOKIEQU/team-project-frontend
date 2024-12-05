@@ -15,6 +15,8 @@ const games = [
     price: 59.99,
     rating: 4.8,
     releaseYear: 2022,
+    // FIX ME FOR FUCK SAKE
+    image: "MMC4.jpg",
     description: "Elden Ring is an action role-playing game developed by FromSoftware and published by Bandai Namco Entertainment.",
     reviews: [
       { id: 1, author: "John Doe", avatar: "JD", rating: 5, content: "Amazing game! The open world is breathtaking.", helpful: 42, notHelpful: 3 },
@@ -137,6 +139,201 @@ const games = [
       { id: 19, author: "Noah Adams", avatar: "NA", rating: 5, content: "Best co-op game I've ever played. So creative and fun!", helpful: 103, notHelpful: 2 },
       { id: 20, author: "Isabella Kim", avatar: "IK", rating: 4, content: "Great game to play with a partner. Puzzles are clever and engaging.", helpful: 79, notHelpful: 5 },
     ]
+  },
+  {
+    id: 11,
+    title: "NBA 2k25",
+    genre: "Sports",
+    price: 59.99,
+    rating: 4.7,
+    releaseYear: 2024,
+    description: "Lebron James.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 12,
+    title: "Rocket League",
+    genre: "Sports",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2016,
+    description: "Car messi.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 13,
+    title: "The Sims 4",
+    genre: "Simulation",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2014,
+    description: "simlish.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 14,
+    title: "The Witcher 3: Wild Hunt",
+    genre: "Action Adventure",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2015,
+    description: "overrated imo.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 15,
+    title: "Genshin Impact ",
+    genre: "Sandbox",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2022,
+    description: "Afnans favorite game.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 16,
+    title: "Terraria ",
+    genre: "Sandbox",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2011,
+    description: "Afnans favorite game.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 17,
+    title: "Dead Cells ",
+    genre: "RogueLike",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2018,
+    description: "idk what this is.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 18,
+    title: "The Biniding of Isaac: Rebirth ",
+    genre: "RogueLike",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2014,
+    description: "no comment.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 19,
+    title: "The Biniding of Isaac: Rebirth ",
+    genre: "RogueLike",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2014,
+    description: "no comment.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 20,
+    title: "Grand Theft Auto V ",
+    genre: "Sandbox",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2013,
+    description: "Stealy Wheely Automobiley.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 21,
+    title: "Portal 2 ",
+    genre: "Action Adventure",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2011,
+    description: "Portal.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 22,
+    title: "The Last of Us",
+    genre: "Action Adventure",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2013,
+    description: "yuh yuh.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 23,
+    title: "The Last of Us",
+    genre: "Action Adventure",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2013,
+    description: "yuh yuh.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 24,
+    title: "Cyberpunk 2077",
+    genre: "Action Adventure",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2022,
+    description: "DIdnt work at release.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
+  },
+  {
+    id: 25,
+    title: "Roblox",
+    genre: "Co-op Adventure",
+    price: 59.99,
+    rating: 5,
+    releaseYear: 2010,
+    description: "GOat.",
+    reviews: [
+      { id: 7, author: "Alex Turner", avatar: "AT", rating: 5, content: "The attention to detail in this game is unparalleled. A masterpiece!", helpful: 92, notHelpful: 4 },
+      { id: 8, author: "Olivia Martinez", avatar: "OM", rating: 4, content: "Fantastic story and gameplay, but can feel slow at times.", helpful: 53, notHelpful: 7 },
+    ]
   }
 ];
 
@@ -192,7 +389,7 @@ function ShopPage() {
   return (
     <div>
       {/* <Navbar /> */}
-      <div className="flex flex-row w-full h-full gap-x-4 px-24">
+      <div className="flex flex-row w-full h-full gap-x-4 px-24 bg-gray-800 pt-10 ">
         <aside className="lg:col-span-1 hidden lg:block">
           <FilterContent
             genres={genres}
@@ -211,39 +408,40 @@ function ShopPage() {
           />
         </aside>
         <main>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3  xl:grid-cols-3  gap-6 ">
             {paginatedGames.map(game => {
               const cartItem = cart.find(item => item.id === game.id)
               return (
-                <div key={game.id} className="flex flex-col justify-between">
+                <div key={game.id} className="flex font-bold bg-white p-5  rounded-xl flex-col justify-between">
                   <Link href={`/shop/${game.id}`} className="flex-grow">
                     <div>
+                      {/* AFNAN FIX ME FOR FUCK SAKE */}
                       <img
-                        src={`https://fakeimg.pl/500x300?text=Game`}
+                        src={`MCC4.jpg`}
                         alt={game.title}
                         className="w-full h-48 object-cover"
                       />
                       <div>
                         <div className="flex justify-between items-start">
-                          <span className="text-lg">{game.title}</span>
+                          <span className=" text-lg">{game.title}</span>
                           <div variant="secondary">{game.releaseYear}</div>
                         </div>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground mb-2">{game.genre}</p>
+                        <p className="text-sm foreground mb-2">{game.genre}</p>
                         <div className="flex items-center space-x-1 text-yellow-500">
                           {Array.from({ length: 5 }).map((_, i) => (
                             <span key={i}>
                               {i < Math.floor(game.rating) ? "★" : "☆"}
                             </span>
                           ))}
-                          <span className="text-sm text-muted-foreground ml-1">({game.rating})</span>
+                          <span className="text-sm  ml-1">({game.rating})</span>
                         </div>
                       </div>
                     </div>
                   </Link>
                   <div className="flex justify-between items-center">
-                    <span className="text-lg font-bold">${game.price.toFixed(2)}</span>
+                    <span className="text-lg  font-bold">${game.price.toFixed(2)}</span>
                     {cartItem ? (
                       <div className="flex items-center">
                         <div
@@ -309,10 +507,10 @@ function ShopPage() {
 }
 
 const FilterContent = ({ genres, games, selectedGenres, minPriceRange, maxPriceRange, setMinPriceRange, setMaxPriceRange, minRating, setMinRating, selectedYears, setSelectedYears, setCurrentPage, handleGenreChange }) => (
-  <div className="h-[calc(100vh-100px)] p-4 bg-gray-400 ">
+  <div className="h-[calc(100vh-100px)] p-4  bg-[#FFA800] p-5  ">
     <div className="space-y-6">
       <div>
-        <h3 className="font-medium mb-2">Genres</h3>
+        <h3 className="font-medium  mb-2">Genres</h3>
         {genres.map(genre => (
           <div key={genre} className="flex items-center space-x-2 mb-2">
             <input

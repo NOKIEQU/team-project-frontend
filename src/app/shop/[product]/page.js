@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 // import Navbar from "../components/navbar";
 import { useParams } from 'next/navigation'
 import { useCart } from '../../../context/cart-context'
+import Link from "next/link";
 
 const games = [
     {
@@ -140,7 +141,7 @@ const games = [
 
 
 function Product() {
-    const [mainImage, setMainImage] = useState("MCC.jpg");
+    const [mainImage, setMainImage] = useState("/MCC.jpg");
     const [currentIndex, setCurrentIndex] = useState(0);
     const params = useParams()
     const { cart, addToCart, updateQuantity } = useCart()
@@ -148,7 +149,7 @@ function Product() {
     const [game, setGame] = useState(null)
     const [newReview, setNewReview] = useState({ rating: 5, content: '' })
 
-    const images = ["MCC.jpg", "MCC2.jpg", "MCC3.jpg", "MCC4.jpg"];
+    const images = ["/MCC.jpg", "/MCC2.jpg", "/MCC3.jpg", "/MCC4.jpg"];
 
     useEffect(() => {
         const productId = typeof params.product === 'string' ? parseInt(params.product, 10) : null
@@ -196,11 +197,15 @@ function Product() {
     };
 
     return (
-        <div className="w-full h-screen bg-gray-400 ">
+        <div className="w-full h-screen bg-gray-900 ">
             {/* <Navbar isLoggedIn={"True"}></Navbar> */}
-            <div className='w-full flex justify-center py-4 text-white font-black text-lg '>
+            <div className='w-full flex flex-row justify-center gap-x-20  py-10 text-white font-black text-lg'>
                 <div className="text-center ">
-                    <h1 className="text-1xl font-bold mb-4">All Games -  Halo: The Master Chief Collection</h1>
+                <h1 className="text-1xl font-bold mb-4">
+                        <Link href="/shop">
+                            <span className="hover:text-yellow-500">All Games</span>
+                        </Link> - Halo: The Master Chief Collection
+                    </h1>
                     <h1 className="text-2xl font-bold mb-4">Halo: The Master Chief Collection</h1>
                     <img
                         src={mainImage}
@@ -221,7 +226,7 @@ function Product() {
                         ))}
                     </div>
 
-                    <ul className="list-disc list-inside mt-3 text-left">
+                    <ul className="list-disc list-inside mt-3 text-left pt-10">
                         <h1 className="text-2xl font-bold mb-4">System Requirments</h1>
                         <hr className="border-t-2 border-white my-4" />
                         <li>Requires a 64-bit processor and operating system</li>
@@ -236,17 +241,10 @@ function Product() {
 
 
                 </div>
-                <div className="mt-8">
-                    <h1 className="text-2xl font-bold mb-4">More Like This</h1>
-                    <div className="grid grid-cols-2 gap-4">
-                        <img src="MLT1.jpg" alt="Photo 1" className="w-32 h-32 object-cover aspect-square border-2 border-white" />
-                        <img src="MLT2.jpg" alt="Photo 2" className="w-32 h-32 object-cover aspect-square border-2 border-white" />
-                        <img src="MLT3.jpg" alt="Photo 3" className="w-32 h-32 object-cover aspect-square border-2 border-white" />
-                        <img src="MLT4.jpg" alt="Photo 4" className="w-32 h-32 object-cover aspect-square border-2 border-white" />
-                    </div>
+                 <div className="pt-20">
 
-                    <div className="">
-                        <hr className="border-t-2 border-white my-4" />
+                        <h1 className=" w-[375px] h-[] text-1xl font-bold mb-4">The Master Chief’s iconic journey includes six
+                            games, built for PC and collected in a single integrated experience. Whether you’re a long-time fan or meeting Spartan 117 for the first time, The Master Chief Collection is the definitive Halo gaming experience.</h1>
                         <h1 className="text-2xl font-bold mb-4">Release Date: 3 Dec 2019</h1>
                         <h1 className="text-2xl font-bold mb-4">Developer: 343 Industries</h1>
                         <hr className="border-t-2 border-white my-4" />
@@ -254,15 +252,22 @@ function Product() {
 
                         <div className="flex items-center space-x-4">
                             <h1 className="text-2xl font-bold mb-4">£35.99</h1>
-                            <button className="bg-yellow-500 text-black font-bold py-2 px-6 rounded-lg hover:bg-yellow-400">
+                            <button className="bg-yellow-500 text-black font-bold py-2 px-6 rounded-lg hover:bg-yellow-400 hover:scale-110">
                                 ADD TO CART
                             </button>
+                        </div>
+                        <br></br>
+                        <h1 className="text-2xl font-bold mb-4 ">More Like This</h1>
+                        <div className="grid grid-cols-2 gap-4 ">
+                            <img src="/MLT1.jpg" alt="Photo 1" className="w-32 h-32 object-cover aspect-square border-2 border-white hover:scale-110" />
+                            <img src="/MLT2.jpg" alt="Photo 2" className="w-32 h-32 object-cover aspect-square border-2 border-white hover:scale-110" />
+                            <img src="/MLT3.jpg" alt="Photo 3" className="w-32 h-32 object-cover aspect-square border-2 border-white hover:scale-110" />
+                            <img src="/MLT4.jpg" alt="Photo 4" className="w-32 h-32 object-cover aspect-square border-2 border-white hover:scale-110" />
                         </div>
 
 
 
-
-                    </div>
+                    
                 </div>
             </div>
         </div>

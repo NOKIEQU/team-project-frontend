@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import FooterComponent from "./components/Footer";
+import FooterComponent from "./components/footer";
 import Navbar from "./components/navbar";
 import { CartProvider } from "../context/cart-context";
 

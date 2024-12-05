@@ -1,125 +1,193 @@
-import React from "react";
+"use client";
+
+
+import Navbar from "../components/navbar";
+import React, { useState } from "react";
+import Link from "next/link";
+
+
 
 
 function CheckoutPage() {
-  return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-10">
-    
-      {/* Checkout Heading */}
-      <h1 className="text-4xl font-bold text-yellow-500 mb-6 pt-10">CHECKOUT</h1>
+  const [paymentMethod, setPaymentMethod] = useState(""); // Track selected payment method
 
-      <div className="flex flex-wrap w-full max-w-5xl gap-8">
+  // Handler to update payment method
+  const handlePaymentChange = (method) => {
+    setPaymentMethod(method);
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-10 ">
+      <Navbar isLoggedIn={"False"}></Navbar>
+
+      {/* Checkout Heading */}
+      w-full py-3 bg-yellow-500 text-black font-bold rounded transition transform hover:scale-110
+      <h1 className="text-2xl font-bold text-yellow-500 mb-6 pt-12 ml-[-850px]"> <Link href={"/basket"}>Back to Basket</Link></h1>
+      <div className="flex space-x-4">
+      <h1 className="text-4xl font-bold text-yellow-500 mb-6 pt-10">CHECKOUT</h1>
+      </div>
+      <div className="flex flex-wrap w-full max-w-5xl gap-8 ">
         {/* Main Content */}
         <div className="flex-1">
           {/* Payment Section */}
-          <section className="w-full bg-gray-800 rounded-lg p-5 mb-10">
+          <section className="w-full bg-gray-800 rounded-lg p-5 mb-10 ">
             <h2 className="text-2xl font-bold text-yellow-500 mb-4">
-              HOW WOULD YOU LIKE TO PAY?
+              Payment Option
             </h2>
             <div className="flex flex-col space-y-4">
-              {/* Disney Gift Card */}
               <label className="flex items-center space-x-3">
-                <input type="radio" name="payment" className="accent-yellow-500" />
+                <input
+                  type="radio"
+                  name="payment"
+                  value="Visa"
+                  onChange={() => handlePaymentChange("Visa")}
+                  className="accent-yellow-500"
+                />
                 <img
-                  src="/disney-gift-card.png"
-                  alt="Disney Gift Card"
+                  src="visa.png"
+                  alt="Visa"
                   className="w-12 h-12"
                 />
-                <span>Disney Gift Card</span>
+                <span>Visa</span>
               </label>
 
-              {/* Disney Rewards Redemption Card */}
               <label className="flex items-center space-x-3">
-                <input type="radio" name="payment" className="accent-yellow-500" />
+                <input
+                  type="radio"
+                  name="payment"
+                  value="Mastercard"
+                  onChange={() => handlePaymentChange("Mastercard")}
+                  className="accent-yellow-500"
+                />
                 <img
-                  src="/disney-rewards.png"
-                  alt="Disney Rewards Redemption Card"
+                  src="mastercard.png"
+                  alt="Mastercard"
                   className="w-12 h-12"
                 />
-                <span>Disney Rewards Redemption Card</span>
+                <span>Mastercard</span>
+                
               </label>
 
-              {/* Credit or Debit Card */}
               <label className="flex items-center space-x-3">
-                <input type="radio" name="payment" className="accent-yellow-500" />
-                <img
-                  src="/credit-card.png"
-                  alt="Credit or Debit Card"
-                  className="w-12 h-12"
+                <input
+                  type="radio"
+                  name="payment"
+                  value="Paypal"
+                  onChange={() => handlePaymentChange("Paypal")}
+                  className="accent-yellow-500"
                 />
-                <span>Credit or Debit Card</span>
+                <img src="paypal.png" alt="Paypal" className="w-12 h-12" />
+                <span>Paypal</span>
               </label>
 
-              {/* Click to Pay */}
               <label className="flex items-center space-x-3">
-                <input type="radio" name="payment" className="accent-yellow-500" />
-                <img
-                  src="/click-to-pay.png"
-                  alt="Click to Pay"
-                  className="w-12 h-12"
+                <input
+                  type="radio"
+                  name="payment"
+                  value="Apple Pay"
+                  onChange={() => handlePaymentChange("Apple Pay")}
+                  className="accent-yellow-500"
                 />
-                <span>Click to Pay</span>
+                <img src="apple.png" alt="Apple Pay" className="w-12 h-12" />
+                <span>Apple Pay</span>
+              </label>
+              <label className="flex items-center space-x-3">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="y"
+                  onChange={() => handlePaymentChange("Loyalty Points")}
+                  className="accent-yellow-500"
+                />
+                <img src="logo-white.png" alt="Apple Pay" className="w-12 h-12" />
+                <span>Loyalty Points</span>
               </label>
             </div>
           </section>
 
           {/* Form Section */}
-          <section className="w-full bg-gray-800 rounded-lg p-5 mb-10">
-            <h2 className="text-2xl font-bold text-yellow-500 mb-4">CONFIRM</h2>
+          <section className="w-full bg-gray-800 rounded-lg p-5 mb-10  ">
+            <h2 className="text-2xl font-bold text-yellow-500 mb-4">
+              CONFIRM PAYMENT
+            </h2>
             <form className="flex flex-col space-y-4">
+
+            <div className="flex space-x-4">
               <input
                 type="email"
-                placeholder="Email"
-                className="w-full p-3 bg-gray-700 text-white rounded border border-yellow-500"
+                placeholder="Card Holder Name"
+                className="w-2/3 p-3 bg-gray-700 text-white rounded border border-yellow-500"
               />
               <input
-                type="text"
+                type="email"
                 placeholder="Address"
-                className="w-full p-3 bg-gray-700 text-white rounded border border-yellow-500"
+                className="w-2/3 p-3 bg-gray-700 text-white rounded border border-yellow-500"
               />
+              </div>
+              
+              <input
+                type="text"
+                placeholder="Card Number"
+                className="w-2/3 p-3 bg-gray-700 text-white rounded border border-yellow-500"
+              />
+              <div className="flex space-x-4">
+                <input
+                  type="text"
+                  placeholder="Expiry Date"
+                  className="w-1/3 p-3 bg-gray-700 text-white rounded border border-yellow-500"
+                />
+                <input
+                  type="text"
+                  placeholder="CV"
+                  className="w-1/3 p-3 bg-gray-700 text-white rounded border border-yellow-500"
+                />
+              </div>
               <input
                 type="text"
                 placeholder="Country"
-                className="w-full p-3 bg-gray-700 text-white rounded border border-yellow-500"
+                className="w-3/4 p-3 bg-gray-700 text-white rounded border border-yellow-500"
               />
-              <button className="w-full py-3 bg-yellow-500 text-black font-bold rounded">
-                Confirm Purchase
+
+              {/* changes the text based on selected method */}
+              <button className="w-full py-3 bg-yellow-500 text-black font-bold rounded transition transform hover:scale-110">
+                {paymentMethod
+                  ? `Confirm Purchase with ${paymentMethod}`
+                  : "Confirm Purchase"}
               </button>
             </form>
           </section>
         </div>
 
-        {/* Items Section (Moved to the Right Side) */}
-        <aside className="w-full max-w-sm bg-gray-800 rounded-lg p-5">
-          <h2 className="text-2xl font-bold text-yellow-500 mb-4">
-            ITEMS BEING PURCHASED
-          </h2>
+        {/* Summary section */}
+        <aside className="  w-full h-full min-h-full max-w-sm bg-gray-800 rounded-lg p-5  ">
+          <h2 className="text-2xl font-bold text-yellow-500 mb-4">Summary</h2>
           <div className="grid grid-cols-4 gap-4 text-center text-white font-semibold">
-            <div>Items</div>
-            <div>Price</div>
-            <div>Quantity</div>
-            <div>Total</div>
+            <h1>Items</h1>
+            <h1>Price</h1>
+            <h1>Quantity</h1>
           </div>
           <div className="grid grid-cols-4 gap-4 text-center mt-4 items-center">
             <div className="flex flex-col items-center">
-              <img
-                src="/game-image.png"
-                alt="Game Thumbnail"
-                className="w-16 h-16 rounded-md"
-              />
-              <span className="text-sm">Fusion Game Hard Company Games</span>
+              <span className=" font-bold text-sm">Elden Ring</span>
             </div>
             <div>£100.00</div>
             <div>1</div>
-            <div>£100.00</div>
+            
+          </div>
+          
+          <div className="mt-8">
+          <hr className="border-t-2 border-white my-4" />
+          <h2 className="text-2xl font-bold text-yellow-500 mb-2">Shipping</h2>
+          <h1 className="text-lg text-white">£4.95</h1>
+          </div>
+          <div className="mt-8">
+          <hr className="border-t-2 border-white my-4" />
+            <h2 className="text-2xl font-bold text-yellow-500 mb-2">Total</h2>
+            <h1 className="text-lg text-white">£1000</h1>
           </div>
         </aside>
       </div>
-
-      {/* Back to Top */}
-      <button className="py-3 px-6 bg-yellow-500 text-black font-bold rounded mt-10">
-        BACK TO TOP
-      </button>
+      
     </div>
   );
 }
