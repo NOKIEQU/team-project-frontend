@@ -4,8 +4,10 @@ import GameCard from "./components/gameCard"
 
 export default function Home() {
   return (
+
     <div className=" min-h-screen bg-[#0d1b2a] text-white font-oswald">
       <div className="absolute top-5 right-5"></div>
+
 
       {/* The first part of the page */}
       <div className="relative shadow-xl">
