@@ -4,8 +4,10 @@ import GameCard from "./components/gameCard"
 
 export default function Home() {
   return (
-    <div className=" min-h-screen bg-gray-800 text-white font-oswald">
+
+    <div className=" min-h-screen bg-[#0d1b2a] text-white font-oswald">
       <div className="absolute top-5 right-5"></div>
+
 
       {/* The first part of the page */}
       <div className="relative shadow-xl">
@@ -22,7 +24,7 @@ export default function Home() {
         <div className="absolute top-0 right-0 h-full w-1/2 bg-gray-800 opacity-90 ">
           <div className="flex flex-col w-full h-screen p-40 pt-60 justify-start gap-y-10">
             <h1 className="text-5xl font-bold text-left">
-              We are on <span className="text-orange-500">TOP</span> of our game{" "}
+              We are on <span className="text-[#f6a302]">TOP</span> of our game{" "}
               <br />
               <div className="bg-[#FFA800] h-2 rounded-full w-1/6 transition-all hover:w-5/6"></div>
             </h1>
@@ -38,7 +40,7 @@ export default function Home() {
 
             <div className="flex w-full justify-left gap-x-6 -ml-4">
               <Link href="/shop">
-                <button className="m-4 bg-[#FFA800] hover:bg-orange-500 font-bold py-4 px-4 rounded-xl w-40 transition transform hover:scale-110">
+                <button className="m-4 bg-[#f6a302] hover:bg-[#e09200d8] font-bold py-4 px-4 rounded-xl w-40 transition transform hover:scale-110">
                   SEARCH NOW
                 </button>
               </Link>
@@ -77,6 +79,11 @@ export default function Home() {
             className="w-2/6 rounded-lg transition-transform hover:scale-110 mt-24 ml-80 mb-10"
             alt="Minecraft"
           />
+
+          {/*Shadow boxes behind images  */}
+          <div className="w-3/6 bg-white">
+
+          </div>
         </div>
 
         <div className="flex flex-col justify-items-start w-1/2 text-left pt-40 m-36  ">
