@@ -7,7 +7,7 @@ const CardForAccount = () => {
         {
             src:"/account/profilepic.png",
             title:'My Profile',
-            description:'Click to view profile.',
+            description:'Click to veiw.',
             link: '/realprofile'
         },
         {
