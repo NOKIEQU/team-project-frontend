@@ -19,7 +19,7 @@ function AccountPage() {
               height={40}
               className="rounded-full"
             />
-            <h1 className="text-3xl font-bold text-yellow-400">My Account</h1>
+            <h1 className="text-3xl font-bold text-[#FFA800]">My Account</h1>
           </div>
           <div className="pb-16">
             <CardForAccount />
