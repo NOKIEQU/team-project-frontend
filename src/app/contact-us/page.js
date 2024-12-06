@@ -1,12 +1,13 @@
 "use client";
 import {useState} from "react"
+import * as Toast from "@radix-ui/react-toast"
 function RegisterPage() {
     const input =
-        "w-full px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none";
+        "w-full px-3 py-2 bg-transparent border-b-2 border-[#e38302] text-white text-sm outline-none";
     const label = 
         "text-white font-bold text-sm mb-1 block";
     const button =
-        "w-full py-3 bg-[#f6a302] text-[#1c1c1c] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#e08c00]";
+        "w-full py-3 bg-[#e38302] text-[#1c1c1c] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#fa9a00ef]";
     const form = 
         "flex-2 flex flex-col items-center p-8 ml-5 w-1/2";
 
@@ -18,7 +19,7 @@ function RegisterPage() {
         message:"",
     });
     const [errors,setErrors]=useState({});
-    const [successMessage,setSuccessMessage]=useState("");
+    const [openToast,setOpenToast]=useState(false);
     const handleChange = (e) => {
         const {name , value} = e.target;
         setFormData({ ...formData,[name]:value});
@@ -52,20 +53,20 @@ function RegisterPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(validateForm()){
-            setSuccessMessage("Your message has been successfully sent!");
+            setOpenToast(true)
             setFormData({name:"",email:"",contactNumber:"",message:""});
             setErrors({});
         }else{
-            setSuccessMessage("");
+            setOpenToast(false);
         }
     };
     return (
-        <div className="flex flex-col font-sans bg-[#1c1c1c] h-full">
+        <div className="flex flex-col font-sans bg-[#0d1b2a] h-full">
             <div className="flex flex-1">
                 {/* Left Side of Page */}
                 <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
                     <img
-                        src="/left-background.png"
+                        src="/bg.jpeg"
                         alt="Left Side"
                         className="absolute top-0 left-0 h-full w-full z-10 object-cover"
                         style={{
@@ -90,10 +91,10 @@ function RegisterPage() {
                         </svg>
                     </div>
                     <div className="relative z-30 p-8 max-w-lg">
-                        <h1 className="text-4xl font-bold mb-5 text-white">
-                            GET IN <span className="text-[#f6a302]">TOUCH</span> WITH US
+                        <h1 className="text-4xl font-bold mb-10 text-white">
+                            GET IN <span className="text-[#e38302]">TOUCH</span> WITH US
                         </h1>
-                        <p className="text-2xl leading-7 text-[#f6a302] mt-40 font-bold">
+                        <p className="text-2xl leading-7 font-bold">
                             We would love to hear form you. Feel free to reach out with any questions, comments, or feedback.
                         </p>
                     </div>
@@ -104,12 +105,7 @@ function RegisterPage() {
                     <h2 className="text-white text-2xl font-bold mb-4 text-center">
                         Contact Us
                     </h2> 
-                    <div className="w-24 h-1 bg-[#f6a302] mx-auto mb-6"></div>
-                    {successMessage && (
-                        <div className="mb-4 text-green-500 font-bold text-center text-2xl">
-                            {successMessage}
-                        </div>
-                    )}
+                    <div className="w-24 h-1 bg-[#e38302] mx-auto mb-6"></div>
                     <form className="w-full max-w-md" onSubmit={handleSubmit}>
                         {/* Names */}
                         <div className="flex gap-4 mb-4">
@@ -187,6 +183,12 @@ function RegisterPage() {
                     </form>
                 </div>
             </div>
+            <Toast.Provider swipeDirection="right">
+                <Toast.Root open={openToast} onOpenChange={setOpenToast} className="bg-[#e38302] p-10 rounded-md text-[#0d1b2a] font-bold fixed top-1/3 left-1/3">
+                    <Toast.Title>Your message has been successfully sent!</Toast.Title>
+                </Toast.Root>
+                <Toast.Viewport className="fixed bottom-0 right-0 p-6 z-50"/>
+            </Toast.Provider>
         </div>
     );
 }
