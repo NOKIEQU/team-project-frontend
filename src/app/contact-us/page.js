@@ -1,69 +1,71 @@
 "use client";
-import {useState} from "react"
-import * as Toast from "@radix-ui/react-toast"
+import { useState } from "react";
+import * as Toast from "@radix-ui/react-toast";
+
 function RegisterPage() {
     const input =
         "w-full px-3 py-2 bg-transparent border-b-2 border-[#e38302] text-white text-sm outline-none";
-    const label = 
-        "text-white font-bold text-sm mb-1 block";
+    const label = "text-white font-bold text-sm mb-1 block";
     const button =
         "w-full py-3 bg-[#e38302] text-[#1c1c1c] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#fa9a00ef]";
-    const form = 
-        "flex-2 flex flex-col items-center p-8 ml-5 w-1/2";
+    const form =
+        "flex-1 flex flex-col items-center p-6 sm:p-4 lg:p-8 sm:w-full lg:w-1/2";
 
-
-    const [formData,setFormData]=useState({
-        name:"",
-        email:"",
-        contactNumber:"",
-        message:"",
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        contactNumber: "",
+        message: "",
     });
-    const [errors,setErrors]=useState({});
-    const [openToast,setOpenToast]=useState(false);
+    const [errors, setErrors] = useState({});
+    const [openToast, setOpenToast] = useState(false);
+
     const handleChange = (e) => {
-        const {name , value} = e.target;
-        setFormData({ ...formData,[name]:value});
-    }
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
     const validateForm = () => {
         let formErrors = {};
-        if(!formData.name){
+        if (!formData.name) {
             formErrors.name = "Name is required.";
-        }else if (formData.name.length<2){
-            formErrors.name="Name must be at least 2 characters.";
+        } else if (formData.name.length < 2) {
+            formErrors.name = "Name must be at least 2 characters.";
         }
-        if(!formData.email){
-            formErrors.email="Email is required.";
-        }else if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData.email)){
-            formErrors.email="Invalid email address.";
+        if (!formData.email) {
+            formErrors.email = "Email is required.";
+        } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData.email)) {
+            formErrors.email = "Invalid email address.";
         }
-        if(!formData.contactNumber){
-            formErrors.contactNumber="Contact number is required.";
-        }else if (!/^[+]?[0-9]+$/.test(formData.contactNumber)){
+        if (!formData.contactNumber) {
+            formErrors.contactNumber = "Contact number is required.";
+        } else if (!/^[+]?[0-9]+$/.test(formData.contactNumber)) {
             formErrors.contactNumber = "Invalid phone number.";
         }
-
-        if(!formData.message){
+        if (!formData.message) {
             formErrors.message = "Message is required.";
-        }else if (formData.message.length < 10){
-            formErrors.message="Message must be at least 10 characters.";
+        } else if (formData.message.length < 10) {
+            formErrors.message = "Message must be at least 10 characters.";
         }
         setErrors(formErrors);
         return Object.keys(formErrors).length === 0;
     };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(validateForm()){
-            setOpenToast(true)
-            setFormData({name:"",email:"",contactNumber:"",message:""});
+        if (validateForm()) {
+            setOpenToast(true);
+            setFormData({ name: "", email: "", contactNumber: "", message: "" });
             setErrors({});
-        }else{
+        } else {
             setOpenToast(false);
         }
     };
+
     return (
         <div className="flex flex-col font-sans bg-[#0d1b2a] h-full">
-            <div className="flex flex-1">
-                {/* Left Side of Page */}
+            <div className="flex flex-1 flex-col lg:flex-row">
+                {/* Left Side */}
                 <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
                     <img
                         src="/bg.jpeg"
@@ -90,24 +92,25 @@ function RegisterPage() {
                             />
                         </svg>
                     </div>
-                    <div className="relative z-30 p-8 max-w-lg">
-                        <h1 className="text-4xl font-bold mb-10 text-white">
+                    <div className="relative z-30 p-6 sm:p-4 max-w-lg text-center lg:text-left">
+                        <h1 className="text-4xl font-bold mb-6 text-white sm:text-2xl">
                             GET IN <span className="text-[#e38302]">TOUCH</span> WITH US
                         </h1>
-                        <p className="text-2xl leading-7 font-bold">
-                            We would love to hear form you. Feel free to reach out with any questions, comments, or feedback.
+                        <p className="text-2xl leading-7 font-bold sm:text-lg">
+                            We would love to hear from you. Feel free to reach out with any
+                            questions, comments, or feedback.
                         </p>
                     </div>
                 </div>
 
-                {/* Right Side of Page*/}
+                {/* Right Side */}
                 <div className={form}>
                     <h2 className="text-white text-2xl font-bold mb-4 text-center">
                         Contact Us
-                    </h2> 
+                    </h2>
                     <div className="w-24 h-1 bg-[#e38302] mx-auto mb-6"></div>
                     <form className="w-full max-w-md" onSubmit={handleSubmit}>
-                        {/* Names */}
+                        {/* Name */}
                         <div className="flex gap-4 mb-4">
                             <div className="flex-1">
                                 <label className={label}>Name</label>
@@ -118,13 +121,12 @@ function RegisterPage() {
                                     onChange={handleChange}
                                     placeholder="Name"
                                     className={input}
-                                    
                                 />
-                                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                                {errors.name && (
+                                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                                )}
                             </div>
                         </div>
-
-                       
 
                         {/* Email */}
                         <div className="mb-4">
@@ -136,13 +138,13 @@ function RegisterPage() {
                                 onChange={handleChange}
                                 placeholder="Enter your email"
                                 className={input}
-                                
                             />
-                            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                            {errors.email && (
+                                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                            )}
                         </div>
 
-            
-                        {/* Names */}
+                        {/* Contact Number */}
                         <div className="flex gap-4 mb-4">
                             <div className="flex-1">
                                 <label className={label}>Contact Number</label>
@@ -153,14 +155,16 @@ function RegisterPage() {
                                     onChange={handleChange}
                                     placeholder="Contact Number"
                                     className={input}
-                                    
                                 />
-                                {errors.contactNumber && <p className="text-red-500 text-sm mt-1">{errors.contactNumber}</p>}
+                                {errors.contactNumber && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.contactNumber}
+                                    </p>
+                                )}
                             </div>
                         </div>
 
-
-                        {/* Names */}
+                        {/* Message */}
                         <div className="flex gap-4 mb-4">
                             <div className="flex-1">
                                 <label className={label}>Message</label>
@@ -170,12 +174,14 @@ function RegisterPage() {
                                     onChange={handleChange}
                                     placeholder="Message"
                                     className={input}
-                                
-                                    rows={10}
+                                    rows={5}
                                 ></textarea>
-                                {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+                                {errors.message && (
+                                    <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                                )}
                             </div>
                         </div>
+
                         {/* Submit Button */}
                         <button type="submit" className={button}>
                             Send
@@ -184,10 +190,14 @@ function RegisterPage() {
                 </div>
             </div>
             <Toast.Provider swipeDirection="right">
-                <Toast.Root open={openToast} onOpenChange={setOpenToast} className="bg-[#e38302] p-10 rounded-md text-[#0d1b2a] font-bold fixed top-1/3 left-1/3">
+                <Toast.Root
+                    open={openToast}
+                    onOpenChange={setOpenToast}
+                    className="bg-[#e38302] p-10 rounded-md text-[#0d1b2a] font-bold fixed top-1/3 left-1/3"
+                >
                     <Toast.Title>Your message has been successfully sent!</Toast.Title>
                 </Toast.Root>
-                <Toast.Viewport className="fixed bottom-0 right-0 p-6 z-50"/>
+                <Toast.Viewport className="fixed bottom-0 right-0 p-6 z-50" />
             </Toast.Provider>
         </div>
     );
