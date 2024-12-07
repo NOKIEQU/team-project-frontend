@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       <body>
         <UserProvider>
           <CartProvider>
-            <Navbar isLoggedIn={"True"}></Navbar>
+            <Navbar />
          {/*   <div className="px-10 bg-[#0d1b2a]"> */}
             {children}
             {/* </div> */}
