@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       <body>
         <UserProvider>
           <CartProvider>
-            <Navbar isLoggedIn={"True"}></Navbar>
+            <Navbar />
 
             {children}
             <Footer />

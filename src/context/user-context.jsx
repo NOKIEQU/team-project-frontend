@@ -27,7 +27,7 @@ export function UserProvider({ children }) {
   const register = async (userData) => {
     console.log(userData);
     try {
-      const response = await fetch('http://localhost:3001/api/users/register', {
+      const response = await fetch('http://51.77.110.253:3001/api/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
