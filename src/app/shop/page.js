@@ -2,17 +2,17 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { ShoppingCart, Check, ChevronLeft, ChevronRight, Minus, Plus, Filter } from 'lucide-react'
 import { useCart } from '../../context/cart-context'
 import { useSearchParams } from 'next/navigation'
-// import Navbar from '../components/navbar'
+import Navbar from '../components/navbar'
 
 function ShopPage() {
   const [games, setGames] = useState([])
   const [genres, setGenres] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('')
 
   const searchParams = useSearchParams()
   const initialGenre = searchParams.get('genre')
@@ -57,7 +57,8 @@ function ShopPage() {
     (selectedGenres.length === 0 || selectedGenres.includes(game.genre.name)) &&
     parseFloat(game.price) >= minPriceRange && parseFloat(game.price) <= maxPriceRange &&
     parseInt(game.rating) >= minRating &&
-    (selectedYears.length === 0 || selectedYears.includes(game.releaseYear))
+    (selectedYears.length === 0 || selectedYears.includes(game.releaseYear)) &&
+    game.title.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
   const totalPages = Math.ceil(filteredGames.length / itemsPerPage)
@@ -110,6 +111,15 @@ function ShopPage() {
           />
         </aside>
         <main>
+          <div className="mb-4">
+            <input
+              type="text"
+              placeholder="Search games..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-3  xl:grid-cols-3  gap-6 ">
             {paginatedGames.map(game => {
               const cartItem = cart.find(item => item.id === game.id)
@@ -117,13 +127,10 @@ function ShopPage() {
                 <div key={game.id} className="flex font-bold bg-white p-5  rounded-xl flex-col justify-between">
                   <Link href={`/shop/${game.id}`} className="flex-grow">
                     <div>
-                      <Image
-                        // src={game.imageUrls[0] || "https://fakeimg.pl/440x320/282828/eae0d0/?retina=1"}
-                        src={"https://fakeimg.pl/440x320/282828/eae0d0/?retina=1"}
+                      <img
+                        src={game.imageUrls[0] || "/placeholder.svg"}
                         alt={game.title}
                         className="w-full h-48 object-cover"
-                        width={440} 
-                        height={320}
                       />
                       <div>
                         <div className="flex justify-between items-start">
