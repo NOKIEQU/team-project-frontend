@@ -1,10 +1,32 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
 import GameCard from "./components/gameCard";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    const fetchGenres = async () => {
+      try {
+        const response = await fetch('http://51.77.110.253:3001/api/genres');
+        if (!response.ok) {
+          throw new Error('Failed to fetch genres');
+        }
+        const data = await response.json();
+        setGenres(data);
+      } catch (error) {
+        console.error('Error fetching genres:', error);
+      }
+    };
+
+    fetchGenres();
+  }, []);
+
   const button =
-   "bg-gray-800 text-white flex items-center justify-center rounded-lg shadow-lg hover:shadow-2xl transition-transform hover:scale-110 w-80 h-auto p-8 mb-10 font-bold";
+    "bg-gray-800 text-white flex items-center justify-center rounded-lg shadow-lg hover:shadow-2xl transition-transform hover:scale-110 w-80 h-auto p-8 mb-10 font-bold";
   return (
     <div className=" min-h-screen bg-[#0d1b2a] text-white font-oswald">
       <div className="absolute top-5 right-5"></div>
@@ -184,17 +206,16 @@ export default function Home() {
       </div>
       <div className="flex flex-col w-full  pt-16 items-center ">
         <h1 className="text-6xl font-bold">Explore Game Genres</h1>
-        
-        <div className="flex flex-wrap justify-center grid-cols-3 gap-5 rounded-lg  p-4 space-x-4 m-24 ">
-         
-  <button className={button}>Horror</button>
-  <button className={button}>FPS</button>
-  <button className={button}>Adventure</button>
-  <button className={button}>Sport</button>
-  <button className={button}>Party</button>
-  <button className={button}>RPG</button>
 
-</div>
+        <div className="flex flex-wrap justify-center grid-cols-3 gap-5 rounded-lg  p-4 space-x-4 m-24 ">
+
+        {genres.map((genre) => (
+                  <Link key={genre.id} href={`/shop?genre=${encodeURIComponent(genre.name)}`}>
+                    <button className={button}>{genre.name}</button>
+                  </Link>
+                ))}
+
+        </div>
       </div>
     </div>
   );
