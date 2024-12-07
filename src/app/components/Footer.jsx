@@ -27,10 +27,9 @@ function FooterComponent() {
                     <div>
                         <h3 className="font-semibold text-lg mb-4">Customer Service</h3>
                         <ul className="space-y-2">
-                            <li><Link href="/faq" className="text-sm hover:underline">FAQ</Link></li>
-                            <li><Link href="/shipping" className="text-sm hover:underline">Shipping</Link></li>
-                            <li><Link href="/returns" className="text-sm hover:underline">Returns</Link></li>
-                            <li><Link href="/privacy" className="text-sm hover:underline">Privacy Policy</Link></li>
+                            <li><Link href="/about" className="text-sm hover:underline">FAQ</Link></li>
+        
+                            <li><Link href="/about" className="text-sm hover:underline">Privacy Policy</Link></li>
                         </ul>
                     </div>
                     <div>

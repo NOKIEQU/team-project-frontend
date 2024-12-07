@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import GameCard from "./components/gameCard"
+import GameCard from "./components/gameCard";
 
 export default function Home() {
+  const button =
+   "bg-gray-800 text-white flex items-center justify-center rounded-lg shadow-lg hover:shadow-2xl transition-transform hover:scale-110 w-80 h-auto p-8 mb-10 font-bold";
   return (
-
     <div className=" min-h-screen bg-[#0d1b2a] text-white font-oswald">
       <div className="absolute top-5 right-5"></div>
-
 
       {/* The first part of the page */}
       <div className="relative shadow-xl">
@@ -21,12 +21,12 @@ export default function Home() {
           <source src="league_video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className="absolute top-0 right-0 h-full w-1/2 bg-gray-800 opacity-90 ">
+        <div className="absolute top-0 right-0 h-full w-1/2 bg-[#0d1b2a] opacity-90 ">
           <div className="flex flex-col w-full h-screen p-40 pt-60 justify-start gap-y-10">
             <h1 className="text-5xl font-bold text-left">
               We are on <span className="text-[#f6a302]">TOP</span> of our game{" "}
               <br />
-              <div className="bg-[#FFA800] h-2 rounded-full w-1/6 transition-all hover:w-5/6"></div>
+              <div className="bg-[#f6a302] h-2 rounded-full w-1/6 transition-all hover:w-5/6"></div>
             </h1>
 
             <p className="text-lg">
@@ -40,12 +40,12 @@ export default function Home() {
 
             <div className="flex w-full justify-left gap-x-6 -ml-4">
               <Link href="/shop">
-                <button className="m-4 bg-[#f6a302] hover:bg-[#e09200d8] font-bold py-4 px-4 rounded-xl w-40 transition transform hover:scale-110">
+                <button className="m-4 bg-[#f6a302] hover:bg-[#fa9a00ef] font-bold py-4 px-4 rounded-xl w-40 transition transform hover:scale-110">
                   SEARCH NOW
                 </button>
               </Link>
               <Link href="/Questionnaire">
-                <button className="m-4 bg-[#FFA800] hover:bg-orange-500 font-bold py-3 px-5 rounded-xl w-40 transition transform hover:scale-110">
+                <button className="m-4 bg-[#f6a302] hover:bg-[#fa9a00ef] font-bold py-3 px-5 rounded-xl w-40 transition transform hover:scale-110">
                   TAKE QUIZ
                 </button>
               </Link>
@@ -81,15 +81,13 @@ export default function Home() {
           />
 
           {/*Shadow boxes behind images  */}
-          <div className="w-3/6 bg-white">
-
-          </div>
+          <div className="w-3/6 bg-white"></div>
         </div>
 
         <div className="flex flex-col justify-items-start w-1/2 text-left pt-40 m-36  ">
           <h1 className="text-4xl font-bold text-left">WHY WE ARE THE BEST</h1>
           <br />
-          <div className="bg-[#FFA800] h-2 rounded-full w-2/6 transition-all hover:w-5/6"></div>
+          <div className="bg-[#f6a302] h-2 rounded-full w-2/6 transition-all hover:w-5/6"></div>
           <p className="pt-10">
             {" "}
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquet,
@@ -127,11 +125,11 @@ export default function Home() {
 
       <div className="flex flex-col w-full min-h-screen pt-36 items-center ">
         <h1 className="text-6xl font-bold">
-          Our <span className="text-orange-500">TOP</span> games
+          Our <span className="text-[#f6a302]">TOP</span> games
         </h1>
         <br />
 
-        <div className="bg-[#FFA800] h-2 rounded-full w-1/6 transition-all hover:w-2/6"></div>
+        <div className="bg-[#f6a302] h-2 rounded-full w-1/6 transition-all hover:w-2/6"></div>
 
         <div className="flex flex-wrap justify-center gap-8 mt-10 w-3/4 pt-20 pb-32 font-bold">
           <GameCard
@@ -183,6 +181,20 @@ export default function Home() {
             description="An open-world adventure"
           />
         </div>
+      </div>
+      <div className="flex flex-col w-full  pt-16 items-center ">
+        <h1 className="text-6xl font-bold">Explore Game Genres</h1>
+        
+        <div className="flex flex-wrap justify-center grid-cols-3 gap-5 rounded-lg  p-4 space-x-4 m-24 ">
+         
+  <button className={button}>Horror</button>
+  <button className={button}>FPS</button>
+  <button className={button}>Adventure</button>
+  <button className={button}>Sport</button>
+  <button className={button}>Party</button>
+  <button className={button}>RPG</button>
+
+</div>
       </div>
     </div>
   );

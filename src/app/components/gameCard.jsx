@@ -17,7 +17,7 @@ function GameCard(props) {
       <p className="text-lg text-gray-400  mt-2">{props.price}</p>
       <p className="text-sm text-gray-300  mt-2">{props.description}</p>
       <Link href={"/shop"}>
-      <button className="mt-4 bg-orange-500 text-white font-semibold py-2 px-4 rounded-lg transition-transform hover:scale-105 hover:bg-orange-600 w-full">
+      <button className="mt-4 bg-[#f6a302] text-white font-semibold py-2 px-4 rounded-lg transition-transform hover:scale-105 hover:bg-[#fa9a00ef] w-full">
         View Details
       </button>
       </Link>
