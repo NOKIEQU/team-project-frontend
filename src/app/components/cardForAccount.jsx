@@ -48,7 +48,7 @@ const CardForAccount = () => {
           <>
             <img src={card.src} alt="card-images" className="w-[75px] mb-4"/>
             <p 
-              className="text-[20px] font-bold uppercase mb-7 hover:text-gray-600 cursor-pointer"
+              className="text-[20px] font-bold uppercase mb-7 hover:text-[#fa9a00ef]  cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 setIsOpen(!isOpen);
