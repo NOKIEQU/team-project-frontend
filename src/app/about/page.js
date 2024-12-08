@@ -122,12 +122,15 @@ const About = () => {
 
       <div className="min-h-screen w-full bg-[#0d1b2a] pt-24">
         <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-full text-white">
-          <p className="text-4xl font-bold border-b-4 border-gray-500 p-2 inline text-[#FFA800] text-center">
-            Keep Up to Date
-          </p>
+          <div className="h-auto flex flex-col items-center">
+            <p className="text-4xl font-bold text-white">
+              Keep Up to Date
+            </p>
+            <div className="bg-[#f6a302] h-2 rounded-full w-2/6 mt-2 transition-all hover:w-4/6"></div>
+          </div>
           <p className="py-6 text-lg text-center">
-          Stay connected and informed by following us on social media for the latest news,
-           offers, and gaming updates.
+            Stay connected and informed by following us on social media for the latest news,
+            offers, and gaming updates.
           </p>
 
           <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-8 text-center py-8 px-12 sm:px-0">
