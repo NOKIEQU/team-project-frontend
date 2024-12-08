@@ -106,7 +106,10 @@ function BasketPage() {
             Continue Shopping
           </button>
         </Link>
-        )
+
+        </div>
+        </div>
+        );
 
 }
 export default BasketPage;
