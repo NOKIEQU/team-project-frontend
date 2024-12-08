@@ -4,10 +4,10 @@ import * as Toast from "@radix-ui/react-toast";
 
 function RegisterPage() {
     const input =
-        "w-full px-3 py-2 bg-transparent border-b-2 border-[#e38302] text-white text-sm outline-none";
+        "w-full px-3 py-2 bg-transparent border-b-2 border-[#FFA800] text-white text-sm outline-none";
     const label = "text-white font-bold text-sm mb-1 block";
     const button =
-        "w-full py-3 bg-[#e38302] text-[#1c1c1c] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#fa9a00ef]";
+        "w-full py-3 bg-[#FFA800] text-[#1c1c1c] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#fa9a00]";
     const form =
         "flex-1 flex flex-col items-center p-6 sm:p-4 lg:p-8 sm:w-full lg:w-1/2";
 
@@ -94,7 +94,7 @@ function RegisterPage() {
                     </div>
                     <div className="relative z-30 p-6 sm:p-4 max-w-lg text-center lg:text-left">
                         <h1 className="text-4xl font-bold mb-6 text-white sm:text-2xl">
-                            GET IN <span className="text-[#e38302]">TOUCH</span> WITH US
+                            GET IN <span className="text-[#FFA800]">TOUCH</span> WITH US
                         </h1>
                         <p className="text-2xl leading-7 font-bold sm:text-lg">
                             We would love to hear from you. Feel free to reach out with any
@@ -106,11 +106,12 @@ function RegisterPage() {
                 {/* Right Side */}
                 <div className={form}>
                     <h2 className="text-white text-2xl font-bold mb-4 text-center pt-12 pb-2">
-                        
                         Contact Us
                     </h2>
-                    <div className="w-24 h-1 bg-[#e38302] mx-auto mb-6"></div>
-                    <p className="text-white text-left pb-4 font-bold justify-left block">Fill out this form and our team will contact you shortly</p>
+                    <div className="w-24 h-1 bg-[#FFA800] mx-auto mb-6"></div>
+                    <p className="text-white text-left pb-4 font-bold justify-left block">
+                        Fill out this form and our team will contact you shortly
+                    </p>
                     <form className="w-full max-w-md" onSubmit={handleSubmit}>
                         {/* Name */}
                         <div className="flex gap-4 mb-4">
@@ -195,7 +196,7 @@ function RegisterPage() {
                 <Toast.Root
                     open={openToast}
                     onOpenChange={setOpenToast}
-                    className="bg-[#e38302] p-10 rounded-md text-[#0d1b2a] font-bold fixed top-1/3 left-1/3"
+                    className="bg-[#FFA800] p-10 rounded-md text-[#0d1b2a] font-bold fixed top-1/3 left-1/3"
                 >
                     <Toast.Title>Your message has been successfully sent!</Toast.Title>
                 </Toast.Root>
