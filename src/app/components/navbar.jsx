@@ -22,7 +22,7 @@ export default function Navbar() {
 
         <ul className="flex space-x-12 font-normal">
           <li className="flex items-center">
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
           </li>
           <li className="flex items-center">
             <Link href="/shop" className="hover:bg-[#fa9a00ef] transition-all">
