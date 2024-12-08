@@ -9,36 +9,42 @@ const About = () => {
       src: "/images/instagram.jpg",
       title: "Instagram",
       style: "shadow-pink-500",
+      link: "https://instagram.com"
     },
     {
       id: 2,
       src: "/images/twitter.jpg",
       title: "Twitter",
       style: "shadow-green-500",
+      link: "https://twitter.com"
     },
     {
       id: 3,
       src: "/images/link.png",
       title: "LinkedIn",
       style: "shadow-orange-500",
+      link: "https://linkedin.com"
     },
     {
       id: 4,
       src: "/images/facebook.jpg",
       title: "Facebook",
       style: "shadow-blue-500",
+      link: "https://facebook.com"
     },
     {
       id: 5,
       src: "/images/tiktok.png",
       title: "TikTok",
       style: "shadow-purple-500",
+      link: "https://tiktok.com"
     },
     {
       id: 6,
       src: "/images/youtube.png",
       title: "YouTube",
       style: "shadow-red-500",
+      link: "https://youtube.com"
     },
   ];
 
@@ -125,14 +131,17 @@ const About = () => {
           </p>
 
           <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-8 text-center py-8 px-12 sm:px-0">
-            {techs.map(({ id, src, title, style }) => (
-              <div
+            {techs.map(({ id, src, title, style, link }) => (
+              <a 
+                href={link}
                 key={id}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`shadow-md hover:scale-105 duration-500 py-2 rounded-lg ${style}`}
               >
                 <img src={src} alt="" className="w-20 mx-auto" />
                 <p className="mt-4 text-white">{title}</p>
-              </div>
+              </a>
             ))}
           </div>
         </div>
