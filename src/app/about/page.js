@@ -50,7 +50,7 @@ const About = () => {
           <div className="h-full w-full">
             <video
               src="/images/Aboutgame.mp4"
-              className="rounded-2xl object-cover w-full h-[115vh]"
+              className="rounded-2xl object-cover w-full h-[180vh]"
               autoPlay
               loop
               muted
@@ -78,6 +78,10 @@ const About = () => {
                 quality games and appreciate a streamlined, easy shopping
                 experience. Whether you're a casual gamer, a hardcore
                 competitor, or a collector, GameVault has something for you.
+                At GameVault, we pride ourselves on delivering quality games, an 
+                effortless shopping experience, and a community for gamers
+                 who share the same passion for discovery and adventure. 
+                No matter what you play or how you play, GameVault is here to support your journey.
               </p>
             </div>
             <hr />
@@ -85,8 +89,9 @@ const About = () => {
             <div className="space-y-4 mt-12">
               <h2 className="text-xl sm:text-4xl font-bold">Our Policy</h2>
               <p className="text-lg">
-                At GameVault, we don't just sell games—we unlock worlds! From
-                epic quests to cozy simulations, our vault is packed with
+              At GameVault, gaming is more than just entertainment—it's a gateway to new worlds. We don't just sell games; we open the door to epic quests, cozy simulations, and mind-bending challenges. Our curated collection has something for every gamer, whether you're 
+              diving into multiplayer battles, embarking on solo adventures, or adding to your cherished collection.
+              Our vault is packed with
                 adventures for every kind of gamer. Dive in and discover your
                 next obsession!
               </p>
@@ -115,7 +120,8 @@ const About = () => {
             Keep Up to Date
           </p>
           <p className="py-6 text-lg text-center">
-            Follow our social media handles:
+          Stay connected and informed by following us on social media for the latest news,
+           offers, and gaming updates.
           </p>
 
           <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-8 text-center py-8 px-12 sm:px-0">
@@ -125,7 +131,7 @@ const About = () => {
                 className={`shadow-md hover:scale-105 duration-500 py-2 rounded-lg ${style}`}
               >
                 <img src={src} alt="" className="w-20 mx-auto" />
-                <p className="mt-4 text-black">{title}</p>
+                <p className="mt-4 text-white">{title}</p>
               </div>
             ))}
           </div>
