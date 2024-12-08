@@ -1,9 +1,9 @@
 "use client";
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import Navbar from '../components/navbar';
-import { useCart } from '../../context/cart-context';
-import { Minus, Plus, Trash2 } from 'lucide-react';
+import React, { useEffect } from "react";
+import Link from "next/link";
+import Navbar from "../components/navbar";
+import { useCart } from "../../context/cart-context";
+import { Minus, Plus, Trash2 } from "lucide-react";
 
 function BasketPage() {
   const { cart, addToCart, removeFromCart, updateQuantity, clearCart, getCartTotal } = useCart();
@@ -12,17 +12,17 @@ function BasketPage() {
   useEffect(() => {
     const handleZoom = () => {
       const zoom = window.devicePixelRatio || 1; // Get the current zoom level
-      const scale = 1 / zoom; // Calculate scale based on zoom
-      document.body.style.transform = `scale(${scale})`;
-      document.body.style.transformOrigin = '0 0'; // Set transform origin to top-left
-      document.body.style.width = `${100 * zoom}%`; // Adjust width to fit zoom
+      const scale = 1 / zoom; // Calculate the scale factor
+      const root = document.documentElement;
+
+      root.style.setProperty("--zoom-scale", scale); // Store scale in a CSS variable
     };
 
-    handleZoom(); // Call on load
-    window.addEventListener('resize', handleZoom); // Listen for resize/zoom changes
+    handleZoom(); // Call on initial load
+    window.addEventListener("resize", handleZoom); // Listen for resize/zoom changes
 
     return () => {
-      window.removeEventListener('resize', handleZoom); // Cleanup listener
+      window.removeEventListener("resize", handleZoom); // Cleanup listener
     };
   }, []);
 
@@ -51,10 +51,7 @@ function BasketPage() {
         </div>
 
         {cart.map((item) => (
-          <div
-            key={item.id}
-            className="flex justify-between items-center py-3 border-b border-gray-200"
-          >
+          <div key={item.id} className="flex justify-between items-center py-3 border-b border-gray-200">
             <div className="flex items-center flex-1">
               <div className="shop-image-container">
                 <ShopImage name={item.title} img={item.img} />
@@ -82,9 +79,7 @@ function BasketPage() {
                 </button>
               </div>
               <div className="price-container min-w-[100px] text-right">
-                <span className="font-semibold text-white">
-                  ${(item.price * item.quantity).toFixed(2)}
-                </span>
+                <span className="font-semibold text-white">${(item.price * item.quantity).toFixed(2)}</span>
               </div>
               <button
                 variant="ghost"
@@ -114,4 +109,25 @@ function BasketPage() {
             Continue Shopping
           </button>
         </Link>
-        <
+        <Link href={"/checkout"}>
+          <button
+            className="hover:bg-yellow-500 transition-colors text-black font-semibold py-2 px-6 rounded"
+            style={{ backgroundColor: "#FFA800" }}
+          >
+            Proceed to Checkout
+          </button>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+function ShopImage({ name, img }) {
+  return (
+    <div className="flex items-center py-3">
+      <img src={img} alt={name} className="w-[100px] h-[100px] mr-2" />
+    </div>
+  );
+}
+
+export default BasketPage;
