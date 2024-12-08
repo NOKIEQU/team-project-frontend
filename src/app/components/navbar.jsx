@@ -102,7 +102,7 @@ export default function Navbar() {
               href="/profile"
               className="hover:text-[#fa9a00ef] transition-all"
             >
-              Profile
+              Account
             </Link>
           </li>
           <li className="flex items-center">
