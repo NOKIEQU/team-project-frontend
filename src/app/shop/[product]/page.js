@@ -6,7 +6,7 @@ import { useCart } from '../../../context/cart-context'
 import Link from "next/link";
 
 function Product() {
-    const [mainImage, setMainImage] = useState("/placeholder.svg");
+    const [mainImage, setMainImage] = useState();
     const [currentIndex, setCurrentIndex] = useState(0);
     const params = useParams()
     const { cart, addToCart, updateQuantity } = useCart()
@@ -24,6 +24,7 @@ function Product() {
                 }
                 const data = await response.json();
                 setGame(data);
+                setMainImage(data.imageUrls[0]);
                 setLoading(false);
             } catch (error) {
                 setError('An error occurred while fetching the product');
@@ -60,8 +61,8 @@ function Product() {
     if (error) return <div className="min-h-screen w-full bg-gray-800 text-white flex items-center justify-center">Error: {error}</div>;
     if (!game) return <div className="min-h-screen w-full bg-gray-800 text-white flex items-center justify-center">Product not found</div>;
 
-    // const images = game.imageUrls ? JSON.parse(game.imageUrls) : ["/placeholder.svg"];
-    const images = ["https://fakeimg.pl/440x320/282828/eae0d0/?retina=1"]
+    const images = game.imageUrls;
+    // const images = ["https://fakeimg.pl/440x320/282828/eae0d0/?retina=1"]
 
     return (
         <div className="min-h-screen w-full bg-gray-800 ">
