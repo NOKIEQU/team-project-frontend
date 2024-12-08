@@ -7,18 +7,18 @@ const CardForAccount = () => {
         {
             src:"/account/profilepic.png",
             title:'My Profile',
-            description:'Click to view profile.',
+            description:'Click to veiw.',
             link: '/realprofile'
         },
         {
             src: "/account/payments.jpg",
             title:'My Payments',
-            description:'Lorem ipsum dolor sit amet. Sed ipsa quia est alias totam aut m.',
+            description:'You have not made any purchases.',
         },
         {
             src: "/account/costumer.png",
             title:'Costumer Service',
-            description:'Lorem ipsum dolor sit amet. Sed ipsa quia est alias totam aut m.',
+            description:'Our Customer Service team is here for you! If you have questions or need assistance fill our contact us form .',
         },
         {
             src: "/account/orders.png",
@@ -28,12 +28,14 @@ const CardForAccount = () => {
          {
             src: "/account/security.png",
             title:'My Security',
-            description:'Lorem ipsum dolor sit amet. Sed ipsa quia est alias totam auto .',
+            description:' Your security is our top priority. We use advanced measures to keep your personal information and transactions safe and protected at all time.',
         },
         {
+          
             src: "/account/security.jpg",
             title:'Our Policy',
-            description:'Lorem ipsum dolor sit amet. Sed ipsa quia est alias totam auto .',
+            description:'Our policy is to make your gaming shopping experience as seamless as possible.',
+            link: '/about'
         }
 
     ]
