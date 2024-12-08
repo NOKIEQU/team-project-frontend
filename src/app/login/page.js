@@ -91,9 +91,6 @@ export default function LoginPage() {
                         />
                     </div>
 
-                    <div className="relative z-10">
-                        <h3 className="text-white text-xl md:text-2xl font-bold mb-4">Welcome</h3>
-                    </div>
                 </div>
 
                 {/* Login Form */}
