@@ -123,7 +123,7 @@ const About = () => {
       <div className="min-h-screen w-full bg-[#0d1b2a] pt-24">
         <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-full text-white">
           <div className="h-auto flex flex-col items-center">
-            <p className="text-4xl font-bold text-[#FFA800]">
+            <p className="text-4xl font-bold text-white">
               Keep Up to Date
             </p>
             <div className="bg-[#f6a302] h-2 rounded-full w-2/6 mt-2 transition-all hover:w-4/6"></div>
