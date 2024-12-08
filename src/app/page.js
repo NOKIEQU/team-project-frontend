@@ -44,7 +44,7 @@ export default function Home() {
           Your browser does not support the video tag.
         </video>
         <div className="absolute top-0 right-0 h-full w-full lg:w-1/2 bg-[#0d1b2a] opacity-90">
-          <div className="flex flex-col w-full h-screen px-8 lg:px-40 pt-20 lg:pt-60 justify-start gap-y-10">
+          <div className="flex flex-col w-full h-screen px-8 lg:px-40 pt-20 lg:pt-10 justify-start gap-y-10">
             <h1 className="text-3xl lg:text-5xl font-bold text-left">
               We are on <span className="text-[#f6a302]">TOP</span> of our game{" "}
               <br />
