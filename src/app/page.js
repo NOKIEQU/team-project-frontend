@@ -205,7 +205,9 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-col w-full  pt-16 items-center ">
-        <h1 className="text-6xl font-bold">Explore Game Genres</h1>
+        <h1 className="text-6xl font-bold pb-5">Explore Game Genres</h1>
+        
+        <div className="bg-[#f6a302] h-2 rounded-full w-1/6 transition-all hover:w-2/6"></div>
 
         <div className="flex flex-wrap justify-center grid-cols-3 gap-5 rounded-lg  p-4 space-x-4 m-24 ">
 

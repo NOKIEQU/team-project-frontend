@@ -31,9 +31,11 @@ const CardForAccount = () => {
             description:' Your security is our top priority. We use advanced measures to keep your personal information and transactions safe and protected at all time.',
         },
         {
+          
             src: "/account/security.jpg",
             title:'Our Policy',
             description:'Our policy is to make your gaming shopping experience as seamless as possible.',
+            link: '/about'
         }
 
     ]
