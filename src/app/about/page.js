@@ -50,7 +50,7 @@ const About = () => {
           <div className="h-full w-full">
             <video
               src="/images/Aboutgame.mp4"
-              className="rounded-2xl object-cover w-full h-[180vh]"
+              className="rounded-2xl object-cover w-full h-[170vh]"
               autoPlay
               loop
               muted
@@ -70,7 +70,7 @@ const About = () => {
             <div className="space-y-4">
               <h2 className="text-xl sm:text-4xl font-bold ">Who Are We?</h2>
 
-              <p className=" text-lg pb-10">
+              <p className=" text-base pb-10">
                 Welcome to GameVault, the ultimate destination for games
                 worldwide! Established in 2024, GameVault is on a mission to
                 make gaming accessible, exciting, and convenient for everyone.
@@ -88,7 +88,7 @@ const About = () => {
 
             <div className="space-y-4 mt-12">
               <h2 className="text-xl sm:text-4xl font-bold">Our Policy</h2>
-              <p className="text-lg">
+              <p className="text-base">
               At GameVault, gaming is more than just entertainment—it's a gateway to new worlds. We don't just sell games; we open the door to epic quests, cozy simulations, and mind-bending challenges. Our curated collection has something for every gamer, whether you're 
               diving into multiplayer battles, embarking on solo adventures, or adding to your cherished collection.
               Our vault is packed with
