@@ -128,15 +128,6 @@ export default function Home() {
             Aliquam erat volutpat. Nam convallis urna id nunc tincidunt, non
             euismod lorem ultricies.
           </p>
-          <p className="pt-10 text-sm lg:text-base">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquet,
-            magna non tempus gravida, sapien mi facilisis erat, ac maximus augue
-            felis nec ante. Sed ultricies, ipsum sit amet cursus facilisis,
-            lectus lectus malesuada tortor, vel pharetra neque purus non est.
-            Vivamus lobortis tincidunt lorem, a fermentum tortor condimentum ac.
-            Aliquam erat volutpat. Nam convallis urna id nunc tincidunt, non
-            euismod lorem ultricies.
-          </p>
         </div>
       </div>
 
