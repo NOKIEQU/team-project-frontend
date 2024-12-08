@@ -8,27 +8,16 @@ import Navbar from "../components/navbar";
 import Image from "next/image";
 
 function RegisterPage() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
-  const [error, setError] = useState("");
-  const { register } = useUser();
-  const router = useRouter();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+    return (
+        <div className='flex flex-row w-full h-full justify-center relative overflow-hidden' >
+            {/* Navbar */}
+            <div className="relative z-50">
+                <Navbar isLoggedIn={"True"} />
+            </div>
+            <div className='flex flex-col justify-center items-center p-10 px-52 bg-black text-white w-1/2 h-full gap-y-10 z-10 rounded-xl'>
+                <h1 className='text-4xl'>Register</h1>
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
 
     // Basic validation
     if (formData.password.length < 6) {
