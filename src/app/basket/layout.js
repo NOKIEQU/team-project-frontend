@@ -1,6 +1,8 @@
-export default function ShopLayout({ children }) {
+
+export default function baskeyLayout({ children }) {
     return (
-        <div className=" w-full h-screen " style={{backgroundColor:"#3E3C3C"}} >
+        <div className="w-full min-h-screen bg-[#0d1b2a] " >
+
             {children}
 
         </div>
