@@ -44,8 +44,9 @@ const About = () => {
 
   return (
     <div className="min-h-screen w-full bg-[#0d1b2a] overflow-x-hidden">
+      <div className="shadow-xl">
       <div className="min-h-screen flex flex-col md:flex-row">
-        <div className="hidden md:block md:w-2/5">
+        <div className="hidden md:block md:w-2/5 shadow-xl">
           <div className="h-full w-full">
             <video
               src="/images/Aboutgame.mp4"
@@ -58,21 +59,17 @@ const About = () => {
           </div>
         </div>
         <div className="w-full md:w-3/5 flex flex-col md:pl-20 text-white pt-10 ml-10">
-  <div className="h-auto flex flex-col items-center px-10 max-w-3xl pt-20">
-    <h1 className="text-4xl sm:text-7xl font-bold text-center">
-      About Us
-    </h1>
- 
-    <div className="bg-[#f6a302] h-2 rounded-full w-2/6 mt-2 transition-all hover:w-4/6"></div>
-  </div>
+          <div className="h-auto flex flex-col items-center px-10 max-w-3xl pt-20">
+            <h1 className="text-4xl sm:text-7xl font-bold text-center">
+              About Us
+            </h1>
+
+            <div className="bg-[#f6a302] h-2 rounded-full w-2/6 mt-2 transition-all hover:w-4/6"></div>
+          </div>
           <div className="h-auto flex flex-col px-10 max-w-3xl space-y-8 pt-10 text-left">
-           
-         
             <div className="space-y-4">
-              <h2 className="text-xl sm:text-4xl font-bold ">
-                Who Are We?
-              </h2>
-              
+              <h2 className="text-xl sm:text-4xl font-bold ">Who Are We?</h2>
+
               <p className=" text-lg pb-10">
                 Welcome to GameVault, the ultimate destination for games
                 worldwide! Established in 2024, GameVault is on a mission to
@@ -83,12 +80,10 @@ const About = () => {
                 competitor, or a collector, GameVault has something for you.
               </p>
             </div>
-            <hr/>
-          
+            <hr />
+
             <div className="space-y-4 mt-12">
-              <h2 className="text-xl sm:text-4xl font-bold">
-                Our Policy
-              </h2>
+              <h2 className="text-xl sm:text-4xl font-bold">Our Policy</h2>
               <p className="text-lg">
                 At GameVault, we don't just sell games—we unlock worlds! From
                 epic quests to cozy simulations, our vault is packed with
@@ -96,10 +91,8 @@ const About = () => {
                 next obsession!
               </p>
             </div>
-       
+
             <div className="flex flex-row items-center justify-centre gap-10 mt-16">
-       
-             
               <Link href="/register">
                 <button className="text-white w-fit px-6 py-3 my-2 flex items-center rounded-md hover:scale-105 duration-500 bg-[#FFA800] hover:bg-[#fa9a00ef]">
                   Sign up now
@@ -113,6 +106,7 @@ const About = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
 
       <div className="min-h-screen w-full bg-[#0d1b2a] pt-24">

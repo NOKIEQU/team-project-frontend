@@ -12,7 +12,7 @@ export default function Navbar() {
     return (
       <nav className="fixed top-0 left-0 w-full z-10 flex justify-between items-center pr-10 bg-gray-900 text-white shadow-xl ">
         <div className="flex items-center space-x-4">
-          <Link href="/" className="hover:text-orange-500 transition-all">
+          <Link href="/" className="hover:text-[#fa9a00ef] transition-all">
             <div className="flex items-center space-x-2">
               <img src="/logo-white.png" alt="logo" className="w-16 h-16" />
               <span className="text-2xl font-bold">GAME VAULT</span>
@@ -25,21 +25,25 @@ export default function Navbar() {
             {/* <ThemeToggle /> */}
           </li>
           <li className="flex items-center">
-            <Link href="/shop" className="hover:bg-[#fa9a00ef] transition-all">
+            <Link href="/shop" className="hover:text-[#fa9a00ef] transition-all">
               Shop
             </Link>
           </li>
           <li className="flex items-center">
-            <Link href="/about" className="hover:bg-[#fa9a00ef] transition-all">
+            <Link href="/about" className="hover:text-[#fa9a00ef] transition-all">
               About Us
             </Link>
           </li>
 
-          <li className="flex items-center">Hello, {user.firstName}</li>
+          <li className="flex items-center">
+             <Link href="/profile" className="hover:text-[#fa9a00ef] transition-all">
+            Hello, {user.firstName}
+            </Link>
+            </li>
           <li>
             <button
               onClick={logout}
-              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              className=" hover:text-[#fa9a00ef] transition-all px-3 py-2 rounded-md "
             >
               Logout
             </button>
