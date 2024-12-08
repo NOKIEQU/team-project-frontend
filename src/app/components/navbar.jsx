@@ -10,7 +10,7 @@ export default function Navbar() {
 
   if (user) {
     return (
-      <nav className="fixed top-0 left-0 w-full z-10 flex justify-between items-center pr-10 bg-gray-900 text-white shadow-xl ">
+      <nav className=" top-0 left-0 w-full z-10 flex justify-between items-center pr-10 bg-gray-900 text-white shadow-xl">
         <div className="flex items-center space-x-4">
           <Link href="/" className="hover:text-[#fa9a00ef] transition-all">
             <div className="flex items-center space-x-2">
@@ -61,7 +61,7 @@ export default function Navbar() {
     );
   } else {
     return (
-      <nav className="fixed top-0 left-0 w-full z-10 flex justify-between items-center p-1 pr-10 bg-gray-900 text-white font-sans">
+      <nav className=" top-0 left-0 w-full z-10 flex justify-between items-center p-1 pr-10 bg-gray-900 text-white font-sans">
         <div className="flex items-center space-x-4">
           <Link href="/" className="hover:text-orange-500 transition-all">
             <div className="flex items-center space-x-2">
@@ -80,14 +80,7 @@ export default function Navbar() {
               Shop
             </Link>
           </li>
-          <li className="flex items-center">
-            <Link
-              href="/about"
-              className="hover:text-[#fa9a00ef] transition-all"
-            >
-              About Us
-            </Link>
-          </li>
+         
         
           <li className="flex items-center">
             <Link

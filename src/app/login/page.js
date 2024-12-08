@@ -78,8 +78,7 @@ export default function LoginPage() {
             <div className="absolute inset-0 bg-[#0d1b2a] bg-opacity-80"></div>
 
             <div className="relative z-10 grid w-full h-full grid-cols-1 md:grid-cols-3 font-sans">
-                {/* Navbar */}
-                <Navbar isLoggedIn={"False"} />
+          
 
                 {/* Orange Box */}
                 <div className="bg-[#f6a302] flex flex-col p-4 absolute top-0 right-0 md:relative md:top-auto md:right-auto md:col-span-1 md:h-auto h-[25vh] z-0 [clip-path:polygon(100%_0%,_0%_0%,_0%_100%,_80%_100%)]">
