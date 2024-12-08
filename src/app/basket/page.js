@@ -10,10 +10,7 @@ function BasketPage() {
 
   return (
     <div className="bg-[#0d1b2a] min-h-screen">
-      <Navbar isLoggedIn={"True"} />
-      <h1 className="w-full flex justify-center py-4 text-white font-black text-lg">
-        GameVault
-      </h1>
+     
 
       <div className="flex justify-around text-black text-base py-3 bg-[#FFA800]">
         <div className="font-black text-lg">Basket</div>
