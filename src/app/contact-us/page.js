@@ -105,7 +105,7 @@ function RegisterPage() {
 
                 {/* Right Side */}
                 <div className={form}>
-                    <h2 className="text-white text-2xl font-bold mb-4 text-center pt-32 pb-2">
+                    <h2 className="text-white text-2xl font-bold mb-4 text-center pt-12 pb-2">
                         
                         Contact Us
                     </h2>

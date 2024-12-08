@@ -73,7 +73,7 @@ function CheckoutPage() {
   };
  
   return (
-    <div className="min-h-screen bg-[#0d1b2a] text-white flex flex-col items-center p-4 sm:p-6 font-sans">
+    <div className="min-h-screen bg-[#0d1b2a] text-white flex flex-col items-center p-4  font-sans">
       <header className="flex flex-col sm:flex-row justify-between w-full max-w-6xl items-center mb-8">
         <div className="flex items-center space-x-3"></div>
       </header>
