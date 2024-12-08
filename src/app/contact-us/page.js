@@ -105,10 +105,12 @@ function RegisterPage() {
 
                 {/* Right Side */}
                 <div className={form}>
-                    <h2 className="text-white text-2xl font-bold mb-4 text-center">
+                    <h2 className="text-white text-2xl font-bold mb-4 text-center pt-32 pb-2">
+                        
                         Contact Us
                     </h2>
                     <div className="w-24 h-1 bg-[#e38302] mx-auto mb-6"></div>
+                    <p className="text-white text-left pb-4 font-bold justify-left block">Fill out this form and our team will contact you shortly</p>
                     <form className="w-full max-w-md" onSubmit={handleSubmit}>
                         {/* Name */}
                         <div className="flex gap-4 mb-4">

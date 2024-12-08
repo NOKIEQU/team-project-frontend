@@ -48,7 +48,7 @@ export default function Home() {
             <h1 className="text-5xl font-bold text-left">
               We are on <span className="text-[#f6a302]">TOP</span> of our game{" "}
               <br />
-              <div className="bg-[#f6a302] h-2 rounded-full w-1/6 transition-all hover:w-5/6"></div>
+              <div className="bg-[#f6a302] h-2 rounded-full w-2/6 transition-all hover:w-5/6"></div>
             </h1>
 
             <p className="text-lg">
@@ -67,7 +67,7 @@ export default function Home() {
                 </button>
               </Link>
               <Link href="/Questionnaire">
-                <button className="m-4 bg-[#f6a302] hover:bg-[#fa9a00ef] font-bold py-3 px-5 rounded-xl w-40 transition transform hover:scale-110">
+                <button className="m-4 bg-[#f6a302] hover:bg-[#fa9a00ef] font-bold py-4 px-4 rounded-xl w-40 transition transform hover:scale-110">
                   TAKE QUIZ
                 </button>
               </Link>

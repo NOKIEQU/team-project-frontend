@@ -106,7 +106,7 @@ const About = () => {
                 </button>
               </Link>
               <Link href="/shop">
-                <button className="text-white w-fit px-6 py-3 my-2 flex items-center rounded-md hover:scale-105 duration-500 bg-[#FFA800] hover:bg-[#fa9a00ef]">
+                <button className="text-white w-fit px-6 py-3 my-2 flex items-center rounded-md hover:scale-105 duration-500 bg-[#FFA800] hover:bg-[#fa9a00ef] ">
                   Shop now
                 </button>
               </Link>
