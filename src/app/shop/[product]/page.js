@@ -25,6 +25,7 @@ function Product() {
                 const data = await response.json();
                 setGame(data);
                 setMainImage(data.imageUrls[0]);
+                console.log(data.imageUrls)
                 setLoading(false);
             } catch (error) {
                 setError('An error occurred while fetching the product');
