@@ -51,7 +51,6 @@ export default function Navbar() {
             >
               <ShoppingBasket />
             </Link>
-            <li className="flex items-center"></li>
           </li>
         </ul>
       </nav>
