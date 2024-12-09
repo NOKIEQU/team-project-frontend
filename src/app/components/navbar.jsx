@@ -40,6 +40,14 @@ export default function Navbar() {
             Hello, {user.firstName}
             </Link>
             </li>
+            <li className="flex items-center">
+            <Link
+              href="/profile"
+              className="hover:text-[#fa9a00ef] transition-all"
+            >
+              Account
+            </Link>
+            </li>
           <li>
             <button
               onClick={logout}
@@ -90,14 +98,8 @@ export default function Navbar() {
               Login
             </Link>
           </li>
-          <li className="flex items-center">
-            <Link
-              href="/profile"
-              className="hover:text-[#fa9a00ef] transition-all"
-            >
-              Account
-            </Link>
-          </li>
+        
+          
           <li className="flex items-center">
             <Link
               href="/basket"
