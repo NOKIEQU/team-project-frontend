@@ -43,52 +43,8 @@ export default function Home() {
           <source src="league_video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className="absolute top-0 right-0 h-full w-full lg:w-1/2 bg-[#0d1b2a] opacity-90">
-          <div className="flex flex-col w-full h-screen px-8 lg:px-40 pt-20 lg:pt-60 justify-start gap-y-10">
-            <h1 className="text-3xl lg:text-5xl font-bold text-left">
-              We are on <span className="text-[#f6a302]">TOP</span> of our game{" "}
-              <br />
-              <div className="bg-[#f6a302] h-2 rounded-full w-1/3 lg:w-2/6 transition-all hover:w-5/6"></div>
-            </h1>
-
-            <p className="text-md lg:text-lg">
-              <span className="text-lg lg:text-2xl font-bold">
-                Start Your Journey{" "}
-              </span>
-              in the world of gaming. Whether you're a seasoned player or just
-              starting your journey, we have everything you need to explore,
-              learn, and grow. Dive into our curated collections, find new
-              favorites, and connect with others who share your passion. The
-              possibilities are endless, and the adventure starts right here!
-            </p>
-
-            <div className="flex flex-wrap lg:flex-nowrap w-full justify-center lg:justify-left gap-x-6 -ml-4">
-              <Link href="/shop">
-                <button className="m-4 bg-[#f6a302] hover:bg-[#fa9a00ef] font-bold py-4 px-4 rounded-xl w-40 transition transform hover:scale-110">
-                  SEARCH NOW
-                </button>
-              </Link>
-              <Link href="/Questionnaire">
-                <button className="m-4 bg-[#f6a302] hover:bg-[#fa9a00ef] font-bold py-4 px-4 rounded-xl w-40 transition transform hover:scale-110">
-                  TAKE QUIZ
-                </button>
-              </Link>
-            </div>
-
-            <div className="flex flex-wrap lg:flex-nowrap w-full items-center justify-center lg:justify-left gap-x-6 mt-15">
-              <img
-                src="league1.webp"
-                className="w-full lg:w-3/6 rounded-md transition-transform hover:scale-110"
-              />
-              <img
-                src="callofduty.jpg"
-                className="w-full lg:w-3/6 rounded-md transition-transform hover:scale-110"
-              />
-            </div>
-          </div>
         </div>
-      </div>
-
+        
       {/* The second part of the page */}
       <div className="flex flex-col lg:flex-row w-full h-full shadow-xl">
         <div className="flex flex-col justify-end w-full lg:w-1/2">
@@ -218,3 +174,4 @@ export default function Home() {
     </div>
   );
 }
+
