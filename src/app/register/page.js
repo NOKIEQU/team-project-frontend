@@ -1,12 +1,12 @@
 "use client";
- 
+
 import { useState } from "react";
 import { useUser } from "../../context/user-context";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "../components/navbar";
 import Image from "next/image";
- 
+
 function RegisterPage() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -17,7 +17,7 @@ function RegisterPage() {
   const [error, setError] = useState("");
   const { register } = useUser();
   const router = useRouter();
- 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -25,17 +25,17 @@ function RegisterPage() {
       [name]: value,
     }));
   };
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
- 
+
     // Basic validation
     if (formData.password.length < 6) {
       setError("Password must be at least 6 characters long");
       return;
     }
- 
+
     try {
       await register(formData);
       router.push("/");
@@ -43,23 +43,19 @@ function RegisterPage() {
       setError("Registration failed. Please try again.");
     }
   };
- 
+
   const input =
     "w-full px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none";
   const label = "text-white font-bold text-sm mb-1 block";
   const button =
     "w-full py-3 bg-[#f6a302] text-[#323232] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#e08c00] mb-5";
   const form = "flex-2 flex flex-col items-center p-8 ml-5";
- 
+
   return (
     <div className="flex flex-col font-sans bg-[#0d1b2a] min-h-screen">
-      {/* Navbar */}
-      <div className="relative z-50">
-        <Navbar isLoggedIn={"True"} />
-      </div>
- 
+
       {/* Main Content */}
-      <div className="flex flex-1 pt-16">
+      <div className="flex flex-1 min-h-screen"> 
         {/* Left Side of Page */}
         <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
           <img
@@ -97,7 +93,7 @@ function RegisterPage() {
             </p>
           </div>
         </div>
- 
+
         {/* Right Side of Page */}
         <div className={form}>
           <h2 className="text-white text-2xl font-bold mb-4 text-center">
@@ -134,7 +130,7 @@ function RegisterPage() {
                 />
               </div>
             </div>
- 
+
             {/* Username */}
             <div className="mb-4">
               <label className={label}>Username</label>
@@ -145,7 +141,7 @@ function RegisterPage() {
                 required
               />
             </div>
- 
+
             {/* Email */}
             <div className="mb-4">
               <label className={label}>Email</label>
@@ -161,7 +157,7 @@ function RegisterPage() {
                 onChange={handleChange}
               />
             </div>
- 
+
             {/* Date of Birth */}
             <div className="mb-4">
               <label className={label}>Date of Birth</label>
@@ -192,7 +188,7 @@ function RegisterPage() {
                 />
               </div>
             </div>
- 
+
             {/* Password */}
             <div className="mb-4">
               <label className={label}>Password</label>
@@ -208,7 +204,7 @@ function RegisterPage() {
                 onChange={handleChange}
               />
             </div>
- 
+
             {/* Confirm Password */}
             <div className="mb-4">
               <label className={label}>Confirm Password</label>
@@ -219,7 +215,7 @@ function RegisterPage() {
                 required
               />
             </div>
- 
+
             {/* Optional Checkbox */}
             <div className="flex items-center mb-4">
               <input
@@ -232,32 +228,30 @@ function RegisterPage() {
                 GameVault.
               </label>
             </div>
- 
+
             <Link href={'/Questionnaire'}>
-            <button
-              type="submit"
-              className={`${button}  flex items-center justify-center space-x-2`}
-            >
-              <span className="align-middle">TAKE QUIZ</span>
-              <Image
-                src="/right-arrow.png"
-                alt="Right Arrow"
-                width={20}
-                height={20}
-                className="inline-block"
-              />
-            </button>
+              <button
+                type="submit"
+                className={`${button} flex items-center justify-center space-x-2`}
+              >
+                <span className="align-middle">TAKE QUIZ</span>
+                <Image
+                  src="/right-arrow.png"
+                  alt="Right Arrow"
+                  width={20}
+                  height={20}
+                  className="inline-block"
+                />
+              </button>
             </Link>
- 
+
             {/* Submit Button */}
-         
- 
             <button type="submit" className={button}>
               CREATE ACCOUNT
             </button>
- 
+
             {error && <div className="text-red-500 text-sm">{error}</div>}
- 
+
             {/* Footer */}
             <p className="mt-4 text-white text-center text-sm">
               Already have an account?{" "}
@@ -271,7 +265,5 @@ function RegisterPage() {
     </div>
   );
 }
- 
+
 export default RegisterPage;
- 
- 

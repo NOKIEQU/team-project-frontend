@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react'
 
-function FooterComponent() {
+function Footer() {
 
     return (
         <footer className="bg-gray-900 text-white">
@@ -70,5 +70,5 @@ function FooterComponent() {
     )
 }
 
-export default FooterComponent;
+export default Footer;
 
