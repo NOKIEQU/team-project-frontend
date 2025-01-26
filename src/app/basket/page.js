@@ -4,34 +4,33 @@ import Link from "next/link";
 import Navbar from "../components/navbar";
 import { useCart } from "../../context/cart-context";
 import { Minus, Plus, Trash2 } from "lucide-react";
-
+ 
 function BasketPage() {
   const { cart, addToCart, removeFromCart, updateQuantity, clearCart, getCartTotal } = useCart();
-
+ 
   // Add an effect to handle zoom level
   useEffect(() => {
     const handleZoom = () => {
       const zoom = window.devicePixelRatio || 1; // Get the current zoom level
       const scale = 1 / zoom; // Calculate the scale factor
       const root = document.documentElement;
-
+ 
       root.style.setProperty("--zoom-scale", scale); // Store scale in a CSS variable
     };
-
+ 
     handleZoom(); // Call on initial load
     window.addEventListener("resize", handleZoom); // Listen for resize/zoom changes
-
+ 
     return () => {
       window.removeEventListener("resize", handleZoom); // Cleanup listener
     };
   }, []);
-
+ 
   return (
     <div className="bg-[#0d1b2a]">
-      <Navbar isLoggedIn={"True"}></Navbar>
-      <h1 className="w-full flex justify-center py-4 text-white font-black text-lg">GameVault</h1>
-
-      <div className="flex justify-around text-black text-base py-3 bg-[#FFA800]">
+ 
+ 
+      <div className="flex justify-around text-black text-base py-2 bg-[#FFA800]">
         <div className="font-black text-lg">Basket</div>
       </div>
       <div className="p-4 px-52">
@@ -49,7 +48,7 @@ function BasketPage() {
             <div className="w-8"></div>
           </div>
         </div>
-
+ 
         {cart.map((item) => (
           <div key={item.id} className="flex justify-between items-center py-3 border-b border-gray-200">
             <div className="flex items-center flex-1">
@@ -92,14 +91,14 @@ function BasketPage() {
             </div>
           </div>
         ))}
-
+ 
         <div className="mt-8 border-t border-gray-200 pt-4">
           <h1 className="text-xl font-semibold text-right text-white">
             Grand Total: £{getCartTotal() === 0 ? "0" : getCartTotal().toFixed(2)}
           </h1>
         </div>
       </div>
-
+ 
       <div className="flex justify-between p-4 px-52 text-base">
         <Link href={"/shop"}>
           <button
@@ -121,7 +120,7 @@ function BasketPage() {
     </div>
   );
 }
-
+ 
 function ShopImage({ name, img }) {
   return (
     <div className="flex items-center py-3">
@@ -129,5 +128,6 @@ function ShopImage({ name, img }) {
     </div>
   );
 }
-
+ 
 export default BasketPage;
+ 

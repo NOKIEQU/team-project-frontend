@@ -17,7 +17,7 @@ const CardForAccount = () => {
         },
         {
             src: "/account/costumer.png",
-            title:'Costumer Service',
+            title:'Customer Service',
             description:'Our Customer Service team is here for you! If you have questions or need assistance fill our contact us form .',
         },
         {
@@ -48,7 +48,7 @@ const CardForAccount = () => {
           <>
             <img src={card.src} alt="card-images" className="w-[75px] mb-4"/>
             <p 
-              className="text-[20px] font-bold uppercase mb-7 hover:text-gray-600 cursor-pointer"
+              className="text-[20px] font-bold uppercase mb-7 hover:text-[#fa9a00ef]  cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 setIsOpen(!isOpen);
@@ -68,14 +68,14 @@ const CardForAccount = () => {
           <div key={id} className="contents">
             {card.link ? (
               <Link href={card.link}
-                className="flex flex-col cursor-pointer bg-white justify-center py-6 px-10 text-center 
+                className="flex flex-col cursor-pointer bg-[#1b263b]  text-white justify-center py-6 px-10 text-center 
                 items-center mt-12 rounded-tl-[35px] rounded-br-[35px] shadow-2xl
                 transition-transform duration-300 hover:-translate-y-2 hover:shadow-3xl"
               >
                 {CardContent}
               </Link>
             ) : (
-              <div className="flex flex-col cursor-pointer bg-white justify-center py-6 px-10 text-center 
+              <div className="flex flex-col cursor-pointer bg-[#1b263b] justify-center text-white py-6 px-10 text-center 
                 items-center mt-12 rounded-tl-[35px] rounded-br-[35px] shadow-2xl
                 transition-transform duration-300 hover:-translate-y-2 hover:shadow-3xl"
               >

@@ -2,7 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ShoppingCart, ChevronLeft, ChevronRight, Minus, Plus } from "lucide-react";
+import {
+  ShoppingCart,
+  ChevronLeft,
+  ChevronRight,
+  Minus,
+  Plus,
+} from "lucide-react";
 import { useCart } from "../../context/cart-context";
 import { useSearchParams } from "next/navigation";
 import Navbar from "../components/navbar";
@@ -16,7 +22,9 @@ function ShopPage() {
 
   const searchParams = useSearchParams();
   const initialGenre = searchParams.get("genre");
-  const [selectedGenres, setSelectedGenres] = useState(initialGenre ? [initialGenre] : []);
+  const [selectedGenres, setSelectedGenres] = useState(
+    initialGenre ? [initialGenre] : []
+  );
   const [minPriceRange, setMinPriceRange] = useState(0);
   const [maxPriceRange, setMaxPriceRange] = useState(200);
   const [minRating, setMinRating] = useState(0);
@@ -55,11 +63,13 @@ function ShopPage() {
 
   const filteredGames = games.filter(
     (game) =>
-      (selectedGenres.length === 0 || selectedGenres.includes(game.genre.name)) &&
+      (selectedGenres.length === 0 ||
+        selectedGenres.includes(game.genre.name)) &&
       parseFloat(game.price) >= minPriceRange &&
       parseFloat(game.price) <= maxPriceRange &&
       parseInt(game.rating) >= minRating &&
-      (selectedYears.length === 0 || selectedYears.includes(game.releaseYear)) &&
+      (selectedYears.length === 0 ||
+        selectedYears.includes(game.releaseYear)) &&
       game.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -97,6 +107,16 @@ function ShopPage() {
     }
   };
 
+  // Reset all filters
+  const resetFilters = () => {
+    setSelectedGenres([]);
+    setMinPriceRange(0);
+    setMaxPriceRange(200);
+    setMinRating(0);
+    setSelectedYears([]);
+    setSearchQuery("");
+  };
+
   if (loading)
     return (
       <div className="min-h-screen w-full bg-[#0d1b2a] text-white flex items-center justify-center">
@@ -111,8 +131,8 @@ function ShopPage() {
     );
 
   return (
-    <div className="bg-[#0d1b2a] min-h-screen text-white font-sans">
-      <Navbar />
+    <div className="bg-[#0d1b2a] text-white font-sans">
+   
       <div className="flex flex-row w-full gap-x-6 px-6 lg:px-24 py-10">
         {/* Sidebar */}
         <aside className="hidden lg:block bg-[#1b263b] p-6 rounded-lg w-1/4">
@@ -134,6 +154,23 @@ function ShopPage() {
                 </label>
               </div>
             ))}
+            {/* Reset Filters Label */}
+            <input
+              type="checkbox"
+              id="reset-filters"
+              className="cursor-pointer text-white mt-4 inline-block"
+              onChange={(e) => {
+                if (e.target.checked) {
+                  resetFilters();
+                }
+              }}
+            />
+            <label
+              htmlFor="reset-filters"
+              className="cursor-pointer text-white ml-2"
+            >
+              Reset Filters
+            </label>
           </div>
           {/* Price Range */}
           <div className="mb-6">
@@ -141,14 +178,18 @@ function ShopPage() {
             <input
               type="number"
               value={minPriceRange}
-              onChange={(e) => handlePriceChange(setMinPriceRange, e.target.value)}
+              onChange={(e) =>
+                handlePriceChange(setMinPriceRange, e.target.value)
+              }
               className="w-full p-2 mb-2 rounded-lg bg-[#2e3a4e] border border-[#444] focus:border-[#f6a302] text-white placeholder-gray-400"
               placeholder="Min Price"
             />
             <input
               type="number"
               value={maxPriceRange}
-              onChange={(e) => handlePriceChange(setMaxPriceRange, e.target.value)}
+              onChange={(e) =>
+                handlePriceChange(setMaxPriceRange, e.target.value)
+              }
               className="w-full p-2 rounded-lg bg-[#2e3a4e] border border-[#444] focus:border-[#f6a302] text-white placeholder-gray-400"
               placeholder="Max Price"
             />
@@ -170,24 +211,28 @@ function ShopPage() {
           {/* Release Year */}
           <div>
             <h3 className="text-lg font-semibold mb-3">Release Year</h3>
-            {Array.from(new Set(games.map((game) => game.releaseYear))).sort().map((year) => (
-              <div key={year} className="flex items-center mb-2">
-                <input
-                  type="checkbox"
-                  id={`year-${year}`}
-                  checked={selectedYears.includes(year)}
-                  onChange={() =>
-                    setSelectedYears((prev) =>
-                      prev.includes(year) ? prev.filter((y) => y !== year) : [...prev, year]
-                    )
-                  }
-                  className="mr-3 cursor-pointer"
-                />
-                <label htmlFor={`year-${year}`} className="cursor-pointer">
-                  {year}
-                </label>
-              </div>
-            ))}
+            {Array.from(new Set(games.map((game) => game.releaseYear)))
+              .sort()
+              .map((year) => (
+                <div key={year} className="flex items-center mb-2">
+                  <input
+                    type="checkbox"
+                    id={`year-${year}`}
+                    checked={selectedYears.includes(year)}
+                    onChange={() =>
+                      setSelectedYears((prev) =>
+                        prev.includes(year)
+                          ? prev.filter((y) => y !== year)
+                          : [...prev, year]
+                      )
+                    }
+                    className="mr-3 cursor-pointer"
+                  />
+                  <label htmlFor={`year-${year}`} className="cursor-pointer">
+                    {year}
+                  </label>
+                </div>
+              ))}
           </div>
         </aside>
         {/* Main Content */}
@@ -216,11 +261,17 @@ function ShopPage() {
                       className="w-full h-40 object-cover rounded-md mb-4"
                     />
                     <h3 className="text-lg font-bold">{game.title}</h3>
-                    <p className="text-sm text-gray-400 mb-2">{game.genre.name}</p>
-                    <p className="text-sm text-gray-400 mb-4">{game.releaseYear}</p>
+                    <p className="text-sm text-gray-400 mb-2">
+                      {game.genre.name}
+                    </p>
+                    <p className="text-sm text-gray-400 mb-4">
+                      {game.releaseYear}
+                    </p>
                     <div className="text-yellow-500 flex items-center">
                       {Array.from({ length: 5 }).map((_, i) => (
-                        <span key={i}>{i < Math.floor(game.rating) ? "★" : "☆"}</span>
+                        <span key={i}>
+                          {i < Math.floor(game.rating) ? "★" : "☆"}
+                        </span>
                       ))}
                       <span className="text-sm ml-2">({game.rating})</span>
                     </div>
@@ -233,14 +284,18 @@ function ShopPage() {
                       <div className="flex items-center">
                         <button
                           className="bg-[#f6a302] p-2 rounded-lg text-black"
-                          onClick={() => updateQuantity(game.id, cartItem.quantity - 1)}
+                          onClick={() =>
+                            updateQuantity(game.id, cartItem.quantity - 1)
+                          }
                         >
                           <Minus size={16} />
                         </button>
                         <span className="mx-3">{cartItem.quantity}</span>
                         <button
                           className="bg-[#f6a302] p-2 rounded-lg text-black"
-                          onClick={() => updateQuantity(game.id, cartItem.quantity + 1)}
+                          onClick={() =>
+                            updateQuantity(game.id, cartItem.quantity + 1)
+                          }
                         >
                           <Plus size={16} />
                         </button>
@@ -275,7 +330,9 @@ function ShopPage() {
               </span>
               <button
                 className="bg-[#f6a302] text-black px-4 py-2 rounded-lg"
-                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
                 disabled={currentPage === totalPages}
               >
                 <ChevronRight />
