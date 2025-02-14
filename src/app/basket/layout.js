@@ -1,8 +1,7 @@
 
-export default function baskeyLayout({ children }) {
+export default function basketLayout({ children }) {
     return (
-        <div className="w-full min-h-screen bg-[#0d1b2a] " >
-
+        <div className=" w-full min-h-screen " >
             {children}
 
         </div>

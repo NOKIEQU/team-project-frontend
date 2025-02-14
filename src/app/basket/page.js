@@ -1,133 +1,99 @@
-"use client";
-import React, { useEffect } from "react";
-import Link from "next/link";
-import Navbar from "../components/navbar";
-import { useCart } from "../../context/cart-context";
-import { Minus, Plus, Trash2 } from "lucide-react";
- 
-function BasketPage() {
-  const { cart, addToCart, removeFromCart, updateQuantity, clearCart, getCartTotal } = useCart();
- 
-  // Add an effect to handle zoom level
-  useEffect(() => {
-    const handleZoom = () => {
-      const zoom = window.devicePixelRatio || 1; // Get the current zoom level
-      const scale = 1 / zoom; // Calculate the scale factor
-      const root = document.documentElement;
- 
-      root.style.setProperty("--zoom-scale", scale); // Store scale in a CSS variable
-    };
- 
-    handleZoom(); // Call on initial load
-    window.addEventListener("resize", handleZoom); // Listen for resize/zoom changes
- 
-    return () => {
-      window.removeEventListener("resize", handleZoom); // Cleanup listener
-    };
-  }, []);
- 
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Trash, Plus, Minus } from "lucide-react";
+
+const GameBasket = () => {
+  const [cart, setCart] = useState([
+    { id: 1, title: "Cyberpunk 2077", price: 49.99, quantity: 1, image: "/cyberpunk.jpg" },
+    { id: 2, title: "Elden Ring", price: 59.99, quantity: 1, image: "/eldenring.jpg" },
+  ]);
+  const [promoCode, setPromoCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+
+  const updateQuantity = (id, amount) => {
+    setCart(cart.map(item => item.id === id ? { ...item, quantity: Math.max(1, item.quantity + amount) } : item));
+  };
+
+  const removeItem = (id) => {
+    setCart(cart.filter(item => item.id !== id));
+  };
+
+  const applyPromoCode = () => {
+    if (promoCode === "GAMER10") {
+      setDiscount(10);
+    } else {
+      setDiscount(0);
+    }
+  };
+
+  const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const total = subtotal - (subtotal * discount) / 100;
+
   return (
-    <div className="bg-[#0d1b2a]">
- 
- 
-      <div className="flex justify-around text-black text-base py-2 bg-[#FFA800]">
-        <div className="font-black text-lg">Basket</div>
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-3xl font-bold text-center mb-6">Basket</h1>
+      <div className="bg-white shadow-md rounded-lg p-4">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="border-b">
+              <th className="p-3">Game</th>
+              <th className="p-3">Price</th>
+              <th className="p-3">Quantity</th>
+              <th className="p-3">Total</th>
+              <th className="p-3">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cart.map(item => (
+              <tr key={item.id} className="border-b">
+                <td className="p-3 flex items-center gap-3">
+                  <img src={item.image} alt={item.title} className="w-16 h-16 rounded" />
+                  {item.title}
+                </td>
+                <td className="p-3">${item.price.toFixed(2)}</td>
+                <td className="p-3 flex items-center gap-2">
+                  <Button size="icon" onClick={() => updateQuantity(item.id, -1)}><Minus /></Button>
+                  {item.quantity}
+                  <Button size="icon" onClick={() => updateQuantity(item.id, 1)}><Plus /></Button>
+                </td>
+                <td className="p-3">${(item.price * item.quantity).toFixed(2)}</td>
+                <td className="p-3">
+                  <Button variant="destructive" size="icon" onClick={() => removeItem(item.id)}>
+                    <Trash />
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <div className="p-4 px-52">
-        <div className="flex justify-between items-center py-3 border-b-2 border-gray-300 mb-4">
-          <div className="flex-1">
-            <span className="font-semibold text-lg text-white">Product</span>
+      <div className="mt-6 flex flex-col gap-4">
+        <div className="flex items-center gap-2">
+          <Input placeholder="Enter Promo Code" value={promoCode} onChange={e => setPromoCode(e.target.value)} />
+          <Button onClick={applyPromoCode}>Apply</Button>
+        </div>
+        <div className="p-4 bg-gray-100 rounded-lg">
+          <div className="flex justify-between text-lg font-semibold">
+            <span>Subtotal:</span>
+            <span>${subtotal.toFixed(2)}</span>
           </div>
-          <div className="flex items-center space-x-8">
-            <div className="min-w-[140px] text-center">
-              <span className="font-semibold text-lg text-white">Quantity</span>
-            </div>
-            <div className="min-w-[100px] text-right text-white">
-              <span className="font-semibold text-lg">Price</span>
-            </div>
-            <div className="w-8"></div>
+          <div className="flex justify-between text-lg font-semibold mt-2">
+            <span>Discount:</span>
+            <span>{discount}%</span>
+          </div>
+          <div className="flex justify-between text-xl font-bold mt-4">
+            <span>Total:</span>
+            <span>${total.toFixed(2)}</span>
           </div>
         </div>
- 
-        {cart.map((item) => (
-          <div key={item.id} className="flex justify-between items-center py-3 border-b border-gray-200">
-            <div className="flex items-center flex-1">
-              <div className="shop-image-container">
-                <ShopImage name={item.title} img={item.img} />
-              </div>
-              <span className="pl-3 text-sm font-medium text-white">{item.title}</span>
-            </div>
-            <div className="flex items-center space-x-8">
-              <div className="quantity-container flex items-center bg-gray-100 rounded-lg px-2 py-1">
-                <button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                  className="h-8 w-8 p-0 hover:bg-gray-200 rounded-full"
-                >
-                  <Minus className="h-4 w-4" />
-                </button>
-                <span className="mx-4 font-medium">{item.quantity}</span>
-                <button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                  className="h-8 w-8 p-0 hover:bg-gray-200 rounded-full"
-                >
-                  <Plus className="h-4 w-4" />
-                </button>
-              </div>
-              <div className="price-container min-w-[100px] text-right">
-                <span className="font-semibold text-white">${(item.price * item.quantity).toFixed(2)}</span>
-              </div>
-              <button
-                variant="ghost"
-                size="icon"
-                onClick={() => removeFromCart(item.id)}
-                className="h-8 w-8 p-0 hover:bg-[#fa9a00ef] rounded-full"
-              >
-                <Trash2 className="h-4 w-4 text-[#f6a302]" />
-              </button>
-            </div>
-          </div>
-        ))}
- 
-        <div className="mt-8 border-t border-gray-200 pt-4">
-          <h1 className="text-xl font-semibold text-right text-white">
-            Grand Total: £{getCartTotal() === 0 ? "0" : getCartTotal().toFixed(2)}
-          </h1>
-        </div>
       </div>
- 
-      <div className="flex justify-between p-4 px-52 text-base">
-        <Link href={"/shop"}>
-          <button
-            className="hover:bg-yellow-500 transition-colors text-black font-semibold py-2 px-6 rounded"
-            style={{ backgroundColor: "#FFA800" }}
-          >
-            Continue Shopping
-          </button>
-        </Link>
-        <Link href={"/checkout"}>
-          <button
-            className="hover:bg-yellow-500 transition-colors text-black font-semibold py-2 px-6 rounded"
-            style={{ backgroundColor: "#FFA800" }}
-          >
-            Proceed to Checkout
-          </button>
-        </Link>
+      <div className="mt-6 flex justify-between">
+        <Button variant="outline">Continue Shopping</Button>
+        <Button className="bg-blue-600 hover:bg-blue-700">Checkout</Button>
       </div>
     </div>
   );
-}
- 
-function ShopImage({ name, img }) {
-  return (
-    <div className="flex items-center py-3">
-      <img src={img} alt={name} className="w-[100px] h-[100px] mr-2" />
-    </div>
-  );
-}
- 
-export default BasketPage;
- 
+};
+
+export default GameBasket;
