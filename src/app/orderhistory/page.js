@@ -3,6 +3,8 @@ import { useState } from "react";
 
 export default function OrderHistory() {
   const [expandedOrder, setExpandedOrder] = useState(null);
+  const [category, setCategory] = useState("all");
+  const [timeFrame, setTimeFrame] = useState("all");
 
   const toggleDetails = (id) => {
     setExpandedOrder(expandedOrder === id ? null : id);
@@ -10,31 +12,51 @@ export default function OrderHistory() {
 
   // Sample order data
   const orders = [
-    { id: "307892", date: "March 16, 2025", game: "Game Vault Action", price: "£1,399.99", payment: "Paid with GameVault Points", status: "Delivered", image: "/game-vault-action.jpg" },
-    { id: "307882", date: "October 16, 2025", game: "Game Vault Action", price: "£1,209.99", payment: "Paid with GameVault Points", status: "Delivered", image: "/game-vault-action.jpg" },
-    { id: "307872", date: "October 16, 2025", game: "Game Vault Action", price: "£1,399.99", payment: "Paid with GameVault Points", status: "Delivered", image: "/game-vault-action.jpg" },
-    { id: "307862", date: "October 16, 2025", game: "Game Vault Action", price: "£1,209.99", payment: "Paid with GameVault Points", status: "Refunded", image: "/game-vault-action.jpg" },
+    { id: "307892", date: "March 16, 2025", game: "Game Vault Action", price: "£1,399.99", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg" },
+    { id: "307882", date: "October 16, 2024", game: "Game Vault RPG", price: "£1,209.99", payment: "Paid with GameVault Points", status: "Delivered", category: "RPG", image: "/game-vault-rpg.jpg" },
+    { id: "307872", date: "July 16, 2024", game: "Game Vault Adventure", price: "£1,399.99", payment: "Paid with GameVault Points", status: "Delivered", category: "Adventure", image: "/game-vault-adventure.jpg" },
+    { id: "307862", date: "January 16, 2024", game: "Game Vault Sports", price: "£1,209.99", payment: "Paid with GameVault Points", status: "Refunded", category: "Sports", image: "/game-vault-sports.jpg" },
   ];
 
-  const recentOrders = orders.slice(0, 2); // First two are recent
-  const pastOrders = orders.slice(2); // Last two are past
+  // Filtering logic
+  const filteredOrders = orders.filter((order) => {
+    const orderDate = new Date(order.date);
+    const currentDate = new Date();
+    let withinTimeFrame = true;
+
+    if (timeFrame === "3months") {
+      withinTimeFrame = orderDate >= new Date(currentDate.setMonth(currentDate.getMonth() - 3));
+    } else if (timeFrame === "6months") {
+      withinTimeFrame = orderDate >= new Date(currentDate.setMonth(currentDate.getMonth() - 6));
+    }
+
+    return (category === "all" || order.category === category) && withinTimeFrame;
+  });
+
+  const recentOrders = filteredOrders.slice(0, 2);
+  const pastOrders = filteredOrders.slice(2);
 
   return (
     <div className="min-h-screen bg-[#111] text-white px-6 py-8">
       {/* Header */}
-      <div className="flex justify-between items-center border-b border-gray-600 pb-4 mb-6">
-        {/* Left Navigation */}
-        <nav className="flex space-x-4 text-gray-400">
-          <span className="hover:text-white cursor-pointer">
-            View <b>All Categories</b>
-          </span>
-          <span className="hover:text-white cursor-pointer">
-            Ordered Within <b>Past 3 Months</b>
-          </span>
-        </nav>
+      <div className="border-b border-gray-600 pb-4 mb-6 text-center">
+        <h1 className="text-4xl font-bold">Order History</h1>
+      </div>
 
-        {/* Centered Title */}
-        <h1 className="text-4xl font-bold text-center mb-6"> OrderHistory</h1>
+      {/* Filters */}
+      <div className="flex justify-between items-center mb-6">
+        <select className="bg-gray-800 text-white p-2 rounded" onChange={(e) => setCategory(e.target.value)}>
+          <option value="all">View All Categories</option>
+          <option value="Action">Action</option>
+          <option value="RPG">RPG</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Sports">Sports</option>
+        </select>
+        <select className="bg-gray-800 text-white p-2 rounded" onChange={(e) => setTimeFrame(e.target.value)}>
+          <option value="all">All Time</option>
+          <option value="3months">Ordered Within Past 3 Months</option>
+          <option value="6months">Ordered Within Past 6 Months</option>
+        </select>
       </div>
 
       {/* Recent Orders Section */}
@@ -44,10 +66,7 @@ export default function OrderHistory() {
           <div key={order.id} className="bg-gray-800 p-4 rounded-lg shadow-lg">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-4">
-                {/* Game Image */}
                 <img src={order.image} alt={order.game} className="w-20 h-20 rounded-md" />
-
-                {/* Order Details */}
                 <div>
                   <p className="text-sm font-bold text-gray-400">{order.date}</p>
                   <p className="text-lg font-semibold">{order.game}</p>
@@ -56,8 +75,6 @@ export default function OrderHistory() {
                   <p className="text-sm text-gray-400">{order.payment}</p>
                 </div>
               </div>
-
-              {/* Status & Show Details */}
               <div className="flex flex-col items-end">
                 <span className={`px-3 py-1 rounded-full text-sm font-semibold ${order.status === "Delivered" ? "bg-green-500" : "bg-red-500"} text-white`}>
                   {order.status}
@@ -67,18 +84,6 @@ export default function OrderHistory() {
                 </button>
               </div>
             </div>
-
-            {/* Expanded Details */}
-            {expandedOrder === order.id && (
-              <div className="mt-4 p-3 bg-gray-900 rounded-lg text-sm text-gray-300">
-                <p><b>Order ID:</b> {order.id}</p>
-                <p><b>Game:</b> {order.game}</p>
-                <p><b>Date:</b> {order.date}</p>
-                <p><b>Price:</b> {order.price}</p>
-                <p><b>Payment Method:</b> {order.payment}</p>
-                <p><b>Status:</b> {order.status}</p>
-              </div>
-            )}
           </div>
         ))}
       </div>
@@ -90,10 +95,7 @@ export default function OrderHistory() {
           <div key={order.id} className="bg-gray-800 p-4 rounded-lg shadow-lg">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-4">
-                {/* Game Image */}
                 <img src={order.image} alt={order.game} className="w-20 h-20 rounded-md" />
-
-                {/* Order Details */}
                 <div>
                   <p className="text-sm font-bold text-gray-400">{order.date}</p>
                   <p className="text-lg font-semibold">{order.game}</p>
@@ -102,8 +104,6 @@ export default function OrderHistory() {
                   <p className="text-sm text-gray-400">{order.payment}</p>
                 </div>
               </div>
-
-              {/* Status & Show Details */}
               <div className="flex flex-col items-end">
                 <span className={`px-3 py-1 rounded-full text-sm font-semibold ${order.status === "Delivered" ? "bg-green-500" : "bg-red-500"} text-white`}>
                   {order.status}
@@ -113,18 +113,6 @@ export default function OrderHistory() {
                 </button>
               </div>
             </div>
-
-            {/* Expanded Details */}
-            {expandedOrder === order.id && (
-              <div className="mt-4 p-3 bg-gray-900 rounded-lg text-sm text-gray-300">
-                <p><b>Order ID:</b> {order.id}</p>
-                <p><b>Game:</b> {order.game}</p>
-                <p><b>Date:</b> {order.date}</p>
-                <p><b>Price:</b> {order.price}</p>
-                <p><b>Payment Method:</b> {order.payment}</p>
-                <p><b>Status:</b> {order.status}</p>
-              </div>
-            )}
           </div>
         ))}
       </div>
