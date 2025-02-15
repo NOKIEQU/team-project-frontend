@@ -34,7 +34,7 @@ export default function OrderHistory() {
         </nav>
 
         {/* Centered Title */}
-        <h1 className="text-3xl font-semibold text-center flex-1">Order History</h1>
+        <h1 className="text-4xl font-bold text-center mb-6"> OrderHistory</h1>
       </div>
 
       {/* Recent Orders Section */}
