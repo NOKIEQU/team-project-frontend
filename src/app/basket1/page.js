@@ -28,10 +28,10 @@ const BasketPage = () => {
     cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
-    <div className="bg-background min-h-screen p-8 text-foreground">
+    <div className="bg-[#121212] min-h-screen p-8 text-[#f5f5f5]">
       <h1 className="text-4xl font-bold text-center mb-6">MY BAG</h1>
 
-      <div className="grid grid-cols-5 text-muted-foreground font-semibold py-4 border-b border-border">
+      <div className="grid grid-cols-5 text-[#b0b0b0] font-semibold py-4 border-b border-[#333]">
         <div className="col-span-2">PRODUCT DESCRIPTION</div>
         <div className="text-center">PRICE</div>
         <div className="text-center">QUANTITY</div>
@@ -39,40 +39,40 @@ const BasketPage = () => {
       </div>
 
       {cart.map((item) => (
-        <div key={item.id} className="grid grid-cols-5 items-center py-4 border-b border-border bg-card shadow-sm p-4">
+        <div key={item.id} className="grid grid-cols-5 items-center py-4 border-b border-[#333] bg-[#1e1e1e] shadow-sm p-4 rounded-lg">
           <div className="flex col-span-2 items-center">
             <img src={item.img} alt={item.title} className="w-24 h-24 object-cover mr-4 rounded-lg shadow-md" />
             <span className="font-medium">{item.title}</span>
           </div>
-          <div className="text-center font-medium">£{item.price.toFixed(2)}</div>
+          <div className="text-center font-medium text-[#e0e0e0]">£{item.price.toFixed(2)}</div>
           <div className="flex items-center justify-center space-x-2">
-            <button className="p-1 border border-border rounded hover:bg-accent" onClick={() => updateQuantity(item.id, item.quantity - 1)}>
-              <Minus className="h-4 w-4" />
+            <button className="p-1 border border-[#555] rounded hover:bg-[#272727]" onClick={() => updateQuantity(item.id, item.quantity - 1)}>
+              <Minus className="h-4 w-4 text-[#b0b0b0]" />
             </button>
-            <input type="text" value={item.quantity} readOnly className="w-12 text-center border border-border p-1 bg-muted" />
-            <button className="p-1 border border-border rounded hover:bg-accent" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
-              <Plus className="h-4 w-4" />
+            <input type="text" value={item.quantity} readOnly className="w-12 text-center border border-[#555] p-1 bg-[#272727] text-white" />
+            <button className="p-1 border border-[#555] rounded hover:bg-[#272727]" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+              <Plus className="h-4 w-4 text-[#b0b0b0]" />
             </button>
           </div>
           <div className="flex justify-between items-center text-right">
-            <span className="font-medium">£{(item.price * item.quantity).toFixed(2)}</span>
-            <button className="text-muted-foreground hover:text-destructive ml-4" onClick={() => removeFromCart(item.id)}>
+            <span className="font-medium text-[#e0e0e0]">£{(item.price * item.quantity).toFixed(2)}</span>
+            <button className="text-[#b0b0b0] hover:text-[#ff4c4c] ml-4" onClick={() => removeFromCart(item.id)}>
               <Trash2 className="h-5 w-5" />
             </button>
           </div>
         </div>
       ))}
 
-      <div className="bg-card p-4 mt-6 shadow-md rounded-lg">
-        <div className="flex justify-between text-lg font-semibold">
+      <div className="bg-[#1e1e1e] p-4 mt-6 shadow-md rounded-lg">
+        <div className="flex justify-between text-lg font-semibold text-[#e0e0e0]">
           <span>TOTAL</span>
           <span>£{getCartTotal().toFixed(2)}</span>
         </div>
-        <div className="flex justify-between text-lg font-semibold mt-2">
+        <div className="flex justify-between text-lg font-semibold text-[#e0e0e0] mt-2">
           <span>DELIVERY</span>
           <span>£{deliveryCharge.toFixed(2)}</span>
         </div>
-        <div className="flex justify-between text-xl font-bold mt-4">
+        <div className="flex justify-between text-xl font-bold text-white mt-4">
           <span>TOTAL</span>
           <span>£{(getCartTotal() + deliveryCharge).toFixed(2)}</span>
         </div>
@@ -80,10 +80,14 @@ const BasketPage = () => {
 
       <div className="flex justify-between mt-6">
         <Link href="/shop">
-          <button className="border border-border px-6 py-2 text-muted-foreground hover:bg-accent">CONTINUE SHOPPING</button>
+          <button className="border border-[#555] px-6 py-2 text-[#b0b0b0] hover:bg-[#272727] rounded-lg">
+            CONTINUE SHOPPING
+          </button>
         </Link>
         <Link href="/checkout">
-          <button className="bg-primary text-primary-foreground px-6 py-2 hover:bg-primary/80">CHECKOUT</button>
+          <button className="bg-[#ff4c4c] text-white px-6 py-2 hover:bg-[#e04343] rounded-lg">
+            CHECKOUT
+          </button>
         </Link>
       </div>
     </div>
