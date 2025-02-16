@@ -104,8 +104,8 @@ export default function OrderHistory() {
 
       {/* Buttons */}
       <div className="mt-10 flex justify-center space-x-4">
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold">Continue Shopping</button>
-        <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold">Proceed to Checkout</button>
+        <button className="bg-blue-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold">Continue Shopping</button>
+        <button className="bg-green-600 hover:bg-orange-700 text-white px-6 py-3 rounded-lg font-semibold">Proceed to Checkout</button>
       </div>
     </div>
   );
