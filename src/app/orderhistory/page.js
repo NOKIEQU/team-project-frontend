@@ -6,11 +6,11 @@ export default function OrderHistory() {
   const [category, setCategory] = useState("all");
   const [timeFrame, setTimeFrame] = useState("all");
 
+  setExpandedOrder(id === expandedOrder ? null : id);
   const toggleDetails = (id) => {
-    setExpandedOrder(id === expandedOrder ? null : id);
   };
 
-  // Sample order data
+
   const orders = [
     { id: "307892", date: "March 16, 2025", game: "Game Vault Action", price: "£120.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg", details: "Shipped via DHL, tracking number: XYZ123" },
     { id: "307882", date: "October 16, 2024", game: "Game Vault RPG", price: "£209.00", payment: "Paid with GameVault Points", status: "Delivered", category: "RPG", image: "/game-vault-rpg.jpg", details: "Shipped via FedEx, tracking number: ABC456" },
@@ -18,7 +18,7 @@ export default function OrderHistory() {
     { id: "307862", date: "January 16, 2024", game: "Game Vault Sports", price: "£259.00", payment: "Paid with GameVault Points", status: "Refunded", category: "Sports", image: "/game-vault-sports.jpg", details: "Refund issued on February 1, 2024" },
   ];
 
-  // Filtering logic
+  
   const filteredOrders = orders.filter((order) => {
     const orderDate = new Date(order.date);
     const currentDate = new Date();
