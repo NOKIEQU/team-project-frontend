@@ -12,10 +12,10 @@ export default function OrderHistory() {
 
   // Sample order data
   const orders = [
-    { id: "307892", date: "March 16, 2025", game: "Game Vault Action", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg", details: "Shipped via DHL, tracking number: XYZ123" },
-    { id: "307882", date: "October 16, 2024", game: "Game Vault RPG", price: "£219.00", payment: "Paid with GameVault Points", status: "Delivered", category: "RPG", image: "/game-vault-rpg.jpg", details: "Shipped via FedEx, tracking number: ABC456" },
-    { id: "307872", date: "July 16, 2024", game: "Game Vault Adventure", price:"£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Adventure", image: "/game-vault-adventure.jpg", details: "Shipped via UPS, tracking number: DEF789" },
-    { id: "307862", date: "January 16, 2024", game: "Game Vault Sports", price:"£500.00", payment: "Paid with GameVault Points", status: "Refunded", category: "Sports", image: "/game-vault-sports.jpg", details: "Refund issued on February 1, 2024" },
+    { id: "307892", date: "March 16, 2025", game: "Game Vault Action", price: "£120.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg", details: "Shipped via DHL, tracking number: XYZ123" },
+    { id: "307882", date: "October 16, 2024", game: "Game Vault RPG", price: "£209.00", payment: "Paid with GameVault Points", status: "Delivered", category: "RPG", image: "/game-vault-rpg.jpg", details: "Shipped via FedEx, tracking number: ABC456" },
+    { id: "307872", date: "July 16, 2024", game: "Game Vault Adventure", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Adventure", image: "/game-vault-adventure.jpg", details: "Shipped via UPS, tracking number: DEF789" },
+    { id: "307862", date: "January 16, 2024", game: "Game Vault Sports", price: "£259.00", payment: "Paid with GameVault Points", status: "Refunded", category: "Sports", image: "/game-vault-sports.jpg", details: "Refund issued on February 1, 2024" },
   ];
 
   // Filtering logic
@@ -104,7 +104,7 @@ export default function OrderHistory() {
 
       {/* Buttons */}
       <div className="mt-10 flex justify-center space-x-4">
-        <button className="bg-blue-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold">Continue Shopping</button>
+        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold">Continue Shopping</button>
         <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold">Proceed to Checkout</button>
       </div>
     </div>
