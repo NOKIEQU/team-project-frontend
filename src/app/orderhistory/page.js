@@ -46,16 +46,17 @@ export default function OrderHistory() {
       {/* Filters */}
       <div className="flex justify-between items-center mb-6">
         <select className="bg-gray-800 text-white p-2 rounded" onChange={(e) => setCategory(e.target.value)}>
-          <option value="all">View All Categories</option>
+          <option value="all"> View All Categories</option>
           <option value="Action">Action</option>
           <option value="RPG">RPG</option>
           <option value="Adventure">Adventure</option>
           <option value="Sports">Sports</option>
         </select>
         <select className="bg-gray-800 text-white p-2 rounded" onChange={(e) => setTimeFrame(e.target.value)}>
-          <option value="all">All Time</option>
-          <option value="3months">Ordered Within Past 3 Months</option>
-          <option value="6months">Ordered Within Past 6 Months</option>
+          <option value="all"> ordered within </option>
+          <option value="3months"> Past 3 Months</option>
+          <option value="6months"> Past 6 Months</option>
+          <option value="12months"> Past 12 Months</option>
         </select>
       </div>
 
