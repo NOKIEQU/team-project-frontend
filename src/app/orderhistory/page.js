@@ -53,10 +53,12 @@ export default function OrderHistory() {
           <option value="Sports">Sports</option>
         </select>
         <select className="bg-gray-800 text-white p-2 rounded" onChange={(e) => setTimeFrame(e.target.value)}>
-          <option value="all"> ordered within </option>
-          <option value="3months"> Past 3 Months</option>
-          <option value="6months"> Past 6 Months</option>
-          <option value="12months"> Past 12 Months</option>
+          <option value="all"> OrderDate </option>
+          <option value="3months">ordered within Past 3 Months</option>
+          <option value="6months">ordered within Past 6 Months</option>
+          <option value="12months">ordered within Past 12 Months</option>
+          <option value="1 year ">ordered within Past 1 year  </option>
+          <option value="2 year ">ordered within Past 2 year  </option>
         </select>
       </div>
 
