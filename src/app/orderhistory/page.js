@@ -12,14 +12,14 @@ export default function OrderHistory() {
 
   // Sample order data
   const orders = [
-    { id: "304010", date: "March 16, 2025", game: "Game Vault Action", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg", details: "Shipped via DHL, tracking number: XYZ123" },
-    { id: "304011", date: "October 16, 2024", game: "Game Vault RPG", price: "£219.00", payment: "Paid with GameVault Points", status: "Delivered", category: "RPG", image: "/game-vault-rpg.jpg", details: "Shipped via FedEx, tracking number: ABC456" },
-    { id: "304012", date: "March 16, 2025", game: "Game Vault Action", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg", details: "Shipped via DHL, tracking number: XYZ123" },
+    { id: "304010", date: "March 11, 2025", game: "Game Vault Action", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg", details: "Shipped via DHL, tracking number: XYZ123" },
+    { id: "304011", date: "April 12, 2025", game: "Game Vault RPG", price: "£219.00", payment: "Paid with GameVault Points", status: "Delivered", category: "RPG", image: "/game-vault-rpg.jpg", details: "Shipped via FedEx, tracking number: ABC456" },
+    { id: "304012", date: "March 20, 2025", game: "Game Vault Action", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg", details: "Shipped via DHL, tracking number: XYZ123" },
     { id: "304013", date: "October 16, 2024", game: "Game Vault RPG", price: "£219.00", payment: "Paid with GameVault Points", status: "Delivered", category: "RPG", image: "/game-vault-rpg.jpg", details: "Shipped via FedEx, tracking number: ABC456" },
-    { id: "304014", date: "July 16, 2024", game: "Game Vault Adventure", price:"£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Adventure", image: "/game-vault-adventure.jpg", details: "Shipped via UPS, tracking number: DEF789" },
-    { id: "304015", date: "January 16, 2024", game: "Game Vault Sports", price:"£500.00", payment: "Paid with GameVault Points", status: "Refunded", category: "Sports", image: "/game-vault-sports.jpg", details: "Refund issued on February 1, 2024" },
-    { id: "304016", date: "July 16, 2024", game: "Game Vault Adventure", price:"£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Adventure", image: "/game-vault-adventure.jpg", details: "Shipped via UPS, tracking number: DEF789" },
-    { id: "304017", date: "January 16, 2024", game: "Game Vault Sports", price:"£500.00", payment: "Paid with GameVault Points", status: "Refunded", category: "Sports", image: "/game-vault-sports.jpg", details: "Refund issued on February 1, 2024" },
+    { id: "304014", date: "July 26, 2024", game: "Game Vault Adventure", price:"£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Adventure", image: "/game-vault-adventure.jpg", details: "Shipped via UPS, tracking number: DEF789" },
+    { id: "304015", date: "January 29, 2024", game: "Game Vault Sports", price:"£500.00", payment: "Paid with GameVault Points", status: "Refunded", category: "Sports", image: "/game-vault-sports.jpg", details: "Refund issued on February 1, 2024" },
+    { id: "304016", date: "July 10, 2024", game: "Game Vault Adventure", price:"£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Adventure", image: "/game-vault-adventure.jpg", details: "Shipped via UPS, tracking number: DEF789" },
+    { id: "304017", date: "January 13, 2024", game: "Game Vault Sports", price:"£500.00", payment: "Paid with GameVault Points", status: "Refunded", category: "Sports", image: "/game-vault-sports.jpg", details: "Refund issued on February 1, 2024" },
   ];
 
   // Filtering logic
