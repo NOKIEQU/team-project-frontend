@@ -103,7 +103,7 @@ export default function OrderHistory() {
           ))}
         </div>
       </div>
-      
+
       {/* Past Orders with Increased Margin */}
       <div className="mt-12"> 
         <h2 className="text-2xl font-semibold mb-4">Past Orders</h2>
@@ -143,7 +143,7 @@ export default function OrderHistory() {
       </div>
 
       {/* Buttons */}
-      <div className="mt-10 flex justify-center space-x-4">
+      <div className="mt-10 flex justify-end space-x-4">
         <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold">Continue Shopping</button>
       </div>
     </div>
