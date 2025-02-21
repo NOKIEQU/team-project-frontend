@@ -117,7 +117,7 @@ function RegisterPage() {
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        placeholder="Name"
+                                        placeholder="e.g. John Mario"
                                         className={input}
                                     />
                                     {errors.name && (
@@ -134,7 +134,7 @@ function RegisterPage() {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    placeholder="Enter your email"
+                                    placeholder="e.g. example@ex.com"
                                     className={input}
                                 />
                                 {errors.email && (
@@ -151,7 +151,7 @@ function RegisterPage() {
                                         name="contactNumber"
                                         value={formData.contactNumber}
                                         onChange={handleChange}
-                                        placeholder="Contact Number"
+                                        placeholder="e.g. +00000"
                                         className={input}
                                     />
                                     {errors.contactNumber && (
@@ -170,7 +170,7 @@ function RegisterPage() {
                                         name="message"
                                         value={formData.message}
                                         onChange={handleChange}
-                                        placeholder="Message"
+                                        placeholder="Write your message here"
                                         className={input}
                                         rows={5}
                                     ></textarea>
