@@ -26,7 +26,8 @@ function Footer() {
                         <ul className="space-y-2">
                             <li><Link href="/faq" className="text-sm hover:underline">FAQ</Link></li>
                             <li><Link href="/privacy-policy" className="text-sm hover:underline">Privacy Policy</Link></li>
-                            <li className="text-sm">📞 <a href="tel:+1234567890" className="hover:underline">+1 (234) 567-890</a></li>
+                            <li className="text-sm">📞 <a href="tel:+442345678900" className="hover:underline">+44 2345 678900</a></li>
+
                         </ul>
                     </div>
                     <div>
@@ -56,7 +57,7 @@ function Footer() {
                 {/* Logo and Copyright */}
                 <div className="mt-8 pt-2 border-t text-center text-sm text-muted-foreground">
                     <div className="flex justify-center mb-2">
-                        <Image src="/gamevult-logo.png" alt="GameVult Logo" width={120} height={40} />
+                        <Image src="/logo-white.png" alt="GameVult Logo" width={120} height={40} />
                     </div>
                     <p>&copy; 2025 GameStore. All rights reserved.</p>
                 </div>
@@ -64,5 +65,4 @@ function Footer() {
         </footer>
     )
 }
-
 export default Footer
