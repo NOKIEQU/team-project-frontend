@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Facebook, Twitter, Instagram, Youtube, Twitch, Linkedin, Discord } from 'lucide-react'
+import Image from 'next/image'
+import { Facebook, Twitter, Instagram, Youtube, Twitch, Linkedin } from 'lucide-react'
 
 function Footer() {
     return (
@@ -25,6 +26,7 @@ function Footer() {
                         <ul className="space-y-2">
                             <li><Link href="/faq" className="text-sm hover:underline">FAQ</Link></li>
                             <li><Link href="/privacy-policy" className="text-sm hover:underline">Privacy Policy</Link></li>
+                            <li className="text-sm">📞 <a href="tel:+1234567890" className="hover:underline">+1 (234) 567-890</a></li>
                         </ul>
                     </div>
                     <div>
@@ -48,13 +50,14 @@ function Footer() {
                             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-400">
                                 <Linkedin className="h-5 w-5" />
                             </a>
-                            <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-400">
-                                <Discord className="h-5 w-5" />
-                            </a>
                         </div>
                     </div>
                 </div>
+                {/* Logo and Copyright */}
                 <div className="mt-8 pt-2 border-t text-center text-sm text-muted-foreground">
+                    <div className="flex justify-center mb-2">
+                        <Image src="/gamevult-logo.png" alt="GameVult Logo" width={120} height={40} />
+                    </div>
                     <p>&copy; 2025 GameStore. All rights reserved.</p>
                 </div>
             </div>
@@ -62,4 +65,4 @@ function Footer() {
     )
 }
 
-export default Footer;
+export default Footer
