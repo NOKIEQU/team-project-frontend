@@ -26,7 +26,7 @@ function Footer() {
                         <ul className="space-y-2">
                             <li><Link href="/faq" className="text-sm hover:underline">FAQ</Link></li>
                             <li><Link href="/privacy-policy" className="text-sm hover:underline">Privacy Policy</Link></li>
-                            <li className="text-sm">📞<a href="tel:+442345678900" className="hover:underline">+44 2345 678900</a></li>
+                            <li className="text-sm"><a href="tel:+442345678900" className="hover:underline">+44 2345 678900</a></li>
 
                         </ul>
                     </div>
