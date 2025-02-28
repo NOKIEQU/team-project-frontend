@@ -60,35 +60,35 @@ export default function LoginPage() {
                 >
                     <polygon
                         points="0,14 0,19 38,39.5 38,34.5"
-                        fill="rgba(255, 255, 255, 0.8)"
+                        fill="rgba(255, 255, 255, 0.5)"
                     />
                     <polygon
                         points="39,35 39,40 100,71 100,66"
-                        fill="rgba(255, 255, 255, 0.3)"
+                        fill="rgba(255, 255, 255, 0.1)"
                     />
                     <polygon
                         points="0,20 0,22 38,42.5 38,40.5"
-                        fill="rgba(255, 255, 255, 0.8)"
+                        fill="rgba(255, 255, 255, 0.5)"
                     />
                     <polygon
                         points="39,41 39,43 100,74 100,72"
-                        fill="rgba(255, 255, 255, 0.3)"
+                        fill="rgba(255, 255, 255, 0.1)"
                     />
                     <polygon
                         points="0,85 0,80 38,95 38,100"
-                        fill="rgba(255, 255, 255, 0.8)"
+                        fill="rgba(255, 255, 255, 0.5)"
                     />
                     <polygon
                         points="39,95 39,100 60,100 60,105"
-                        fill="rgba(255, 255, 255, 0.3)"
+                        fill="rgba(255, 255, 255, 0.1)"
                     />
                     <polygon
                         points="0,86 0,88 38,103 38,101"
-                        fill="rgba(255, 255, 255, 0.8)"
+                        fill="rgba(255, 255, 255, 0.5)"
                     />
                     <polygon
                         points="39,41 39,43 100,74 100,72"
-                        fill="rgba(255, 255, 255, 0.3)"
+                        fill="rgba(255, 255, 255, 0.1)"
                     />
                 </svg>
             </div>
@@ -158,7 +158,7 @@ export default function LoginPage() {
                                     type="email"
                                     value={popupEmail}
                                     onChange={(e) => setPopupEmail(e.target.value)}
-                                    className="w-full px-3 py-2 mt-2 bg-white text-black border-2 border-white text-sm outline-none rounded-lg shadow-md focus:ring-2 "
+                                    className="w-full px-3 py-2 mt-2 bg-transparent border-b-2 border-white text-sm outline-none text-white placeholder-white focus:ring-0 text-sm outline-none shadow-md "
                                     placeholder="Enter your email"
                                     required
                                 />
