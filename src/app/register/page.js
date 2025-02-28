@@ -169,7 +169,7 @@ function RegisterPage() {
                         />
                     </div>
 
-                    {/* Optional Checkbox */}
+                    {/* Checkbox */}
                     <div className="flex items-center mb-3">
                         <input
                             type="checkbox"
