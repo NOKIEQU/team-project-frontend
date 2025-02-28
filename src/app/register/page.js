@@ -14,7 +14,7 @@ function RegisterPage() {
     return (
         <div className="relative h-screen bg-[#1A1A22] text-white flex font-oswald">
 
-          
+         
             <div className="absolute top-0 left-0 w-full h-full z-10 pointer-events-none hidden md:block">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -24,35 +24,35 @@ function RegisterPage() {
                 >
                     <polygon
                         points="0,14 0,19 38,39.5 38,34.5"
-                        fill="rgba(255, 255, 255, 0.8)"
+                        fill="rgba(255, 255, 255, 0.5)"
                     />
                     <polygon
                         points="39,35 39,40 100,71 100,66"
-                        fill="rgba(255, 255, 255, 0.3)"
+                        fill="rgba(255, 255, 255, 0.1)"
                     />
                     <polygon
                         points="0,20 0,22 38,42.5 38,40.5"
-                        fill="rgba(255, 255, 255, 0.8)"
+                        fill="rgba(255, 255, 255, 0.5)"
                     />
                     <polygon
                         points="39,41 39,43 100,74 100,72"
-                        fill="rgba(255, 255, 255, 0.3)"
+                        fill="rgba(255, 255, 255, 0.1)"
                     />
                     <polygon
                         points="0,85 0,80 38,95 38,100"
-                        fill="rgba(255, 255, 255, 0.8)"
+                        fill="rgba(255, 255, 255, 0.5)"
                     />
                     <polygon
                         points="39,95 39,100 60,100 60,105"
-                        fill="rgba(255, 255, 255, 0.3)"
+                        fill="rgba(255, 255, 255, 0.1)"
                     />
                     <polygon
                         points="0,86 0,88 38,103 38,101"
-                        fill="rgba(255, 255, 255, 0.8)"
+                        fill="rgba(255, 255, 255, 0.5)"
                     />
                     <polygon
                         points="39,41 39,43 100,74 100,72"
-                        fill="rgba(255, 255, 255, 0.3)"
+                        fill="rgba(255, 255, 255, 0.1)"
                     />
                 </svg>
             </div>
@@ -67,13 +67,12 @@ function RegisterPage() {
             
             <div className="w-full md:w-3/5 flex flex-col items-center justify-center p-6 z-20 relative pointer-events-auto md:border-r-4 md:border-black md:shadow-xl md:mr-8 pt-28">
 
-             
                 <h1 className="text-4xl font-bold text-center mb-2 text-white underline z-30">CREATE ACCOUNT</h1>
 
               
                 
                 <form className="w-full max-w-md">
-                
+                    {/* Names */}
                     <div className="flex gap-4 mb-3">
                         <div className="flex-1">
                             <label className={label}>First Name</label>
