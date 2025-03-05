@@ -10,6 +10,7 @@ export default function OrderHistory() {
     setExpandedOrder(id === expandedOrder ? null : id);
   };
 
+  // Sample order data
   const orders = [
     { id: "304010", date: "March 11, 2025", game: "Game Vault Action", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg", details: "Shipped via DHL, tracking number: XYZ123" },
     { id: "304011", date: "April 12, 2025", game: "Game Vault RPG", price: "£219.00", payment: "Paid with GameVault Points", status: "Delivered", category: "RPG", image: "/game-vault-rpg.jpg", details: "Shipped via FedEx, tracking number: ABC456" },
@@ -21,7 +22,7 @@ export default function OrderHistory() {
     { id: "304017", date: "January 13, 2024", game: "Game Vault Sports", price:"£500.00", payment: "Paid with GameVault Points", status: "Refunded", category: "Sports", image: "/game-vault-sports.jpg", details: "Refund issued on February 1, 2024" },
   ];
 
- 
+  // Filtering logic
   const filteredOrders = orders.filter((order) => {
     const orderDate = new Date(order.date);
     const currentDate = new Date();
@@ -41,12 +42,12 @@ export default function OrderHistory() {
 
   return (
     <div className="min-h-screen bg-[#111] text-white px-6 py-8">
-      {}
+      {/* Header */}
       <div className="border-b border-gray-600 pb-4 mb-6 text-center">
-        <h1 className="text-4xl font-bold">OrderHistory</h1>
+        <h1 className="text-4xl font-bold">Order History</h1>
       </div>
 
-      {}
+      {/* Filters */}
       <div className="flex justify-between items-center mb-6">
         <select className="bg-gray-800 text-white p-2 rounded" onChange={(e) => setCategory(e.target.value)}>
           <option value="all"> View All Categories</option>
@@ -60,12 +61,12 @@ export default function OrderHistory() {
           <option value="3months">ordered within Past 3 Months</option>
           <option value="6months">ordered within Past 6 Months</option>
           <option value="12months">ordered within Past 12 Months</option>
-          <option value="1 year ">ordered within Past 1 year </option>
-          <option value="2 year ">ordered within Past 2 year</option>
+          <option value="1 year ">ordered within Past 1 year  </option>
+          <option value="2 year ">ordered within Past 2 year  </option>
         </select>
       </div>
 
-      {}
+      {/* Orders Section */}
       <div>
         <h2 className="text-2xl font-semibold mb-4">Recent Orders</h2>
         <div className="space-y-6">
@@ -106,7 +107,7 @@ export default function OrderHistory() {
       {/* Past Orders with Increased Margin */}
       <div className="mt-12"> 
         <h2 className="text-2xl font-semibold mb-4">Past Orders</h2>
-        <div className="space-y-6">
+        <div className="space-y-6"> 
           {pastOrders.map((order) => (
             <div key={order.id} className="bg-gray-800 p-4 rounded-lg shadow-lg">
               <div className="flex justify-between items-center">
@@ -141,9 +142,9 @@ export default function OrderHistory() {
         </div>
       </div>
 
-      {}
+      {/* Buttons */}
       <div className="mt-10 flex justify-end space-x-4">
-        <button className="bg-white-600 hover:bg-white-700 text-white px-6 py-3 rounded-lg font-semibold">Continue Shopping</button>
+        <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold">Continue Shopping</button>
       </div>
     </div>
   );
