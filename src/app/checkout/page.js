@@ -130,7 +130,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
                 <input
                   type="text"
                   name="name"
-                  placeholder="Name"
+                  placeholder="e.g. John Mario"
                   className={input}
                 />
               </div>
@@ -139,7 +139,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
                 <input
                   type="email"
                   name="email"
-                  placeholder="E-Mail"
+                  placeholder="e.g. example@ex.com"
                   className={input}
                 />
               </div>
@@ -156,7 +156,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
                 <input
                   type="text"
                   name="poastcode"
-                  placeholder="Post Code"
+                  placeholder="e.g. B0xxxx"
                   className={input}
                 />
               </div>
@@ -165,7 +165,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
                 <input
                   type="text"
                   name="address"
-                  placeholder="Address"
+                  placeholder="e.g. 27 xxxst. xxxxx"
                   className={input}
                 />
               </div>
@@ -174,7 +174,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
                 <input
                   type="text"
                   name="phone"
-                  placeholder="Phone"
+                  placeholder="e.g. +00000"
                   className={input}
                 />
               </div>
@@ -220,7 +220,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
                       <input
                         type="text"
                         name="cardNumber"
-                        placeholder="card Number"
+                        placeholder="insert the 16 digit numbers"
                         className={input}
                       />
                     </div>
@@ -229,7 +229,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
                       <input
                         type="text"
                         name="expairyDate"
-                        placeholder="Expairy Date"
+                        placeholder="Expiry Date"
                         className={input}
                       />
                     </div>
@@ -280,7 +280,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
                       <input
                         type="text"
                         name="cardNumber"
-                        placeholder="card Number"
+                        placeholder="insert the 16 digit numbers"
                         className={input}
                       />
                     </div>
@@ -289,7 +289,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
                       <input
                         type="text"
                         name="expairyDate"
-                        placeholder="Expairy Date"
+                        placeholder="Expiry Date"
                         className={input}
                       />
                     </div>

@@ -170,7 +170,7 @@ function RegisterPage() {
                                         name="message"
                                         value={formData.message}
                                         onChange={handleChange}
-                                        placeholder="Write your message here"
+                                        placeholder="Write your message here "
                                         className={input}
                                         rows={5}
                                     ></textarea>
