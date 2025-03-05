@@ -9,7 +9,6 @@ function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div className="flex flex-col items-start">
                         <p className="text-sm text-muted dark:text-white">
-                            Level up your gaming experience—discover, play, and connect like never before!
                         </p>
                     </div>
                     <div>
@@ -57,7 +56,7 @@ function Footer() {
                 {/* Logo and Copyright */}
                 <div className="mt-8 pt-2 border-t text-center text-sm text-muted-foreground">
                     <div className="flex justify-center mb-2"> </div>
-                    <p>&copy; 2025 GameStore. All rights reserved.</p>
+                    <p>&copy; 2025 Gamevault. All rights reserved.</p>
                 </div>
             </div>
         </footer>
