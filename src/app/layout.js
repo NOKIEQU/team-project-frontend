@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
          {/*   <div className="px-10 bg-[#0d1b2a]"> */}
             {children}
             {/* </div> */}
-            <Footer />
+           
           </CartProvider>
         </UserProvider>
       </body>

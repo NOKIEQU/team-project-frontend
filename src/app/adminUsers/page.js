@@ -1,168 +1,85 @@
 "use client";
+
 import Link from "next/link";
+import { LayoutDashboard, Gamepad2, BarChart, Layers } from "lucide-react";
+import SidebarLink from "../components/SidebarLink";
+import { SearchCode } from "lucide-react";
 
-function Users() {
-    return (
-        <div className="flex min-h-screen bg-[#1c1c1c] text-white">
+function AdminUsers() {
+  return (
+    <div className="flex min-h-screen">
+
     
-            {/* Sidebar */}
-            <aside className="w-64 bg-black p-6">
-                <div className="text-2xl font-bold text-[#f6a302] mb-10">GameVault Admin</div>
-                <nav>
-                    <ul className="space-y-4">
-                        <li>
-                            <a
-                                href="/admin"
-                                className="block text-lg font-medium hover:text-[#f6a302]"
-                            >
-                                Dashboard
-                            </a>
-                        </li>
-                        <li>
-                        <Link
-                        
-                                href="/adminusers"
-                                className="block text-lg font-medium hover:text-[#f6a302]"
-                        >
-                                Manage Users
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href="/reports"
-                                className="block text-lg font-medium hover:text-[#f6a302]"
-                            >
-                                Manage Games
-                            </Link>
-                        </li>
-                     
-                    </ul>
-                </nav>
-            </aside>
-
-            <main className="flex-1 p-6">
-                <div className="flex justify-between items-center mb-10">
-                    <h1 className="text-2xl font-bold text-white">Dashboard</h1>
-                </div>
-
-                {/* Quick Stats*/}
-                <section className="mb-8">
-                    <h3 className="text-xl font-bold mb-6">Quick Stats</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div className="bg-[#2a2a2a] p-6 rounded-lg text-center">
-                            <h4 className="text-lg font-bold">Total Revenue</h4>
-                            <p className="text-4xl font-bold text-[#f6a302]">£0</p>
-                        </div>
-                        <div className="bg-[#2a2a2a] p-6 rounded-lg text-center">
-                            <h4 className="text-lg font-bold">Orders</h4>
-                            <p className="text-4xl font-bold text-[#f6a302]">0</p>
-                        </div>
-                        <div className="bg-[#2a2a2a] p-6 rounded-lg text-center">
-                            <h4 className="text-lg font-bold">Total Users</h4>
-                            <p className="text-4xl font-bold text-[#f6a302]">0</p>
-                        </div>
-                        <div className="bg-[#2a2a2a] p-6 rounded-lg text-center">
-                            <h4 className="text-lg font-bold">Active Users</h4>
-                            <p className="text-4xl font-bold text-[#f6a302]">0</p>
-                        </div>
-                    </div>
-                </section>
-
-           
-                 {/* User table */}
-<section>
-  <div className="overflow-x-auto">
-    <table className="min-w-full divide-y divide-gray-200">
-      <thead className="bg-gray-900">
-        <tr>
-          <th
-            scope="col"
-            className="px-6 py-3 text-centre  text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Avatar
-          </th>
-          <th
-            scope="col"
-            className="px-6 py-3 text-centre text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Username
-          </th>
-          <th
-            scope="col"
-            className="px-6 py-3 text-centre text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Email
-          </th>
-          <th
-            scope="col"
-            className="px-6 py-3 text-centre text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Games Purchased
-          </th>
-          <th
-            scope="col"
-            className="px-6 py-3 text-centre text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Actions
-          </th>
-        </tr>
-      </thead>
-      <tbody className="bg-white divide-y divide-gray-200">
-      
-        <tr>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-        </tr>
+      {/* Sidebar */}
+      <div className="bg-[#111827] text-white w-64 flex flex-col p-5 space-y-4">
+        <nav className="space-y-2">
+          <SidebarLink
+            href="/admin"
+            icon={<LayoutDashboard />}
+            text="Dashboard"
+          />
+          <SidebarLink href="/AdminGames" icon={<Gamepad2 />} text="Games" />
+          <SidebarLink href="/AdminUsers" icon={<BarChart />} text="Users" />
+          <SidebarLink href="/AdminGenres" icon={<Layers />} text="Genres" />
+        </nav>
+      </div>
+      {/* Main content */}
     
-        <tr>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-        </tr>
- 
-        <tr>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-        </tr>
-   
-        <tr>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-        </tr>
-    
-        <tr>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-        </tr>
-  
-        <tr>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-            </main>
+      <div className="bg-gray-100 flex-1 p-6 flex flex-col">
+        <h1 className="text-gray-900 text-2xl font-bold">User List</h1>
+
+
+          {/* Search Bar Section */}
+          <div className="bg-[#1F2937] text-white w-full p-4 mt-4 rounded-lg flex items-center space-x-2">
+          <SearchCode className="text-xl" />
+          <input
+            type="text"
+            placeholder="Search for users.."
+            className="bg-transparent border-b-2 border-white text-white focus:outline-none w-full"
+          />
         </div>
-    );
+
+        {/* Users Data Table */}
+        <div className="bg-white p-6 mt-6 rounded-lg shadow-lg">
+      
+          <div className="overflow-x-auto mt-4">
+            <table className="w-full border-collapse">
+              <thead>  
+                <tr className="bg-gray-200 text-gray-700">
+                  <th className="p-3 text-left">User ID</th>
+                  <th className="p-3 text-left">Username</th>
+                  <th className="p-3 text-left">Email</th>
+                  <th className="p-3 text-left">Role</th>
+                  <th className="p-3 text-left">Registration Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { id: "#101", username: "john_doe", email: "john.doe@example.com", role: "Admin", date: "01/15/2024" },
+                  { id: "#102", username: "jane_smith", email: "jane.smith@example.com", role: "Admin", date: "02/12/2024" },
+                  { id: "#103", username: "samuel_jones", email: "samuel.jones@example.com", role: "User", date: "03/02/2024" },
+                  { id: "#104", username: "mary_rose", email: "mary.rose@example.com", role: "User", date: "03/05/2024" },
+                  { id: "#105", username: "GeorgeAssmiss", email: "GGeroge2005@example.com", role: "User", date: "03/01/2024" },
+                  { id: "#106", username: "MohammedSumbil", email: "liam.williams@example.com", role: "User", date: "03/01/2024" },
+                  { id: "#107", username: "liam_williams", email: "liam.williams@example.com", role: "User", date: "03/01/2024" },
+                  { id: "#108", username: "liam_williams", email: "liam.williams@example.com", role: "User", date: "03/01/2024" }
+
+                ].map((user, index) => (
+                  <tr key={index} className="border-t text-gray-800 hover:bg-gray-50">
+                    <td className="p-3">{user.id}</td>
+                    <td className="p-3">{user.username}</td>
+                    <td className="p-3">{user.email}</td>
+                    <td className="p-3">{user.role}</td>
+                    <td className="p-3">{user.date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Users;
+export default AdminUsers;
