@@ -1,12 +1,12 @@
 "use client";
- 
+
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useCart } from "../../../context/cart-context";
 import Link from "next/link";
- 
- 
- 
+
+
+
 function Product() {
   const [mainImage, setMainImage] = useState();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,7 +16,7 @@ function Product() {
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
- 
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -35,12 +35,12 @@ function Product() {
         setLoading(false);
       }
     };
- 
+
     if (params.product) {
       fetchProduct();
     }
   }, [params.product]);
- 
+
   const handleAddToCart = () => {
     if (game) {
       addToCart({
@@ -51,8 +51,8 @@ function Product() {
       });
     }
   };
- 
- 
+
+
   const handleQuantityChange = (newQuantity) => {
     if (newQuantity >= 1) {
       setQuantity(newQuantity);
@@ -61,7 +61,7 @@ function Product() {
       }
     }
   };
- 
+
   if (loading)
     return (
       <div className="min-h-screen w-full bg-gray-800 text-white flex items-center justify-center">
@@ -80,42 +80,21 @@ function Product() {
         Product not found
       </div>
     );
- 
+
   const images = game.imageUrls;
- 
+
   return (
-    <div className="min-h-screen w-full bg-gray-800">
+    <div className="min-h-screen w-full bg-[#1A1A22]">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     
+
       <div className="container mx-auto px-4 py-10 text-white">
         <div className="flex flex-col lg:flex-row gap-10">
           {/* More Like This */}
           <div className="pt-14 md:left-[450px] animate-fadeIn">
-            <h1 className="text-2xl font-sans font-bold mb-4">More Like This</h1>
-            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-1 md:grid-cols-4 gap-4">
-              <img
-                src="/MLT1.jpg"
-                alt="Photo 1"
-                className="w-32 h-32 sm:w-40 sm:h-40 object-cover aspect-square border-2 border-white hover:scale-110"
-              />
-              <img
-                src="/MLT2.jpg"
-                alt="Photo 2"
-                className="w-32 h-32 sm:w-40 sm:h-40 object-cover aspect-square border-2 border-white hover:scale-110"
-              />
-              <img
-                src="/MLT3.jpg"
-                alt="Photo 3"
-                className="w-32 h-32 sm:w-40 sm:h-40 object-cover aspect-square border-2 border-white hover:scale-110"
-              />
-              <img
-                src="/MLT4.jpg"
-                alt="Photo 4"
-                className="w-32 h-32 sm:w-40 sm:h-40 object-cover aspect-square border-2 border-white hover:scale-110"
-              />
-            </div>
+            
+          
           </div>
- 
+
           {/* Left Section: Game Details */}
           <div className="flex-1 text-center">
             <h1 className="text-xl font-bold mb-4">
@@ -135,14 +114,13 @@ function Product() {
                   key={index}
                   src={image}
                   alt={`Thumbnail ${index + 1}`}
-                  className={`w-16 cursor-pointer border-2 ${
-                    mainImage === image ? "border-yellow-500" : "border-white"
-                  }`}
+                  className={`w-16 cursor-pointer border-2 ${mainImage === image ? "border-black" : "border-white"
+                    }`}
                   onClick={() => setMainImage(image)}
                 />
               ))}
             </div>
- 
+
             <div className="text-left mt-10">
               <h2 className="text-2xl font-bold mb-4">System Requirements</h2>
               <hr className="border-t-2 border-white my-4" />
@@ -157,7 +135,7 @@ function Product() {
               </ul>
             </div>
           </div>
- 
+
           {/* Right Section: Description and Cart */}
           <div className="flex-1 pt-10">
             <div className="mb-6">
@@ -168,24 +146,24 @@ function Product() {
               <h2 className="text-2xl font-bold mb-4">Genre: {game.genre.name}</h2>
               <hr className="border-t-2 border-white my-4" />
             </div>
- 
+
             <div className="flex items-center space-x-4 mb-6">
               <h2 className="text-2xl font-bold">${parseFloat(game.price).toFixed(2)}</h2>
               <button
-                className="bg-yellow-500 text-black font-bold py-2 px-6 rounded-lg hover:bg-yellow-400 hover:scale-110"
+                className="bg-green-500 border border-white text-black font-bold py-2 px-6 rounded-lg  hover:scale-110"
                 onClick={handleAddToCart}
               >
                 ADD TO CART
               </button>
             </div>
- 
-           
- 
+
+
+
             <div className="mt-6">
               <h2 className="text-2xl font-bold">Rating: {game.rating}/5</h2>
             </div>
-             {/* Features */}
-             <div className="   w-[600px] h-[220px] border border-white xl:ml-0 l:ml-6 md:ml-20 sm:mt-10   bg-gray-900  animate-fadeIn">
+            {/* Features */}
+            <div className="   w-[600px] h-[240px] border border-white xl:ml-0 l:ml-6 md:ml-20 sm:mt-6   bg-[#1A1A22  animate-fadeIn">
               <h1 className="pl-1 border ">Features</h1>
               <div className=" pl-1 pr-1 hover:bg-[#31699e] ">
                 <h1 className=" border border-white rounded-l mt-1 pl-1 ">Single-Player</h1>
@@ -204,40 +182,76 @@ function Product() {
               </div>
               <div className=" pl-1 pr-1  hover:bg-[#31699e]  ">
                 <h1 className=" border border-white rounded-l mt-1 pl-1 ">Controller Support</h1>
+
               </div>
- 
+              <h1 className="pl-1 border ">Features</h1>
+
+
             </div>
- 
+
           </div>
-       
+
         </div>
-        </div>
-           {/* Reviews Section */}
-           <div className="mt-10">
-          <hr className="border-t-2 xl:ml-[400px] xl:mr-[400px]    md-20 sm:mr-[50px] sm:ml-[50px] border-white my-4 ] opacity-50 " />
-          <h1 className="text-[35px] font-sans ml- font-bold sm:text-center text-white">Reviews</h1>
- 
-          {/* Individual Reviews */}
-          <div className="mt-6 space-y-4">
-            {/* First Review */}
-            <div className="border rounded-xl xl:ml-[100px] xl:mr-[100px]  sm:ml-[25px] sm:mr-[25px] text-white bg-[#1b263b] p-4">
-              <h2 className="text-lg font-bold mb-2">Debbie Downer - I Don't Like This Game</h2>
-              <p className="text-xl font-bold mb-2">1/5</p>
-              <p className="text-sm text-gray-400 text-right">Posted on 6/12/2024</p>
-            </div>
- 
-            {/* Second Review */}
-            <div className="border text-white xl:ml-[100px] xl:mr-[100px] sm:ml-[25px] sm: sm:mr-[25px] rounded-xl bg-[#1b263b] p-4">
-              <h2 className="text-lg font-bold mb-2">Positive Peter - I Like This Game</h2>
-              <p className="text-xl font-bold mb-2">5/5</p>
-              <p className="text-sm text-gray-400 text-right">Posted on 4/12/2024</p>
-            </div>
-          </div>
-          </div>
-         
+
+
+
+        {/* More Like This */}
+        <section className="w-full py-16 text-center">
+      <h1 className="text-[35px] font-sans font-bold sm:text-center mt-[30] text-white mb-20">More Like This</h1>
+
+      <div className="flex flex-wrap justify-center gap-16">
+        <img
+          src="/MLT1.jpg"
+          alt="Photo 1"
+          className="w-48 h-48 sm:w-64 sm:h-64 object-cover aspect-square border-2 border-white hover:scale-110"
+        />
+        <img
+          src="/MLT2.jpg"
+          alt="Photo 2"
+          className="w-48 h-48 sm:w-64 sm:h-64 object-cover aspect-square border-2 border-white hover:scale-110"
+        />
+        <img
+          src="/MLT3.jpg"
+          alt="Photo 3"
+          className="w-48 h-48 sm:w-64 sm:h-64 object-cover aspect-square border-2 border-white hover:scale-110"
+        />
+        <img
+          src="/MLT4.jpg"
+          alt="Photo 4"
+          className="w-48 h-48 sm:w-64 sm:h-64 object-cover aspect-square border-2 border-white hover:scale-110"
+        />
       </div>
-   
+    </section>
+
+
+
+      </div>
+      {/* Reviews Section */}
+      <div className="mt-10">
+        <hr className="border-t-2 xl:ml-[400px] xl:mr-[400px]    md-20 sm:mr-[50px] sm:ml-[50px] border-white my-4 ] opacity-50 " />
+        <h1 className="text-[35px] font-sans ml- font-bold sm:text-center text-white">Reviews</h1>
+
+        {/* Individual Reviews */}
+        <div className="mt-6 space-y-4">
+          {/* First Review */}
+          <div className="border rounded-xl xl:ml-[100px] xl:mr-[100px]  sm:ml-[25px] sm:mr-[25px] text-white bg-[#1A1A22] p-4">
+            <h2 className="text-lg font-bold mb-2">Debbie Downer - I Don't Like This Game</h2>
+            <p className="text-xl font-bold mb-2">1/5</p>
+            <p className="text-sm text-gray-400 text-right">Posted on 6/12/2024</p>
+          </div>
+
+          {/* Second Review */}
+          <div className="border text-white xl:ml-[100px] xl:mr-[100px] sm:ml-[25px] sm: sm:mr-[25px] rounded-xl bg-[#1A1A22] p-4">
+            <h2 className="text-lg font-bold mb-2">Positive Peter - I Like This Game</h2>
+            <p className="text-xl font-bold mb-2">5/5</p>
+            <p className="text-sm text-gray-400 text-right">Posted on 4/12/2024</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   );
 }
- 
+
 export default Product;
