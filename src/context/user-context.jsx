@@ -42,6 +42,7 @@ export function UserProvider({ children }) {
       }
 
       const data = await response.json();
+      setUser(null);
       login(data.user);
       return data;
     } catch (error) {
