@@ -4,14 +4,20 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '../components/navbar';
+import { useRouter } from 'next/navigation';
+import { useUser } from '../../context/user-context';
 
 export default function LoginPage() {
     const [Popup, setPopup] = useState(false);
     const [ThankYou, setThankYou] = useState(false);
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
     const [popupEmail, setPopupEmail] = useState('');
     const [popupEmailError, setPopupEmailError] = useState('');
+
+    const router = useRouter();
+    const { user, login } = useUser();
 
     const ForgottenPasswordOpen = () => {
         setPopup(true);
@@ -25,26 +31,44 @@ export default function LoginPage() {
         setThankYou(false);
     };
 
-    const Submitt = (e) => {
+    const submitLogin = (e) => {
         e.preventDefault();
         if (validateEmail(email)) {
+            checkLogin(email, password)
+
         } else {
             setEmailError('Please enter a valid email address.');
-        }
-    };
-
-    const PopupSubmit = (e) => {
-        e.preventDefault();
-        if (validateEmail(popupEmail)) {
-            setThankYou(true);
-        } else {
-            setPopupEmailError('Please enter a valid email address.');
         }
     };
 
     const validateEmail = (email) => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailPattern.test(email);
+    };
+
+    const checkLogin = async (email, password) => {
+        try {
+            const response = await fetch(`http://localhost:3001/api/users/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Login failed');
+            }
+    
+            const data = await response.json();
+            // Handle successful login, e.g., save token, redirect, etc.
+            login(data);
+            
+            console.log('Login successful:', data);
+        } catch (error) {
+            console.error('Error during login:', error);
+            // Handle login error, e.g., show error message
+        }
     };
 
     return (
@@ -105,7 +129,7 @@ export default function LoginPage() {
             md:border-r-4 md:border-black md:shadow-xl md:mr-8">
                 <h1 className="text-4xl font-bold text-center mb-2">LOGIN TO ACCOUNT</h1>
                 <div className="w-40 h-0.5 bg-white mb-6 mx-auto"></div> 
-                <form className="flex flex-col space-y-4 w-full max-w-md" onSubmit={Submitt}>
+                <form className="flex flex-col space-y-4 w-full max-w-md" onSubmit={(e) => {submitLogin(e)}}>
                     <div>
                         <label htmlFor="email" className="block text-sm font-bold">Email</label>
                         <input
@@ -124,6 +148,8 @@ export default function LoginPage() {
                         <input
                             id="password"
                             type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             className="w-full px-3 py-2 bg-transparent border-b-2 border-white text-sm outline-none text-white placeholder-white focus:ring-0"
                             placeholder="Enter your password"
                             required
@@ -165,7 +191,7 @@ export default function LoginPage() {
                                 {popupEmailError && <p className="text-red-500 text-sm">{popupEmailError}</p>}
                                 <div className="flex justify-between mt-4">
                                     <button className="p-2 bg-gray-700 rounded hover:bg-gray-600 flex-1 mr-2" onClick={ForgottenPasswordClose}>Cancel</button>
-                                    <button className="p-2 bg-gray-700 rounded hover:bg-gray-600 flex-1" onClick={PopupSubmit}>Submit</button>
+                                    <button className="p-2 bg-gray-700 rounded hover:bg-gray-600 flex-1"type='submit' >Submit</button>
                                 </div>
                             </>
                         )}
