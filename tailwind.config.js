@@ -5,13 +5,32 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+
+  darkMode: 'class',
+
   theme: {
     extend: {
+      fontFamily: {
+        oswald: ["Oswald", "sans-serif"], // Correct way to define font family
+      },
+
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        "dark": '#232A30',
+        "medium": '#293245',
+        background: "hsl(var(--background))", // Define HSL-based custom colors
+        foreground: "hsl(var(--foreground))",
+
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+
+        // Custom Colors
+        "button-bg": "#F0ECEC", // Button background color
+        "background": "#1A1A22", // Background color
       },
     },
   },
+
   plugins: [],
 };

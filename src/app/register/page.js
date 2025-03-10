@@ -1,4 +1,5 @@
 "use client";
+
 import Navbar from "../components/navbar";
 
 function RegisterPage() {
@@ -201,6 +202,7 @@ function RegisterPage() {
                     </p>
                 </form>
             </div>
+
         </div>
     );
 }
