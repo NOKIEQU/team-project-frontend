@@ -150,7 +150,7 @@ function Product() {
             <div className="flex items-center space-x-4 mb-6">
               <h2 className="text-2xl font-bold">${parseFloat(game.price).toFixed(2)}</h2>
               <button
-                className="bg-green-500 border border-white text-black font-bold py-2 px-6 rounded-lg  hover:scale-110"
+                className="bg-white border border-white text-black font-bold py-2 px-6 rounded-lg  hover:scale-110"
                 onClick={handleAddToCart}
               >
                 ADD TO CART
