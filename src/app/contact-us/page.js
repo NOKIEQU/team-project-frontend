@@ -5,10 +5,10 @@ import * as Toast from "@radix-ui/react-toast";
 
 function RegisterPage() {
     const input =
-        "w-full px-3 py-2 bg-transparent border-b-2 border-[#D9D9D9] text-white text-sm outline-none";
+        "w-full px-3 py-2 bg-transparent border-b-2 border-[#F0ECEC] text-white text-sm outline-none";
     const label = "text-white font-bold text-sm mb-1 block";
     const button =
-        "w-full py-3 bg-[#D9D9D9] text-[#1c1c1c] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#fff]";
+        "w-full py-3 bg-[#F0ECEC] text-[#1c1c1c] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#fff]";
     const form =
         "flex-1 flex flex-col items-center p-6 sm:p-4 lg:p-8 sm:w-full lg:w-1/2";
 
@@ -103,7 +103,7 @@ function RegisterPage() {
                         <h2 className="text-white text-2xl font-bold mb-4 text-center pt-12 pb-2">
                             Contact Us
                         </h2>
-                        <div className="w-24 h-1 bg-[#D9D9D9] mx-auto mb-6"></div>
+                        <div className="w-24 h-1 bg-[#F0ECEC] mx-auto mb-6"></div>
                         <p className="text-white text-left pb-4 font-bold justify-left block">
                             Fill out this form and our team will contact you shortly
                         </p>

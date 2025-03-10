@@ -18,7 +18,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
       >
         <div className="flex flex-col sm:items-center  sm:w-full md:w-[80%] lg:w-[45%] xl:w-[45%]">
           {/* Order Summary */}
-          <div className="bg-[#D9D9D9] shadow-lg  rounded-3xl   mb-4 w-full">
+          <div className="bg-[#F0ECEC] shadow-lg  rounded-3xl   mb-4 w-full">
             <h2 className="p-4 text-2xl font-black text-black text-center">
               ORDER SUMMARY
             </h2>
@@ -119,7 +119,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
         {/* style={{"align-items":"flex-end"}} */}
         <div className="flex flex-col sm:items-center md:items-center sm:justify-center sm:w-full md:w-[80%] lg:w-[45%] xl:w-[45%]">
           {/* Billing Address */}
-          <div className="bg-[#D9D9D9] shadow-lg  rounded-3xl w-full pb-4 ">
+          <div className="bg-[#F0ECEC] shadow-lg  rounded-3xl w-full pb-4 ">
             <h2 className="p-4 text-2xl font-black text-black text-center">
               BILLING ADDRESS
             </h2>
@@ -183,7 +183,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
           </div>
 
           {/* Payment Methods */}
-          <div className="bg-[#D9D9D9] shadow-lg  rounded-3xl  mt-4 w-full">
+          <div className="bg-[#F0ECEC] shadow-lg  rounded-3xl  mt-4 w-full">
             <h2 className="p-4 text-2xl font-black text-black text-center">
               PAYMENT METHODS
             </h2>
@@ -340,7 +340,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
       </div>
 
       {/* Submit Button */}
-      <button className="mt-6 px-6 py-2 bg-[#D9D9D9] text-[#1A1A22] font-black rounded-3xl border-gray-600 border transition-colors duration-300 hover:bg-[#fff]">
+      <button className="mt-6 px-6 py-2 bg-[#F0ECEC] text-[#1A1A22] font-black rounded-3xl border-gray-600 border transition-colors duration-300 hover:bg-[#fff]">
         SUBMIT
       </button>
     </div>
