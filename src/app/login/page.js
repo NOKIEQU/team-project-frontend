@@ -1,5 +1,6 @@
 "use client";
 
+
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -24,6 +25,7 @@ export default function LoginPage() {
         setThankYou(false);
         setPopupEmail('');
         setPopupEmailError('');
+
     };
 
     const ForgottenPasswordClose = () => {
@@ -34,6 +36,7 @@ export default function LoginPage() {
     const submitLogin = (e) => {
         e.preventDefault();
         if (validateEmail(email)) {
+
             checkLogin(email, password)
 
         } else {
@@ -41,10 +44,12 @@ export default function LoginPage() {
         }
     };
 
+
     const validateEmail = (email) => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailPattern.test(email);
     };
+
 
     const checkLogin = async (email, password) => {
         try {
@@ -68,10 +73,12 @@ export default function LoginPage() {
         } catch (error) {
             console.error('Error during login:', error);
             // Handle login error, e.g., show error message
+
         }
     };
 
     return (
+
         <div className="relative h-screen bg-[#1A1A22] text-white flex font-oswald">
 
         
@@ -202,3 +209,4 @@ export default function LoginPage() {
         </div>
     );
 };
+

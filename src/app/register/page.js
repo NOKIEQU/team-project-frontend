@@ -8,6 +8,7 @@ import Navbar from "../components/navbar";
 import Image from "next/image";
 
 function RegisterPage() {
+
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -143,6 +144,7 @@ function RegisterPage() {
                         </div>
 
                         {/*             
+
             <div className="mb-4">
               <label className={label}>Username</label>
               <input
@@ -280,9 +282,10 @@ function RegisterPage() {
                     </form>
                 </div>
             </div>
+
+
         </div>
     );
 }
 
 export default RegisterPage;
-
