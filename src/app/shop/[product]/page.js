@@ -87,16 +87,16 @@ function Product() {
     <div className="min-h-screen w-full bg-[#1A1A22]">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      <div className="container mx-auto px-4 py-10 text-white">
-        <div className="flex flex-col lg:flex-row gap-10">
-          {/* More Like This */}
-          <div className="pt-14 md:left-[450px] animate-fadeIn">
+      <div className="container   mx-auto px-18 py-10 text-white">
+        <div className="flex flex-col  border-1 lg:flex-row gap-10">
+          
+          
             
           
-          </div>
+          
 
           {/* Left Section: Game Details */}
-          <div className="flex-1 text-center">
+          <div className="flex-1  text-center">
             <h1 className="text-xl font-bold mb-4">
               <Link href="/shop">
                 <span className="hover:text-yellow-500">All Games</span>
@@ -106,7 +106,7 @@ function Product() {
             <img
               src={mainImage}
               alt={`Main ${game.title} Image`}
-              className="w-96 mx-auto mb-6 border-2 border-white rounded-xl"
+              className="w-108  h-[400px] object-cover mx-auto mb-6 border-2 border-white rounded-xl"
             />
             <div className="flex justify-center space-x-4">
               {images.map((image, index) => (
@@ -114,17 +114,17 @@ function Product() {
                   key={index}
                   src={image}
                   alt={`Thumbnail ${index + 1}`}
-                  className={`w-16 cursor-pointer border-2 ${mainImage === image ? "border-black" : "border-white"
+                  className={`w-32 cursor-pointer border-2 ${mainImage === image ? "border-black" : "border-white"
                     }`}
                   onClick={() => setMainImage(image)}
                 />
               ))}
             </div>
 
-            <div className="text-left mt-10">
-              <h2 className="text-2xl font-bold mb-4">System Requirements</h2>
-              <hr className="border-t-2 border-white my-4" />
-              <ul className="list-disc list-inside space-y-2">
+            <div className="text-left border border-white h-[320px] mt-10">
+              <h2 className="text-2xl font-bold ml-[20px]  mb-4">System Requirements</h2>
+              <hr className="border-t-2 border-white mr-[20px] ml-[20px] my-4" />
+              <ul className="list-disc list-inside ml-[20px]  space-y-2">
                 <li>Requires a 64-bit processor and operating system</li>
                 <li>OS: Windows 10</li>
                 <li>Processor: Intel Core i5 or equivalent</li>
@@ -132,15 +132,16 @@ function Product() {
                 <li>DirectX: Version 11</li>
                 <li>Network: Broadband Internet connection</li>
                 <li>Storage: 50 GB available space</li>
+                
               </ul>
             </div>
           </div>
 
           {/* Right Section: Description and Cart */}
-          <div className="flex-1 pt-10">
+          <div className="flex-1   mt-20 pt-10">
             <div className="mb-6">
-              <h1 className="text-lg font-bold mb-4">{game.description}</h1>
-              <h2 className="text-2xl font-bold mb-4">
+              <h1 className="text-xl nt-bold mb-6">{game.description}</h1>
+              <h2 className="text-2xl font-bold mb-6">
                 Release Date: {new Date(game.releaseYear, 0).getFullYear()}
               </h2>
               <h2 className="text-2xl font-bold mb-4">Genre: {game.genre.name}</h2>
@@ -162,34 +163,33 @@ function Product() {
             <div className="mt-6">
               <h2 className="text-2xl font-bold">Rating: {game.rating}/5</h2>
             </div>
-            {/* Features */}
-            <div className="   w-[600px] h-[240px] border border-white xl:ml-0 l:ml-6 md:ml-20 sm:mt-6   bg-[#1A1A22  animate-fadeIn">
-              <h1 className="pl-1 border ">Features</h1>
-              <div className=" pl-1 pr-1 hover:bg-[#31699e] ">
-                <h1 className=" border border-white rounded-l mt-1 pl-1 ">Single-Player</h1>
-              </div>
-              <div className=" pl-1 pr-1  hover:bg-[#31699e]  ">
-                <h1 className=" border border-white rounded-l mt-1 pl-1 ">Multi-player</h1>
-              </div>
-              <div className=" pl-1 pr-1  hover:bg-[#31699e] ">
-                <h1 className=" border border-white rounded-l mt-1 pl-1 ">Co-op</h1>
-              </div>
-              <div className=" pl-1 pr-1  hover:bg-[#31699e]  ">
-                <h1 className=" border border-white rounded-l mt-1 pl-1 ">LAN</h1>
-              </div>
-              <div className="pl-1 pr-1  hover:bg-[#31699e]  ">
-                <h1 className=" border border-white rounded-l mt-1 pl-1 ">Cross-Platform</h1>
-              </div>
-              <div className=" pl-1 pr-1  hover:bg-[#31699e]  ">
-                <h1 className=" border border-white rounded-l mt-1 pl-1 ">Controller Support</h1>
 
-              </div>
-              <h1 className="pl-1 border ">Features</h1>
-
-
+            <div className="text-left border border-white h-[320px] mt-[175px] ">
+              <h2 className="text-2xl font-bold ml-[20px]  mb-4">Features</h2>
+              <hr className="border-t-2 border-white mr-[20px] ml-[20px] my-4" />
+              <ul className="list-disc list-inside ml-[20px]  space-y-2">
+                <li>Single-Player</li>
+                <li>Multi-Player</li>
+                <li>LAN </li>
+                <li>Co-Op</li>
+                <li>Supports Achievments</li>
+                <li>DLC Content</li>
+                
+                
+              </ul>
             </div>
 
+            
+            
+
+            
+           
+            
+
           </div>
+          
+          
+
 
         </div>
 
