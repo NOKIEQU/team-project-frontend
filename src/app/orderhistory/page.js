@@ -56,8 +56,8 @@ export default function OrderHistory() {
           <option value="Adventure">Adventure</option>
           <option value="Sports">Sports</option>
         </select>
-        <select className="bg-gray-800 text-white p-2 rounded" onChange={(e) => setTimeFrame(e.target.value)}>
-          <option value="all"> OrderDate </option>
+        <select className=" bg-[#F0ECEC]text-[#111] p-2 rounded" onChange={(e) => setTimeFrame(e.target.value)}>
+          <option value="all"> Order Date </option>
           <option value="3months">ordered within Past 3 Months</option>
           <option value="6months">ordered within Past 6 Months</option>
           <option value="12months">ordered within Past 12 Months</option>
@@ -71,7 +71,7 @@ export default function OrderHistory() {
         <h2 className="text-2xl font-semibold mb-4">Recent Orders</h2>
         <div className="space-y-6">
           {recentOrders.map((order) => (
-            <div key={order.id} className="bg-gray-800 p-4 rounded-lg shadow-lg">
+            <div key={order.id} className="bg-[#F0ECEC] p-4 rounded-lg shadow-lg">
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-4">
                   <img src={order.image} alt={order.game} className="w-20 h-20 rounded-md" />
@@ -109,7 +109,7 @@ export default function OrderHistory() {
         <h2 className="text-2xl font-semibold mb-4">Past Orders</h2>
         <div className="space-y-6">
           {pastOrders.map((order) => (
-            <div key={order.id} className="bg-gray-800 p-4 rounded-lg shadow-lg">
+            <div key={order.id} className="bg-[#F0ECEC] p-4 rounded-lg shadow-lg">
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-4">
                   <img src={order.image} alt={order.game} className="w-20 h-20 rounded-md" />
