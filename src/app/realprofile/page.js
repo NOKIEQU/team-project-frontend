@@ -53,7 +53,7 @@ function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen w-full px-4 md:px-8 overflow-auto bg-[#0d1b2a] relative">
+    <div className="min-h-screen w-full px-4 md:px-8 overflow-auto bg-[#1a1a22] relative">
       {showNotification && (
         <div className="fixed top-4 right-4 bg-yellow-400 text-black px-6 py-3 rounded-md shadow-lg">
           Email sent to reset password!
@@ -214,13 +214,13 @@ function ProfilePage() {
             <div className='flex flex-row gap-x-4 mt-4'>
               <button 
                 onClick={handleResetPassword}
-                className='p-4 bg-[#FFA800] text-black border-2 border-gray-300 rounded-md w-1/2 hover:bg-[#fa9a00ef]'
+                className='p-4 bg-[#F0ECEC] text-black border-2 border-gray-300 rounded-md w-1/2 hover:bg-[#fa9a00ef]'
               >
                 Reset Password
               </button>
               <button 
                 onClick={handleSave}
-                className='p-4 bg-[#FFA800] text-black rounded-md w-1/2 border-2 border-gray-300 hover:bg-[#fa9a00ef]'
+                className='p-4 bg-[#F0ECEC] text-black rounded-md w-1/2 border-2 border-gray-300 hover:bg-[#fa9a00ef]'
               >
                 Save Changes
               </button>
