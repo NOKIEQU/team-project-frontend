@@ -41,7 +41,7 @@ export default function OrderHistory() {
   const pastOrders = filteredOrders.slice(2);
 
   return (
-    <div className="min-h-screen bg-[#111] text-white px-6 py-8">
+    <div className="min-h-screen bg-[#1A1A22] text-white px-6 py-8">
       {/* Header */}
       <div className="border-b border-gray-600 pb-4 mb-6 text-center">
         <h1 className="text-4xl font-bold">Order History</h1>
@@ -61,8 +61,8 @@ export default function OrderHistory() {
           <option value="3months">ordered within Past 3 Months</option>
           <option value="6months">ordered within Past 6 Months</option>
           <option value="12months">ordered within Past 12 Months</option>
-          <option value="1 year ">ordered within Past 1 year  </option>
-          <option value="2 year ">ordered within Past 2 year  </option>
+          <option value="1 year">ordered within Past 1 year</option>
+          <option value="2 year">ordered within Past 2 years</option>
         </select>
       </div>
 
@@ -105,7 +105,7 @@ export default function OrderHistory() {
       </div>
 
       {/* Past Orders with Increased Margin */}
-      <div className="mt-12"> 
+      <div className="mt-12">
         <h2 className="text-2xl font-semibold mb-4">Past Orders</h2>
         <div className="space-y-6">
           {pastOrders.map((order) => (
@@ -144,7 +144,7 @@ export default function OrderHistory() {
 
       {/* Buttons */}
       <div className="mt-10 flex justify-end space-x-4">
-        <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold">Continue Shopping</button>
+        <button className="bg-[#F0ECEC] hover:bg-[#d9d9d9] text-[#111] px-6 py-3 rounded-lg font-semibold">Continue Shopping</button>
       </div>
     </div>
   );
