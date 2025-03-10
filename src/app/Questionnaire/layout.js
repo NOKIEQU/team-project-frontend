@@ -1,6 +1,6 @@
 export default function QuestionnaireLayout({ children }) {
     return (
-        <div className="h-screen overflow-hidden">
+        <div className="min-h-screen overflow-hidden">
             {children}
 
         </div>

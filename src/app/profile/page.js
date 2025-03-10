@@ -6,7 +6,7 @@ import Image from 'next/image'
 function AccountPage() {
   return (
     <div>
-      <Navbar isLoggedIn={true} />
+      
       <div className='flex flex-row w-full h-full'>
 
 
