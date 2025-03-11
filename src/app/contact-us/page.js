@@ -64,7 +64,7 @@ function RegisterPage() {
     };
 
     return (
-        <div className="flex flex-col font-sans bg-[#1A1A22] h-full">
+        <div style={{"font-family": "Oswald"}} className="flex flex-col font-sans bg-[#1A1A22] h-full">
             <div className="flex flex-1 flex-col lg:flex-row">
                 {/* Left Side */}
                 <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
@@ -101,10 +101,10 @@ function RegisterPage() {
                 {openToast === false && (
                     <div className={form}>
                         <h2 className="text-white text-2xl font-bold mb-4 text-center pt-12 pb-2">
-                            Contact Us
+                            CONTACT US
                         </h2>
                         <div className="w-24 h-1 bg-[#F0ECEC] mx-auto mb-6"></div>
-                        <p className="text-white text-left pb-4 font-bold justify-left block">
+                        <p style={{"font-family": "Oswald"}} className="text-white text-left pb-4 font-bold justify-left block">
                             Fill out this form and our team will contact you shortly
                         </p>
                         <form className="w-full max-w-md mt-3" onSubmit={handleSubmit}>
