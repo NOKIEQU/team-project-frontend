@@ -123,50 +123,72 @@ function Product() {
 
   // Product details
   return (
-    <div className="min-h-screen bg-[#1A1A22] text-white">
-      <div className="container mx-auto px-6 py-10 max-w-7xl">
-        <div className="flex flex-col lg:flex-row gap-12">
-          <div className="w-full lg:w-1/2 relative">
+
+    <div className="min-h-screen w-full bg-[#1A1A22]">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+      <div className="container   mx-auto px-18 py-10 text-white">
+        <div className="flex flex-col  border-1 lg:flex-row gap-10">
+          
+          
+            
+          
+          
+
+          {/* Left Section: Game Details */}
+          <div className="flex-1  text-center">
+            <h1 className="text-xl font-bold mb-4">
+              <Link href="/shop">
+                <span className="hover:text-yellow-500">All Games</span>
+              </Link>{" "}
+              - {game.title}
+            </h1>
+
             <img
               src={game.imageUrls[currentImageIndex]}
               alt={`Main ${game.title} Image`}
-              className="w-full border-2 border-white rounded-lg shadow-lg"
+
+              className="w-108  h-[400px] object-cover mx-auto mb-6 border-2 border-white rounded-xl"
             />
-            <button
-              onClick={handlePrevImage}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 p-3 rounded-full hover:bg-opacity-80 transition"
-            >
-              <ChevronLeft size={30} className="text-white" />
-            </button>
-            <button
-              onClick={handleNextImage}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 p-3 rounded-full hover:bg-opacity-80 transition"
-            >
-              <ChevronRight size={30} className="text-white" />
-            </button>
+            <div className="flex justify-center space-x-4">
+              {images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Thumbnail ${index + 1}`}
+                  className={`w-32 cursor-pointer border-2 ${mainImage === image ? "border-black" : "border-white"
+                    }`}
+                  onClick={() => setMainImage(image)}
+                />
+              ))}
+            </div>
+
+            <div className="text-left border border-white h-[320px] mt-10">
+              <h2 className="text-2xl font-bold ml-[20px]  mb-4">System Requirements</h2>
+              <hr className="border-t-2 border-white mr-[20px] ml-[20px] my-4" />
+              <ul className="list-disc list-inside ml-[20px]  space-y-2">
+                <li>Requires a 64-bit processor and operating system</li>
+                <li>OS: Windows 10</li>
+                <li>Processor: Intel Core i5 or equivalent</li>
+                <li>Graphics: DirectX 11 compatible GPU</li>
+                <li>DirectX: Version 11</li>
+                <li>Network: Broadband Internet connection</li>
+                <li>Storage: 50 GB available space</li>
+                
+              </ul>
+            </div>
           </div>
-          <div className="w-full lg:w-1/2 flex flex-col justify-between">
-            <div>
-              <h1 className="text-4xl font-bold">{game.title}</h1>
-              <p className="text-gray-400 mt-2">{game.description}</p>
-              <div className="flex items-center mt-3">
-                <div className="flex">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <span
-                      key={i}
-                      className={`text-3xl ${i < Math.round(averageRating) ? "text-yellow-400" : "text-gray-500"}`}
-                    >
-                      ★
-                    </span>
-                  ))}
-                </div>
-                <span className="text-gray-400 ml-2">({averageRating.toFixed(1)})</span>
-              </div>
-              <div className="mt-6">
-                <h2 className="text-4xl font-bold text-white">
-                  ${parseFloat(game.price).toFixed(2)}
-                </h2>
-              </div>
+
+          {/* Right Section: Description and Cart */}
+          <div className="flex-1   mt-20 pt-10">
+            <div className="mb-6">
+              <h1 className="text-xl nt-bold mb-6">{game.description}</h1>
+              <h2 className="text-2xl font-bold mb-6">
+                Release Date: {new Date(game.releaseYear, 0).getFullYear()}
+              </h2>
+              <h2 className="text-2xl font-bold mb-4">Genre: {game.genre.name}</h2>
+              <hr className="border-t-2 border-white my-4" />
+
             </div>
             <div className="mt-6 flex items-center space-x-4">
               <button className="bg-white text-black px-3 py-2 rounded-lg hover:scale-105 transition" onClick={() => handleQuantityChange(quantity - 1)}>
@@ -177,12 +199,42 @@ function Product() {
                 <Plus size={20} />
               </button>
             </div>
-            <div className="mt-4">
-              <button className="w-full max-w-sm bg-white text-black font-bold py-2 px-6 rounded-lg hover:scale-105 transition" onClick={handleAddToCart}>
-                Add to Basket
-              </button>
+
+
+
+
+            <div className="mt-6">
+              <h2 className="text-2xl font-bold">Rating: {game.rating}/5</h2>
             </div>
+
+            <div className="text-left border border-white h-[320px] mt-[175px] ">
+              <h2 className="text-2xl font-bold ml-[20px]  mb-4">Features</h2>
+              <hr className="border-t-2 border-white mr-[20px] ml-[20px] my-4" />
+              <ul className="list-disc list-inside ml-[20px]  space-y-2">
+                <li>Single-Player</li>
+                <li>Multi-Player</li>
+                <li>LAN </li>
+                <li>Co-Op</li>
+                <li>Supports Achievments</li>
+                <li>DLC Content</li>
+                
+                
+              </ul>
+            </div>
+
+            
+            
+
+            
+           
+            
+
           </div>
+          
+          
+
+
+
         </div>
         <div className="mt-10 grid grid-cols-2 lg:grid-cols-2 gap-6 text-center">
           <div className="bg-[#1A1A22] p-4 rounded-lg border border-white">
