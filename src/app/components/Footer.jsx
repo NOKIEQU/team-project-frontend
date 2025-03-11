@@ -15,7 +15,7 @@ function Footer() {
                             <li><Link href="/about" className="text-sm hover:underline">About Us</Link></li>
                             <li><Link href="/contact-us" className="text-sm hover:underline">Contact</Link></li>
                         </ul>
-                    </div
+                    </div>
                     {/* Customer Service (Middle) - Adjusted left alignment */}
                     <div className="flex flex-col items-start ml-4">
                         <h3 className="font-semibold text-lg mb-4">Customer Service</h3>
