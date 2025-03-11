@@ -7,6 +7,7 @@ import Image from "next/image";
 
 export default function Navbar() {
   const { user, logout } = useUser();
+  console.log(user);
 
   if (user) {
     return (
@@ -35,19 +36,9 @@ export default function Navbar() {
             </Link>
           </li>
 
-          <li className="flex items-center">
-             <Link href="/profile" className="hover:text-[#fa9a00ef] transition-all">
-            Hello, {user.firstName}
-            </Link>
-            </li>
-            <li className="flex items-center">
-            <Link
-              href="/profile"
-              className="hover:text-[#fa9a00ef] transition-all"
-            >
-              Account
-            </Link>
-            </li>
+login
+          <li className="flex items-center">Hello, {user.user.firstName}</li>
+
           <li>
             <button
               onClick={logout}

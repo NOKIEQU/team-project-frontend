@@ -1,318 +1,350 @@
 "use client";
+
 import React, { useState } from "react";
- 
-function CheckoutPage() {
-  const [pickedPayment, setPickedPayment] = useState("");
-  const [coupons, setCoupons] = useState("");
-  const [form, setForm] = useState({
-    cardHolderName: "",
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-    name: "",
-    email: "",
-    address: "",
-    city: "",
-    country: "",
-    postalCode: ""
-  });
- 
-  const orderSummary = {
-    items: [
-      { name: "Halo", price: 20, quantity: 2, imgSrc: "/halo.png" },
-      { name: "Detroit Become Human", price: 35, quantity: 1, imgSrc: "/detroit.png" }
-    ],
-    total: 0
-  };
- 
- 
-  orderSummary.total = orderSummary.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
- 
-  const selectPayment = (method) => {
-    setPickedPayment(method);
-    if (method === "click-to-pay") {
-      window.location.href = "https://www.paypal.com/checkout";
-    }
-  };
- 
-  const applyCoupon = (e) => {
-    setCoupons(e.target.value);
-  };
- 
-  const updateInput = (e) => {
-    const { name, value } = e.target;
-    setForm({
-      ...form,
-      [name]: value
-    });
-  };
- 
-  const updateCardNumber = (e) => {
-    const { value } = e.target;
- 
-    if (/[^0-9\s]/.test(value)) return;
-    setForm({
-      ...form,
-      cardNumber: value
-    });
-  };
- 
-  const submitForm = (e) => {
-    e.preventDefault();
-    console.log("Form data submitted:", form);
-  };
- 
-  const submitBillingForm = (e) => {
-    e.preventDefault();
-    console.log("Billing form data submitted:", form);
-  };
- 
-  const submitCardForm = (e) => {
-    e.preventDefault();
-    console.log("Card form data submitted:", form);
-  };
- 
+
+const Checkout = () => {
+  const input =
+    "w-full px-3 py-2 bg-transparent border-b-2 border-[#1A1A22] text-[#1A1A22]  text-sm outline-none mb-3";
+  const label = "text-[#1A1A22] font-bold text-sm mb-1 block";
+  const [selectedPayment, setSelectedPayment] = useState("MasterCard");
+
   return (
-    <div className="min-h-screen bg-[#0d1b2a] text-white flex flex-col items-center p-4  font-sans">
-      <header className="flex flex-col sm:flex-row justify-between w-full max-w-6xl items-center mb-8">
-        <div className="flex items-center space-x-3"></div>
-      </header>
- 
-      <div className="flex flex-col sm:flex-row w-full max-w-6xl gap-6 sm:gap-8">
-        {/* Checkout Form */}
-        <div className="flex-1 bg-gray-800 p-4 sm:p-6 rounded-lg shadow-lg font-sans">
-          <h2 className="text-4xl font-bold text-[#f6a302] border-b-2 border-[#f6a302] mb-6 font-sans">
-            Payment Details
-          </h2>
- 
-          {/* Payment Options */}
-          <div className="mb-8 font-sans">
-            <h3 className="text-2xl font-semibold text-white mb-4 font-sans">Choose Payment Method</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 font-sans">
-              {[{
-                label: "GameVault Gift Card",
-                method: "gift-card",
-                imgSrc: "/logo.svg",
-              }, {
-                label: "GameVault Points",
-                method: "points",
-                imgSrc: "/logo.svg",
-              }, {
-                label: "Credit or Debit Card",
-                method: "credit-card",
-                imgSrc: "/card1.png",
-              }, {
-                label: "Pay with Paypal",
-                method: "click-to-pay",
-                imgSrc: "/Paypal.png",
-              }].map((option) => (
-                <label
-                  key={option.method}
-                  className={`flex items-center space-x-4 bg-[#0d1b2a] p-4 rounded-lg hover:bg-gray-600 cursor-pointer border-2 border-transparent ${pickedPayment === option.method ? 'border-[#f6a302]' : ''} font-sans`}
-                  onClick={() => selectPayment(option.method)}
-                >
-                  <input
-                    type="radio"
-                    name="payment-method"
-                    className="accent-[#f6a302] hidden"
-                    checked={pickedPayment === option.method}
-                    readOnly
-                  />
-                  <div className="flex items-center space-x-3 font-sans">
-                    <img
-                      src={option.imgSrc}
-                      alt={option.label}
-                      className="w-12 h-12 rounded"
-                    />
-                    <span className="text-white font-medium text-lg font-sans">{option.label}</span>
-                  </div>
-                  <span
-                    className={`inline-block w-4 h-4 rounded-full ${pickedPayment === option.method ? 'bg-[#f6a302]' : 'bg-gray-500'}`}></span>
-                </label>
-              ))}
-            </div>
-          </div>
- 
-          {/* Gift Card and Points */}
-          {pickedPayment === "gift-card" && (
-            <div className="mt-6 bg-[#0d1b2a] p-4 rounded-lg shadow-md font-sans">
-              <h4 className="text-2xl font-bold text-[#f6a302] mb-4 border-b-2 border-[#f6a302] font-sans">Gift Card Details</h4>
-              <p className="text-gray-100 mb-4 font-sans">Please enter your GameVault Gift Card code below to apply it to your purchase.</p>
-              <input
-                type="text"
-                placeholder="Enter Gift Card Code"
-                className="w-full p-3 bg-transparent text-white rounded-lg border-b-2 border-[#f6a302] text-lg font-bold font-sans"
-                required
-                aria-label="Gift Card Code"
-              />
-              <button className="mt-2 py-2 px-4 bg-[#f6a302] text-black font-semibold text-lg rounded hover:bg-[#fa9a00ef] focus:outline-none focus:ring-2 focus:ring-[#f6a302] focus:ring-opacity-50 font-sans">
-                Apply Gift Card
+    <div className=" min-h-screen pt-10 pb-10 bg-[#1A1A22] text-white flex flex-col justify-center items-center">
+      
+      <div
+        className="w-[80%] flex flex-col md:flex-col lg:flex-row xl:flex-row 
+justify-center md:justify-between lg:justify-between xl:justify-between
+      "
+      >
+        <div className="flex flex-col sm:items-center  sm:w-full md:w-[80%] lg:w-[45%] xl:w-[45%]">
+          {/* Order Summary */}
+          <div className="bg-[#F0ECEC] shadow-lg  rounded-3xl   mb-4 w-full">
+            <h2 className="p-4 text-2xl font-black text-black text-center">
+              ORDER SUMMARY
+            </h2>
+            <div className="w-full h-[10px] bg-[#1A1A22]"></div>
+            <div className="p-4 rounded-tl-lg border-gray-300 flex items-center justify-between">
+              <div className="flex items-center">
+                <lable className="pr-1 font-black text-black text-center">
+                  X1
+                </lable>
+                <img
+                  src="/back3.jpg"
+                  alt="Game Vault Action"
+                  className="w-16 h-16 rounded-lg mr-4"
+                />
+                <div className="">
+                  <p className="text-black font-semibold">Game Vault Action</p>
+                  <p className="text-sm text-gray-600">Price: £1,399.99</p>
+                </div>
+              </div>
+              <button className="bg-red-600 text-white px-3 py-1 rounded">
+                DELETE
               </button>
             </div>
-          )}
- 
-          {pickedPayment === "points" && (
-            <div className="mt-6 bg-[#0d1b2a] p-4 rounded-lg shadow-md font-sans">
-              <h4 className="text-2xl font-bold text-[#f6a302] mb-4 border-b-2 border-[#f6a302] font-sans">Points Details</h4>
-              <p className="text-white mb-4 font-sans">You have <strong>0</strong> GameVault Points available for use.</p>
-            </div>
-          )}
- 
-          {/* Credit Card Section */}
-          {pickedPayment === "credit-card" && (
-            <div className="mt-6 bg-[#0d1b2a] p-6 rounded-lg shadow-md font-sans">
-              <h4 className="text-2xl font-bold text-[#f6a302] mb-4 border-b-2 border-[#f6a302] font-sans">Enter Card Details</h4>
-              <form className="grid grid-cols-1 gap-4 font-sans" onSubmit={submitCardForm}>
-                <input
-                  type="text"
-                  name="cardHolderName"
-                  placeholder="Cardholder Name"
-                  className="w-full p-3 bg-transparent text-white rounded-lg border-b-2 border-[#f6a302] text-lg font-bold font-sans"
-                  value={form.cardHolderName}
-                  onChange={updateInput}
-                  required
-                  aria-label="Cardholder Name"
+
+            <div className="w-full h-[10px] bg-[#1A1A22]"></div>
+            <div className="p-4 rounded-tl-lg border-gray-300 flex items-center justify-between">
+              <div className="flex items-center">
+                <lable className="pr-1 font-black text-black text-center">
+                  X1
+                </lable>
+                <img
+                  src="/back3.jpg"
+                  alt="Game Vault Action"
+                  className="w-16 h-16 rounded-lg mr-4"
                 />
-                <input
-                  type="text"
-                  name="cardNumber"
-                  placeholder="Card Number"
-                  className="w-full p-3 bg-transparent text-white rounded-lg border-b-2 border-[#f6a302] text-lg font-bold font-sans"
-                  value={form.cardNumber}
-                  maxLength="16"
-                  onChange={updateCardNumber}
-                  required
-                  aria-label="Card Number"
-                />
-                <div className="grid grid-cols-2 gap-4 font-sans">
-                  <input
-                    type="text"
-                    name="expiryDate"
-                    placeholder="Expiry Date (MM/YY)"
-                    className="w-full p-3 bg-transparent text-white rounded-lg border-b-2 border-[#f6a302] text-lg font-bold font-sans"
-                    value={form.expiryDate}
-                    onChange={updateInput}
-                    maxLength="5"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="cvv"
-                    placeholder="CVV"
-                    className="w-full p-3 bg-transparent text-white rounded-lg border-b-2 border-[#f6a302] text-lg font-bold font-sans"
-                    value={form.cvv}
-                    onChange={updateInput}
-                    maxLength="3"
-                    required
-                  />
+                <div className="">
+                  <p className="text-black font-semibold">Game Vault Action</p>
+                  <p className="text-sm text-gray-600">Price: £1,399.99</p>
                 </div>
-                <button type="submit" className="mt-4 py-2 px-4 bg-[#f6a302] text-black font-semibold text-lg rounded hover:bg-[#fa9a00ef] focus:outline-none focus:ring-2 focus:ring-[#f6a302] focus:ring-opacity-50 font-sans">
-                  Submit Payment
-                </button>
-              </form>
+              </div>
+              <button className="bg-red-600 text-white px-3 py-1 rounded">
+                DELETE
+              </button>
             </div>
-          )}
-        </div>
- 
-        {/* Billing Form */}
-        <div className="flex-1 bg-gray-800 p-6 rounded-lg shadow-lg font-sans">
-          <h2 className="text-4xl font-bold text-[#f6a302] border-b-2 border-[#f6a302] mb-6 font-sans">Billing Details</h2>
-          <form className="grid grid-cols-1 gap-4 font-sans" onSubmit={submitBillingForm}>
-            <input
-              type="text"
-              name="name"
-              placeholder="Full Name"
-              className="w-full p-3 bg-transparent text-white rounded-lg border-b-2 border-[#f6a302] text-lg font-bold font-sans"
-              value={form.name}
-              onChange={updateInput}
-              required
-              aria-label="Full Name"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              className="w-full p-3 bg-transparent text-white rounded-lg border-b-2 border-[#f6a302] text-lg font-bold font-sans"
-              value={form.email}
-              onChange={updateInput}
-              required
-              aria-label="Email Address"
-            />
-            <input
-              type="text"
-              name="address"
-              placeholder="Street Address"
-              className="w-full p-3 bg-transparent text-white rounded-lg border-b-2 border-[#f6a302] text-lg font-bold font-sans"
-              value={form.address}
-              onChange={updateInput}
-              required
-              aria-label="Street Address"
-            />
-            <input
-              type="text"
-              name="city"
-              placeholder="City"
-              className="w-full p-3 bg-transparent text-white rounded-lg border-b-2 border-[#f6a302] text-lg font-bold font-sans"
-              value={form.city}
-              onChange={updateInput}
-              required
-              aria-label="City"
-            />
-            <input
-              type="text"
-              name="country"
-              placeholder="Country"
-              className="w-full p-3 bg-transparent text-white rounded-lg border-b-2 border-[#f6a302] text-lg font-bold font-sans"
-              value={form.country}
-              onChange={updateInput}
-              required
-              aria-label="Country"
-            />
-            <input
-              type="text"
-              name="postalCode"
-              placeholder="Postal Code"
-              className="w-full p-3 bg-transparent text-white rounded-lg border-b-2 border-[#f6a302] text-lg font-bold font-sans"
-              value={form.postalCode}
-              onChange={updateInput}
-              required
-              aria-label="Postal Code"
-            />
-            <button type="submit" className="mt-4 py-2 px-4 bg-[#f6a302] text-black font-semibold text-lg rounded hover:bg-[#fa9a00ef] focus:outline-none focus:ring-2 focus:ring-[#f6a302] focus:ring-opacity-50 font-sans">
-              Submit Billing Information
-            </button>
-          </form>
-        </div>
-      </div>
- 
-      {/* Order Summary */}
-<div className="mt-6 bg-gray-800 p-6 rounded-lg shadow-lg font-sans w-full max-w-6xl">
-  <h2 className="text-4xl font-bold text-[#f6a302] border-b-2 border-[#f6a302] mb-6 font-sans">Order Summary</h2>
-  <div className="font-sans">
-    <h3 className="text-2xl font-semibold text-white mb-4 font-sans">Items</h3>
-    <ul>
-      {orderSummary.items.map((item, index) => (
-        <li key={index} className="flex justify-between mb-4 font-sans">
-          <div className="flex items-center space-x-4">
-            <img src={item.imgSrc} alt={item.name} className="w-16 h-16 object-cover rounded" />
-            <div className="flex flex-col">
-              <span className="text-white font-semibold">{item.name}</span>
-              <span className="text-gray-400">Quantity: {item.quantity}</span>
+
+            <div className="w-full h-[10px] bg-[#1A1A22]"></div>
+            <div className="p-4 rounded-tl-lg border-gray-300 flex items-center justify-between">
+              <div className="flex items-center">
+                <lable className="pr-1 font-black text-black text-center">
+                  X1
+                </lable>
+                <img
+                  src="/back3.jpg"
+                  alt="Game Vault Action"
+                  className="w-16 h-16 rounded-lg mr-4"
+                />
+                <div className="">
+                  <p className="text-black font-semibold">Game Vault Action</p>
+                  <p className="text-sm text-gray-600">Price: £1,399.99</p>
+                </div>
+              </div>
+              <button className="bg-red-600 text-white px-3 py-1 rounded">
+                DELETE
+              </button>
+            </div>
+            
+            <div className="w-full h-[10px] bg-[#1A1A22]"></div>
+            <div className="p-4 flex items-center justify-between">
+              <div className="flex items-center">
+                <lable className="pr-1 font-black text-black text-center">
+                  X2
+                </lable>
+                <img
+                  src="/back3.jpg"
+                  alt="Fortnite"
+                  className="w-16 h-16 rounded-lg mr-4"
+                />
+                <div>
+                  <p className="text-black font-semibold">Fortnite</p>
+                  <p className="text-sm text-gray-600">Price: £720.99</p>
+                </div>
+              </div>
+              <button className="bg-red-600 text-white px-3 py-1 rounded">
+                DELETE
+              </button>
+            </div>
+            <div className="w-full h-[10px] bg-[#1A1A22]"></div>
+
+            <div className="p-4 rounded-bl-lg">
+              <p className="p-4 text-lg font-black text-black">
+                TOTAL: £2841.97
+              </p>
             </div>
           </div>
-          <span className="text-white font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
-        </li>
-      ))}
-    </ul>
-    <div className="flex justify-between mt-4 font-sans">
-      <h4 className="text-lg font-semibold text-white">Total</h4>
-      <span className="text-lg font-semibold text-[#f6a302]">${orderSummary.total.toFixed(2)}</span>
-    </div>
-  </div>
-</div>
- 
+        </div>
+
+        {/* Payment Methods & Payment Methods */}
+        {/* style={{"align-items":"flex-end"}} */}
+        <div className="flex flex-col sm:items-center md:items-center sm:justify-center sm:w-full md:w-[80%] lg:w-[45%] xl:w-[45%]">
+          {/* Billing Address */}
+          <div className="bg-[#F0ECEC] shadow-lg  rounded-3xl w-full pb-4 ">
+            <h2 className="p-4 text-2xl font-black text-black text-center">
+              BILLING ADDRESS
+            </h2>
+            <div className="w-full h-[10px] bg-[#1A1A22]"></div>
+            <div className="p-4">
+              <div className="flex-1">
+                <label className={label}>Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="e.g. John Mario"
+                  className={input}
+                />
+              </div>
+              <div className="flex-1">
+                <label className={label}>E-Mail</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="e.g. example@ex.com"
+                  className={input}
+                />
+              </div>
+              <div className="flex-1">
+                <label className={label}>Country</label>
+                <select className={input}>
+                  <option>Country</option>
+                  <option>Qatar</option>
+                  <option>UK</option>
+                </select>
+              </div>
+              <div className="flex-1">
+                <label className={label}>Post Code</label>
+                <input
+                  type="text"
+                  name="poastcode"
+                  placeholder="e.g. B0xxxx"
+                  className={input}
+                />
+              </div>
+              <div className="flex-1">
+                <label className={label}>Address</label>
+                <input
+                  type="text"
+                  name="address"
+                  placeholder="e.g. 27 xxxst. xxxxx"
+                  className={input}
+                />
+              </div>
+              <div className="flex-1">
+                <label className={label}>Phone</label>
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder="e.g. +00000"
+                  className={input}
+                />
+              </div>
+            </div>
+            <div className="mb-10 w-full h-[10px] bg-[#1A1A22]"></div>
+          </div>
+
+          {/* Payment Methods */}
+          <div className="bg-[#F0ECEC] shadow-lg  rounded-3xl  mt-4 w-full">
+            <h2 className="p-4 text-2xl font-black text-black text-center">
+              PAYMENT METHODS
+            </h2>
+            <div className="w-full h-[10px] bg-[#1A1A22]"></div>
+            <div className="pt-4 pb-4  rounded-tl-lg border-gray-300 flex-col flex items-center justify-between">
+              <div className="flex items-center justify-between w-[90%]">
+                <img
+                  src="/visa_1.png"
+                  alt="Game Vault Action"
+                  className="w-1/4 rounded-lg"
+                />
+                <span className="font-black text-sm text-[#1A1A22]">
+                  VisaCard
+                </span>
+                <button
+                  className={`font-black flex w-[100px] items-center justify-between p-3 rounded ${
+                    selectedPayment === "Visa"
+                      ? "bg-white text-[#1A1A22]"
+                      : "bg-[#1A1A22] text-white"
+                  }`}
+                  onClick={() => setSelectedPayment("Visa")}
+                >
+                  <span className="font-black  text-sm ml-1 w-full">
+                    {selectedPayment === "Visa" ? "Selected" : "pay"}
+                  </span>
+                </button>
+              </div>
+
+              {selectedPayment === "Visa" && (
+                <div className="flex flex-col max-w-[90%] w-[90%]">
+                  <div className="flex justify-between">
+                    <div className="w-[60%]">
+                      {/* <label className={label}>E-Mail</label> */}
+                      <input
+                        type="text"
+                        name="cardNumber"
+                        placeholder="insert the 16 digit numbers"
+                        className={input}
+                      />
+                    </div>
+                    <div className="w-[35%]">
+                      {/* <label className={label}>E-Mail</label> */}
+                      <input
+                        type="text"
+                        name="expairyDate"
+                        placeholder="Expiry Date"
+                        className={input}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="w-[35%]">
+                        {/* <label className={label}>E-Mail</label> */}
+                        <input
+                          type="text"
+                          name="cvv"
+                          placeholder="cvv"
+                          className={input}
+                        />
+                      </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="w-full h-[10px] bg-[#1A1A22]"></div>
+            <div className="pt-4 pb-4 rounded-tl-lg border-gray-300 flex-col flex items-center justify-between">
+            <div className="flex items-center justify-between w-[90%]">
+              <img
+                src="/aMastercard.png"
+                alt="Game Vault Action"
+                className="w-1/4 rounded-lg"
+              />
+              <span className="font-black text-sm text-[#1A1A22]">
+                MasterCard
+              </span>
+              <button
+                className={` font-black flex  w-[100px] items-center justify-between p-3 rounded ${
+                  selectedPayment === "MasterCard"
+                    ? "bg-white text-[#1A1A22]"
+                    : "bg-[#1A1A22] text-white"
+                }`}
+                onClick={() => setSelectedPayment("MasterCard")}
+              >
+                <span className="font-black text-sm ml-1 w-full">
+                  {selectedPayment === "MasterCard" ? "Selected" : "pay"}
+                </span>
+              </button>
+              </div>
+              {selectedPayment === "MasterCard" && (
+                <div className="flex flex-col max-w-[90%] w-[90%]">
+                  <div className="flex justify-between">
+                    <div className="w-[60%]">
+                      {/* <label className={label}>E-Mail</label> */}
+                      <input
+                        type="text"
+                        name="cardNumber"
+                        placeholder="insert the 16 digit numbers"
+                        className={input}
+                      />
+                    </div>
+                    <div className="w-[35%]">
+                      {/* <label className={label}>E-Mail</label> */}
+                      <input
+                        type="text"
+                        name="expairyDate"
+                        placeholder="Expiry Date"
+                        className={input}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="w-[35%]">
+                        {/* <label className={label}>E-Mail</label> */}
+                        <input
+                          type="text"
+                          name="cvv"
+                          placeholder="cvv"
+                          className={input}
+                        />
+                      </div>
+                  </div>
+                </div>
+              )}
+
+            </div>
+
+            <div className="w-full h-[10px] bg-[#1A1A22]"></div>
+            <div className="pb-4 pt-4 rounded-tl-lg border-gray-300 flex items-center justify-between justify-around">
+              <div className="flex items-center justify-between w-[90%]">
+                <img
+                  src="/Paypal-Logo2.png"
+                  alt="Game Vault Action"
+                  className="w-1/4 rounded-lg"
+                />
+                <span className="font-black text-sm text-[#1A1A22]">PayPal</span>
+                <button
+                  className={` font-black flex  w-[100px] items-center justify-between p-3 rounded ${
+                    selectedPayment === "PayPal"
+                      ? "bg-white text-[#1A1A22]"
+                      : "bg-[#1A1A22] text-white"
+                  }`}
+                  onClick={() => setSelectedPayment("PayPal")}
+                >
+                  <span className="font-black text-sm ml-1 w-full">
+                    {selectedPayment === "PayPal" ? "Selected" : "pay"}
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+
+      {/* Submit Button */}
+      <button className="mt-6 px-6 py-2 bg-[#F0ECEC] text-[#1A1A22] font-black rounded-3xl border-gray-600 border transition-colors duration-300 hover:bg-[#fff]">
+        SUBMIT
+      </button>
     </div>
   );
-}
- 
-export default CheckoutPage;
+};
+
+export default Checkout;
