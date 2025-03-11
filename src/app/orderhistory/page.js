@@ -10,19 +10,18 @@ export default function OrderHistory() {
     setExpandedOrder(id === expandedOrder ? null : id);
   };
 
-
   const orders = [
-    { id: "304010", date: "March 11, 2025", game: "Game Vault Action", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg", details: "Delivered via DHL, tracking number: XYZ123" },
     { id: "304011", date: "April 12, 2025", game: "Game Vault RPG", price: "£219.00", payment: "Paid with GameVault Points", status: "Delivered", category: "RPG", image: "/game-vault-rpg.jpg", details: "Delivered via FedEx, tracking number: ABC456" },
+    { id: "304010", date: "March 11, 2025", game: "Game Vault Action", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg", details: "Delivered via DHL, tracking number: XYZ123" },
     { id: "304012", date: "March 20, 2025", game: "Game Vault Action", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg", details: "Delivered via DHL, tracking number: XYZ123" },
-    { id: "304013", date: "October 16, 2024", game: "Game Vault RPG", price: "£219.00", payment: "Paid with GameVault Points", status: "Delivered", category: "RPG", image: "/game-vault-rpg.jpg", details: "Delivered via FedEx, tracking number: ABC456" },
-    { id: "304014", date: "July 26, 2024", game: "Game Vault Adventure", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Adventure", image: "/game-vault-adventure.jpg", details: "Delivered via UPS, tracking number: DEF789" },
+    { id: "304020", date: "February 18, 2025", game: "Game Vault Racing", price: "£249.00", payment: "Paid with GameVault Points", status: "Pending", category: "Racing", image: "/game-vault-racing.jpg", details: "Order received, awaiting processing" },
     { id: "304015", date: "January 29, 2024", game: "Game Vault Sports", price: "£500.00", payment: "Paid with GameVault Points", status: "Processed", category: "Sports", image: "/game-vault-sports.jpg", details: "Order processed, preparing for dispatch" },
-    { id: "304016", date: "July 10, 2024", game: "Game Vault Adventure", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Adventure", image: "/game-vault-adventure.jpg", details: "Delivered via UPS, tracking number: DEF789" },
     { id: "304017", date: "January 13, 2024", game: "Game Vault Sports", price: "£500.00", payment: "Paid with GameVault Points", status: "Pending", category: "Sports", image: "/game-vault-sports.jpg", details: "Order received, awaiting processing" },
-    { id: "304018", date: "November 22, 2024", game: "Game Vault Fantasy", price: "£299.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Fantasy", image: "/game-vault-fantasy.jpg", details: "Delivered via DHL, tracking number: GHI123" },
     { id: "304019", date: "December 5, 2024", game: "Game Vault Puzzle", price: "£159.00", payment: "Paid with GameVault Points", status: "Processed", category: "Puzzle", image: "/game-vault-puzzle.jpg", details: "Order processed, preparing for dispatch" },
-    { id: "304020", date: "February 18, 2025", game: "Game Vault Racing", price: "£249.00", payment: "Paid with GameVault Points", status: "Pending", category: "Racing", image: "/game-vault-racing.jpg", details: "Order received, awaiting processing" }
+    { id: "304018", date: "November 22, 2024", game: "Game Vault Fantasy", price: "£299.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Fantasy", image: "/game-vault-fantasy.jpg", details: "Delivered via DHL, tracking number: GHI123" },
+    { id: "304013", date: "October 16, 2024", game: "Game Vault RPG", price: "£219.00", payment: "Paid with GameVault Points", status: "Delivered", category: "RPG", image: "/game-vault-rpg.jpg", details: "Delivered via FedEx, tracking number: ABC456" },
+    { id: "304016", date: "July 10, 2024", game: "Game Vault Adventure", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Adventure", image: "/game-vault-adventure.jpg", details: "Delivered via UPS, tracking number: DEF789" },
+    { id: "304014", date: "July 26, 2024", game: "Game Vault Adventure", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Adventure", image: "/game-vault-adventure.jpg", details: "Delivered via UPS, tracking number: DEF789" }
 ];
 
   // Filtering logic
