@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 const About = () => {
@@ -50,100 +49,177 @@ const About = () => {
 
   return (
     <div className="min-h-screen w-full bg-[#1a1a22] overflow-x-hidden">
-      <div className="shadow-xl">
-      <div className="min-h-screen flex flex-col md:flex-row">
-        <div className="hidden md:block md:w-2/5 shadow-xl">
-          <div className="h-full w-full">
-            <video
-              src="/images/Aboutgame.mp4"
-              className="rounded-2xl object-cover w-full h-[170vh]"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-          </div>
-        </div>
-        <div className="w-full md:w-3/5 flex flex-col md:pl-20 text-white pt-10 ml-10">
-          <div className="h-auto flex flex-col items-center px-10 max-w-3xl pt-20">
-            <h1 className="text-4xl sm:text-7xl font-bold text-center">
-              About Us
-            </h1>
-
-            <div className="bg-[#f6a302] h-2 rounded-full w-2/6 mt-2 transition-all hover:w-4/6"></div>
-          </div>
-          <div className="h-auto flex flex-col px-10 max-w-3xl space-y-8 pt-10 text-left">
-            <div className="space-y-4">
-              <h2 className="text-xl sm:text-4xl font-bold ">Who Are We?</h2>
-
-              <p className=" text-base pb-10">
-                Welcome to GameVault, the ultimate destination for games
-                worldwide! Established in 2024, GameVault is on a mission to
-                make gaming accessible, exciting, and convenient for everyone.
-                Our platform is built for players who are passionate about
-                quality games and appreciate a streamlined, easy shopping
-                experience. Whether you're a casual gamer, a hardcore
-                competitor, or a collector, GameVault has something for you.
-                At GameVault, we pride ourselves on delivering quality games, an 
-                effortless shopping experience, and a community for gamers
-                 who share the same passion for discovery and adventure. 
-                No matter what you play or how you play, GameVault is here to support your journey.
+      {/* Hero Section with Gradient Overlay */}
+      <div className="relative bg-gradient-to-b from-[#1a1a22] via-[#1a1a22]/95 to-[#1a1a22]">
+        <div className="absolute inset-0 bg-[url('/images/hero-pattern.png')] opacity-10"></div>
+        <div className="max-w-[1400px] mx-auto px-8 py-32 relative">
+          <div className="flex flex-col md:flex-row items-center gap-20">
+            <div className="w-full md:w-1/2 flex flex-col justify-center">
+              <h1 className="text-6xl sm:text-7xl font-bold text-white mb-8 leading-tight">
+                Redefining Your
+                <span className="text-[#f6a302] block mt-2">Gaming Experience</span>
+              </h1>
+              <div className="h-1 w-32 bg-[#f6a302] mb-10"></div>
+              <p className="text-gray-300 text-xl leading-relaxed mb-12 max-w-xl">
+                Welcome to GameVault, where passion meets play. Established in 2024, 
+                we're on a mission to make gaming accessible, exciting, and convenient 
+                for everyone who shares our love for digital adventures.
               </p>
-            </div>
-            <hr />
-
-            <div className="space-y-4 mt-12">
-              <h2 className="text-xl sm:text-4xl font-bold">Our Policy</h2>
-              <p className="text-base">
-              At GameVault, gaming is more than just entertainment—it's a gateway to new worlds. We don't just sell games; we open the door to epic quests, cozy simulations, and mind-bending challenges. Our curated collection has something for every gamer, whether you're 
-              diving into multiplayer battles, embarking on solo adventures, or adding to your cherished collection.
-              Our vault is packed with
-                adventures for every kind of gamer. Dive in and discover your
-                next obsession!
-              </p>
-            </div>
-
-            <div className="flex flex-row items-center justify-centre gap-10 mt-16">
-              <Link href="/register">
-                <button className="text-black w-fit px-6 py-3 my-2 flex items-center rounded-md hover:scale-105 duration-500 bg-[#F0ECEC] hover:bg-[#fa9a00ef]">
-                  Sign up now
-                </button>
-              </Link>
               <Link href="/shop">
-                <button className="text-black w-fit px-6 py-3 my-2 flex items-center rounded-md hover:scale-105 duration-500 bg-[#F0ECEC] hover:bg-[#fa9a00ef] ">
-                  Shop now
+                <button className="bg-[#F0ECEC] text-[#1A1A22] px-10 py-5 rounded-xl font-semibold 
+                  transition-all duration-300 hover:bg-[#F0ECEC]/90 hover:scale-105 
+                  shadow-lg hover:shadow-2xl hover:shadow-black/30 text-lg">
+                  Explore Our Collection
                 </button>
               </Link>
+            </div>
+            <div className="w-full md:w-1/2">
+              <div className="relative">
+                <div className="absolute -inset-4 bg-[#f6a302]/20 rounded-xl blur-xl"></div>
+                <div className="relative rounded-xl overflow-hidden shadow-2xl">
+                  <video
+                    src="/images/about2ndvid.mp4"
+                    className="w-full aspect-[16/9]"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Mission Section */}
+      <div className="bg-[#1a1a22] py-24">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="flex flex-col md:flex-row-reverse items-center gap-20">
+            <div className="w-full md:w-1/2 space-y-8">
+              <div className="inline-block">
+                <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">Who We Are</h2>
+                <div className="h-1 w-24 bg-[#f6a302] transition-all duration-300 hover:w-32"></div>
+              </div>
+              <p className="text-gray-300 text-xl leading-relaxed">
+                Our platform is crafted for players who are passionate about quality gaming 
+                experiences. Whether you're a casual gamer, a hardcore competitor, or a 
+                collector, GameVault is your trusted destination.
+              </p>
+              <ul className="space-y-6 text-gray-300 text-lg">
+                <li className="flex items-center gap-4">
+                  <div className="h-3 w-3 bg-[#f6a302] rounded-full"></div>
+                  <span>Curated Selection of Premium Games</span>
+                </li>
+                <li className="flex items-center gap-4">
+                  <div className="h-3 w-3 bg-[#f6a302] rounded-full"></div>
+                  <span>Secure and Seamless Shopping Experience</span>
+                </li>
+                <li className="flex items-center gap-4">
+                  <div className="h-3 w-3 bg-[#f6a302] rounded-full"></div>
+                  <span>24/7 Customer Support</span>
+                </li>
+              </ul>
+            </div>
+            <div className="w-full md:w-1/2">
+              <div className="relative rounded-xl overflow-hidden shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                <video
+                  src="/images/Aboutgame.mp4"
+                  className="w-full h-auto"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="min-h-screen w-full bg-[#1a1a22] pt-24">
-        <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-full text-white">
-          <div className="h-auto flex flex-col items-center">
-            <p className="text-4xl font-bold text-white">
-              Keep Up to Date
+      {/* Policy Section */}
+      <div className="bg-[#1a1a22]/50 py-32">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">Our Commitment</h2>
+            <div className="h-1 w-24 bg-[#f6a302] mx-auto mb-10 transition-all duration-300 hover:w-48"></div>
+            <p className="text-gray-300 text-xl max-w-2xl mx-auto">
+              At GameVault, gaming is more than entertainment—it's a gateway to new worlds.
             </p>
-            <div className="bg-[#f6a302] h-2 rounded-full w-2/6 mt-2 transition-all hover:w-4/6"></div>
           </div>
-          <p className="py-6 text-lg text-center">
-            Stay connected and informed by following us on social media for the latest news,
-            offers, and gaming updates.
-          </p>
+          
+          <div className="grid md:grid-cols-3 gap-10 mb-20">
+            {[
+              {
+                title: "Quality Assurance",
+                description: "Every game in our collection is thoroughly vetted for quality and authenticity."
+              },
+              {
+                title: "Secure Shopping",
+                description: "Your security is our priority, with state-of-the-art protection for all transactions."
+              },
+              {
+                title: "Community First",
+                description: "We're building more than a store - we're creating a community of passionate gamers."
+              }
+            ].map((card, index) => (
+              <div key={index} className="bg-[#F0ECEC] p-10 rounded-xl 
+                transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-black/30
+                transform hover:-translate-y-1">
+                <h3 className="text-2xl font-bold text-[#1A1A22] mb-6">{card.title}</h3>
+                <p className="text-[#1A1A22]/80 text-lg">{card.description}</p>
+              </div>
+            ))}
+          </div>
 
-          <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-8 text-center py-8 px-12 sm:px-0">
+          <div className="flex flex-wrap justify-center gap-8">
+            <Link href="/register">
+              <button className="bg-[#F0ECEC] text-[#1A1A22] px-10 py-5 rounded-xl font-semibold 
+                transition-all duration-300 hover:bg-[#F0ECEC]/90 hover:scale-105 
+                shadow-lg hover:shadow-2xl hover:shadow-black/30 text-lg">
+                Join GameVault
+              </button>
+            </Link>
+            <Link href="/shop">
+              <button className="bg-[#F0ECEC] text-[#1A1A22] px-10 py-5 rounded-xl font-semibold 
+                transition-all duration-300 hover:bg-[#F0ECEC]/90 hover:scale-105 
+                shadow-lg hover:shadow-2xl hover:shadow-black/30 text-lg">
+                Browse Games
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Social Media */}
+      <div className="bg-[#1a1a22] py-32">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">Connect With Us</h2>
+            <div className="h-1 w-24 bg-[#f6a302] mx-auto mb-10 transition-all duration-300 hover:w-48"></div>
+            <p className="text-gray-300 text-xl max-w-2xl mx-auto">
+              Join our growing community across social media for the latest updates, 
+              exclusive offers, and gaming content.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8">
             {techs.map(({ id, src, title, style, link }) => (
               <a 
                 href={link}
                 key={id}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`shadow-md hover:scale-105 duration-500 py-2 rounded-lg ${style}`}
+                className="group bg-[#F0ECEC] p-8 rounded-xl 
+                  transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-black/30
+                  transform hover:-translate-y-1"
               >
-                <img src={src} alt="" className="w-20 mx-auto" />
-                <p className="mt-4 text-white">{title}</p>
+                <img src={src} alt="" className="w-12 h-12 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
+                <p className="text-[#1A1A22] text-sm text-center group-hover:text-[#1A1A22]/80 transition-colors duration-300">
+                  {title}
+                </p>
               </a>
             ))}
           </div>
