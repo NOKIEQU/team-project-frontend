@@ -54,7 +54,7 @@ function Footer() {
                 </div>
                 {/* Logo and Copyright */}
                 <div className="mt-2 pt-2 border-t border-gray-700 text-center text-sm text-muted-foreground"> {/* Reduced spacing */}
-                    <p>&copy; 2025 Gamevault. All rights reserved.</p>
+                    <p>&copy; 2025 GameVault. All rights reserved.</p>
                 </div>
             </div>
         </footer>
