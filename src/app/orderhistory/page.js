@@ -107,7 +107,7 @@ export default function OrderHistory() {
       {/* Past Orders with Increased Margin */}
       <div className="mt-12">
         <h2 className="text-2xl font-semibold mb-4">Past Orders</h2>
-        <div className="space-y-6">
+        <div className="space-y-6"> 
           {pastOrders.map((order) => (
             <div key={order.id} className="bg-gray-800 p-4 rounded-lg shadow-lg">
               <div className="flex justify-between items-center">
