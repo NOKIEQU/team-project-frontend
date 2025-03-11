@@ -198,6 +198,7 @@ function RegisterPage() {
                     </p>
                 </form>
             </div>
+
         </div>
     );
 }
