@@ -40,7 +40,7 @@ const CardForAccount = () => {
 
     ]
     return(
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full"> 
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full p-4"> 
       { cardList.map((card,id)=>{
         const [isOpen, setIsOpen] = useState(false);
         
@@ -68,15 +68,16 @@ const CardForAccount = () => {
           <div key={id} className="contents">
             {card.link ? (
               <Link href={card.link}
-                className="flex flex-col cursor-pointer bg-[#1b263b]  text-white justify-center py-6 px-10 text-center 
-                items-center mt-12 rounded-tl-[35px] rounded-br-[35px] shadow-2xl
+                className="flex flex-col cursor-pointer bg-[#D9D9D9]  text-black justify-center py-6 px-10 text-center 
+                items-center mt-12 rounded-[35px] shadow-2xl
                 transition-transform duration-300 hover:-translate-y-2 hover:shadow-3xl"
               >
                 {CardContent}
               </Link>
             ) : (
-              <div className="flex flex-col cursor-pointer bg-[#1b263b] justify-center text-white py-6 px-10 text-center 
-                items-center mt-12 rounded-tl-[35px] rounded-br-[35px] shadow-2xl
+              <div className="flex flex-col cursor-pointer bg-[#D9D9D9] justify-center text-black
+ py-6 px-10 text-center 
+                items-center mt-12 rounded-[35px] shadow-2xl
                 transition-transform duration-300 hover:-translate-y-2 hover:shadow-3xl"
               >
                 {CardContent}
