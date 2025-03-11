@@ -7,9 +7,16 @@ const Checkout = () => {
     "w-full px-3 py-2 bg-transparent border-b-2 border-[#1A1A22] text-[#1A1A22]  text-sm outline-none mb-3";
   const label = "text-[#1A1A22] font-bold text-sm mb-1 block";
   const [selectedPayment, setSelectedPayment] = useState("MasterCard");
-
+  const [openToast, setOpenToast] = useState(false);
+  const handleSubmit = (e) => {
+    setOpenToast(true);
+  };
   return (
-    <div className=" min-h-screen pt-10 pb-10 bg-[#1A1A22] text-white flex flex-col justify-center items-center">
+    <div style={{"font-family": "Oswald"}}>
+
+      {openToast === false && (
+      
+      <div className=" min-h-screen pt-10 pb-10 bg-[#1A1A22] text-white flex flex-col justify-center items-center">
       
       <div
         className="w-[80%] flex flex-col md:flex-col lg:flex-row xl:flex-row 
@@ -84,6 +91,18 @@ justify-center md:justify-between lg:justify-between xl:justify-between
                 DELETE
               </button>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+            
             
             <div className="w-full h-[10px] bg-[#1A1A22]"></div>
             <div className="p-4 flex items-center justify-between">
@@ -117,7 +136,7 @@ justify-center md:justify-between lg:justify-between xl:justify-between
 
         {/* Payment Methods & Payment Methods */}
         {/* style={{"align-items":"flex-end"}} */}
-        <div className="flex flex-col sm:items-center md:items-center sm:justify-center sm:w-full md:w-[80%] lg:w-[45%] xl:w-[45%]">
+        <div className="flex flex-col sm:items-center md:items-center  sm:w-full md:w-[80%] lg:w-[45%] xl:w-[45%]">
           {/* Billing Address */}
           <div className="bg-[#F0ECEC] shadow-lg  rounded-3xl w-full pb-4 ">
             <h2 className="p-4 text-2xl font-black text-black text-center">
@@ -338,12 +357,79 @@ justify-center md:justify-between lg:justify-between xl:justify-between
           
         </div>
       </div>
-
+      
       {/* Submit Button */}
-      <button className="mt-6 px-6 py-2 bg-[#F0ECEC] text-[#1A1A22] font-black rounded-3xl border-gray-600 border transition-colors duration-300 hover:bg-[#fff]">
+      <button onClick={handleSubmit} className="mt-6 px-10 py-4 bg-[#F0ECEC] text-[#1A1A22] font-black rounded-3xl border-gray-600 border transition-colors duration-300 hover:bg-[#fff]">
         SUBMIT
       </button>
+      </div>
+      )}
+
+
+
+      {openToast === true && (
+      <div className="flex flex-col font-sans bg-[#1A1A22] h-full">
+        <div className="flex flex-1 flex-col lg:flex-row">
+            <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
+              <img
+                  src="/back.webp"
+                  alt="Left Side"
+                  className="absolute top-0 left-0 h-full w-full z-10 object-cover"
+                  style={{
+                      clipPath: "polygon(0 0, 100% 0, 80% 100%, 0% 100%)",
+                  }}
+              />
+                <div className="absolute top-0 right-0 w-full h-full z-20">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 100 100"
+                        preserveAspectRatio="none"
+                        className="w-full h-full"
+                    >
+                        <polygon
+                            points="77.5,0 85,0 65,100 55,100"
+                            fill="rgba(255, 255, 255, 0.4)"
+                        />
+                        <polygon
+                            points="90,0 100,0 80,100 70,100"
+                            fill="rgba(255, 255, 255, 0.8)"
+                        />
+                    </svg>
+                </div>
+            
+      </div>
+      <div className="flex-1 flex flex-col items-center p-6 sm:p-4 lg:p-8 sm:w-full lg:w-1/2 min-h-screen justify-center">
+                        <div className="flex">
+                            
+                            <label style={{"font-family": "Oswald"}} className="text-white text-3xl font-black">
+                            Your payment has been made successfully!
+                            </label>
+                        </div>
+                        <a href="/" className="mt-6 px-6 py-2 bg-[#D9D9D9] text-[#1A1A22] font-black rounded-3xl border-gray-600 border transition-colors duration-300 hover:bg-[#fff]">
+                                HOME
+                            </a>
+      </div>
     </div>
+      </div>
+      )}
+<svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 100 100"
+                            preserveAspectRatio="none"
+                            
+                            style={{"position": "absolute","top": "135vh","width":"54%","height":"50%"}}
+                        >
+                            <polygon
+                                points="0,10 0,0 100,75 100,85"
+                                fill="rgba(255, 255, 255, 0.4)"
+                            />
+                            <polygon
+                                points="0,15 0,25 100,100 100,90"
+                                fill="rgba(255, 255, 255, 0.8)"
+                            />
+      </svg>
+    </div>
+    
   );
 };
 
