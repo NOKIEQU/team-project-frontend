@@ -1,20 +1,19 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useUser } from "../../context/user-context";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import Navbar from "../components/navbar";
-import Image from "next/image";
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useUser } from '../../context/user-context';
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const { register } = useUser();
   const router = useRouter();
 
@@ -28,34 +27,33 @@ function RegisterPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setError('');
 
     // Basic validation
     if (formData.password.length < 6) {
-      setError("Password must be at least 6 characters long");
+      setError('Password must be at least 6 characters long');
       return;
     }
 
     try {
       await register(formData);
-      router.push("/");
+      router.push('/');
     } catch (error) {
-      setError("Registration failed. Please try again.");
+      setError('Registration failed. Please try again.');
     }
   };
 
   const input =
-    "w-full px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none";
-  const label = "text-white font-bold text-sm mb-1 block";
+    'w-full px-3 py-2 bg-transparent border-b-2 border-[#f6a302] text-white text-sm outline-none';
+  const label = 'text-white font-bold text-sm mb-1 block';
   const button =
-    "w-full py-3 bg-[#f6a302] text-[#323232] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#e08c00] mb-5";
-  const form = "flex-2 flex flex-col items-center p-8 ml-5";
+    'w-full py-3 bg-[#f6a302] text-[#323232] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#e08c00] mb-5';
+  const form = 'flex-2 flex flex-col items-center p-8 ml-5';
 
   return (
     <div className="flex flex-col font-sans bg-[#0d1b2a] min-h-screen">
-
       {/* Main Content */}
-      <div className="flex flex-1 min-h-screen"> 
+      <div className="flex flex-1 min-h-screen">
         {/* Left Side of Page */}
         <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
           <img
@@ -63,7 +61,7 @@ function RegisterPage() {
             alt="Left Side"
             className="absolute top-0 left-0 h-full w-full z-10 object-cover"
             style={{
-              clipPath: "polygon(0 0, 100% 0, 80% 100%, 0% 100%)",
+              clipPath: 'polygon(0 0, 100% 0, 80% 100%, 0% 100%)',
             }}
           />
           <div className="absolute top-0 right-0 w-full h-full z-20">
@@ -229,7 +227,7 @@ function RegisterPage() {
               </label>
             </div>
 
-            <Link href={'/Questionnaire'}>
+            <Link href={'/questionnaire'}>
               <button
                 type="submit"
                 className={`${button} flex items-center justify-center space-x-2`}
@@ -254,7 +252,7 @@ function RegisterPage() {
 
             {/* Footer */}
             <p className="mt-4 text-white text-center text-sm">
-              Already have an account?{" "}
+              Already have an account?{' '}
               <a href="/login" className="text-[#f6a302] font-bold underline">
                 Login
               </a>
