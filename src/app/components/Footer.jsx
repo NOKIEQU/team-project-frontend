@@ -1,24 +1,28 @@
 import Link from 'next/link'
 
-
 import { Facebook, Twitter, Instagram, Youtube, Twitch, Linkedin } from 'lucide-react'
 
 function Footer() {
     return (
         <footer className="bg-gray-950 text-white">
 
+
             <div className="container mx-auto px-4 py-4"> {/* Adjusted padding */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Quick Links (Far Left) */}
                     <div className="flex flex-col items-start">
-      <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
+
+                        <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
+
                         <ul className="space-y-2">
                             <li><Link href="/" className="text-sm hover:underline">Home</Link></li>
                             <li><Link href="/shop" className="text-sm hover:underline">Shop</Link></li>
                             <li><Link href="/about" className="text-sm hover:underline">About Us</Link></li>
                             <li><Link href="/contact-us" className="text-sm hover:underline">Contact</Link></li>
                         </ul>
+
                     </div>
+
                     {/* Customer Service (Middle) - Adjusted left alignment */}
                     <div className="flex flex-col items-start ml-4">
                         <h3 className="font-semibold text-lg mb-4">Customer Service</h3>
