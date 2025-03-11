@@ -112,7 +112,7 @@ function ShopPage() {
 
   return (
     <div className="bg-[#1A1A22] min-h-screen text-white font-sans">
-      <Navbar />
+  
       <div className="flex flex-row w-full  gap-x-6 px-6 lg:px-24 py-10">
         {/* Sidebar */}
         <aside className="hidden lg:block bg-[#1A1A22] p-6 border border-white rounded-lg w-1/4">
