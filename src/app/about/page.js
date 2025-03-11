@@ -49,7 +49,7 @@ const About = () => {
 
   return (
     <div className="min-h-screen w-full bg-[#1a1a22] overflow-x-hidden">
-      {/* Hero Section with Gradient Overlay */}
+      
       <div className="relative bg-gradient-to-b from-[#1a1a22] via-[#1a1a22]/95 to-[#1a1a22]">
         <div className="absolute inset-0 bg-[url('/images/hero-pattern.png')] opacity-10"></div>
         <div className="max-w-[1400px] mx-auto px-8 py-32 relative">
@@ -93,7 +93,7 @@ const About = () => {
         </div>
       </div>
 
-      {/* Mission Section */}
+      {/* Who wea are */}
       <div className="bg-[#1a1a22] py-24">
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex flex-col md:flex-row-reverse items-center gap-20">
@@ -139,7 +139,7 @@ const About = () => {
         </div>
       </div>
 
-      {/* Policy Section */}
+      {/* our Policy */}
       <div className="bg-[#1a1a22]/50 py-32">
         <div className="max-w-7xl mx-auto px-8">
           <div className="text-center mb-20">
