@@ -17,7 +17,7 @@ function AdminPage() {
     <div className="flex min-h-screen">
       
       {/* Sidebar */}
-      <div className="bg-[#111827] text-white w-64 flex flex-col p-5 space-y-4">
+      <div className="bg-gray-950 text-white w-64 flex flex-col p-5 space-y-4">
         <nav className="space-y-2">
           <SidebarLink
             href="/admin"
@@ -93,7 +93,7 @@ function AdminPage() {
 // Stats Card Component
 function StatCard({ title, value, icon }) {
   return (
-    <div className="bg-[#1F2937] text-white p-4 rounded-xl shadow-md flex items-center space-x-4">
+    <div className="bg-gray-950 text-white p-4 rounded-xl shadow-md flex items-center space-x-4">
       {/* Icon */}
       <div className="bg-white bg-opacity-20 p-4 rounded-full text-3xl text-white">
         {icon}
