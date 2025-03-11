@@ -9,7 +9,7 @@ function AdminGenres() {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <div className="bg-[#111827] text-white w-64 flex flex-col p-5 space-y-4">
+      <div className="bg-gray-950 text-white w-64 flex flex-col p-5 space-y-4">
         <nav className="space-y-2">
           <SidebarLink href="/admin" icon={<LayoutDashboard />} text="Dashboard" />
           <SidebarLink href="/AdminGames" icon={<Gamepad2 />} text="Games" />
@@ -28,7 +28,7 @@ function AdminGenres() {
 <h1 className="text-gray-900 text-3xl font-bold">Genres</h1>
 
 {/* Search Bar Section */}
-<div className="bg-[#1F2937] text-white w-full p-4 mt-4 rounded-lg flex items-center space-x-2">
+<div className="bg-gray-950 text-white w-full p-4 mt-4 rounded-lg flex items-center space-x-2">
   <SearchCode className="text-xl" />
   <input
     type="text"

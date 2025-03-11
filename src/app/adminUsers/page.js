@@ -11,7 +11,7 @@ function AdminUsers() {
 
     
       {/* Sidebar */}
-      <div className="bg-[#111827] text-white w-64 flex flex-col p-5 space-y-4">
+      <div className="bg-gray-950 text-white w-64 flex flex-col p-5 space-y-4">
         <nav className="space-y-2">
           <SidebarLink
             href="/admin"
@@ -30,7 +30,7 @@ function AdminUsers() {
 
 
           {/* Search Bar Section */}
-          <div className="bg-[#1F2937] text-white w-full p-4 mt-4 rounded-lg flex items-center space-x-2">
+          <div className="bg-gray-950 text-white w-full p-4 mt-4 rounded-lg flex items-center space-x-2">
           <SearchCode className="text-xl" />
           <input
             type="text"
