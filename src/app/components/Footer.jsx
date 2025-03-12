@@ -8,7 +8,7 @@ function Footer() {
 
 
             <div className="container mx-auto px-4 py-4"> {/* Adjusted padding */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Quick Links (Far Left) */}
                     <div className="flex flex-col items-start">
 
@@ -22,6 +22,21 @@ function Footer() {
                         </ul>
 
                     </div>
+                       {/* Legal */}
+                    <div className="flex flex-col items-start">
+
+                        <h3 className="font-semibold text-lg mb-4">Legal</h3>
+
+                        <ul className="space-y-2">
+                            <li><Link href="/ReturnsPolicy" className="text-sm hover:underline">Returns Policy</Link></li>
+                            <li><Link href="/T&C" className="text-sm hover:underline">Terms & Conditions</Link></li>
+                           
+                        </ul>
+
+                    </div>
+
+
+                    
 
                     {/* Customer Service (Middle) - Adjusted left alignment */}
                     <div className="flex flex-col items-start ml-4">
@@ -29,11 +44,14 @@ function Footer() {
                         <ul className="space-y-2">
 
                             <li className="text-sm"><a href="tel:+442345678900" className="hover:underline">+44 2345 678900</a></li>
+                            <li className="text-sm"><a href="tel:+442345678900" className="hover:underline">GameVault@gmail.con</a></li>
                             <li><Link href="/privacy-policy" className="text-sm hover:underline">Privacy Policy</Link></li>
                             <li><Link href="/faq" className="text-sm hover:underline">FAQ</Link></li>
 
                         </ul>
                     </div>
+
+                    
                     {/* Connect With Us (Aligned with Quick Links and Customer Service) */}
                     <div className="flex flex-col items-start mt-2">
                         <h3 className="font-semibold text-lg mb-4">Connect With Us</h3>
