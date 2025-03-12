@@ -45,7 +45,9 @@ function Footer() {
 
                             <li className="text-sm"><a href="tel:+442345678900" className="hover:underline">+44 2345 678900</a></li>
                             <li className="text-sm"><a href="tel:+442345678900" className="hover:underline">GameVault@gmail.con</a></li>
-                            <li><Link href="/PrivacyPolicy" className="text-sm hover:underline">Privacy Policy</Link></li>
+
+                            <li><Link href="/privacy-policy" className="text-sm hover:underline">Privacy Policy</Link></li>
+
                             <li><Link href="/faq" className="text-sm hover:underline">FAQ</Link></li>
 
                         </ul>
