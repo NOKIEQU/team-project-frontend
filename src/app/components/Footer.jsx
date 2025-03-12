@@ -4,7 +4,9 @@ import { Facebook, Twitter, Instagram, Youtube, Twitch, Linkedin } from 'lucide-
 
 function Footer() {
     return (
-       <footer className="bg-gray-950 text-white">
+
+          <footer className="bg-gray-950 text-white">
+
 
 
             <div className="container mx-auto px-4 py-4"> {/* Adjusted padding */}
@@ -29,7 +31,9 @@ function Footer() {
 
                         <ul className="space-y-2">
                             <li><Link href="/ReturnsPolicy" className="text-sm hover:underline">Returns Policy</Link></li>
-                            <li><Link href="/T&C" className="text-sm hover:underline">Terms & Conditions</Link></li>
+
+                            <li><Link href="/shop" className="text-sm hover:underline">Terms & Conditions</Link></li>
+
                            
                         </ul>
 
