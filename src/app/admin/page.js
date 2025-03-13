@@ -101,14 +101,10 @@ function StatCard({ title, value, icon }) {
 
       {/* Content Section */}
       <div>
-        <h3 className="text-3xl font-semibold">{value}</h3>
+        <h3 className="text-2xl font-semibold">{value}</h3>
         <p className="text-sm font-bold text-white">{title}</p>
       </div>
-
-      {/* Optional Sub Stats */}
-      <div className="ml-6 text-sm text-white">
-        <p>Sub Stat 1: 1,245</p>
-      </div>
+     
     </div>
   );
 }
