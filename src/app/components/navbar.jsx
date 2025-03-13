@@ -7,7 +7,6 @@ import Image from "next/image";
 
 export default function Navbar() {
   const { user, logout } = useUser();
-  console.log(user);
 
   if (user) {
     return (
