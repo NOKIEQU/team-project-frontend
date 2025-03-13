@@ -5,13 +5,20 @@ import React, { createContext, useContext, useState, useEffect } from 'react'
 const CartContext = createContext(undefined)
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem('cart')
-    return savedCart ? JSON.parse(savedCart) : []
-  })
+  const [cart, setCart] = useState([])
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart))
+    // Check if window is available (ensures it's a client-side operation)
+    if (typeof window !== 'undefined') {
+      const savedCart = localStorage.getItem('cart')
+      setCart(savedCart ? JSON.parse(savedCart) : [])
+    }
+  }, [])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cart', JSON.stringify(cart))
+    }
   }, [cart])
 
   const addToCart = (item) => {
