@@ -30,8 +30,8 @@ function ShopPage() {
     const fetchData = async () => {
       try {
         const [genresResponse, productsResponse] = await Promise.all([
-          fetch("http://51.77.110.253:3001/api/genres"),
-          fetch("http://51.77.110.253:3001/api/products"),
+          fetch("http://localhost:3001/api/genres"),
+          fetch("http://localhost:3001/api/products"),
         ]);
 
         if (!genresResponse.ok || !productsResponse.ok) {
