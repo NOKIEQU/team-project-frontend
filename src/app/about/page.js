@@ -49,7 +49,7 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full bg-[#0d1b2a] overflow-x-hidden">
+    <div className="min-h-screen w-full bg-[#1a1a22] overflow-x-hidden">
       <div className="shadow-xl">
       <div className="min-h-screen flex flex-col md:flex-row">
         <div className="hidden md:block md:w-2/5 shadow-xl">
@@ -105,12 +105,12 @@ const About = () => {
 
             <div className="flex flex-row items-center justify-centre gap-10 mt-16">
               <Link href="/register">
-                <button className="text-white w-fit px-6 py-3 my-2 flex items-center rounded-md hover:scale-105 duration-500 bg-[#FFA800] hover:bg-[#fa9a00ef]">
+                <button className="text-black w-fit px-6 py-3 my-2 flex items-center rounded-md hover:scale-105 duration-500 bg-[#F0ECEC] hover:bg-[#fa9a00ef]">
                   Sign up now
                 </button>
               </Link>
               <Link href="/shop">
-                <button className="text-white w-fit px-6 py-3 my-2 flex items-center rounded-md hover:scale-105 duration-500 bg-[#FFA800] hover:bg-[#fa9a00ef] ">
+                <button className="text-black w-fit px-6 py-3 my-2 flex items-center rounded-md hover:scale-105 duration-500 bg-[#F0ECEC] hover:bg-[#fa9a00ef] ">
                   Shop now
                 </button>
               </Link>
@@ -120,7 +120,7 @@ const About = () => {
       </div>
       </div>
 
-      <div className="min-h-screen w-full bg-[#0d1b2a] pt-24">
+      <div className="min-h-screen w-full bg-[#1a1a22] pt-24">
         <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-full text-white">
           <div className="h-auto flex flex-col items-center">
             <p className="text-4xl font-bold text-white">
