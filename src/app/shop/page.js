@@ -7,6 +7,7 @@ import { useCart } from "../../context/cart-context";
 import { useSearchParams } from "next/navigation";
 import Navbar from "../components/navbar";
 
+
 function ShopPage() {
   const [games, setGames] = useState([]);
   const [genres, setGenres] = useState([]);
@@ -30,8 +31,8 @@ function ShopPage() {
     const fetchData = async () => {
       try {
         const [genresResponse, productsResponse] = await Promise.all([
-          fetch("http://localhost:3001/api/genres"),
-          fetch("http://localhost:3001/api/products"),
+          fetch("http://51.77.110.253:3001/api/genres"),
+          fetch("http://51.77.110.253:3001/api/products"),
         ]);
 
         if (!genresResponse.ok || !productsResponse.ok) {
@@ -110,18 +111,20 @@ function ShopPage() {
       </div>
     );
 
+
+
   return (
     <div className="bg-[#1A1A22] min-h-screen text-white font-sans">
-  
+      
       <div className="flex flex-row w-full  gap-x-6 px-6 lg:px-24 py-10">
         {/* Sidebar */}
-        <aside className="hidden lg:block bg-[#1A1A22] p-6 border border-white rounded-lg w-1/4">
-          <h2 className="text-2xl font-bold text-[white] mb-6">Filters</h2>
+        <aside className="hidden lg:block bg-[white] p-6 border border-white rounded-lg w-1/4">
+          <h2 className="text-2xl font-bold text-[black] mb-6">Filters</h2>
           {/* Genres */}
           <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-3">Genres</h3>
+            <h3 className="text-lg text-black font-semibold mb-3">Genres</h3>
             {genres.map((genre) => (
-              <div key={genre.id} className="flex items-center mb-2 ">
+              <div key={genre.id} className="flex items-center text-black mb-2 ">
                 <input
                   type="checkbox"
                   id={genre.id}
@@ -136,26 +139,26 @@ function ShopPage() {
             ))}
           </div>
           {/* Price Range */}
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-3">Price Range</h3>
+          <div className="mb-6 ">
+            <h3 className="text-lg text-black font-semibold mb-3">Price Range</h3>
             <input
               type="number"
               value={minPriceRange}
               onChange={(e) => handlePriceChange(setMinPriceRange, e.target.value)}
-              className="w-full p-2 mb-2 rounded-lg bg-[#1A1A22]  border border-[#444] focus:border-[white] text-white placeholder-gray-400"
+              className="w-full p-2 mb-2 rounded-lg bg-[white]  border border-[#444] focus:border-[white] text-black placeholder-gray-400"
               placeholder="Min Price"
             />
             <input
               type="number"
               value={maxPriceRange}
               onChange={(e) => handlePriceChange(setMaxPriceRange, e.target.value)}
-              className="w-full p-2 rounded-lg bg-[#1A1A22]  border border-[#444] focus:border-[white] text-white placeholder-gray-400"
+              className="w-full p-2 rounded-lg bg-[white]  border border-[#444] focus:border-[white] text-black placeholder-gray-400"
               placeholder="Max Price"
             />
           </div>
           {/* Rating */}
           <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-3">Minimum Rating</h3>
+            <h3 className="text-lg font-semibold  text-black mb-3">Minimum Rating</h3>
             <input
               type="range"
               min={0}
@@ -163,13 +166,13 @@ function ShopPage() {
               step={0.1}
               value={minRating}
               onChange={(e) => setMinRating(e.target.value)}
-              className="w-full"
+              className="w-full "
             />
-            <p className="text-sm mt-2">{minRating} / 5</p>
+            <p className="text-sm text-black mt-2">{minRating} / 5</p>
           </div>
           {/* Release Year */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">Release Year</h3>
+            <h3 className="text-lg font-semibold text-black mb-3">Release Year</h3>
             {Array.from(new Set(games.map((game) => game.releaseYear))).sort().map((year) => (
               <div key={year} className="flex items-center mb-2">
                 <input
@@ -183,7 +186,7 @@ function ShopPage() {
                   }
                   className="mr-3 cursor-pointer"
                 />
-                <label htmlFor={`year-${year}`} className="cursor-pointer">
+                <label htmlFor={`year-${year}`} className="cursor-pointer text-black">
                   {year}
                 </label>
               </div>
@@ -197,49 +200,49 @@ function ShopPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full p-3 rounded-lg bg-[#1A1A22] border border-[#444] text-white focus:border-[white] focus:ring-0 placeholder-gray-400"
+              className="w-full p-3 rounded-lg  border border-[#444] text-black focus:border-[white] focus:ring-0 placeholder-gray-400"
               placeholder="Search games..."
-              
+
             />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-6">
-            {paginatedGames.map((game) => { 
+            {paginatedGames.map((game) => {
               const cartItem = cart.find((item) => item.id === game.id);
               return (
                 <div
                   key={game.id}
-                  className="bg-[#1A1A22] p-6 rounded-lg border border-white shadow-md transform transition-all duration-300 hover:scale-105"
+                  className="bg-[white] p-6 rounded-lg border border-[black] shadow-md transform transition-all duration-300 hover:scale-105"
                 >
-                  
+
                   <Link href={`/shop/${game.id}`}>
                     <img
                       src={game.imageUrls[0] || "/placeholder.svg"}
                       alt={game.title}
-                      className="w-full h-40 object-cover rounded-md mb-4"
+                      className="w-full h-40 object-cover border border-black rounded-md mb-4"
                     />
-                    <h3 className="text-lg font-bold">{game.title}</h3>
-                    <p className="text-sm text-gray-400 mb-2">{game.genre.name}</p>
-                    <p className="text-sm text-gray-400 mb-2">{game.releaseYear}</p>
-                    <p className="text-sm text-gray-400 mb-2">Tags - Placeholder </p> 
-                    
+                    <h3 className="text-lg text-black font-bold">{game.title}</h3>
+                    <p className="text-sm text-black mb-2">{game.genre.name}</p>
+                    <p className="text-sm text-black mb-2">{game.releaseYear}</p>
+                    <p className="text-sm text-black mb-2">Tags - Placeholder </p>
+
                     <div className="text-yellow-500 flex items-center">
                       {Array.from({ length: 5 }).map((_, i) => (
                         <span key={i}>{i < Math.floor(game.rating) ? "★" : "☆"}</span>
                       ))}
                       <span className="text-sm ml-2">({game.rating})</span>
-                    
+
                     </div>
-                    
+
                   </Link>
                   <div className="mt-4 flex justify-between items-center">
-                    
+
                     <span className="text-lg font-bold text-[white]">
                       ${parseFloat(game.price).toFixed(2)}
                     </span>
-                    
+
                     {cartItem ? (
                       <div className="flex items-center">
-                        
+
                         <button
                           className="bg-[white] p-2 rounded-lg text-black"
                           onClick={() => updateQuantity(game.id, cartItem.quantity - 1)}
@@ -250,14 +253,14 @@ function ShopPage() {
                         <button
                           className="bg-[white] p-2 rounded-lg text-black"
                           onClick={() => updateQuantity(game.id, cartItem.quantity + 1)}
-                          
+
                         >
                           <Plus size={16} />
                         </button>
                       </div>
                     ) : (
                       <button
-                        className="bg-[white] text-black px-4 py-2 rounded-lg font-bold hover:scale-105"
+                        className="bg-[black] text-black px-4 py-2 text-white rounded-lg font-bold hover:scale-105"
                         onClick={(e) => {
                           e.preventDefault();
                           handleAddToCart(game);
@@ -265,10 +268,10 @@ function ShopPage() {
                       >
                         Add to Cart
                       </button>
-                      
+
                     )}
                   </div>
-                  
+
                 </div>
               );
             })}
@@ -276,7 +279,7 @@ function ShopPage() {
           {totalPages > 1 && (
             <div className="flex justify-center mt-8 space-x-4">
               <button
-                className="bg-[white] text-black px-4 py-2 rounded-lg"
+                className="bg-[white] text-black px-4 py-2 rounded-lg hover:scale-110"
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
               >
@@ -286,38 +289,46 @@ function ShopPage() {
                 Page {currentPage} of {totalPages}
               </span>
               <button
-                className="bg-[white] text-black px-4 py-2 rounded-lg"
+                className="bg-[white] text-black px-4 py-2 rounded-lg hover:scale-110"
                 onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
               >
                 <ChevronRight />
               </button>
             </div>
-            
+
           )}
         </main>
-        
+
       </div>
-     
+      {/* Coming Soon  */}
       <section className="w-full py-16 text-center">
-      <h1 className="text-[35px] font-sans font-bold sm:text-center mt-[30] text-white mb-20">COMING SOON</h1>
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-20 bg-[#1A1A22] px-6">
-        <div className="bg-[#1A1A22] border border-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition w-full h-80 flex flex-col justify-center">
-          <h3 className="text-2xl text-white mb-2">New Collection</h3>
-          <h4 className="text-lg text-white mb-2">7/3/25</h4>
+        <h1 className="text-[35px] font-sans font-bold sm:text-center mt-[30] text-white mb-20">
+          COMING SOON
+        </h1>
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-20 bg-[#1A1A22] px-6">
+          {[
+            { date: "7/3/25", image: "/questionmark.png" },
+            { date: "8/3/25", image: "/questionmark.png" },
+            { date: "9/3/25", image: "/questionmark.png" },
+          ].map((item, index) => (
+            <div
+              key={index}
+              className="bg-[#1A1A22] border border-white p-8 rounded-2xl shadow-lg hover:scale-105 hover:shadow-2xl transition w-full h-80 flex flex-col items-center justify-center"
+            >
+              <img
+                src={item.image}
+                alt="Coming Soon"
+                className="w-55 h-40 object-cover mb-4"
+              />
+              <h3 className="text-2xl text-white mb-2">Reveal</h3>
+              <h4 className="text-lg text-white mb-2">{item.date}</h4>
+            </div>
+          ))}
         </div>
-        <div className="bg-[#1A1A22] border border-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition w-full h-80 flex flex-col justify-center">
-          <h3 className="text-2xl text-white mb-2">Reveal</h3>
-          <h4 className="text-lg text-white mb-2">7/3/25</h4>
-        </div>
-        <div className="bg-[#1A1A22] border border-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition w-full h-80 flex flex-col justify-center">
-          <h3 className="text-2xl text-white mb-2">New Collection</h3>
-          <h4 className="text-lg text-white mb-2">7/3/25</h4>
-        </div>
-      </div>
-    </section>
-      
-      
+      </section>
+
+
     </div>
   );
 }
