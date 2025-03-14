@@ -3,7 +3,7 @@ import { useState } from "react";
 import { MailOpen } from 'lucide-react';
 import * as Toast from "@radix-ui/react-toast";
 
-function RegisterPage() {
+function ContactUsPage() {
     const input =
         "w-full px-3 py-2 bg-transparent border-b-2 border-[#F0ECEC] text-white text-sm outline-none";
     const label = "text-white font-bold text-sm mb-1 block";
@@ -64,7 +64,7 @@ function RegisterPage() {
     };
 
     return (
-        <div style={{"font-family": "Oswald"}} className="flex flex-col font-sans bg-[#1A1A22] h-full">
+        <div style={{"font-family": "Oswald"}} className="flex flex-col font-sans bg-[#1A1A22] h-full min-h-screen">
             <div className="flex flex-1 flex-col lg:flex-row">
                 {/* Left Side */}
                 <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
@@ -207,4 +207,4 @@ function RegisterPage() {
     );
 }
 
-export default RegisterPage;
+export default ContactUsPage;
