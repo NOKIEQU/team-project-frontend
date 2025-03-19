@@ -1,4 +1,4 @@
-export default function QuestionnaireLayout({ children }) {
+export default function questionnaire2Layout({ children }) {
     return (
         <div className="min-h-screen overflow-hidden">
             {children}
@@ -6,3 +6,4 @@ export default function QuestionnaireLayout({ children }) {
         </div>
     )
 }
+

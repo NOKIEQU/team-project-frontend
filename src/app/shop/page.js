@@ -7,6 +7,7 @@ import { useCart } from "../../context/cart-context";
 import { useSearchParams } from "next/navigation";
 import Navbar from "../components/navbar";
 
+
 function ShopPage() {
   const [games, setGames] = useState([]);
   const [genres, setGenres] = useState([]);
@@ -244,12 +245,14 @@ function ShopPage() {
     }
   };
 
+
   const handleMouseEnter = () => setIsPaused(true);
   const handleMouseLeave = () => setIsPaused(false);
   const handleBudgetMouseEnter = () => setIsBudgetPaused(true);
   const handleBudgetMouseLeave = () => setIsBudgetPaused(false);
   const handleRecentMouseEnter = () => setIsRecentPaused(true);
   const handleRecentMouseLeave = () => setIsRecentPaused(false);
+
 
   if (loading)
     return (
@@ -264,12 +267,16 @@ function ShopPage() {
       </div>
     );
 
+
+
   return (
+
     <div className="bg-[#1A1A22] min-h-screen text-white font-sans animate-fade-in">
       <div className="flex flex-row w-full gap-x-6 px-6 lg:px-24 py-10">
         {/* Sidebar */}
         <aside className="hidden lg:block bg-[white] p-6 border border-white rounded-lg w-1/4">
           <h2 className="text-2xl font-bold text-[black] mb-6">Filters</h2>
+
           <div className="mb-6">
             <h3 className="text-lg text-black font-semibold mb-3">Genres</h3>
             {genres.map((genre) => (
@@ -287,25 +294,32 @@ function ShopPage() {
               </div>
             ))}
           </div>
+
           <div className="mb-6 ">
             <h3 className="text-lg text-black font-semibold mb-3">Price Range</h3>
             <input
               type="number"
               value={minPriceRange}
               onChange={(e) => handlePriceChange(setMinPriceRange, e.target.value)}
+
               className="w-full p-2 mb-2 rounded-lg bg-[white] border border-[#444] focus:border-[white] text-black placeholder-gray-400"
+
               placeholder="Min Price"
             />
             <input
               type="number"
               value={maxPriceRange}
               onChange={(e) => handlePriceChange(setMaxPriceRange, e.target.value)}
+
               className="w-full p-2 rounded-lg bg-[white] border border-[#444] focus:border-[white] text-black placeholder-gray-400"
+
               placeholder="Max Price"
             />
           </div>
           <div className="mb-6">
+
             <h3 className="text-lg font-semibold text-black mb-3">Minimum Rating</h3>
+
             <input
               type="range"
               min={0}
@@ -313,7 +327,7 @@ function ShopPage() {
               step={0.1}
               value={minRating}
               onChange={(e) => setMinRating(e.target.value)}
-              className="w-full"
+              className="w-full "
             />
             <p className="text-sm text-black mt-2">{minRating} / 5</p>
           </div>
@@ -340,17 +354,20 @@ function ShopPage() {
           </div>
         </aside>
         {/* Main Content */}
-        <main className="w-full lg:w-3/4">
+        <main className="w-full lg:w-3/4 ">
           <div className="mb-6">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+
               className="w-full p-3 rounded-lg border border-[#444] text-black focus:border-[white] focus:ring-0 placeholder-gray-400"
+
               placeholder="Search games..."
+
             />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-6">
             {paginatedGames.map((game) => {
               const cartItem = cart.find((item) => item.id === game.id);
               return (
@@ -358,7 +375,9 @@ function ShopPage() {
                   key={game.id}
                   className="bg-[white] p-6 rounded-lg border border-[black] shadow-md transform transition-all duration-300 hover:scale-105"
                 >
+
                   <Link href={`/shop/${game.id}`} onClick={() => handleGameView(game)}>
+
                     <img
                       src={game.imageUrls[0] || "/placeholder.svg"}
                       alt={game.title}
@@ -368,19 +387,25 @@ function ShopPage() {
                     <p className="text-sm text-black mb-2">{game.genre.name}</p>
                     <p className="text-sm text-black mb-2">{game.releaseYear}</p>
                     <p className="text-sm text-black mb-2">Tags - Placeholder </p>
+
                     <div className="text-yellow-500 flex items-center">
                       {Array.from({ length: 5 }).map((_, i) => (
                         <span key={i}>{i < Math.floor(game.rating) ? "★" : "☆"}</span>
                       ))}
                       <span className="text-sm ml-2">({game.rating})</span>
+
                     </div>
+
                   </Link>
                   <div className="mt-4 flex justify-between items-center">
+
                     <span className="text-lg font-bold text-[white]">
                       ${parseFloat(game.price).toFixed(2)}
                     </span>
+
                     {cartItem ? (
                       <div className="flex items-center">
+
                         <button
                           className="bg-[white] p-2 rounded-lg text-black"
                           onClick={() => updateQuantity(game.id, cartItem.quantity - 1)}
@@ -391,6 +416,7 @@ function ShopPage() {
                         <button
                           className="bg-[white] p-2 rounded-lg text-black"
                           onClick={() => updateQuantity(game.id, cartItem.quantity + 1)}
+
                         >
                           <Plus size={16} />
                         </button>
@@ -405,8 +431,10 @@ function ShopPage() {
                       >
                         Add to Cart
                       </button>
+
                     )}
                   </div>
+
                 </div>
               );
             })}
@@ -431,8 +459,10 @@ function ShopPage() {
                 <ChevronRight />
               </button>
             </div>
+
           )}
         </main>
+
       </div>
 
       {/* First Carousel: Featured Games */}
@@ -702,6 +732,7 @@ function ShopPage() {
 
       
       
+
     </div>
   );
 }

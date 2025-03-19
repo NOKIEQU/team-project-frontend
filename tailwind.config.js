@@ -6,7 +6,7 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
 
-  darkMode:'class',
+  darkMode: 'class',
 
   theme: {
     extend: {
@@ -19,13 +19,18 @@ module.exports = {
         "medium": '#293245',
         background: "hsl(var(--background))", // Define HSL-based custom colors
         foreground: "hsl(var(--foreground))",
-        
+
         primary: {
-         DEFAULT: "hsl(var(--primary))",
-        foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
+
+        // Custom Colors
+        "button-bg": "#F0ECEC", // Button background color
+        "background": "#1A1A22", // Background color
       },
     },
   },
+
   plugins: [],
 };
