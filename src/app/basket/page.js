@@ -2,30 +2,12 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Minus, Plus, Trash2 } from "lucide-react";
+import { useCart } from "../../context/cart-context";
 
 const BasketPage = () => {
-  const [cart, setCart] = useState([
-    { id: 1, title: "Game 1", price: 125.0, quantity: 1, img: "/images/backpack.jpg" },
-    { id: 2, title: "Game 2", price: 75.0, quantity: 1, img: "/images/wallet.jpg" },
-    { id: 3, title: "Game 3", price: 199.99, quantity: 1, img: "/images/headphones.jpg" },
-  ]);
+  const { cart, removeFromCart, updateQuantity, getCartTotal } = useCart()
 
   const deliveryCharge = 4.95;
-
-  const updateQuantity = (id, newQuantity) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, newQuantity) } : item
-      )
-    );
-  };
-
-  const removeFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
-  };
-
-  const getCartTotal = () =>
-    cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
     <div className="bg-[#1A1A22] min-h-screen p-10 text-[#F5F5F5]">

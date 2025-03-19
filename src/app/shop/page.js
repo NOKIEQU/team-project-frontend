@@ -170,6 +170,7 @@ function ShopPage() {
       title: game.title,
       price: parseFloat(game.price),
       quantity: 1,
+      img: game.imageUrls[0]
     });
   };
 

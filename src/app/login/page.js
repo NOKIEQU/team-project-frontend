@@ -53,7 +53,7 @@ export default function LoginPage() {
 
     const checkLogin = async (email, password) => {
         try {
-            const response = await fetch(`http://localhost:3001/api/users/login`, {
+            const response = await fetch(`http://51.77.110.253:3001/api/users/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

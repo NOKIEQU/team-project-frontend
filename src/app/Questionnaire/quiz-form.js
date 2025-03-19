@@ -56,7 +56,7 @@ export default function QuizForm() {
     async function fetchGenres() {
       try {
         setIsLoading(true);
-        const response = await fetch('http://localhost:3001/api/genres');
+        const response = await fetch('http://51.77.110.253:3001/api/genres');
 
         if (!response.ok) {
           throw new Error('Failed to fetch genres');
