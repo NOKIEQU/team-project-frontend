@@ -9,6 +9,7 @@ export function CartProvider({ children }) {
     const savedCart = localStorage.getItem('cart')
     return savedCart ? JSON.parse(savedCart) : []
   })
+  console.trace('initializing cart')
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart))

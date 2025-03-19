@@ -54,7 +54,7 @@ export default function Home() {
                   SEARCH NOW
                 </button>
               </Link>
-              <Link href="/Questionnaire">
+              <Link href="/questionnaire">
                 <button className="bg-[#F0ECEC] text-black font-bold py-3 px-6 rounded-md hover:bg-[#e89502] transition transform hover:scale-105">
                   TAKE QUIZ
                 </button>
