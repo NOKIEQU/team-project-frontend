@@ -24,6 +24,7 @@ export default function Home() {
   }, []);
 
   const button =
+
     'bg-gray-800 text-white flex items-center justify-center rounded-lg shadow-lg hover:shadow-2xl transition-transform hover:scale-110 w-full sm:w-80 h-auto p-8 mb-10 font-bold';
 
   return (
@@ -59,16 +60,19 @@ export default function Home() {
               learn, and grow. Dive into our curated collections, find new
               favorites, and connect with others who share your passion. The
               possibilities are endless, and the adventure starts right here!
+
             </p>
 
             <div className="flex flex-wrap lg:flex-nowrap gap-6">
               <Link href="/shop">
+
                 <button className="bg-[#f6a302] hover:bg-[#fa9a00ef] font-bold py-4 px-4 rounded-xl transition transform hover:scale-110">
                   SEARCH NOW
                 </button>
               </Link>
               <Link href="/questionnaire">
                 <button className="bg-[#f6a302] hover:bg-[#fa9a00ef] font-bold py-4 px-4 rounded-xl transition transform hover:scale-110">
+
                   TAKE QUIZ
                 </button>
               </Link>
@@ -129,68 +133,66 @@ export default function Home() {
         </div>
       </div>
 
-      {/* The third part of the page */}
-      <div className="flex flex-col w-full min-h-screen pt-36 items-center shadow-xl">
+            <div className="grid grid-cols-2 gap-6 mt-4">
+              <img src="league1.webp" className="w-full rounded-lg transition-transform hover:scale-105 shadow-lg" />
+              <img src="callofduty.jpg" className="w-full rounded-lg transition-transform hover:scale-105 shadow-lg" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+     {/* Why We Are the Best Section */}
+<div className="flex flex-col lg:flex-row w-full bg-[#1A1A22] py-16 px-8 lg:px-20 shadow-xl">
+  <div className="w-full lg:w-1/2 flex justify-center">
+    <img
+      src="fantasy.webp"
+      className="w-3/4 rounded-lg transition-transform hover:scale-105 shadow-lg"
+      alt="Fantasy"
+    />
+  </div>
+  <div className="w-full lg:w-1/2 mt-10 lg:mt-16 lg:pl-10 text-center lg:text-left">
+    <h1 className="text-4xl font-extrabold">WHY WE ARE THE BEST</h1>
+    <div className="bg-white h-2 rounded-full w-1/5 mt-3 mb-6 transition-all hover:w-3/5"></div>
+    <p className="text-lg leading-relaxed">
+      Explore why we are at the top. From curated collections to expert reviews, we bring you the best in gaming.
+    </p>
+    <Link
+      href="/about"
+      className="inline-block mt-6 bg-[#F0ECEC] text-black font-bold py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
+    >
+      Read More
+    </Link>
+  </div>
+</div>
+>>>>>>> dev
+
+
+      {/* Our Top Games Section */}
+      <div className="flex flex-col w-full min-h-screen pt-28 items-center shadow-xl">
         <h1 className="text-4xl lg:text-6xl font-bold">
-          Our <span className="text-[#f6a302]">TOP</span> games
+          Our <span className="text-[#f6a302]">TOP</span> Games
         </h1>
-        <br />
+        <div className="bg-[#F0ECEC] h-2 rounded-full w-1/3 lg:w-1/6 transition-all hover:w-2/6 mt-5"></div>
 
-        <div className="bg-[#f6a302] h-2 rounded-full w-1/3 lg:w-1/6 transition-all hover:w-2/6"></div>
-
-        <div className="flex flex-wrap justify-center gap-8 mt-10 w-full max-w-screen-lg pt-20 pb-32 font-bold">
-          <GameCard
-            image="/GameCards/mortalcombat.jpeg"
-            title="Mortal Combat"
-            price="£50"
-            description="An open-world adventure"
-          />
-          <GameCard
-            image="/GameCards/assasins.jpg"
-            title="Assasins Creed"
-            price="£45"
-            description="An open-world adventure"
-          />
-          <GameCard
-            image="/GameCards/EldenRing.jpg"
-            title="Elden Ring"
-            price="£60"
-            description="An open-world adventure"
-          />
-          <GameCard
-            image="/GameCards/halo.jpg"
-            title="Halo"
-            price="£30"
-            description="An open-world adventure"
-          />
-          <GameCard
-            image="/GameCards/lastofus.webp"
-            title="Last of Us"
-            price="£50"
-            description="An open-world adventure"
-          />
-          <GameCard
-            image="/GameCards/returnal.jpg"
-            title="Returnal"
-            price="£40"
-            description="An open-world adventure"
-          />
-          <GameCard
-            image="/GameCards/detroit.jpg"
-            title="Detroit becomes human"
-            price="£35"
-            description="An open-world adventure"
-          />
-          <GameCard
-            image="/GameCards/overwatch.jpg"
-            title="Overwatch 2"
-            price="£20"
-            description="An open-world adventure"
-          />
+        {/* Grid Layout for Game Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 w-full max-w-screen-lg px-4">
+          {[ 
+            { image: "/GameCards/mortalcombat.jpeg", title: "Mortal Combat", price: "£50" },
+            { image: "/GameCards/assasins.jpg", title: "Assassins Creed", price: "£45" },
+            { image: "/GameCards/EldenRing.jpg", title: "Elden Ring", price: "£60" },
+            { image: "/GameCards/halo.jpg", title: "Halo", price: "£30" },
+            { image: "/GameCards/lastofus.webp", title: "Last of Us", price: "£50" },
+            { image: "/GameCards/returnal.jpg", title: "Returnal", price: "£40" },
+          ].map((game, index) => (
+            <div key={index} className="p-4 bg-[#1A1A22] rounded-xl shadow-md hover:shadow-lg transition duration-300">
+              <GameCard image={game.image} title={game.title} price={game.price} description="An open-world adventure" />
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Explore Game Genres */}
+
       <div className="flex flex-col w-full pt-16 items-center">
         <h1 className="text-4xl lg:text-6xl font-bold">Explore Game Genres</h1>
         <div className="bg-[#f6a302] h-2 rounded-full w-1/3 lg:w-1/6 transition-all hover:w-2/6 mt-5"></div>

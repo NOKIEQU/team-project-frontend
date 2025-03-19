@@ -1,226 +1,170 @@
 "use client";
 
 import Link from "next/link";
+import { SearchCode } from "lucide-react";
+import { LayoutDashboard, Gamepad2, BarChart, Layers } from "lucide-react";
+import SidebarLink from "../components/SidebarLink";
 
-function adminGames() {
+function AdminGames() {
   return (
-    <div className="flex min-h-screen bg-[#1c1c1c] text-white">
+    <div className="flex min-h-screen relative">
+
       {/* Sidebar */}
-      <aside className="w-64 bg-black p-6">
-        <div className="text-2xl font-bold text-[#f6a302] mb-10">
-          GameVault Admin
-        </div>
-        <nav>
-          <ul className="space-y-4">
-            <li>
-              <a
-                href="/admin"
-                className="block text-lg font-medium hover:text-[#f6a302]"
-              >
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <Link
-                href="/adminusers"
-                className="block text-lg font-medium hover:text-[#f6a302]"
-              >
-                Manage Users
-              </Link>
-            </li>
-            <li>
-              <a
-                href="/admingames"
-                className="block text-lg font-medium hover:text-[#f6a302]"
-              >
-                Manage Games
-              </a>
-            </li>
-          </ul>
+      <div className="bg-gray-950 text-white w-64 flex flex-col p-5 space-y-4">
+        <nav className="space-y-2">
+          <SidebarLink
+            href="/admin"
+            icon={<LayoutDashboard />}
+            text="Dashboard"
+          />
+          <SidebarLink href="/AdminGames" icon={<Gamepad2 />} text="Games" />
+          <SidebarLink href="/AdminUsers" icon={<BarChart />} text="Users" />
+          <SidebarLink href="/AdminGenres" icon={<Layers />} text="Genres" />
         </nav>
-      </aside>
+      </div>
 
-      <main className="flex-1 p-6">
-        <div className="flex justify-between items-center mb-10">
-          <h1 className="text-2xl font-bold text-white">Dashboard</h1>
+      {/* Main Content Section */}
+      <div className="bg-gray-100 flex-1 p-6 flex flex-col relative">
+
+        {/* Add Genre Button positioned top-right */}
+        <div className="absolute top-6 right-6">
+          <button className="bg-gray-950 text-[#F0ECEC] py-3 px-4 rounded-lg text-sm font-semibold hover:bg-gray-800 transition-all">
+            Add Games
+          </button>
         </div>
 
-        {/* Quick Stats*/}
-        <section className="mb-8">
-          <h3 className="text-xl font-bold mb-6">Quick Stats</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-[#2a2a2a] p-6 rounded-lg text-center">
-              <h4 className="text-lg font-bold">Total Revenue</h4>
-              <p className="text-4xl font-bold text-[#f6a302]">£0</p>
+        <h1 className="text-gray-900 text-3xl font-bold">Games</h1>
+      
+        {/* Search Bar Section */}
+        <div className="bg-gray-950 text-white w-full p-4 mt-4 rounded-lg flex items-center space-x-2">
+          <SearchCode className="text-xl" />
+          <input
+            type="text"
+            placeholder="Search for games..."
+            className="bg-transparent border-b-2 border-white text-white focus:outline-none w-full"
+          />
+        </div>
+
+        {/* Games List Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+
+          {/* Game Card 1 */}
+          <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Cyberpunk 2077</h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
             </div>
-            <div className="bg-[#2a2a2a] p-6 rounded-lg text-center">
-              <h4 className="text-lg font-bold">Orders</h4>
-              <p className="text-4xl font-bold text-[#f6a302]">0</p>
-            </div>
-            <div className="bg-[#2a2a2a] p-6 rounded-lg text-center">
-              <h4 className="text-lg font-bold">Total Users</h4>
-              <p className="text-4xl font-bold text-[#f6a302]">0</p>
-            </div>
-            <div className="bg-[#2a2a2a] p-6 rounded-lg text-center">
-              <h4 className="text-lg font-bold">Active Users</h4>
-              <p className="text-4xl font-bold text-[#f6a302]">0</p>
+          </div>  <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Cyberpunk 2077</h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
             </div>
           </div>
-        </section>
-
-        {/* Games table */}
-        <section>
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-900">
-                <tr>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-centre  text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Game
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-centre text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Genre
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-centre text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Price
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-centre text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Rating
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-centre text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                </tr>
-
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                </tr>
-
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                </tr>
-
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                </tr>
-
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                </tr>
-
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    --
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Cyberpunk 2077</h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
+            </div>
           </div>
-        </section>
-      </main>
+          <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Rocket League </h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
+            </div>
+          </div>
+          <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Cyberpunk 2077</h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
+            </div>
+          </div>
+          <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Cyberpunk 2077</h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
+            </div>
+          </div>
+          <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Cyberpunk 2077</h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
+            </div>
+          </div>
+          <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Cyberpunk 2077</h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
+            </div>
+          </div>
+          <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Cyberpunk 2077</h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
+            </div>
+          </div>
+          <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Cyberpunk 2077</h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
+            </div>
+          </div>
+          <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Cyberpunk 2077</h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
+            </div>
+          </div>
+          <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Cyberpunk 2077</h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
+            </div>
+          </div>
+          <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Cyberpunk 2077</h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
+            </div>
+          </div>
+          <div className="bg-gray-950 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <h3 className="text-xl font-semibold">Cyberpunk 2077</h3>
+            <p className="text-sm text-gray-400">Genre:</p>
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-lg font-bold">$69.99</p>
+              <button className="bg-[#F0ECEC] text-black py-1 px-4 rounded-lg text-sm">Edit</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   );
 }
 
-export default adminGames;
+export default AdminGames;

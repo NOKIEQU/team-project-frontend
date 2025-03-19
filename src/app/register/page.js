@@ -1,5 +1,6 @@
 'use client';
 
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -185,34 +186,154 @@ function RegisterPage() {
                   required
                 />
               </div>
+
             </div>
 
-            {/* Password */}
-            <div className="mb-4">
-              <label className={label}>Password</label>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                className={input}
-                id="password"
-                name="password"
-                autoComplete="new-password"
-                required
-                value={formData.password}
-                onChange={handleChange}
-              />
+           
+            <div className="w-2/5 h-full relative z-0 hidden md:block">
+                <img src="/loginpic.jpg" alt="Background" className="w-full h-full object-cover"/>
             </div>
 
-            {/* Confirm Password */}
-            <div className="mb-4">
-              <label className={label}>Confirm Password</label>
-              <input
-                type="password"
-                placeholder="Confirm your password"
-                className={input}
-                required
-              />
+        
+
+            
+            <div className="w-full md:w-3/5 flex flex-col items-center justify-center p-6 z-20 relative pointer-events-auto md:border-r-4 md:border-black md:shadow-xl md:mr-8 pt-28">
+
+                <h1 className="text-4xl font-bold text-center mb-2 text-white underline z-30">CREATE ACCOUNT</h1>
+
+              
+                
+                <form className="w-full max-w-md">
+                    {/* Names */}
+                    <div className="flex gap-4 mb-3">
+                        <div className="flex-1">
+                            <label className={label}>First Name</label>
+                            <input
+                                type="text"
+                                placeholder="First Name"
+                                className={input}
+                                required
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label className={label}>Last Name</label>
+                            <input
+                                type="text"
+                                placeholder="Last Name"
+                                className={input}
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    {/* Username */}
+                    <div className="mb-3">
+                        <label className={label}>Username</label>
+                        <input
+                            type="text"
+                            placeholder="Enter your username"
+                            className={input}
+                            required
+                        />
+                    </div>
+
+                    {/* Email */}
+                    <div className="mb-3">
+                        <label className={label}>Email</label>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            className={input}
+                            required
+                        />
+                    </div>
+
+                    {/* Date of Birth */}
+                    <div className="mb-3">
+                        <label className={label}>Date of Birth</label>
+                        <div className="flex gap-3">
+                            <input
+                                type="number"
+                                placeholder="Day"
+                                min="1"
+                                max="31"
+                                className={`${input} w-1/3`}
+                                required
+                            />
+                            <input
+                                type="number"
+                                placeholder="Month"
+                                min="1"
+                                max="12"
+                                className={`${input} w-1/3`}
+                                required
+                            />
+                            <input
+                                type="number"
+                                placeholder="Year"
+                                min="1900"
+                                max={new Date().getFullYear()}
+                                className={`${input} w-1/3`}
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    {/* Password */}
+                    <div className="mb-3">
+                        <label className={label}>Password</label>
+                        <input
+                            type="password"
+                            placeholder="Enter your password"
+                            className={input}
+                            required
+                        />
+                    </div>
+
+                    {/* Confirm Password */}
+                    <div className="mb-3">
+                        <label className={label}>Confirm Password</label>
+                        <input
+                            type="password"
+                            placeholder="Confirm your password"
+                            className={input}
+                            required
+                        />
+                    </div>
+
+                    {/* Checkbox */}
+                    <div className="flex items-center mb-3">
+                        <input
+                            type="checkbox"
+                            id="newsletter"
+                            className="mr-2 transform scale-125 cursor-pointer"
+                        />
+                        <label
+                            htmlFor="newsletter"
+                            className="text-white text-sm"
+                        >
+                            I would like to receive news and promotional messages from GameVault.
+                        </label>
+                    </div>
+
+                    {/* Submit Button */}
+                    <button type="submit" className={button}>
+                        CREATE ACCOUNT
+                    </button>
+
+                    {/* Footer */}
+                    <p className="mt-4 text-white text-center text-sm">
+                        Already have an account?{" "}
+                        <a
+                            href="/login"
+                            className="text-white font-bold underline"
+                        >
+                            Login
+                        </a>
+                    </p>
+                </form>
             </div>
+
 
             {/* Optional Checkbox */}
             <div className="flex items-center mb-4">
@@ -258,10 +379,9 @@ function RegisterPage() {
               </a>
             </p>
           </form>
+
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default RegisterPage;

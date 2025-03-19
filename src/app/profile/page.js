@@ -10,7 +10,7 @@ function AccountPage() {
       <div className='flex flex-row w-full h-full'>
 
 
-        <div className="min-h-screen w-full px-4 md:px-8 overflow-auto bg-[#0d1b2a]">
+        <div className="min-h-screen w-full px-4 md:px-8 overflow-auto bg-[#1a1a22]">
           <div className="flex items-center gap-4 py-8">
             <Image
               src="/account/account.png"
