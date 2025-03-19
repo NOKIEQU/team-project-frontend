@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ShoppingCart, ChevronLeft, ChevronRight, Minus, Plus } from "lucide-react";
 import { useCart } from "../../context/cart-context";
@@ -8,12 +8,19 @@ import { useSearchParams } from "next/navigation";
 import Navbar from "../components/navbar";
 
 
+
 function ShopPage() {
+
+ 
+
   const [games, setGames] = useState([]);
   const [genres, setGenres] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [featuredGames, setFeaturedGames] = useState([]);
+  const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
+  const carouselRef = useRef(null);
 
   const searchParams = useSearchParams();
   const initialGenre = searchParams.get("genre");
@@ -44,6 +51,11 @@ function ShopPage() {
 
         setGenres(genresData);
         setGames(productsData);
+        
+        // Set featured games with highest ratings
+        const sortedGames = [...productsData].sort((a, b) => b.rating - a.rating);
+        setFeaturedGames(sortedGames.slice(0, 8));
+        
         setLoading(false);
       } catch (error) {
         setError("An error occurred while fetching data");
@@ -85,6 +97,21 @@ function ShopPage() {
       quantity: 1,
     });
   };
+  
+  const scrollCarousel = (direction) => {
+    const container = carouselRef.current;
+    if (!container) return;
+    
+    const scrollAmount = direction === 'right' ? 300 : -300;
+    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    
+    // Update current index for indicators
+    if (direction === 'right' && currentCarouselIndex < featuredGames.length - 4) {
+      setCurrentCarouselIndex(currentCarouselIndex + 1);
+    } else if (direction === 'left' && currentCarouselIndex > 0) {
+      setCurrentCarouselIndex(currentCarouselIndex - 1);
+    }
+  };
 
   const handlePriceChange = (setter, value) => {
     const numericValue = Math.min(200, Math.max(0, parseFloat(value) || 0));
@@ -110,12 +137,15 @@ function ShopPage() {
         Error: {error}
       </div>
     );
+    
 
 
 
   return (
     <div className="bg-[#1A1A22] min-h-screen text-white font-sans">
-      <Navbar />
+       
+     
+
       <div className="flex flex-row w-full  gap-x-6 px-6 lg:px-24 py-10">
         {/* Sidebar */}
         <aside className="hidden lg:block bg-[white] p-6 border border-white rounded-lg w-1/4">
@@ -299,39 +329,101 @@ function ShopPage() {
 
           )}
         </main>
-
       </div>
-      {/* Coming Soon  */}
-      <section className="w-full py-16 text-center">
-        <h1 className="text-[35px] font-sans font-bold sm:text-center mt-[30] text-white mb-20">
-          COMING SOON
-        </h1>
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-20 bg-[#1A1A22] px-6">
-          {[
-            { date: "7/3/25", image: "/questionmark.png" },
-            { date: "8/3/25", image: "/questionmark.png" },
-            { date: "9/3/25", image: "/questionmark.png" },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="bg-[#1A1A22] border border-white p-8 rounded-2xl shadow-lg hover:scale-105 hover:shadow-2xl transition w-full h-80 flex flex-col items-center justify-center"
+
+
+      
+      {/* Featured Games Carousel */}
+      <br></br><br></br><br></br>
+        <div className="container mx-auto  ">
+          <h2 className="text-3xl font-bold text-white  mb-8">Featured Games</h2>
+          
+          <div className="relative ">
+            <button 
+              onClick={() => scrollCarousel('left')}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10 hover:bg-opacity-70"
+              aria-label="Previous"
             >
-              <img
-                src={item.image}
-                alt="Coming Soon"
-                className="w-55 h-40 object-cover mb-4"
-              />
-              <h3 className="text-2xl text-white mb-2">Reveal</h3>
-              <h4 className="text-lg text-white mb-2">{item.date}</h4>
+              <ChevronLeft size={24} />
+            </button>
+            
+            <div 
+              ref={carouselRef} 
+              className="flex overflow-x-auto pb-6 scrollbar-hide  snap-x scroll-smooth"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {featuredGames.map((game) => (
+                <div key={game.id} className="flex-none w-96 mx-2  snap-start">
+                  <Link href={`/shop/${game.id}`}>
+                    <div className=" border border-[#444] bg-white rounded-lg overflow-hidden hover:scale-105 transition duration-300">
+                      <div className="h-40 overflow-hidden">
+                        <img 
+                          src={game.imageUrls[0] || "/placeholder.svg"} 
+                          alt={game.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="p-4">
+                        <h3 className="text-lg font-bold text-black truncate">{game.title}</h3>
+                        <div className="flex justify-between items-center mt-2">
+                          <div className="text-yellow-500 flex items-center">
+                            {Array.from({ length: 5 }).map((_, i) => (
+                              <span key={i} className="text-sm">{i < Math.floor(game.rating) ? "★" : "☆"}</span>
+                            ))}
+                          </div>
+                          <span className="text-lg font-bold text-black">
+                            ${parseFloat(game.price).toFixed(2)}
+                          </span>
+                        </div>
+                        <button
+                          className="mt-3 w-full bg-black text-white py-2 rounded-lg font-bold hover:bg-[#5A5A8A] transition"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleAddToCart(game);
+                          }}
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))}
             </div>
-          ))}
+            
+            <button 
+              onClick={() => scrollCarousel('right')}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10 hover:bg-opacity-70"
+              aria-label="Next"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+          
+          {/* Carousel Indicators */}
+          <div className="flex justify-center mt-4 space-x-2">
+            {Array.from({ length: Math.ceil(featuredGames.length / 4) }).map((_, index) => (
+              <button
+                key={index}
+                className={`h-2 w-2 rounded-full ${
+                  index === Math.floor(currentCarouselIndex / 4) ? 'bg-white' : 'bg-gray-500'
+                }`}
+                onClick={() => {
+                  const newIndex = index * 4;
+                  setCurrentCarouselIndex(newIndex);
+                  carouselRef.current.scrollTo({
+                    left: newIndex * 300,
+                    behavior: 'smooth',
+                  });
+                }}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
-      </section>
-
-
+        <br></br><br></br>
     </div>
   );
 }
 
 export default ShopPage;
-
