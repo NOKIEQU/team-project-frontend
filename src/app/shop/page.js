@@ -525,6 +525,95 @@ function ShopPage() {
 
       {/* Second Carousel: Games Under £20 */}
       <div className="container mx-auto scale-110 py-12 px-4 sm:px-0">
+        <h2 className="text-3xl font-bold text-white mb-8">Recomended Games</h2>
+        
+        <div className="relative">
+          <button 
+            onClick={() => scrollBudgetCarousel('left')}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10 hover:bg-opacity-70"
+            aria-label="Previous"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          
+          <div 
+            ref={budgetCarouselRef} 
+            className="flex overflow-x-auto pb-6 scrollbar-hide snap-x scroll-smooth"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            onMouseEnter={handleBudgetMouseEnter}
+            onMouseLeave={handleBudgetMouseLeave}
+          >
+            {budgetGames.map((game) => (
+              <div key={game.id} className="flex-none w-full sm:w-96 mx-2 snap-start">
+                <Link href={`/shop/${game.id}`} onClick={() => handleGameView(game)}>
+                  <div className="border border-[#444] bg-white rounded-lg overflow-hidden hover:scale-105 transition duration-300">
+                    <div className="h-40 overflow-hidden">
+                      <img 
+                        src={game.imageUrls[0] || "/placeholder.svg"} 
+                        alt={game.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="text-lg font-bold text-black truncate">{game.title}</h3>
+                      <div className="flex justify-between items-center mt-2">
+                        <div className="text-yellow-500 flex items-center">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <span key={i} className="text-sm">{i < Math.floor(game.rating) ? "★" : "☆"}</span>
+                          ))}
+                        </div>
+                        <span className="text-lg font-bold text-black">
+                          £{parseFloat(game.price).toFixed(2)}
+                        </span>
+                      </div>
+                      <button
+                        className="mt-3 w-full bg-black text-white py-2 rounded-lg font-bold hover:bg-[#5A5A8A] transition"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleAddToCart(game);
+                        }}
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+          
+          <button 
+            onClick={() => scrollBudgetCarousel('right')}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10 hover:bg-opacity-70"
+            aria-label="Next"
+          >
+            <ChevronRight size={24} />
+          </button>
+        </div>
+        
+        <div className="flex justify-center mt-4 space-x-2">
+          {budgetGames.map((_, index) => (
+            <button
+              key={index}
+              className={`h-2 w-2 rounded-full ${
+                index === currentBudgetCarouselIndex ? 'bg-white' : 'bg-gray-500'
+              }`}
+              onClick={() => {
+                setCurrentBudgetCarouselIndex(index);
+                budgetCarouselRef.current.scrollTo({
+                  left: index * getItemWidth(),
+                  behavior: 'smooth',
+                });
+              }}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      
+      {/* Second Carousel: Games Under £20 */}
+      <div className="container mx-auto scale-110 py-12 px-4 sm:px-0">
         <h2 className="text-3xl font-bold text-white mb-8">Games Under £20</h2>
         
         <div className="relative">
@@ -611,95 +700,8 @@ function ShopPage() {
         </div>
       </div>
 
-      {/* Third Carousel: Recently Viewed */}
-      {recentlyViewed.length > 0 && (
-        <div className="container mx-auto scale-110 py-12 px-4 sm:px-0">
-          <h2 className="text-3xl font-bold text-white mb-8">Recently Viewed</h2>
-          
-          <div className="relative">
-            <button 
-              onClick={() => scrollRecentCarousel('left')}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10 hover:bg-opacity-70"
-              aria-label="Previous"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            
-            <div 
-              ref={recentCarouselRef} 
-              className="flex overflow-x-auto pb-6 scrollbar-hide snap-x scroll-smooth"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              onMouseEnter={handleRecentMouseEnter}
-              onMouseLeave={handleRecentMouseLeave}
-            >
-              {recentlyViewed.map((game) => (
-                <div key={game.id} className="flex-none w-full sm:w-96 mx-2 snap-start">
-                  <Link href={`/shop/${game.id}`} onClick={() => handleGameView(game)}>
-                    <div className="border border-[#444] bg-white rounded-lg overflow-hidden hover:scale-105 transition duration-300">
-                      <div className="h-40 overflow-hidden">
-                        <img 
-                          src={game.imageUrls[0] || "/placeholder.svg"} 
-                          alt={game.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="p-4">
-                        <h3 className="text-lg font-bold text-black truncate">{game.title}</h3>
-                        <div className="flex justify-between items-center mt-2">
-                          <div className="text-yellow-500 flex items-center">
-                            {Array.from({ length: 5 }).map((_, i) => (
-                              <span key={i} className="text-sm">{i < Math.floor(game.rating) ? "★" : "☆"}</span>
-                            ))}
-                          </div>
-                          <span className="text-lg font-bold text-black">
-                            ${parseFloat(game.price).toFixed(2)}
-                          </span>
-                        </div>
-                        <button
-                          className="mt-3 w-full bg-black text-white py-2 rounded-lg font-bold hover:bg-[#5A5A8A] transition"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleAddToCart(game);
-                          }}
-                        >
-                          Add to Cart
-                        </button>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              ))}
-            </div>
-            
-            <button 
-              onClick={() => scrollRecentCarousel('right')}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-10 hover:bg-opacity-70"
-              aria-label="Next"
-            >
-              <ChevronRight size={24} />
-            </button>
-          </div>
-          
-          <div className="flex justify-center mt-4 space-x-2">
-            {recentlyViewed.map((_, index) => (
-              <button
-                key={index}
-                className={`h-2 w-2 rounded-full ${
-                  index === currentRecentCarouselIndex ? 'bg-white' : 'bg-gray-500'
-                }`}
-                onClick={() => {
-                  setCurrentRecentCarouselIndex(index);
-                  recentCarouselRef.current.scrollTo({
-                    left: index * getItemWidth(),
-                    behavior: 'smooth',
-                  });
-                }}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      )}
+      
+      
     </div>
   );
 }
