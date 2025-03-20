@@ -1,123 +1,80 @@
 "use client";
-
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { useCart } from "../../context/cart-context";
 import { Minus, Plus, Trash2 } from "lucide-react";
+import { useCart } from "../../context/cart-context";
 
-function BasketPage() {
-  const { cart, updateQuantity, removeFromCart, getCartTotal } = useCart();
+const BasketPage = () => {
+  const { cart, removeFromCart, updateQuantity, getCartTotal } = useCart()
 
-  useEffect(() => {
-    const handleZoom = () => {
-      const zoom = window.devicePixelRatio || 1;
-      document.documentElement.style.setProperty("--zoom-scale", 1 / zoom);
-    };
-    handleZoom();
-    window.addEventListener("resize", handleZoom);
-    return () => window.removeEventListener("resize", handleZoom);
-  }, []);
+  const deliveryCharge = 4.95;
 
   return (
-    <div className="relative min-h-screen bg-[#1A1A22] text-[#F0ECEC] font-oswald">
-      <div className="absolute top-0 left-0 w-full h-full z-10 pointer-events-none hidden md:block">
-        
+    <div className="bg-[#1A1A22] min-h-screen p-10 text-[#F5F5F5]">
+      <h1 className="text-4xl font-extrabold mb-8 tracking-wide">MY BASKET</h1>
+
+      <div className="grid grid-cols-5 text-[#F5F5F5] font-semibold py-3 border-b border-[#444]">
+        <div className="col-span-2">PRODUCT</div>
+        <div className="text-center">PRICE</div>
+        <div className="text-center">QUANTITY</div>
+        <div className="text-right">TOTAL</div>
       </div>
-
-      <div className="flex justify-center items-center py-4 border-b border-gray-600">
-  <h1 className="font-black text-3xl">Basket</h1> 
-</div>
-
-
-      <div className="p-4 md:px-16">
-        <div className="hidden md:flex justify-between items-center py-3 border-b-2 border-gray-500 mb-4">
-          <div className="flex-1">
-            <span className="font-semibold text-lg">Product</span>
+            
+      {cart.map((item) => (
+        <div key={item.id} className="grid grid-cols-5 items-center mb-4 py-4 border-b border-[#444] bg-[#F0ECEC] shadow-md p-4  rounded-md">
+          <div className="flex col-span-2 items-center">
+            <img src={item.img} alt={item.title} className="w-20 h-20 object-cover mr-4 rounded-md shadow" />
+            <span className="font-medium text-[#000000] text-lg">{item.title}</span>
           </div>
-          <div className="flex items-center space-x-8">
-            <div className="min-w-[140px] text-center">
-              <span className="font-semibold text-lg">Quantity</span>
-            </div>
-            <div className="min-w-[100px] text-right">
-              <span className="font-semibold text-lg">Price</span>
-            </div>
-            <div className="w-8"></div>
+          <div className="text-center font-medium text-[#000000]">£{item.price.toFixed(2)}</div>
+          <div className="flex items-center justify-center space-x-2">
+            <button className="p-2 border border-[#000000] rounded-md bg-[#F0ECEC] hover:bg-[#E4DFDF] transition" onClick={() => updateQuantity(item.id, item.quantity - 1)}>
+              <Minus className="h-4 w-4 text-[#000000]" />
+            </button>
+            <input type="text" value={item.quantity} readOnly className="w-12 text-center border border-[#000000] p-2 bg-[#F0ECEC] text-[#000000] rounded-md" />
+            <button className="p-2 border border-[#000000] rounded-md bg-[#F0ECEC] hover:bg-[#E4DFDF] transition" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+              <Plus className="h-4 w-4 text-[#000000]" />
+            </button>
+          </div>
+          <div className="flex justify-between items-center text-right">
+            <span className="font-semibold text-[#000000] text-lg">£{(item.price * item.quantity).toFixed(2)}</span>
+            <button className="text-[#000000] hover:text-[#E63946] transition ml-4" onClick={() => removeFromCart(item.id)}>
+              <Trash2 className="h-5 w-5" />
+            </button>
           </div>
         </div>
+      ))}
+      
 
-        {cart.map((item) => (
-          <div
-            key={item.id}
-            className="flex flex-col md:flex-row justify-between items-center py-3 mb-4 p-4 bg-[#F0ECEC] shadow-md rounded-lg border border-gray-300"
-          >
-            <div className="flex items-center flex-1 w-full md:w-auto">
-              <ShopImage name={item.title} img={item.img} />
-              <span className="pl-3 text-sm font-medium text-black">{item.title}</span>
-            </div>
-
-            <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-8 w-full md:w-auto">
-              <div className="flex items-center bg-[#F0ECEC] shadow-md rounded-lg px-3 py-2 w-28 md:w-auto">
-                <button
-                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                  className="h-10 w-10 p-0 bg-[#F0ECEC] hover:bg-gray-300 rounded-full flex justify-center items-center"
-                >
-                  <Minus className="h-5 w-5 text-black" />
-                </button>
-                <span className="mx-5 font-medium text-black text-base">{item.quantity}</span> 
-                <button
-                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                  className="h-10 w-10 p-0 bg-[#F0ECEC] hover:bg-gray-300 rounded-full flex justify-center items-center "
-                >
-                  <Plus className="h-5 w-5 text-black" />
-                </button>
-              </div>
-
-              <div className="flex items-center space-x-4 w-full justify-between">
-                <div className="text-right min-w-[100px] mt-2 md:mt-0 w-full md:w-auto">
-                  <span className="font-semibold text-black">
-                    £{ (item.price * item.quantity).toFixed(2) }
-                  </span>
-                </div>
-                <button
-                  onClick={() => removeFromCart(item.id)}
-                  className="h-8 w-8 p-0 hover:bg-gray-300 rounded-full mt-2 md:mt-0"
-                >
-                  <Trash2 className="h-4 w-4 text-black" />
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-
-        <div className="mt-8 border-t border-gray-500 pt-4">
-          <h1 className="text-xl font-semibold text-right">
-            Grand Total: £{getCartTotal() === 0 ? "0" : getCartTotal().toFixed(2)}
-          </h1>
+      <div className="bg-[#F0ECEC] p-6 mt-[500px] shadow-lg rounded-md">
+        <div className="flex justify-between text-lg font-semibold text-[#000000]">
+          <span>Subtotal</span>
+          <span>£{getCartTotal().toFixed(2)}</span>
+        </div>
+        <div className="flex justify-between text-lg font-semibold text-[#000000] mt-2">
+          <span>Delivery</span>
+          <span>£{deliveryCharge.toFixed(2)}</span>
+        </div>
+        <div className="flex justify-between text-xl font-bold text-[#000000] mt-4 border-t pt-4 border-[#888]">
+          <span>Total</span>
+          <span>£{(getCartTotal() + deliveryCharge).toFixed(2)}</span>
         </div>
       </div>
 
-      <div className="p-4 md:px-16 flex flex-col md:flex-row justify-between space-y-2 md:space-y-0 md:space-x-4">
+      <div className="flex justify-between mt-8">
         <Link href="/shop">
-          <button className="w-full md:w-auto py-2 px-6 bg-[#F0ECEC] text-black font-semibold rounded transition-colors hover:bg-gray-300">
+          <button className="border border-[#000000] px-6 py-3 text-[#000000] bg-[#F0ECEC] hover:bg-[#E4DFDF] transition rounded-md shadow-md">
             Continue Shopping
           </button>
         </Link>
         <Link href="/checkout">
-          <button className="w-full md:w-auto py-2 px-6 bg-[#F0ECEC] text-black font-semibold rounded transition-colors hover:bg-gray-300">
+          <button className="bg-[#F0ECEC] text-[#000000] px-6 py-3 border border-[#000000] hover:bg-[#E4DFDF] transition rounded-md shadow-md">
             Proceed to Checkout
           </button>
         </Link>
       </div>
     </div>
   );
-}
-
-function ShopImage({ name, img }) {
-  return (
-    <div className="flex-shrink-0">
-      <img src={img} alt={name} className="w-20 h-20 object-cover mr-2" />
-    </div>
-  );
-}
+};
 
 export default BasketPage;
