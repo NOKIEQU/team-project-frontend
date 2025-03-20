@@ -6,10 +6,13 @@ const CartContext = createContext(undefined)
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem('cart')
-    return savedCart ? JSON.parse(savedCart) : []
+    if (typeof window !== 'undefined') {
+      const savedCart = localStorage.getItem('cart')
+      return savedCart ? JSON.parse(savedCart) : []
+    }
+    return []
   })
-  console.trace('initializing cart')
+  // console.trace('initializing cart')
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart))
