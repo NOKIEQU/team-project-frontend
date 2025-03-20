@@ -1,21 +1,26 @@
 'use client'
 import React, { useState, useRef } from 'react'
 import Image from 'next/image'
+import { useUser } from '../../context/user-context'
+import { useEffect } from 'react'
 
 function ProfilePage() {
-  const [formData, setFormData] = useState({
-    firstName: 'Lilly',
-    lastName: 'Joshua',
-    email: 'lillyjoshua.@gmail.com',
-    phone: '+44 76 765 970',
-    age: '30',
-    address: '123 letus Street',
-    city: 'Birmingham',
-    postcode: 'B18 9AA'
-  });
+
+  const { user: userObject } = useUser();
+
+  
+  
   const [showNotification, setShowNotification] = useState(false);
   const [imagePreview, setImagePreview] = useState("/account/profilepic.png");
   const fileInputRef = useRef(null);
+  const [isUserLoaded, setIsUserLoaded] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    newPassword: '',
+    confirmPassword: ''
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,15 +30,20 @@ function ProfilePage() {
     }));
   };
 
-  const handleResetPassword = () => {
-    setShowNotification(true);
-    setTimeout(() => {
-      setShowNotification(false);
-    }, 4000);
-  };
+  useEffect(() => {
+    if (userObject && userObject.token) {
+      setIsUserLoaded(true);
+      formData.firstName = userObject.user.firstName;
+      formData.lastName = userObject.user.lastName;
+      formData.email = userObject.user.email;
+
+    }
+  }, [userObject]);
+
 
   const handleSave = () => {
     console.log('Saving updated profile:', formData);
+    setShowNotification(true);
   };
 
   const handleImageUpload = (event) => {
@@ -61,7 +71,7 @@ function ProfilePage() {
         </div>
       )}
       
-      <div className="max-w-7xl mx-auto">
+      <div className=" mx-auto">
         <div className="flex items-center gap-6 mb-16">
           <div className="bg-[#F0ECEC]/10 p-2 rounded-full">
             <Image 
@@ -75,7 +85,7 @@ function ProfilePage() {
           <h1 className="text-4xl font-bold text-white">My Profile</h1>
         </div>
         
-        <div className="flex justify-center mb-20">
+        <div className="flex justify-center">
           <div className="bg-[#F0ECEC] rounded-2xl shadow-2xl p-10 lg:p-14 w-full max-w-3xl">
             <div className="flex flex-col items-center mb-12">
               <div className="relative group cursor-pointer mb-4" onClick={handleImageClick}>
@@ -141,6 +151,31 @@ function ProfilePage() {
               </div>
 
               <div className="flex flex-col gap-y-3">
+                <label className="text-lg font-medium text-[#1A1A22]">New Password</label>
+                <input 
+                  type='password'
+                  name='newPassword'
+                  value={formData.newPassword}
+                  onChange={handleInputChange}
+                  placeholder='New Password' 
+                  className='p-4 bg-white border border-gray-200 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-[#FFA800]/50 transition-all duration-300 hover:border-[#FFA800]/30' 
+                />
+              </div>
+
+              <div className="flex flex-col gap-y-3">
+                <label className="text-lg font-medium text-[#1A1A22]">Confirm Password</label>
+                <input 
+                  type='password'
+                  name='confirmPassword'
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                  placeholder='Confirm Password' 
+                  className='p-4 bg-white border border-gray-200 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-[#FFA800]/50 transition-all duration-300 hover:border-[#FFA800]/30' 
+                />
+              </div>
+
+
+              {/* <div className="flex flex-col gap-y-3">
                 <label className="text-lg font-medium text-[#1A1A22]">Phone Number</label>
                 <input 
                   type='tel'
@@ -150,9 +185,9 @@ function ProfilePage() {
                   placeholder='Phone Number' 
                   className='p-4 bg-white border border-gray-200 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-[#FFA800]/50 transition-all duration-300 hover:border-[#FFA800]/30' 
                 />
-              </div>
+              </div> */}
 
-              <div className="flex flex-col gap-y-3">
+              {/* <div className="flex flex-col gap-y-3">
                 <label className="text-lg font-medium text-[#1A1A22]">Age</label>
                 <input 
                   type='number'
@@ -162,9 +197,9 @@ function ProfilePage() {
                   placeholder='Age' 
                   className='p-4 bg-white border border-gray-200 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-[#FFA800]/50 transition-all duration-300 hover:border-[#FFA800]/30' 
                 />
-              </div>
+              </div> */}
 
-              <div className="flex flex-col gap-y-3">
+              {/* <div className="flex flex-col gap-y-3">
                 <label className="text-lg font-medium text-[#1A1A22]">Address</label>
                 <input 
                   type='text'
@@ -198,19 +233,19 @@ function ProfilePage() {
                   placeholder='Postcode' 
                   className='p-4 bg-white border border-gray-200 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-[#FFA800]/50 transition-all duration-300 hover:border-[#FFA800]/30' 
                 />
-              </div>
+              </div> */}
 
               <div className='flex flex-row gap-x-4 mt-8'>
-                <button 
+                {/* <button 
                   onClick={handleResetPassword}
                   className='p-5 bg-[#1A1A22] text-white rounded-xl w-1/2 font-semibold shadow-md 
                   hover:bg-[#2C2C35] hover:shadow-lg transition-all duration-300'
                 >
                   Reset Password
-                </button>
+                </button> */}
                 <button 
                   onClick={handleSave}
-                  className='p-5 bg-[#1A1A22] text-white rounded-xl w-1/2 font-semibold shadow-md 
+                  className='p-5 bg-[#1A1A22] text-white rounded-xl w-full font-semibold shadow-md 
                   hover:bg-[#2C2C35] hover:shadow-lg transition-all duration-300'
                 >
                   Save Changes

@@ -11,11 +11,55 @@ import {
   Activity,
 } from "lucide-react";
 import SidebarLink from "../components/SidebarLink";
+import { useEffect, useState } from "react";
+import { useUser } from "../../context/user-context";
 
 function AdminPage() {
+  const [orders, setOrders] = useState([]);
+  const { user: userObject } = useUser();
+  const [isUserLoaded, setIsUserLoaded] = useState(false);
+
+  // Check if the user is loaded
+  useEffect(() => {
+    if (userObject && userObject.token) {
+      setIsUserLoaded(true);
+    }
+  }, [userObject]);
+
+  // Fetch orders only when the user is loaded
+  useEffect(() => {
+    const fetchOrders = async () => {
+      if (!userObject || !userObject.token) {
+        console.error("User is not authenticated. Cannot fetch orders.");
+        return;
+      }
+
+      try {
+        const response = await fetch("http://51.77.110.253:3001/api/orders", {
+          headers: {
+            Authorization: `Bearer ${userObject.token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch orders: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        setOrders(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    };
+
+    if (isUserLoaded) {
+      fetchOrders();
+    }
+  }, [isUserLoaded, userObject]);
+
   return (
     <div className="flex min-h-screen">
-      
       {/* Sidebar */}
       <div className="bg-gray-950 text-white w-64 flex flex-col p-5 space-y-4">
         <nav className="space-y-2">
@@ -24,9 +68,11 @@ function AdminPage() {
             icon={<LayoutDashboard />}
             text="Dashboard"
           />
-          <SidebarLink href="/AdminGames" icon={<Gamepad2 />} text="Games" />
-          <SidebarLink href="/AdminUsers" icon={<BarChart />} text="Users" />
-          <SidebarLink href="/AdminGenres" icon={<Layers />} text="Genres" />
+          <SidebarLink href="/adminGames" icon={<Gamepad2 />} text="Games" />
+          <SidebarLink href="/adminUsers" icon={<BarChart />} text="Users" />
+          <SidebarLink href="/adminGenres" icon={<Layers />} text="Genres" />
+          <SidebarLink href="/adminOrders" icon={<Layers />} text="Orders" />
+
         </nav>
       </div>
 
@@ -46,45 +92,50 @@ function AdminPage() {
           <StatCard title="Active Users" value="2,573" icon={<Activity />} />
         </div>
 
-       
- {/* Recent Sales Table */}
-<div className="bg-white p-6 mt-6 rounded-lg shadow">
-  <h2 className="text-xl font-semibold text-gray-900">Recent Sales</h2>
-  <p className="text-sm text-black">This Month: $54,231 (+8% from last month)</p>
-  <p className="text-gray-600 text-sm mb-4">You made 265 sales this month.</p>
-  
-  <div className="overflow-x-auto">
-    <table className="w-full border-collapse">
-      <thead>
-        <tr className="bg-gray-200 text-gray-700">
-          <th className="p-3 text-left">Order ID</th>
-          <th className="p-3 text-left">Game</th>
-          <th className="p-3 text-left">Customer</th>
-          <th className="p-3 text-left">Date Purchased</th> {/* Moved Column */}
-          <th className="p-3 text-left">Amount</th> {/* Amount is now the last column */}
-        </tr>
-      </thead>
-      <tbody>
-        {[ 
-          { id: "#3210", game: "Cyberpunk 2077", customer: "Ethan Scott", amount: "$69.99", date: "2025-03-01" },
-          { id: "#3209", game: "The Witcher 3", customer: "Liam Davis", amount: "$39.99", date: "2025-02-28" },
-          { id: "#3208", game: "Assassin's Creed Valhalla", customer: "Ava Brown", amount: "$59.99", date: "2025-03-02" },
-          { id: "#3207", game: "Red Dead Redemption 2", customer: "Gareth Bale", amount: "$49.99", date: "2025-02-25" },
-          { id: "#3206", game: "Minecraft", customer: "Sophia Williams", amount: "$26.95", date: "2025-03-03" },
-        ].map((sale, index) => (
-          <tr key={index} className="border-t text-gray-800 hover:bg-gray-200">
-            <td className="p-3">{sale.id}</td>
-            <td className="p-3">{sale.game}</td>
-            <td className="p-3">{sale.customer}</td>
-            <td className="p-3">{sale.date}</td> {/* Moved Column */}
-            <td className="p-3 font-semibold">{sale.amount}</td> {/* Amount is now the last column */}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</div>
+        {/* Recent Sales Table */}
+        <div className="bg-white p-6 mt-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold text-gray-900">Recent Sales</h2>
+          <p className="text-sm text-black">
+            This Month: $54,231 (+8% from last month)
+          </p>
+          <p className="text-gray-600 text-sm mb-4">
+            You made 265 sales this month.
+          </p>
 
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-200 text-gray-700">
+                  <th className="p-3 text-left">Order ID</th>
+                  <th className="p-3 text-left">Game</th>
+                  <th className="p-3 text-left">Customer</th>
+                  <th className="p-3 text-left">Date Purchased</th>
+                  <th className="p-3 text-left">Amount</th>
+                  <th className="p-3 text-left">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order) =>
+                  order.orderItems.map((item, index) => (
+                    <tr
+                      key={index}
+                      className="border-t text-gray-800 hover:bg-gray-200"
+                    >
+                      <td className="p-3">{order.id}</td>
+                      <td className="p-3">{item.product.title}</td>
+                      <td className="p-3">{order.userId}</td>
+                      <td className="p-3">
+                        {new Date(order.createdAt).toLocaleDateString()}
+                      </td>
+                      <td className="p-3 font-semibold">${item.price}</td>
+                      <td className="p-3">{order.status || "Pending"}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -104,7 +155,6 @@ function StatCard({ title, value, icon }) {
         <h3 className="text-2xl font-semibold">{value}</h3>
         <p className="text-sm font-bold text-white">{title}</p>
       </div>
-     
     </div>
   );
 }

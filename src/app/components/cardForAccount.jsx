@@ -31,7 +31,6 @@ const CardForAccount = () => {
             src: "/account/costumer.png",
             title: 'Customer Service',
             description: 'Our Customer Service team is here for you! If you have questions or need assistance fill our contact us form.',
-            link: '/contact-us',
             icon: HeadphonesIcon
         },
         {
@@ -45,7 +44,6 @@ const CardForAccount = () => {
             src: "/account/security.png",
             title: 'My Security',
             description: 'Your security is our top priority. We use advanced measures to keep your personal information and transactions safe and protected at all time.',
-            link: '/PrivacyPolicy',
             icon: Shield
         },
         {
@@ -65,15 +63,15 @@ const CardForAccount = () => {
                 <div className="flex flex-col md:flex-row gap-4 justify-between">
                     <div className="flex justify-between items-center p-6 bg-white rounded-xl shadow-md flex-1">
                         <span className="font-medium text-[#1A1A22]">Current Points</span>
-                        <span className="text-2xl font-bold text-[#FFA800]">50</span>
+                        <span className="text-2xl font-bold text-[#1A1A22]">0</span>
                     </div>
                     <div className="flex justify-between items-center p-6 bg-white rounded-xl shadow-md flex-1">
                         <span className="font-medium text-[#1A1A22]">Level</span>
-                        <span className="text-2xl font-bold text-[#FFA800]">Gold</span>
+                        <span className="text-2xl font-bold text-[#1A1A22]">Gold</span>
                     </div>
                     <div className="flex justify-between items-center p-6 bg-white rounded-xl shadow-md flex-1">
                         <span className="font-medium text-[#1A1A22]">Points to Next Level</span>
-                        <span className="text-2xl font-bold text-[#FFA800]">50</span>
+                        <span className="text-2xl font-bold text-[#1A1A22]">50</span>
                     </div>
                 </div>
             </div>
@@ -93,12 +91,12 @@ const CardForAccount = () => {
                                         ${isHovered ? 'opacity-100' : 'opacity-0'}`}></div>
                                     <div className="w-12 h-12 bg-[#1A1A22] rounded-full flex items-center justify-center relative">
                                         <Icon 
-                                            className={`w-6 h-6 transition-colors duration-300 
-                                            ${isHovered ? 'text-[#FFA800]' : 'text-[#F0ECEC]'}`}
+                                            className={`w-6 h-6 transition-colors duration-300 text-[#ffffff]
+                                            `}
                                         />
                                     </div>
                                 </div>
-                                <h3 className="text-xl font-bold text-[#1A1A22] group-hover:text-[#FFA800] transition-colors duration-300">
+                                <h3 className="text-xl font-bold text-[#1A1A22]">
                                     {card.title}
                                 </h3>
                             </div>
@@ -125,7 +123,7 @@ const CardForAccount = () => {
                                 <ChevronDown className="w-4 h-4 text-[#F0ECEC] transition-transform group-hover:translate-y-0.5" />
                             </button>
 
-                            <div className={`absolute inset-0 border-2 border-[#FFA800] rounded-2xl transition-all duration-500
+                            <div className={`absolute inset-0 border-2 border-[#ffffff] rounded-2xl transition-all duration-500
                                 ${isHovered ? 'opacity-20' : 'opacity-0'}`}></div>
                         </div>
                     );

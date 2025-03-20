@@ -1,29 +1,66 @@
 "use client";
 import { useState } from "react";
+import { useEffect } from "react";
+import { useUser } from "../../context/user-context";
+import { useRouter } from "next/navigation";
 
 export default function OrderHistory() {
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [category, setCategory] = useState("all");
   const [timeFrame, setTimeFrame] = useState("all");
+  const [orders, setOrders] = useState([]);
+  const { user: userObject } = useUser();
+  const [isUserLoaded, setIsUserLoaded] = useState(false);
+  const router = useRouter();
+
+  // Check if the user is loaded
+  useEffect(() => {
+    if (userObject && userObject.token) {
+      setIsUserLoaded(true);
+    }
+  }, [userObject]);
 
   const toggleDetails = (id) => {
     setExpandedOrder(id === expandedOrder ? null : id);
   };
 
+  
 
-  const orders = [
-    { id: "304010", date: "March 11, 2025", game: "Game Vault Action", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg", details: "Delivered via DHL, tracking number: XYZ123" },
-    { id: "304011", date: "April 12, 2025", game: "Game Vault RPG", price: "£219.00", payment: "Paid with GameVault Points", status: "Delivered", category: "RPG", image: "/game-vault-rpg.jpg", details: "Delivered via FedEx, tracking number: ABC456" },
-    { id: "304012", date: "March 20, 2025", game: "Game Vault Action", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Action", image: "/game-vault-action.jpg", details: "Delivered via DHL, tracking number: XYZ123" },
-    { id: "304013", date: "October 16, 2024", game: "Game Vault RPG", price: "£219.00", payment: "Paid with GameVault Points", status: "Delivered", category: "RPG", image: "/game-vault-rpg.jpg", details: "Delivered via FedEx, tracking number: ABC456" },
-    { id: "304014", date: "July 26, 2024", game: "Game Vault Adventure", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Adventure", image: "/game-vault-adventure.jpg", details: "Delivered via UPS, tracking number: DEF789" },
-    { id: "304015", date: "January 29, 2024", game: "Game Vault Sports", price: "£500.00", payment: "Paid with GameVault Points", status: "Processed", category: "Sports", image: "/game-vault-sports.jpg", details: "Order processed, preparing for dispatch" },
-    { id: "304016", date: "July 10, 2024", game: "Game Vault Adventure", price: "£399.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Adventure", image: "/game-vault-adventure.jpg", details: "Delivered via UPS, tracking number: DEF789" },
-    { id: "304017", date: "January 13, 2024", game: "Game Vault Sports", price: "£500.00", payment: "Paid with GameVault Points", status: "Pending", category: "Sports", image: "/game-vault-sports.jpg", details: "Order received, awaiting processing" },
-    { id: "304018", date: "November 22, 2024", game: "Game Vault Fantasy", price: "£299.00", payment: "Paid with GameVault Points", status: "Delivered", category: "Fantasy", image: "/game-vault-fantasy.jpg", details: "Delivered via DHL, tracking number: GHI123" },
-    { id: "304019", date: "December 5, 2024", game: "Game Vault Puzzle", price: "£159.00", payment: "Paid with GameVault Points", status: "Processed", category: "Puzzle", image: "/game-vault-puzzle.jpg", details: "Order processed, preparing for dispatch" },
-    { id: "304020", date: "February 18, 2025", game: "Game Vault Racing", price: "£249.00", payment: "Paid with GameVault Points", status: "Pending", category: "Racing", image: "/game-vault-racing.jpg", details: "Order received, awaiting processing" }
-];
+
+useEffect(() => {
+  const fetchOrders = async () => {
+    try {
+      const response = await fetch("http://51.77.110.253:3001/api/orders", {
+        headers: {
+          Authorization: `Bearer ${userObject.token}`,
+        },
+      });
+      const data = await response.json();
+      const formattedOrders = data.map((order) => ({
+        id: order.id,
+        date: new Date(order.createdAt).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }),
+        game: order.orderItems.map((item) => item.product.title).join(", "),
+        price: `£${order.totalPrice}`,
+        payment: "Paid with GameVault Points", // Adjust if payment info is available
+        status: order.status.charAt(0).toUpperCase() + order.status.slice(1).toLowerCase(),
+        category: "Unknown", // Adjust if category info is available
+        image: order.orderItems[0]?.product.imageUrls[0] || "/placeholder.jpg",
+        details: `Order contains ${order.orderItems.length} item(s).`,
+      }));
+      setOrders(formattedOrders);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
+  };
+
+  if (isUserLoaded) {
+    fetchOrders();
+  }
+}, [isUserLoaded, userObject]);
 
   // Filtering logic
   const filteredOrders = orders.filter((order) => {

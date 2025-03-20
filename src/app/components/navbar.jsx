@@ -24,6 +24,7 @@ export default function Navbar() {
           <li className="flex items-center">
             {/* <ThemeToggle /> */}
           </li>
+
           <li className="flex items-center">
             <Link href="/shop" className="hover:text-[#fa9a00ef] transition-all">
               Shop
@@ -34,9 +35,13 @@ export default function Navbar() {
               About Us
             </Link>
           </li>
+          <Link href={"/profile"} className="flex items-center">Profile</Link>
 
-login
-          <li className="flex items-center">Hello, {user.user.firstName}</li>
+
+          {user.user.role === "ADMIN" && 
+          <Link href={"/admin"} className="flex items-center">Admin Dashboard</Link>
+          
+          }
 
           <li>
             <button

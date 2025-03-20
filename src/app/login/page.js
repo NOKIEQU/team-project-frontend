@@ -68,6 +68,7 @@ export default function LoginPage() {
             const data = await response.json();
             // Handle successful login, e.g., save token, redirect, etc.
             login(data);
+            router.push('/');   
             
             console.log('Login successful:', data);
         } catch (error) {
