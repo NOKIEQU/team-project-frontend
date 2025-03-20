@@ -12,7 +12,7 @@ const Checkout = () => {
   const label = "text-[#1A1A22] font-bold text-sm mb-1 block";
 
   const [selectedPayment, setSelectedPayment] = useState("MasterCard");
-  const { cart, getCartTotal, clearCart } = useCart()
+  const { cart, getCartTotal, clearCart, removeFromCart } = useCart()
   const { user } = useUser();
   const router = useRouter();
 
@@ -78,7 +78,7 @@ const Checkout = () => {
     e.preventDefault();
     if (validateForm()) {
 
-      
+
       clearCart();
     } else {
     }
@@ -89,12 +89,12 @@ const Checkout = () => {
       router.push("/login");
     }
   }
-  , []);
+    , []);
 
   return (
     <div className="min-h-screen h-full">
       {openToast === false && (
-        <div className="absolute w-full h-full min-h-screen " style={{ "z-index": "0", "top": "250px" }}>
+        <div className="absolute w-full h-full min-h-screen " style={{ "zIndex": "0", "top": "250px" }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 100 100"
@@ -132,92 +132,40 @@ const Checkout = () => {
                     ORDER SUMMARY
                   </h2>
                   <div className="w-full h-[10px] bg-[#1A1A22]"></div>
-                  <div className="p-4 rounded-tl-lg border-gray-300 flex items-center justify-between">
-                    <div className="flex items-center">
-                      <label className="pr-1 font-black text-black text-center">
-                        X1
-                      </label>
-                      <img
-                        src="/back3.jpg"
-                        alt="Game Vault Action"
-                        className="w-16 h-16 rounded-lg mr-4"
-                      />
-                      <div className="">
-                        <p className="text-black font-semibold">Game Vault Action</p>
-                        <p className="text-sm text-gray-600">Price: £1,399.99</p>
-                      </div>
-                    </div>
-                    <button className="bg-red-600 text-white px-3 py-1 rounded">
-                      DELETE
-                    </button>
-                  </div>
 
-                  <div className="w-full h-[10px] bg-[#1A1A22]"></div>
-                  <div className="p-4 rounded-tl-lg border-gray-300 flex items-center justify-between">
-                    <div className="flex items-center">
-                      <label className="pr-1 font-black text-black text-center">
-                        X1
-                      </label>
-                      <img
-                        src="/back3.jpg"
-                        alt="Game Vault Action"
-                        className="w-16 h-16 rounded-lg mr-4"
-                      />
-                      <div className="">
-                        <p className="text-black font-semibold">Game Vault Action</p>
-                        <p className="text-sm text-gray-600">Price: £1,399.99</p>
-                      </div>
-                    </div>
-                    <button className="bg-red-600 text-white px-3 py-1 rounded">
-                      DELETE
-                    </button>
-                  </div>
 
-                  <div className="w-full h-[10px] bg-[#1A1A22]"></div>
-                  <div className="p-4 rounded-tl-lg border-gray-300 flex items-center justify-between">
-                    <div className="flex items-center">
-                      <label className="pr-1 font-black text-black text-center">
-                        X1
-                      </label>
-                      <img
-                        src="/back3.jpg"
-                        alt="Game Vault Action"
-                        className="w-16 h-16 rounded-lg mr-4"
-                      />
-                      <div className="">
-                        <p className="text-black font-semibold">Game Vault Action</p>
-                        <p className="text-sm text-gray-600">Price: £1,399.99</p>
+                  {cart.map((item, index) => (
+                    <div key={index} className="p-4 rounded-tl-lg border-gray-300 flex items-center justify-between">
+                      <div className="flex items-center">
+                        <label className="pr-1 font-black text-black text-center">X{item.quantity}</label>
+                        <img
+                          src={item.img}
+                          alt={item.name}
+                          className="w-16 h-16 rounded-lg mr-4"
+                        />
+                        <div>
+                          <p className="text-black font-semibold">{item.name}</p>
+                          <p className="text-sm text-gray-600">Price: £{item.price.toFixed(2)}</p>
+                        </div>
                       </div>
+                      <button
+                        className="bg-red-600 text-white px-3 py-1 rounded"
+                        onClick={() => {
+                          removeFromCart(item.id);
+                        }}
+                      >
+                        DELETE
+                      </button>
                     </div>
-                    <button className="bg-red-600 text-white px-3 py-1 rounded">
-                      DELETE
-                    </button>
-                  </div>
-                  <div className="w-full h-[10px] bg-[#1A1A22]"></div>
-                  <div className="p-4 flex items-center justify-between">
-                    <div className="flex items-center">
-                      <label className="pr-1 font-black text-black text-center">
-                        X2
-                      </label>
-                      <img
-                        src="/back3.jpg"
-                        alt="Fortnite"
-                        className="w-16 h-16 rounded-lg mr-4"
-                      />
-                      <div>
-                        <p className="text-black font-semibold">Fortnite</p>
-                        <p className="text-sm text-gray-600">Price: £720.99</p>
-                      </div>
-                    </div>
-                    <button className="bg-red-600 text-white px-3 py-1 rounded">
-                      DELETE
-                    </button>
-                  </div>
+                  ))}
+
+
+
                   <div className="w-full h-[10px] bg-[#1A1A22]"></div>
 
                   <div className="p-4 rounded-bl-lg">
                     <p className="p-4 text-lg font-black text-black">
-                      TOTAL: £2841.97
+                      TOTAL: £{getCartTotal().toFixed(2)}
                     </p>
                   </div>
                 </div>
@@ -468,8 +416,8 @@ const Checkout = () => {
                       </span>
                       <button
                         className={`font-black flex w-[100px] items-center justify-between p-3 rounded ${selectedPayment === "Visa"
-                            ? "bg-white text-[#1A1A22]"
-                            : "bg-[#1A1A22] text-white"
+                          ? "bg-white text-[#1A1A22]"
+                          : "bg-[#1A1A22] text-white"
                           }`}
                         onClick={() => setSelectedPayment("Visa")}
                       >
@@ -535,8 +483,8 @@ const Checkout = () => {
                       </span>
                       <button
                         className={` font-black flex  w-[100px] items-center justify-between p-3 rounded ${selectedPayment === "MasterCard"
-                            ? "bg-white text-[#1A1A22]"
-                            : "bg-[#1A1A22] text-white"
+                          ? "bg-white text-[#1A1A22]"
+                          : "bg-[#1A1A22] text-white"
                           }`}
                         onClick={() => setSelectedPayment("MasterCard")}
                       >
@@ -593,7 +541,7 @@ const Checkout = () => {
                   </div>
 
                   <div className="w-full h-[10px] bg-[#1A1A22]"></div>
-                  <div className="pb-4 pt-4 rounded-tl-lg border-gray-300 flex items-center justify-between justify-around">
+                  <div className="pb-4 pt-4 rounded-tl-lg border-gray-300 flex items-center justify-around">
                     <div className="flex items-center justify-between w-[90%]">
                       <img
                         src="/Paypal-Logo2.png"
@@ -603,8 +551,8 @@ const Checkout = () => {
                       <span className="font-black text-sm text-[#1A1A22]">PayPal</span>
                       <button
                         className={` font-black flex  w-[100px] items-center justify-between p-3 rounded ${selectedPayment === "PayPal"
-                            ? "bg-white text-[#1A1A22]"
-                            : "bg-[#1A1A22] text-white"
+                          ? "bg-white text-[#1A1A22]"
+                          : "bg-[#1A1A22] text-white"
                           }`}
                         onClick={() => setSelectedPayment("PayPal")}
                       >
