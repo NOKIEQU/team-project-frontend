@@ -31,25 +31,28 @@ const CardForAccount = () => {
             src: "/account/costumer.png",
             title: 'Customer Service',
             description: 'Our Customer Service team is here for you! If you have questions or need assistance fill our contact us form.',
+            link: '/contact-us',
             icon: HeadphonesIcon
         },
         {
             src: "/account/orders.png",
             title: 'My Orders',
             description: 'You have not made any purchases yet, order now.',
+            link: '/orderhistory',
             icon: ShoppingBag
         },
          {
             src: "/account/security.png",
             title: 'My Security',
             description: 'Your security is our top priority. We use advanced measures to keep your personal information and transactions safe and protected at all time.',
+            link: '/PrivacyPolicy',
             icon: Shield
         },
         {
             src: "/account/security.jpg",
             title: 'Our Policy',
             description: 'Our policy is to make your gaming shopping experience as seamless as possible.',
-            link: '/about',
+            link: '/ReturnsPolicy',
             icon: ScrollText
         }
 
