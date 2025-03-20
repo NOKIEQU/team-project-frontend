@@ -21,18 +21,18 @@ const CardForAccount = () => {
             link: '/realprofile',
             icon: UserCircle
         },
-        // {
-        //     src: "/account/payments.jpg",
-        //     title: 'My Payments',
-        //     description: 'You have not made any purchases.',
-        //     icon: CreditCard
-        // },
-        // {
-        //     src: "/account/costumer.png",
-        //     title: 'Customer Service',
-        //     description: 'Our Customer Service team is here for you! If you have questions or need assistance fill our contact us form.',
-        //     icon: HeadphonesIcon
-        // },
+        {
+            src: "/account/payments.jpg",
+            title: 'My Payments',
+            description: 'You have not made any purchases.',
+            icon: CreditCard
+        },
+        {
+            src: "/account/costumer.png",
+            title: 'Customer Service',
+            description: 'Our Customer Service team is here for you! If you have questions or need assistance fill our contact us form.',
+            icon: HeadphonesIcon
+        },
         {
             src: "/account/orders.png",
             title: 'My Orders',
@@ -40,17 +40,17 @@ const CardForAccount = () => {
             link: '/orderhistory',
             icon: ShoppingBag
         },
-        //  {
-        //     src: "/account/security.png",
-        //     title: 'My Security',
-        //     description: 'Your security is our top priority. We use advanced measures to keep your personal information and transactions safe and protected at all time.',
-        //     icon: Shield
-        // },
+         {
+            src: "/account/security.png",
+            title: 'My Security',
+            description: 'Your security is our top priority. We use advanced measures to keep your personal information and transactions safe and protected at all time.',
+            icon: Shield
+        },
         {
             src: "/account/security.jpg",
             title: 'Our Policy',
             description: 'Our policy is to make your gaming shopping experience as seamless as possible.',
-            link: '/about',
+            link: '/ReturnsPolicy',
             icon: ScrollText
         }
 
