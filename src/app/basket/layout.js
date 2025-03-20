@@ -1,6 +1,6 @@
-export default function ShopLayout({ children }) {
+export default function basketLayout({ children }) {
     return (
-        <div className=" w-full h-screen " style={{backgroundColor:"#3E3C3C"}} >
+        <div className=" w-full min-h-screen " >
             {children}
 
         </div>

@@ -1,4 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+  :root {
+    --background: hsl(240, 12%, 12%);
+    --foreground: hsl(0, 1%, 18%);
+    --primary: hsl(0, 1%, 18%);
+    --primary-foreground: hsl(40, 100%, 50%);
+
+    --darkMode-background: "bg-gray-800"
+    --darkMode-foreground: 0 1% 18%;
+    --darkMode-primary: 0 1% 18%;
+    --darkMode-primary-foreground: 40 100% 50%;
+
+    --lightMode-background: white;
+    --lightMode-foreground: black;
+    --lightMode-primary: #FF0000;
+  }
+  
+  body {
+    font-family: 'Oswald', sans-serif;
+  }
+}
 
