@@ -1,12 +1,20 @@
 "use client";
 import Link from "next/link";
-import { ShoppingBasket } from "lucide-react";
+import { ShoppingBasket, X, Check } from "lucide-react";
 import { useUser } from "../../context/user-context";
+import { useCart } from "../../context/cart-context";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const { user, logout } = useUser();
+  const { 
+    cart, 
+    showAddedNotification, 
+    recentlyAdded, 
+    hideAddedNotification 
+  } = useCart();
+  
   const [cartItemCount, setCartItemCount] = useState(0);
 
   const fetchCartItems = () => {
@@ -42,6 +50,57 @@ export default function Navbar() {
 
   const triggerCartUpdate = () => {
     fetchCartItems();
+  };
+
+  const CartNotification = () => {
+    if (!showAddedNotification || !recentlyAdded) return null;
+    
+    return (
+      <div className="absolute top-full right-0 mt-2 w-72 bg-[#252530] rounded-lg shadow-lg border border-[#3A3A4A] z-50 overflow-hidden animate-slideDown">
+        <div className="flex justify-between items-center p-3 bg-[#1A1A22] border-b border-[#3A3A4A]">
+          <div className="flex items-center">
+            <Check size={16} className="text-[#FFA800] mr-2" />
+            <p className="font-medium text-white">Added to Cart</p>
+          </div>
+          <button 
+            onClick={hideAddedNotification}
+            className="text-gray-400 hover:text-white"
+          >
+            <X size={16} />
+          </button>
+        </div>
+        
+        <div className="p-4 flex gap-3">
+          <div className="w-16 h-16 rounded overflow-hidden bg-[#1A1A22]">
+            <img 
+              src={recentlyAdded.img || "/placeholder.svg"} 
+              alt={recentlyAdded.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          
+          <div className="flex-1">
+            <p className="font-medium truncate text-white">{recentlyAdded.title}</p>
+            <p className="text-[#FFA800] font-medium mt-1">
+              ${parseFloat(recentlyAdded.price).toFixed(2)} x {recentlyAdded.quantity}
+            </p>
+          </div>
+        </div>
+        
+        <div className="p-3 flex justify-between border-t border-[#3A3A4A] bg-[#1A1A22]">
+          <Link href="/shop">
+            <button className="text-[#FFA800] hover:text-[#FF7A00] text-sm font-medium">
+              Continue Shopping
+            </button>
+          </Link>
+          <Link href="/basket">
+            <button className="bg-[#FFA800] hover:bg-[#FF7A00] text-black px-4 py-1 rounded-full text-sm font-medium">
+              View Cart
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
   };
 
   if (user) {
@@ -81,15 +140,6 @@ export default function Navbar() {
             </li>
           )}
 
-          <li className="flex items-center">
-            <button
-              onClick={logout}
-              className="hover:text-[#fa9a00ef] transition-all"
-            >
-              Logout
-            </button>
-          </li>
-
           <li className="flex items-center relative">
             <Link
               href="/basket"
@@ -103,6 +153,8 @@ export default function Navbar() {
                 </span>
               )}
             </Link>
+            
+            <CartNotification />
           </li>
         </ul>
       </nav>
@@ -150,6 +202,8 @@ export default function Navbar() {
                 </span>
               )}
             </Link>
+            
+            <CartNotification />
           </li>
         </ul>
       </nav>

@@ -1,632 +1,460 @@
 "use client";
 
-import React, { use, useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCart } from "../../context/cart-context";
 import { useUser } from "../../context/user-context";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import {
+  CreditCard,
+  Wallet, 
+  Gift, 
+  ArrowLeft,
+  Check
+} from "lucide-react";
+import Image from "next/image";
 
-const Checkout = () => {
-  const input =
-    "w-full px-3 py-2 bg-transparent border-b-2 border-[#1A1A22] text-[#1A1A22]  text-sm outline-none mb-3";
-  const label = "text-[#1A1A22] font-bold text-sm mb-1 block";
-
-  const [selectedPayment, setSelectedPayment] = useState("MasterCard");
-  const { cart, getCartTotal, clearCart, removeFromCart } = useCart()
-  const { user } = useUser();
+function CheckoutPage() {
   const router = useRouter();
-
-  const [openToast, setOpenToast] = useState(false);
+  const { user, login } = useUser();
+  const { cart, getCartTotal, clearCart } = useCart();
+  
+  useEffect(() => {
+    console.log("Current user from context:", user);
+  }, [user]);
+  
+  const totalAmount = getCartTotal();
+  
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
-    country: "",
-    postcode: "",
-    address: "",
-    phone: "",
+    deliveryEmail: "", 
     cardNumber: "",
+    cardName: "",
     expiryDate: "",
     cvv: "",
-    visaCardNumber: "",
-    visaExpiryDate: "",
-    visaCvv: ""
+    giftCardNumber: "",
+    giftCardPin: ""
   });
-  const [errors, setErrors] = useState({});
 
+  // Payment method state
+  const [paymentMethod, setPaymentMethod] = useState("creditCard");
+  
+  useEffect(() => {
+    if (user) {
+      console.log("User data found:", user);
+      
+      const firstName = user.firstName || user.first_name || (user.name && user.name.first) || "";
+      const lastName = user.lastName || user.last_name || (user.name && user.name.last) || "";
+      const email = user.email || user.emailAddress || "";
+      
+      setFormData(prev => ({
+        ...prev,
+        firstName: firstName || prev.firstName,
+        lastName: lastName || prev.lastName,
+        email: email || prev.email,
+        deliveryEmail: email || prev.deliveryEmail 
+      }));
+      
+      console.log("Form data after auto-fill:", { firstName, lastName, email });
+    } else {
+      console.log("No user data available");
+    }
+  }, [user]);
+  
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isOrderComplete, setIsOrderComplete] = useState(false);
+  const [orderId, setOrderId] = useState("");
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({
+      ...formData,
+      [name]: value
+    });
   };
-  const validateForm = () => {
-    let formErrors = {};
-    if (!formData.name) {
-      formErrors.name = "Name is required.";
-    } else if (formData.name.length < 2) {
-      formErrors.name = "Name must be at least 2 characters.";
-    }
-    if (!formData.email) {
-      formErrors.email = "Email is required.";
-    } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData.email)) {
-      formErrors.email = "Invalid email address.";
-    }
-    if (!formData.postcode) {
-      formErrors.postcode = "Postcode is required.";
-    } else if (!/^[A-Za-z0-9]{5,7}$/.test(formData.postcode)) {
-      formErrors.postcode = "Invalid postcode format.";
-    }
-    if (!formData.phone) {
-      formErrors.phone = "Phone number is required.";
-    } else if (!/^[+]?[0-9]+$/.test(formData.phone)) {
-      formErrors.phone = "Invalid phone number format.";
-    }
-    if (!formData.address) {
-      formErrors.address = "Address is required.";
-    }
-    if (!selectedPayment) {
-      formErrors.payment = "Please select a payment method.";
-    } else if (selectedPayment == "MasterCard" && (!formData.cardNumber || !formData.expiryDate || !formData.cvv)) {
-      formErrors.paymentDetails = "Please fill in all payment details. Master";
-    } else {
-      if (selectedPayment == "Visa" && (!formData.visaCardNumber || !formData.visaExpiryDate || !formData.visaCvv)) {
-        formErrors.paymentDetails = "Please fill in all payment details. Visa";
-      }
-    }
-    setErrors(formErrors);
-    return Object.keys(formErrors).length === 0;
+
+  const handlePaymentMethodChange = (method) => {
+    setPaymentMethod(method);
   };
-  const handleSubmit = (e) => {
+  
+  const isFormValid = () => {
+    let requiredFields = ["firstName", "lastName", "email", "deliveryEmail"];
+    
+    if (paymentMethod === "creditCard") {
+      requiredFields = [...requiredFields, "cardNumber", "cardName", "expiryDate", "cvv"];
+    } else if (paymentMethod === "giftCard") {
+      requiredFields = [...requiredFields, "giftCardNumber"];
+    }
+    
+    return requiredFields.every(field => formData[field].trim() !== "");
+  };
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
+    
+    if (!isFormValid()) {
+      alert("Please fill in all required fields");
+      return;
+    }
+    
+    setIsProcessing(true);
+    
+    setTimeout(() => {
 
-
+      const randomOrderId = "GAME-" + Math.floor(Math.random() * 10000000);
+      setOrderId(randomOrderId);
+      setIsProcessing(false);
+      setIsOrderComplete(true);
       clearCart();
-    } else {
-    }
+    }, 2000);
   };
-
+  
   useEffect(() => {
-    if (user === null) {
-      router.push("/login");
+    if (!user && typeof window !== 'undefined') {
+      console.log("No user is logged in. Consider redirecting to login.");
     }
+  }, [user, router]);
+
+  if (cart.length === 0 && !isOrderComplete) {
+    return (
+      <div className="bg-[#1A1A22] min-h-screen text-white p-6 lg:p-16 flex flex-col items-center justify-center">
+        <h1 className="text-3xl font-bold mb-4">Your basket is empty</h1>
+        <p className="text-gray-400 mb-8">You need to add games to your basket before checkout.</p>
+        <Link href="/shop">
+          <button className="bg-[#FFA800] hover:bg-[#e08800] px-6 py-3 text-white rounded-full font-bold transition-all duration-300 flex items-center">
+            <ArrowLeft size={18} className="mr-2" />
+            Continue Shopping
+          </button>
+        </Link>
+      </div>
+    );
   }
-    , []);
-
-  return (
-    <div className="min-h-screen h-full">
-      {openToast === false && (
-        <div className="absolute w-full h-full min-h-screen " style={{ "zIndex": "0", "top": "250px" }}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            className="h-full w-full"
-          >
-            <polygon
-              points="100,10 100,15 0,93 0,88"
-              fill="rgba(255, 255, 255, 0.4)"
-            />
-            <polygon
-              points="100,18 100,23 0,100 0,95"
-              fill="rgba(255, 255, 255, 0.8)"
-            />
-          </svg>
+  
+  // Order complete screen
+  if (isOrderComplete) {
+    return (
+      <div className="bg-[#1A1A22] min-h-screen text-white p-6 lg:p-16 flex flex-col items-center justify-center">
+        <div className="bg-[#252530] border border-[#3A3A4A] rounded-lg p-8 max-w-md w-full">
+          <div className="flex justify-center mb-6">
+            <div className="bg-green-500 p-4 rounded-full">
+              <Check size={32} className="text-white" />
+            </div>
+          </div>
+          <h1 className="text-2xl font-bold mb-4 text-center">Order Confirmed!</h1>
+          <p className="text-gray-300 mb-6 text-center">
+            Thank you for your purchase. Your games will be delivered shortly.
+          </p>
+          <div className="bg-[#1A1A22] p-4 rounded-lg mb-6">
+            <div className="flex justify-between mb-2">
+              <span className="text-gray-400">Order ID:</span>
+              <span className="font-medium">{orderId}</span>
+            </div>
+            <div className="flex justify-between mb-2">
+              <span className="text-gray-400">Total Amount:</span>
+              <span className="font-medium">${totalAmount.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-400">Delivery Email:</span>
+              <span className="font-medium">{formData.deliveryEmail}</span>
+            </div>
+          </div>
+          <p className="text-gray-300 mb-6 text-center text-sm">
+            Your game access codes and download links will be sent to {formData.deliveryEmail}
+          </p>
+          <Link href="/shop">
+            <button className="w-full bg-[#FFA800] hover:bg-[#e08800] text-white py-3 rounded-full font-bold transition-all duration-300">
+              Continue Shopping
+            </button>
+          </Link>
         </div>
-      )}
-      {openToast === false && (
-
-        <div className=" min-h-screen pt-10 pb-10 bg-[#1A1A22] text-white flex flex-col justify-center items-center"
-          style={{ "z-index": "1" }}
-        >
-          <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
-            <div
-              className="w-[80%] flex flex-col md:flex-col lg:flex-row xl:flex-row 
-  justify-center md:justify-between lg:justify-between xl:justify-between
-        "
-            >
-              <div className="flex flex-col sm:items-center  sm:w-full md:w-[80%] lg:w-[45%] xl:w-[45%]">
-                {/* Order Summary */}
-                <div className="bg-[#F0ECEC] shadow-lg  rounded-3xl   mb-4 w-full"
-                  style={{ "z-index": "1" }}
-                >
-                  <h2 className="p-4 text-2xl font-black text-black text-center">
-                    ORDER SUMMARY
-                  </h2>
-                  <div className="w-full h-[10px] bg-[#1A1A22]"></div>
-
-
-                  {cart.map((item, index) => (
-                    <div key={index} className="p-4 rounded-tl-lg border-gray-300 flex items-center justify-between">
-                      <div className="flex items-center">
-                        <label className="pr-1 font-black text-black text-center">X{item.quantity}</label>
-                        <img
-                          src={item.img}
-                          alt={item.name}
-                          className="w-16 h-16 rounded-lg mr-4"
-                        />
-                        <div>
-                          <p className="text-black font-semibold">{item.name}</p>
-                          <p className="text-sm text-gray-600">Price: £{item.price.toFixed(2)}</p>
-                        </div>
-                      </div>
-                      <button
-                        className="bg-red-600 text-white px-3 py-1 rounded"
-                        onClick={() => {
-                          removeFromCart(item.id);
-                        }}
-                      >
-                        DELETE
-                      </button>
+      </div>
+    );
+  }
+  
+  return (
+    <div className="bg-[#1A1A22] min-h-screen text-white p-6 lg:p-16">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex items-center gap-6 mb-8">
+          <div className="bg-[#F0ECEC]/10 p-2 rounded-full">
+            <Image 
+              src="/account/profilepic.png"  
+              alt="Profile Icon"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+          </div>
+          <h1 className="text-3xl lg:text-4xl font-bold">Checkout</h1>
+        </div>
+        
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Left column */}
+          <div className="lg:w-2/3">
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="bg-[#252530] border border-[#3A3A4A] rounded-lg p-6">
+                <h2 className="text-xl font-bold mb-6">Contact Information</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-gray-300 mb-2">First Name *</label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      className="w-full p-3 rounded-lg border border-[#3A3A4A] bg-[#1A1A22] text-white focus:border-[#FFA800] focus:ring-0"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-300 mb-2">Last Name *</label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      className="w-full p-3 rounded-lg border border-[#3A3A4A] bg-[#1A1A22] text-white focus:border-[#FFA800] focus:ring-0"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <label className="block text-gray-300 mb-2">Your Email Address *</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full p-3 rounded-lg border border-[#3A3A4A] bg-[#1A1A22] text-white focus:border-[#FFA800] focus:ring-0"
+                    required
+                  />
+                </div>
+                <div className="mt-4">
+                  <label className="block text-gray-300 mb-2">Delivery Email Address *</label>
+                  <input
+                    type="email"
+                    name="deliveryEmail"
+                    value={formData.deliveryEmail}
+                    onChange={handleChange}
+                    className="w-full p-3 rounded-lg border border-[#3A3A4A] bg-[#1A1A22] text-white focus:border-[#FFA800] focus:ring-0"
+                    required
+                  />
+                  <p className="text-gray-400 text-sm mt-1">Game access codes will be sent to this email</p>
+                </div>
+              </div>
+              
+              {/* Payment Information */}
+              <div className="bg-[#252530] border border-[#3A3A4A] rounded-lg p-6">
+                <h2 className="text-xl font-bold mb-6">Payment Information</h2>
+                <div className="flex flex-wrap gap-4 mb-6">
+                  <div 
+                    className={`flex items-center gap-2 bg-[#1A1A22] px-4 py-3 rounded-lg cursor-pointer ${paymentMethod === 'creditCard' ? 'border-2 border-[#FFA800]' : 'border border-[#3A3A4A]'}`}
+                    onClick={() => handlePaymentMethodChange('creditCard')}
+                  >
+                    <input 
+                      type="radio" 
+                      id="creditCard" 
+                      name="paymentMethod" 
+                      value="creditCard" 
+                      checked={paymentMethod === 'creditCard'}
+                      onChange={() => handlePaymentMethodChange('creditCard')}
+                    />
+                    <label htmlFor="creditCard" className="flex items-center cursor-pointer">
+                      <CreditCard size={20} className="mr-2 text-[#FFA800]" />
+                      Credit / Debit Card
+                    </label>
+                  </div>
+                  
+                  <div 
+                    className={`flex items-center gap-2 bg-[#1A1A22] px-4 py-3 rounded-lg cursor-pointer ${paymentMethod === 'paypal' ? 'border-2 border-[#FFA800]' : 'border border-[#3A3A4A]'}`}
+                    onClick={() => handlePaymentMethodChange('paypal')}
+                  >
+                    <input 
+                      type="radio" 
+                      id="paypal" 
+                      name="paymentMethod" 
+                      value="paypal" 
+                      checked={paymentMethod === 'paypal'}
+                      onChange={() => handlePaymentMethodChange('paypal')}
+                    />
+                    <label htmlFor="paypal" className="flex items-center cursor-pointer">
+                      <Wallet size={20} className="mr-2 text-[#FFA800]" />
+                      PayPal
+                    </label>
+                  </div>
+                  
+                  <div 
+                    className={`flex items-center gap-2 bg-[#1A1A22] px-4 py-3 rounded-lg cursor-pointer ${paymentMethod === 'giftCard' ? 'border-2 border-[#FFA800]' : 'border border-[#3A3A4A]'}`}
+                    onClick={() => handlePaymentMethodChange('giftCard')}
+                  >
+                    <input 
+                      type="radio" 
+                      id="giftCard" 
+                      name="paymentMethod" 
+                      value="giftCard" 
+                      checked={paymentMethod === 'giftCard'}
+                      onChange={() => handlePaymentMethodChange('giftCard')}
+                    />
+                    <label htmlFor="giftCard" className="flex items-center cursor-pointer">
+                      <Gift size={20} className="mr-2 text-[#FFA800]" />
+                      Gift Card
+                    </label>
+                  </div>
+                </div>
+                
+                {/* Credit Card */}
+                {paymentMethod === 'creditCard' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-gray-300 mb-2">Card Number *</label>
+                      <input
+                        type="text"
+                        name="cardNumber"
+                        value={formData.cardNumber}
+                        onChange={handleChange}
+                        placeholder="1234 5678 9012 3456"
+                        className="w-full p-3 rounded-lg border border-[#3A3A4A] bg-[#1A1A22] text-white focus:border-[#FFA800] focus:ring-0"
+                        required={paymentMethod === 'creditCard'}
+                      />
                     </div>
-                  ))}
-
-
-
-                  <div className="w-full h-[10px] bg-[#1A1A22]"></div>
-
-                  <div className="p-4 rounded-bl-lg">
-                    <p className="p-4 text-lg font-black text-black">
-                      TOTAL: £{getCartTotal().toFixed(2)}
+                    <div>
+                      <label className="block text-gray-300 mb-2">Name on Card *</label>
+                      <input
+                        type="text"
+                        name="cardName"
+                        value={formData.cardName}
+                        onChange={handleChange}
+                        className="w-full p-3 rounded-lg border border-[#3A3A4A] bg-[#1A1A22] text-white focus:border-[#FFA800] focus:ring-0"
+                        required={paymentMethod === 'creditCard'}
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-gray-300 mb-2">Expiry Date *</label>
+                        <input
+                          type="text"
+                          name="expiryDate"
+                          value={formData.expiryDate}
+                          onChange={handleChange}
+                          placeholder="MM/YY"
+                          className="w-full p-3 rounded-lg border border-[#3A3A4A] bg-[#1A1A22] text-white focus:border-[#FFA800] focus:ring-0"
+                          required={paymentMethod === 'creditCard'}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-gray-300 mb-2">Security Code (CVV) *</label>
+                        <input
+                          type="text"
+                          name="cvv"
+                          value={formData.cvv}
+                          onChange={handleChange}
+                          placeholder="123"
+                          className="w-full p-3 rounded-lg border border-[#3A3A4A] bg-[#1A1A22] text-white focus:border-[#FFA800] focus:ring-0"
+                          required={paymentMethod === 'creditCard'}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {/* PayPal*/}
+                {paymentMethod === 'paypal' && (
+                  <div className="bg-[#1A1A22] p-4 rounded-lg">
+                    <p className="text-gray-300">
+                      You will be redirected to PayPal to complete your purchase securely after clicking "Complete Order".
                     </p>
                   </div>
-                </div>
+                )}
+                
+                {/* Gift Card Form */}
+                {paymentMethod === 'giftCard' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-gray-300 mb-2">Gift Card Number *</label>
+                      <input
+                        type="text"
+                        name="giftCardNumber"
+                        value={formData.giftCardNumber}
+                        onChange={handleChange}
+                        placeholder="XXXX-XXXX-XXXX-XXXX"
+                        className="w-full p-3 rounded-lg border border-[#3A3A4A] bg-[#1A1A22] text-white focus:border-[#FFA800] focus:ring-0"
+                        required={paymentMethod === 'giftCard'}
+                      />
+                    </div>
+                    <div className="mt-2 text-gray-300 text-sm">
+                      <p>Enter the gift card number exactly as it appears on your gift card.</p>
+                    </div>
+                  </div>
+                )}
               </div>
-
-              {/* Payment Methods & Payment Methods */}
-              {/* style={{"align-items":"flex-end"}} */}
-              <div style={{ "z-index": "1" }} className="flex flex-col sm:items-center md:items-center  sm:w-full md:w-[80%] lg:w-[45%] xl:w-[45%]"
-              >
-                {/* Billing Address */}
-                <div className="bg-[#F0ECEC] shadow-lg  rounded-3xl w-full pb-4 ">
-                  <h2 className="p-4 text-2xl font-black text-black text-center">
-                    BILLING ADDRESS
-                  </h2>
-                  <div className="w-full h-[10px] bg-[#1A1A22]"></div>
-                  <div className="p-4">
-                    <div className="flex-1">
-                      <label className={label}>Name</label>
-                      <input
-                        value={formData.name}
-                        type="text"
-                        name="name"
-                        placeholder="e.g. John Mario"
-                        className={input}
-                        onChange={handleChange}
-                      />
-                      {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
-                    </div>
-                    <div className="flex-1">
-                      <label className={label}>E-Mail</label>
-                      <input
-                        value={formData.email}
-                        onChange={handleChange}
-                        type="email"
-                        name="email"
-                        placeholder="e.g. example@ex.com"
-                        className={input}
-                      />
-                      {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-                    </div>
-                    <div className="flex-1">
-                      <label className={label}>Country</label>
-                      <select className={input}>
-                        <option value="">Select Country</option>
-                        <option value="AF">Afghanistan</option>
-                        <option value="AL">Albania</option>
-                        <option value="DZ">Algeria</option>
-                        <option value="AS">American Samoa</option>
-                        <option value="AD">Andorra</option>
-                        <option value="AO">Angola</option>
-                        <option value="AI">Anguilla</option>
-                        <option value="AQ">Antarctica</option>
-                        <option value="AG">Antigua and Barbuda</option>
-                        <option value="AR">Argentina</option>
-                        <option value="AM">Armenia</option>
-                        <option value="AW">Aruba</option>
-                        <option value="AU">Australia</option>
-                        <option value="AT">Austria</option>
-                        <option value="AZ">Azerbaijan</option>
-                        <option value="BS">Bahamas</option>
-                        <option value="BH">Bahrain</option>
-                        <option value="BD">Bangladesh</option>
-                        <option value="BB">Barbados</option>
-                        <option value="BY">Belarus</option>
-                        <option value="BE">Belgium</option>
-                        <option value="BZ">Belize</option>
-                        <option value="BJ">Benin</option>
-                        <option value="BM">Bermuda</option>
-                        <option value="BT">Bhutan</option>
-                        <option value="BO">Bolivia</option>
-                        <option value="BA">Bosnia and Herzegovina</option>
-                        <option value="BW">Botswana</option>
-                        <option value="BR">Brazil</option>
-                        <option value="BN">Brunei</option>
-                        <option value="BG">Bulgaria</option>
-                        <option value="BF">Burkina Faso</option>
-                        <option value="BI">Burundi</option>
-                        <option value="KH">Cambodia</option>
-                        <option value="CM">Cameroon</option>
-                        <option value="CA">Canada</option>
-                        <option value="CV">Cape Verde</option>
-                        <option value="CF">Central African Republic</option>
-                        <option value="TD">Chad</option>
-                        <option value="CL">Chile</option>
-                        <option value="CN">China</option>
-                        <option value="CO">Colombia</option>
-                        <option value="KM">Comoros</option>
-                        <option value="CG">Congo</option>
-                        <option value="CR">Costa Rica</option>
-                        <option value="HR">Croatia</option>
-                        <option value="CU">Cuba</option>
-                        <option value="CY">Cyprus</option>
-                        <option value="CZ">Czech Republic</option>
-                        <option value="DK">Denmark</option>
-                        <option value="DJ">Djibouti</option>
-                        <option value="DM">Dominica</option>
-                        <option value="DO">Dominican Republic</option>
-                        <option value="EC">Ecuador</option>
-                        <option value="EG">Egypt</option>
-                        <option value="SV">El Salvador</option>
-                        <option value="GQ">Equatorial Guinea</option>
-                        <option value="ER">Eritrea</option>
-                        <option value="EE">Estonia</option>
-                        <option value="ET">Ethiopia</option>
-                        <option value="FI">Finland</option>
-                        <option value="FR">France</option>
-                        <option value="GA">Gabon</option>
-                        <option value="GM">Gambia</option>
-                        <option value="GE">Georgia</option>
-                        <option value="DE">Germany</option>
-                        <option value="GH">Ghana</option>
-                        <option value="GR">Greece</option>
-                        <option value="GT">Guatemala</option>
-                        <option value="GN">Guinea</option>
-                        <option value="HT">Haiti</option>
-                        <option value="HN">Honduras</option>
-                        <option value="HU">Hungary</option>
-                        <option value="IS">Iceland</option>
-                        <option value="IN">India</option>
-                        <option value="ID">Indonesia</option>
-                        <option value="IR">Iran</option>
-                        <option value="IQ">Iraq</option>
-                        <option value="IE">Ireland</option>
-                        <option value="IT">Italy</option>
-                        <option value="JM">Jamaica</option>
-                        <option value="JP">Japan</option>
-                        <option value="JO">Jordan</option>
-                        <option value="KZ">Kazakhstan</option>
-                        <option value="KE">Kenya</option>
-                        <option value="KW">Kuwait</option>
-                        <option value="KG">Kyrgyzstan</option>
-                        <option value="LA">Laos</option>
-                        <option value="LV">Latvia</option>
-                        <option value="LB">Lebanon</option>
-                        <option value="LS">Lesotho</option>
-                        <option value="LR">Liberia</option>
-                        <option value="LY">Libya</option>
-                        <option value="LT">Lithuania</option>
-                        <option value="LU">Luxembourg</option>
-                        <option value="MG">Madagascar</option>
-                        <option value="MW">Malawi</option>
-                        <option value="MY">Malaysia</option>
-                        <option value="MV">Maldives</option>
-                        <option value="ML">Mali</option>
-                        <option value="MT">Malta</option>
-                        <option value="MX">Mexico</option>
-                        <option value="MD">Moldova</option>
-                        <option value="MC">Monaco</option>
-                        <option value="MN">Mongolia</option>
-                        <option value="ME">Montenegro</option>
-                        <option value="MA">Morocco</option>
-                        <option value="MZ">Mozambique</option>
-                        <option value="MM">Myanmar</option>
-                        <option value="NA">Namibia</option>
-                        <option value="NP">Nepal</option>
-                        <option value="NL">Netherlands</option>
-                        <option value="NZ">New Zealand</option>
-                        <option value="NI">Nicaragua</option>
-                        <option value="NE">Niger</option>
-                        <option value="NG">Nigeria</option>
-                        <option value="KP">North Korea</option>
-                        <option value="NO">Norway</option>
-                        <option value="OM">Oman</option>
-                        <option value="PK">Pakistan</option>
-                        <option value="PS">Palestine</option>
-                        <option value="PA">Panama</option>
-                        <option value="PY">Paraguay</option>
-                        <option value="PE">Peru</option>
-                        <option value="PH">Philippines</option>
-                        <option value="PL">Poland</option>
-                        <option value="PT">Portugal</option>
-                        <option value="QA">Qatar</option>
-                        <option value="RO">Romania</option>
-                        <option value="RU">Russia</option>
-                        <option value="SA">Saudi Arabia</option>
-                        <option value="SG">Singapore</option>
-                        <option value="ZA">South Africa</option>
-                        <option value="KR">South Korea</option>
-                        <option value="ES">Spain</option>
-                        <option value="SE">Sweden</option>
-                        <option value="CH">Switzerland</option>
-                        <option value="SY">Syria</option>
-                        <option value="TH">Thailand</option>
-                        <option value="TR">Turkey</option>
-                        <option value="UA">Ukraine</option>
-                        <option value="AE">United Arab Emirates</option>
-                        <option value="GB">United Kingdom</option>
-                        <option value="US">United States</option>
-                        <option value="VN">Vietnam</option>
-                        <option value="YE">Yemen</option>
-                      </select>
-                    </div>
-                    <div className="flex-1">
-                      <label className={label}>Post Code</label>
-                      <input
-                        value={formData.postcode}
-                        onChange={handleChange}
-                        type="text"
-                        name="postcode"
-                        placeholder="e.g. B0xxxx"
-                        className={input}
-                      />
-                      {errors.postcode && <p className="text-red-500 text-sm">{errors.postcode}</p>}
-                    </div>
-                    <div className="flex-1">
-                      <label className={label}>Address</label>
-                      <input
-                        type="text"
-                        name="address"
-                        placeholder="e.g. 27 xxxst. xxxxx"
-                        className={input}
-                        value={formData.address}
-                        onChange={handleChange}
-                      />
-                      {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
-                    </div>
-                    <div className="flex-1">
-                      <label className={label}>Phone</label>
-                      <input
-                        type="text"
-                        name="phone"
-                        placeholder="e.g. +00000"
-                        className={input}
-                        value={formData.phone}
-                        onChange={handleChange}
-                      />
-                      {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
-                    </div>
-                  </div>
-                  <div className="mb-10 w-full h-[10px] bg-[#1A1A22]"></div>
-                </div>
-
-                {/* Payment Methods */}
-                <div className="bg-[#F0ECEC] shadow-lg  rounded-3xl  mt-4 w-full">
-                  <h2 className="p-4 text-2xl font-black text-black text-center">
-                    PAYMENT METHODS
-                  </h2>
-                  <div className="w-full h-[10px] bg-[#1A1A22]"></div>
-                  <div className="pt-4 pb-4  rounded-tl-lg border-gray-300 flex-col flex items-center justify-between">
-                    <div className="flex items-center justify-between w-[90%]">
-                      <img
-                        src="/visa_1.png"
-                        alt="Game Vault Action"
-                        className="w-1/4 rounded-lg"
-                      />
-                      <span className="font-black text-sm text-[#1A1A22]">
-                        VisaCard
-                      </span>
-                      <button
-                        className={`font-black flex w-[100px] items-center justify-between p-3 rounded ${selectedPayment === "Visa"
-                          ? "bg-white text-[#1A1A22]"
-                          : "bg-[#1A1A22] text-white"
-                          }`}
-                        onClick={() => setSelectedPayment("Visa")}
-                      >
-                        <span className="font-black  text-sm ml-1 w-full">
-                          {selectedPayment === "Visa" ? "Selected" : "pay"}
-                        </span>
-                      </button>
-                    </div>
-
-                    {selectedPayment === "Visa" && (
-                      <div className="flex flex-col max-w-[90%] w-[90%]">
-                        <div className="flex justify-between">
-                          <div className="w-[60%]">
-                            {/* <label className={label}>E-Mail</label> */}
-                            <input
-                              type="text"
-                              name="visaCardNumber"
-                              placeholder="insert the 16 digit numbers"
-                              className={input}
-                              value={formData.visaCardNumber}
-                              onChange={handleChange}
-                            />
-                          </div>
-                          <div className="w-[35%]">
-                            {/* <label className={label}>E-Mail</label> */}
-                            <input
-                              type="text"
-                              name="visaExpiryDate"
-                              placeholder="Expiry Date"
-                              className={input}
-                              value={formData.visaExpiryDate}
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </div>
-                        <div className="flex justify-between">
-                          <div className="w-[35%]">
-                            {/* <label className={label}>E-Mail</label> */}
-                            <input
-                              type="text"
-                              name="visaCvv"
-                              placeholder="cvv"
-                              className={input}
-                              value={formData.visaCvv}
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </div>
-                        {errors.paymentDetails && <p className="text-red-500 text-sm">{errors.paymentDetails}</p>}
-                      </div>
-                    )}
-                  </div>
-                  <div className="w-full h-[10px] bg-[#1A1A22]"></div>
-                  <div className="pt-4 pb-4 rounded-tl-lg border-gray-300 flex-col flex items-center justify-between">
-                    <div className="flex items-center justify-between w-[90%]">
-                      <img
-                        src="/aMastercard.png"
-                        alt="Game Vault Action"
-                        className="w-1/4 rounded-lg"
-                      />
-                      <span className="font-black text-sm text-[#1A1A22]">
-                        MasterCard
-                      </span>
-                      <button
-                        className={` font-black flex  w-[100px] items-center justify-between p-3 rounded ${selectedPayment === "MasterCard"
-                          ? "bg-white text-[#1A1A22]"
-                          : "bg-[#1A1A22] text-white"
-                          }`}
-                        onClick={() => setSelectedPayment("MasterCard")}
-                      >
-                        <span className="font-black text-sm ml-1 w-full">
-                          {selectedPayment === "MasterCard" ? "Selected" : "pay"}
-                        </span>
-                      </button>
-                    </div>
-                    {selectedPayment === "MasterCard" && (
-                      <div className="flex flex-col max-w-[90%] w-[90%]">
-                        <div className="flex justify-between">
-                          <div className="w-[60%]">
-                            {/* <label className={label}>E-Mail</label> */}
-                            <input
-                              type="text"
-                              name="cardNumber"
-                              placeholder="insert the 16 digit numbers"
-                              className={input}
-                              value={formData.cardNumber}
-                              onChange={handleChange}
-                            />
-                          </div>
-                          <div className="w-[35%]">
-                            {/* <label className={label}>E-Mail</label> */}
-                            <input
-                              type="text"
-                              name="expiryDate"
-                              placeholder="Expiry Date"
-                              className={input}
-                              value={formData.expiryDate}
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </div>
-                        <div className="flex justify-between">
-                          <div className="w-[35%]">
-                            {/* <label className={label}>E-Mail</label> */}
-                            <input
-                              type="text"
-                              name="cvv"
-                              placeholder="cvv"
-                              className={input}
-                              value={formData.cvv}
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </div>
-                        {errors.paymentDetails && <p className="text-red-500 text-sm">{errors.paymentDetails}</p>}
-                      </div>
-                    )}
-
-
-
-                  </div>
-
-                  <div className="w-full h-[10px] bg-[#1A1A22]"></div>
-                  <div className="pb-4 pt-4 rounded-tl-lg border-gray-300 flex items-center justify-around">
-                    <div className="flex items-center justify-between w-[90%]">
-                      <img
-                        src="/Paypal-Logo2.png"
-                        alt="Game Vault Action"
-                        className="w-1/4 rounded-lg"
-                      />
-                      <span className="font-black text-sm text-[#1A1A22]">PayPal</span>
-                      <button
-                        className={` font-black flex  w-[100px] items-center justify-between p-3 rounded ${selectedPayment === "PayPal"
-                          ? "bg-white text-[#1A1A22]"
-                          : "bg-[#1A1A22] text-white"
-                          }`}
-                        onClick={() => setSelectedPayment("PayPal")}
-                      >
-                        <span className="font-black text-sm ml-1 w-full">
-                          {selectedPayment === "PayPal" ? "Selected" : "pay"}
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-
-              </div>
-            </div>
-
-            {/* Submit Button */}
-            <button onClick={handleSubmit} className="mt-6 px-10 py-4 bg-[#F0ECEC] text-[#1A1A22] font-black rounded-3xl border-gray-600 border transition-colors duration-300 hover:bg-[#fff]">
-              SUBMIT
-            </button>
-          </form>
-        </div>
-      )}
-
-
-
-      {openToast === true && (
-        <div className=" min-h-screen flex flex-col font-sans bg-[#1A1A22] h-full">
-          <div className="flex flex-1 flex-col lg:flex-row">
-            <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
-              <img
-                src="/back.webp"
-                alt="Left Side"
-                className="absolute top-0 left-0 h-full w-full z-10 object-cover"
-                style={{
-                  clipPath: "polygon(0 0, 100% 0, 80% 100%, 0% 100%)",
-                }}
-              />
-              <div className="absolute top-0 right-0 w-full h-full z-20">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="none"
-                  className="w-full h-full"
+              
+              <div className="flex justify-between items-center">
+                <Link href="/basket">
+                  <button type="button" className="flex items-center bg-[#252530] hover:bg-[#3A3A4A] text-white px-6 py-3 rounded-full transition-colors">
+                    <ArrowLeft size={18} className="mr-2" />
+                    Back to Basket
+                  </button>
+                </Link>
+                
+                <button
+                  type="submit"
+                  className="bg-[#FFA800] hover:bg-[#e08800] px-8 py-3 text-white rounded-full font-bold transition-all duration-300 flex items-center"
+                  disabled={isProcessing}
                 >
-                  <polygon
-                    points="77.5,0 85,0 65,100 55,100"
-                    fill="rgba(255, 255, 255, 0.4)"
-                  />
-                  <polygon
-                    points="90,0 100,0 80,100 70,100"
-                    fill="rgba(255, 255, 255, 0.8)"
-                  />
-                </svg>
+                  {isProcessing ? (
+                    <>
+                      <div className="animate-spin mr-2 h-4 w-4 border-t-2 border-white rounded-full"></div>
+                      Processing...
+                    </>
+                  ) : (
+                    "Complete Order"
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+          
+          {/* Order Summary */}
+          <div className="lg:w-1/3">
+            <div className="bg-[#252530] border border-[#3A3A4A] rounded-lg p-6 sticky top-8">
+              <h2 className="text-xl font-bold mb-6">Order Summary</h2>
+              
+              <div className="max-h-80 overflow-y-auto mb-6">
+                {cart.map((item) => (
+                  <div key={item.id} className="flex items-center gap-4 mb-4 border-b border-[#3A3A4A] pb-4">
+                    <div className="w-16 h-16 overflow-hidden rounded-lg">
+                      <img 
+                        src={item.img || "/placeholder.svg"} 
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-medium text-white">{item.title}</h3>
+                      <div className="flex justify-between mt-1">
+                        <span className="text-gray-300">Qty: {item.quantity}</span>
+                        <span>${(item.price * item.quantity).toFixed(2)}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="flex justify-between items-center mb-4">
+                <span className="font-bold text-lg">Total</span>
+                <span className="font-bold text-lg">${totalAmount.toFixed(2)}</span>
               </div>
 
-            </div>
-            <div className="flex-1 flex flex-col items-center p-6 sm:p-4 lg:p-8 sm:w-full lg:w-1/2 min-h-screen justify-center">
-              <div className="flex">
-
-                <label style={{ "font-family": "Oswald" }} className="text-white text-3xl font-black">
-                  Your payment has been made successfully!
-                </label>
+              <div className="bg-[#1A1A22] p-4 rounded-lg text-gray-300 text-sm">
+                <p>Digital games will be delivered immediately to your delivery email after purchase.</p>
               </div>
-              <a href="/" className="mt-6 px-6 py-2 bg-[#D9D9D9] text-[#1A1A22] font-black rounded-3xl border-gray-600 border transition-colors duration-300 hover:bg-[#fff]">
-                HOME
-              </a>
             </div>
           </div>
         </div>
-      )}
-
+      </div>
     </div>
-
   );
-};
+}
 
-export default Checkout;
+export default CheckoutPage;

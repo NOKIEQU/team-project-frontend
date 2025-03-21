@@ -1,44 +1,22 @@
 "use client";
-import { useEffect, useState } from "react";
 
+import { Sun, Moon } from "lucide-react";
+import { useTheme } from "../../context/theme-context";
 
-const ThemeToggle = () => {
-  const [darkMode, setDarkMode] = useState(true);
-
-
-  useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    if (theme === "dark") {
-      setDarkMode(true);
-    } else if (theme === "light") {
-      setDarkMode(false);
-    }
-  }, []);
-
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
+export default function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <div
-      className="relative w-16 h-8 flex items-center dark:bg-gray-800 bg-white cursor-pointer rounded-full p-1"
-      onClick={() => setDarkMode(!darkMode)}
+    <button
+      onClick={toggleTheme}
+      className="flex items-center justify-center p-2 rounded-full bg-[#3A3A4A] hover:bg-[#4A4A5A] transition-colors duration-200"
+      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
-   
-      <div
-        className={`absolute w-6 h-6 bg-white dark:bg-gray-800 rounded-full shadow-md transform transition-all duration-300 ease-in-out ${
-          darkMode ? "translate-x-8" : "translate-x-0"
-        }`}
-      ></div>
-    </div>
+      {theme === "dark" ? (
+        <Sun size={20} className="text-[#FFA800]" />
+      ) : (
+        <Moon size={20} className="text-[#FFA800]" />
+      )}
+    </button>
   );
-};
-
-export default ThemeToggle;
+}
