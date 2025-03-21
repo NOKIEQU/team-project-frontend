@@ -60,27 +60,24 @@ function AdminPage() {
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar */}
-      <div className="bg-gray-950 text-white w-64 flex flex-col p-5 space-y-4">
+      {/* Sidebar - Changed to a darker color */}
+      <div className="bg-[#0F0F15] text-white w-64 flex flex-col p-5 space-y-4 border-r border-[#2A2A35]">
         <nav className="space-y-2">
           <SidebarLink
             href="/admin"
-            icon={<LayoutDashboard />}
+            icon={<LayoutDashboard className="text-[#fa9a00ef]" />}
             text="Dashboard"
           />
-          <SidebarLink href="/adminGames" icon={<Gamepad2 />} text="Games" />
-          <SidebarLink href="/adminUsers" icon={<BarChart />} text="Users" />
-          <SidebarLink href="/adminGenres" icon={<Layers />} text="Genres" />
-          <SidebarLink href="/adminOrders" icon={<Layers />} text="Orders" />
-
+          <SidebarLink href="/adminGames" icon={<Gamepad2 className="text-[#fa9a00ef]" />} text="Games" />
+          <SidebarLink href="/adminUsers" icon={<BarChart className="text-[#fa9a00ef]" />} text="Users" />
+          <SidebarLink href="/adminGenres" icon={<Layers className="text-[#fa9a00ef]" />} text="Genres" />
+          <SidebarLink href="/adminOrders" icon={<Layers className="text-[#fa9a00ef]" />} text="Orders" />
         </nav>
       </div>
 
-      {/* Main Content Container */}
-      <div className="bg-gray-100 flex-1 flex flex-col p-6">
-        <h1 className="text-gray-900 text-3xl font-bold">Dashboard</h1>
+      <div className="bg-[#1A1A22] flex-1 flex flex-col p-6">
+        <h1 className="text-white text-3xl font-bold">Dashboard</h1>
 
-        {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
           <StatCard title="Total Games" value="2,845" icon={<Gamepad2 />} />
           <StatCard
@@ -92,48 +89,21 @@ function AdminPage() {
           <StatCard title="Active Users" value="2,573" icon={<Activity />} />
         </div>
 
-        {/* Recent Sales Table */}
-        <div className="bg-white p-6 mt-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold text-gray-900">Recent Sales</h2>
-          <p className="text-sm text-black">
-            This Month: $54,231 (+8% from last month)
-          </p>
-          <p className="text-gray-600 text-sm mb-4">
-            You made 265 sales this month.
+        {/* Recent Activity Section */}
+        <div className="bg-[#252530] border border-[#3A3A4A] p-6 mt-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold text-white">Recent Activity</h2>
+          <p className="text-gray-400 text-sm mb-6">
+            Monitor the latest activities across your platform
           </p>
 
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-gray-200 text-gray-700">
-                  <th className="p-3 text-left">Order ID</th>
-                  <th className="p-3 text-left">Game</th>
-                  <th className="p-3 text-left">Customer</th>
-                  <th className="p-3 text-left">Date Purchased</th>
-                  <th className="p-3 text-left">Amount</th>
-                  <th className="p-3 text-left">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map((order) =>
-                  order.orderItems.map((item, index) => (
-                    <tr
-                      key={index}
-                      className="border-t text-gray-800 hover:bg-gray-200"
-                    >
-                      <td className="p-3">{order.id}</td>
-                      <td className="p-3">{item.product.title}</td>
-                      <td className="p-3">{order.userId}</td>
-                      <td className="p-3">
-                        {new Date(order.createdAt).toLocaleDateString()}
-                      </td>
-                      <td className="p-3 font-semibold">${item.price}</td>
-                      <td className="p-3">{order.status || "Pending"}</td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+          <div className="flex flex-col items-center justify-center py-10">
+            <Activity size={48} className="text-[#3A3A4A] mb-4" />
+            <p className="text-gray-400 text-center">
+              No activity to display yet. Activity will appear here when users interact with your platform.
+            </p>
+            <button className="mt-6 bg-[#fa9a00ef] hover:bg-[#e08800] px-6 py-2 text-white rounded-full font-medium transition-all duration-300">
+              Refresh Activity
+            </button>
           </div>
         </div>
       </div>
@@ -144,9 +114,9 @@ function AdminPage() {
 // Stats Card Component
 function StatCard({ title, value, icon }) {
   return (
-    <div className="bg-gray-950 text-white p-4 rounded-xl shadow-md flex items-center space-x-4">
+    <div className="bg-[#252530] border border-[#3A3A4A] text-white p-4 rounded-xl shadow-md flex items-center space-x-4">
       {/* Icon */}
-      <div className="bg-white bg-opacity-20 p-4 rounded-full text-3xl text-white">
+      <div className="bg-[#3A3A4A] p-4 rounded-full text-3xl text-[#fa9a00ef]">
         {icon}
       </div>
 
