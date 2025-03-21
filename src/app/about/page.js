@@ -197,7 +197,7 @@ const About = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a22] to-transparent z-10"></div>
                 <div className="w-full h-full">
                   <img 
-                    src="/images/mission.jpg" 
+                    src="/images/ourmission.jpg" 
                     alt="Gaming community" 
                     className="w-full h-full object-cover"
                     onError={(e) => {
