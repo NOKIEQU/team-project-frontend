@@ -207,8 +207,6 @@ export default function QuizForm() {
       setCurrentSelection('');
       setSelectedGenres([]);
       setSubmitError('');
-
-      // router.push('/questionnaire');
     } catch (error) {
       console.error('Error submitting quiz:', error);
       setSubmitError('Something went wrong to Resetting. Please try again.');
