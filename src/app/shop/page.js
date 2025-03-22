@@ -254,7 +254,7 @@ function ShopPage() {
         </Link>
         <div className="p-4 mt-4 flex justify-between items-center border-t border-[#3A3A4A] pt-3">
           <span className="text-lg font-bold text-white whitespace-nowrap">
-            ${parseFloat(game.price).toFixed(2)}
+            £{parseFloat(game.price).toFixed(2)}
           </span>
 
           {cartItem ? (
@@ -277,7 +277,7 @@ function ShopPage() {
             </div>
           ) : (
             <button
-              className="bg-[#FFA800] hover:bg-[#e08800] px-5 py-2 text-black rounded-full font-bold transition-all duration-200"
+              className="bg-[#FFA800] hover:bg-[#e08800] px-5 py-2 text-white rounded-full font-bold transition-all duration-200"
               onClick={(e) => {
                 e.preventDefault();
                 handleAddToCart(game);
@@ -337,11 +337,11 @@ function ShopPage() {
                           ))}
                         </div>
                         <span className="text-lg font-bold text-white">
-                          ${parseFloat(game.price).toFixed(2)}
+                          £{parseFloat(game.price).toFixed(2)}
                         </span>
                       </div>
                       <button
-                        className="mt-3 w-full bg-[#FFA800] hover:bg-[#e08800] text-black py-2 rounded-full font-bold transition"
+                        className="mt-3 w-full bg-[#FFA800] hover:bg-[#e08800] text-white py-2 rounded-full font-bold transition"
                         onClick={(e) => {
                           e.preventDefault();
                           handleAddToCart(game);
@@ -435,7 +435,7 @@ function ShopPage() {
           <div className="mb-6">
             <h3 className="text-lg text-white font-semibold mb-3">Price Range</h3>
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-gray-400">$</span>
+              <span className="text-gray-400">£</span>
               <input
                 type="number"
                 value={minPriceRange}
@@ -445,7 +445,7 @@ function ShopPage() {
               />
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-gray-400">$</span>
+              <span className="text-gray-400">£</span>
               <input
                 type="number"
                 value={maxPriceRange}

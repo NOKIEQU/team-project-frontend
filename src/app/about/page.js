@@ -3,70 +3,29 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Instagram, Twitter, Linkedin, Facebook, MessageCircle, Youtube, Shield, Users, Zap, Gift, Headphones, Globe } from "lucide-react";
+import { ChevronLeft, ChevronRight, Shield, Users, Zap, Gift, Headphones, Globe } from "lucide-react";
 
 const About = () => {
-  // Social media links
-  const socialLinks = [
-    {
-      id: 1,
-      icon: <Instagram size={48} />,
-      title: "Instagram",
-      link: "https://instagram.com"
-    },
-    {
-      id: 2,
-      icon: <Twitter size={48} />,
-      title: "Twitter",
-      link: "https://twitter.com"
-    },
-    {
-      id: 3,
-      icon: <Linkedin size={48} />,
-      title: "LinkedIn",
-      link: "https://linkedin.com"
-    },
-    {
-      id: 4,
-      icon: <Facebook size={48} />,
-      title: "Facebook",
-      link: "https://facebook.com"
-    },
-    {
-      id: 5,
-      icon: <MessageCircle size={48} />,
-      title: "TikTok",
-      link: "https://tiktok.com"
-    },
-    {
-      id: 6,
-      icon: <Youtube size={48} />,
-      title: "YouTube",
-      link: "https://youtube.com"
-    },
-  ];
-
-  // Timeline data
   const timeline = [
     {
-      year: "2022",
-      title: "The Idea",
+      year: "Sep 2024",
+      title: "The Beginning",
       description: "GameVault began as a concept to create a modern gaming marketplace with a focus on curation and community."
     },
     {
-      year: "2023",
+      year: "Nov 2024",
       title: "Development",
       description: "Our team worked tirelessly to build the platform, focusing on user experience and a robust backend system."
     },
     {
-      year: "2024",
-      title: "Launch",
-      description: "GameVault officially launched, offering a carefully selected catalog of games across multiple genres and platforms."
+      year: "Jan 2025",
+      title: "Testing Phase",
+      description: "GameVault entered extensive testing, ensuring a seamless experience for our future users."
     },
     {
-      year: "2025",
-      title: "Growth",
-      description: "With a growing community and expanding game library, GameVault continues to evolve with new features and partnerships."
+      year: "Mar 2025",
+      title: "Launch",
+      description: "GameVault officially launched, offering a carefully selected catalog of games across multiple genres and platforms."
     }
   ];
 
@@ -83,28 +42,27 @@ const About = () => {
       name: "James Wilson",
       role: "Casual Gamer",
       quote: "GameVault has completely changed how I discover new games. The curation is spot-on and I've found so many hidden gems I would've missed otherwise.",
-      image: "/images/testimonials/james.jpg"
+      image: "/images/james.jpg"
     },
     {
       id: 2,
       name: "Elena Kim",
       role: "Competitive Player",
       quote: "As someone who takes gaming seriously, I appreciate the detailed information GameVault provides about each title. Their service is reliable and fast.",
-      image: "/images/testimonials/elena.jpg"
+      image: "/images/elena.jpg"
     },
     {
       id: 3,
       name: "Marcus Thompson",
       role: "Game Collector",
       quote: "The collector editions and special releases section on GameVault is unmatched. I've completed collections I've been working on for years.",
-      image: "/images/testimonials/marcus.jpg"
+      image: "/images/marcus.jpg"
     }
   ];
 
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-scroll testimonials
   useEffect(() => {
     if (!isPaused) {
       const interval = setInterval(() => {
@@ -165,18 +123,21 @@ const About = () => {
             </div>
             <div className="bg-[#252530] border border-[#3A3A4A] rounded-lg p-6 hover:border-[#f6a302] transition-all duration-300">
               <div className="space-y-6">
-                {timeline.map((item, index) => (
-                  <div key={index} className="flex">
-                    <div className="mr-4 flex flex-col items-center">
-                      <div className="w-10 h-10 rounded-full bg-[#f6a302] flex items-center justify-center font-bold">{item.year}</div>
-                      {index < timeline.length - 1 && <div className="w-0.5 h-full bg-[#3A3A4A] mt-2"></div>}
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-bold text-white">{item.title}</h4>
-                      <p className="text-gray-400 mt-1">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
+              {timeline.map((item, index) => (
+  <div key={index} className="flex">
+    <div className="mr-4 flex flex-col items-center">
+      <div className="w-12 h-12 rounded-full bg-[#f6a302] flex flex-col items-center justify-center font-bold text-white text-center text-sm">
+        <span>{item.year.split(' ')[0]}</span>
+        <span>{item.year.split(' ')[1]}</span>
+      </div>
+      {index < timeline.length - 1 && <div className="w-0.5 h-full bg-[#3A3A4A] mt-2"></div>}
+    </div>
+    <div>
+      <h4 className="text-xl font-bold text-white">{item.title}</h4>
+      <p className="text-gray-400 mt-1">{item.description}</p>
+    </div>
+  </div>
+))}
               </div>
             </div>
           </div>
@@ -223,20 +184,20 @@ const About = () => {
         </div>
       </div>
 
-      {/* Stats Section */}
-      <div className="container mx-auto px-4 py-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
-            <div key={index} className="bg-[#252530] border border-[#3A3A4A] rounded-lg p-6 text-center hover:border-[#f6a302] transition-all duration-300 hover:transform hover:scale-105">
-              <div className="flex justify-center mb-4 text-[#f6a302]">
-                {stat.icon}
-              </div>
-              <h3 className="text-3xl md:text-4xl font-bold text-[#f6a302]">{stat.value}</h3>
-              <p className="text-gray-400 mt-2">{stat.label}</p>
-            </div>
-          ))}
+{/* Stats Section */}
+<div className="container mx-auto px-4 py-20">
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+    {stats.map((stat, index) => (
+      <div key={index} className="bg-[#252530] border border-[#3A3A4A] rounded-lg p-6 text-center hover:border-[#f6a302] transition-all duration-300 hover:transform hover:scale-105">
+        <div className="flex justify-center mb-4 text-[#f6a302]">
+          {stat.icon}
         </div>
+        <h3 className="text-3xl md:text-4xl font-bold text-white">{stat.value}</h3>
+        <p className="text-gray-400 mt-2">{stat.label}</p>
       </div>
+    ))}
+  </div>
+</div>
 
       {/* Testimonials */}
       <div className="container mx-auto px-4 py-20">
@@ -392,39 +353,6 @@ const About = () => {
                 Shop now
               </button>
             </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Social Media Section */}
-      <div className="w-full bg-[#1a1a22] pt-24 pb-20">
-        <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-full text-white">
-          <div className="h-auto flex flex-col items-center">
-            <p className="text-4xl font-bold text-white">
-              Keep Up to Date
-            </p>
-            <div className="bg-[#f6a302] h-2 rounded-full w-2/6 mt-2 transition-all hover:w-4/6"></div>
-          </div>
-          <p className="py-6 text-lg text-center">
-            Stay connected and informed by following us on social media for the latest news,
-            offers, and gaming updates.
-          </p>
-
-          <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-8 text-center py-8 px-12 sm:px-0">
-            {socialLinks.map(({ id, icon, title, link }) => (
-              <a 
-                href={link}
-                key={id}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#252530] border border-[#3A3A4A] rounded-lg py-6 hover:scale-105 duration-500 hover:border-[#f6a302] transition-all"
-              >
-                <div className="flex justify-center text-[#f6a302]">
-                  {icon}
-                </div>
-                <p className="mt-4 text-white">{title}</p>
-              </a>
-            ))}
           </div>
         </div>
       </div>

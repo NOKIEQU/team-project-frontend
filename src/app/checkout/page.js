@@ -153,7 +153,7 @@ function CheckoutPage() {
             </div>
             <div className="flex justify-between mb-2">
               <span className="text-gray-400">Total Amount:</span>
-              <span className="font-medium">${totalAmount.toFixed(2)}</span>
+              <span className="font-medium">£{totalAmount.toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-400">Delivery Email:</span>
@@ -249,7 +249,7 @@ function CheckoutPage() {
                 <h2 className="text-xl font-bold mb-6">Payment Information</h2>
                 <div className="flex flex-wrap gap-4 mb-6">
                   <div 
-                    className={`flex items-center gap-2 bg-[#1A1A22] px-4 py-3 rounded-lg cursor-pointer ${paymentMethod === 'creditCard' ? 'border-2 border-[#FFA800]' : 'border border-[#3A3A4A]'}`}
+                    className={`flex items-center gap-2 bg-[#1A1A22] px-4 py-3 rounded-lg cursor-pointer £{paymentMethod === 'creditCard' ? 'border-2 border-[#FFA800]' : 'border border-[#3A3A4A]'}`}
                     onClick={() => handlePaymentMethodChange('creditCard')}
                   >
                     <input 
@@ -267,7 +267,7 @@ function CheckoutPage() {
                   </div>
                   
                   <div 
-                    className={`flex items-center gap-2 bg-[#1A1A22] px-4 py-3 rounded-lg cursor-pointer ${paymentMethod === 'paypal' ? 'border-2 border-[#FFA800]' : 'border border-[#3A3A4A]'}`}
+                    className={`flex items-center gap-2 bg-[#1A1A22] px-4 py-3 rounded-lg cursor-pointer £{paymentMethod === 'paypal' ? 'border-2 border-[#FFA800]' : 'border border-[#3A3A4A]'}`}
                     onClick={() => handlePaymentMethodChange('paypal')}
                   >
                     <input 
@@ -285,7 +285,7 @@ function CheckoutPage() {
                   </div>
                   
                   <div 
-                    className={`flex items-center gap-2 bg-[#1A1A22] px-4 py-3 rounded-lg cursor-pointer ${paymentMethod === 'giftCard' ? 'border-2 border-[#FFA800]' : 'border border-[#3A3A4A]'}`}
+                    className={`flex items-center gap-2 bg-[#1A1A22] px-4 py-3 rounded-lg cursor-pointer £{paymentMethod === 'giftCard' ? 'border-2 border-[#FFA800]' : 'border border-[#3A3A4A]'}`}
                     onClick={() => handlePaymentMethodChange('giftCard')}
                   >
                     <input 
@@ -434,7 +434,7 @@ function CheckoutPage() {
                       <h3 className="font-medium text-white">{item.title}</h3>
                       <div className="flex justify-between mt-1">
                         <span className="text-gray-300">Qty: {item.quantity}</span>
-                        <span>${(item.price * item.quantity).toFixed(2)}</span>
+                        <span>£{(item.price * item.quantity).toFixed(2)}</span>
                       </div>
                     </div>
                   </div>
@@ -443,7 +443,7 @@ function CheckoutPage() {
               
               <div className="flex justify-between items-center mb-4">
                 <span className="font-bold text-lg">Total</span>
-                <span className="font-bold text-lg">${totalAmount.toFixed(2)}</span>
+                <span className="font-bold text-lg">£{totalAmount.toFixed(2)}</span>
               </div>
 
               <div className="bg-[#1A1A22] p-4 rounded-lg text-gray-300 text-sm">

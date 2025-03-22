@@ -122,7 +122,7 @@ function AccountPage() {
   return (
     <div className="min-h-screen bg-[#1a1a22] text-white">
       {showNotification && (
-        <div className="fixed top-4 right-4 bg-[#FFA800] text-black px-6 py-3 rounded-xl shadow-lg z-50 flex items-center">
+        <div className="fixed top-4 right-4 bg-[#FFA800] text-white px-6 py-3 rounded-xl shadow-lg z-50 flex items-center">
           <span className="mr-2">✓</span>
           Profile updated successfully!
         </div>
@@ -192,7 +192,10 @@ function AccountPage() {
                 ))}
  
                 <button
-                  onClick={() => logout()}
+                  onClick={() => {
+                    logout();
+                    router.push('/'); // This will redirect to home page after logout
+                  }}
                   className="w-full px-6 py-5 flex items-center gap-4 text-left hover:bg-[#2C2C38] transition-colors text-red-400 hover:text-red-300"
                 >
                   <LogOut size={20} />
@@ -278,7 +281,7 @@ function AccountPage() {
                   <div className="flex justify-end">
                     <button
                       onClick={handleSave}
-                      className="px-6 py-3 bg-[#FFA800] text-black rounded-lg font-semibold hover:bg-[#e08800] transition-colors"
+                      className="px-6 py-3 bg-[#FFA800] text-white rounded-lg font-semibold hover:bg-[#e08800] transition-colors"
                     >
                       Save Changes
                     </button>
@@ -305,7 +308,7 @@ function AccountPage() {
                     <h3 className="text-xl font-medium mb-2">No orders yet</h3>
                     <p className="text-gray-400 mb-6">You haven't placed any orders yet.</p>
                     <Link href="/shop">
-                      <button className="px-6 py-3 bg-[#FFA800] text-black rounded-lg font-semibold hover:bg-[#e08800] transition-colors">
+                      <button className="px-6 py-3 bg-[#FFA800] text-white rounded-lg font-semibold hover:bg-[#e08800] transition-colors">
                         Browse Games
                       </button>
                     </Link>
@@ -325,7 +328,7 @@ function AccountPage() {
                   </div>
                   <h3 className="text-xl font-medium mb-2">No payment methods yet</h3>
                   <p className="text-gray-400 mb-6">Add a payment method for faster checkout.</p>
-                  <button className="px-6 py-3 bg-[#FFA800] text-black rounded-lg font-semibold hover:bg-[#e08800] transition-colors">
+                  <button className="px-6 py-3 bg-[#FFA800] text-white rounded-lg font-semibold hover:bg-[#e08800] transition-colors">
                     Add Payment Method
                   </button>
                 </div>
