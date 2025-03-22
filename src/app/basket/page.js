@@ -52,7 +52,7 @@ const BasketPage = () => {
               </div>
               <span className="font-medium text-white">{item.title}</span>
             </div>
-            <div className="text-center">${item.price.toFixed(2)}</div>
+            <div className="text-center">£{item.price.toFixed(2)}</div>
             <div className="col-span-2 flex items-center justify-center">
               <div className="flex items-center bg-[#252530] border border-[#3A3A4A] rounded-full px-3 py-1">
                 <button
@@ -73,7 +73,7 @@ const BasketPage = () => {
               </div>
             </div>
             <div className="text-right flex items-center justify-end">
-              <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
+              <span className="font-medium">£{(item.price * item.quantity).toFixed(2)}</span>
               <button
                 className="ml-6 text-gray-400 hover:text-red-500 transition-colors"
                 onClick={() => removeFromCart(item.id)}
@@ -100,7 +100,7 @@ const BasketPage = () => {
               </div>
               <div>
                 <h3 className="font-medium text-white">{item.title}</h3>
-                <p className="text-gray-300">${item.price.toFixed(2)}</p>
+                <p className="text-gray-300">£{item.price.toFixed(2)}</p>
               </div>
             </div>
             
@@ -124,7 +124,7 @@ const BasketPage = () => {
               </div>
               
               <div className="flex items-center">
-                <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
+                <span className="font-medium">£{(item.price * item.quantity).toFixed(2)}</span>
                 <button
                   className="ml-4 text-gray-400 hover:text-red-500 transition-colors"
                   onClick={() => removeFromCart(item.id)}
@@ -155,17 +155,17 @@ const BasketPage = () => {
           <div className="space-y-4 border-b border-[#3A3A4A] pb-4 mb-4">
             <div className="flex justify-between">
               <span className="text-gray-300">Subtotal</span>
-              <span>${getCartTotal().toFixed(2)}</span>
+              <span>£{getCartTotal().toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-300">Shipping</span>
-              <span>${deliveryCharge.toFixed(2)}</span>
+              <span>£{deliveryCharge.toFixed(2)}</span>
             </div>
           </div>
           
           <div className="flex justify-between items-center">
             <span className="font-bold text-lg">Total</span>
-            <span className="font-bold text-lg">${totalAmount.toFixed(2)}</span>
+            <span className="font-bold text-lg">£{totalAmount.toFixed(2)}</span>
           </div>
           
           <Link href="/checkout">

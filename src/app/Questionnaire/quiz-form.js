@@ -2,12 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useUser } from '../../context/user-context';
 import Question from './question';
 
-// TODO: will remove it cause it's not needed
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
 export default function QuizForm() {
+  const { user } = useUser();
   const router = useRouter();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [quizData, setQuizData] = useState({
@@ -134,29 +133,29 @@ export default function QuizForm() {
 
     setIsSubmitting(true);
     setSubmitError('');
-    await sleep(2000);
 
     try {
-      console.log('🚀 ~ handleSubmit ~ finalData:', finalData);
+      const response = await fetch(
+        'http://51.77.110.253:3001/api/questionnaire',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify(finalData),
+        }
+      );
 
-      // TODO: will do this later
-      //   const response = await fetch('http://localhost:3001/api/questionnaire', {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify(finalData),
-      //   });
-
-      //   if (!response.ok) {
-      //     throw new Error('Failed to submit quiz');
-      //   }
+      if (!response.ok) {
+        throw new Error('Failed to submit quiz');
+      }
 
       // Navigate to the home page
       router.push('/');
     } catch (error) {
       console.error('Error submitting quiz:', error);
-      setSubmitError('Failed to submit quiz. Please try again.');
+      setSubmitError('You have Already Submitted the Quiz.');
     } finally {
       setIsSubmitting(false);
     }
@@ -175,6 +174,46 @@ export default function QuizForm() {
       }
 
       setCurrentQuestion(currentQuestion - 1);
+    }
+  };
+
+  // handle resetting the quiz
+  const handleReset = async () => {
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(
+        'http://51.77.110.253:3001/api/questionnaire',
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to submit quiz');
+      }
+
+      // reset all the states
+      setCurrentQuestion(0);
+      setQuizData({
+        favoriteGenres: [],
+        isAdult: '',
+        gamePlayPreference: '',
+      });
+      setCurrentSelection('');
+      setSelectedGenres([]);
+      setSubmitError('');
+
+      // router.push('/questionnaire');
+    } catch (error) {
+      console.error('Error submitting quiz:', error);
+      setSubmitError('Something went wrong to Resetting. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -226,11 +265,43 @@ export default function QuizForm() {
         >
           <p>{submitError}</p>
         </div>
+
         <button
-          onClick={() => setSubmitError('')}
-          className="w-full px-6 py-2 bg-[#F0ECEC] text-[#1A1A22] font-medium rounded-lg hover:bg-gray-200 transition-colors duration-200"
+          onClick={handleReset}
+          disabled={isSubmitting}
+          className={`w-full px-6 py-2 rounded-lg font-medium ${
+            !isSubmitting
+              ? 'bg-[#F0ECEC] text-[#1A1A22] hover:bg-gray-200'
+              : 'bg-gray-700 text-gray-500 cursor-not-allowed'
+          } transition-colors duration-200 flex items-center justify-center`}
         >
-          Try Again
+          {isSubmitting ? (
+            <>
+              <svg
+                className="animate-spin -ml-1 mr-2 h-4 w-4 text-[#1A1A22]"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              Resetting...
+            </>
+          ) : (
+            'Reset Quiz'
+          )}
         </button>
       </div>
     );
