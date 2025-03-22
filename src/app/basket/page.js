@@ -8,8 +8,7 @@ import { useCart } from "../../context/cart-context";
 const BasketPage = () => {
   const { cart, removeFromCart, updateQuantity, getCartTotal } = useCart();
   
-  const deliveryCharge = 4.95;
-  const totalAmount = getCartTotal() + deliveryCharge;
+  const totalAmount = getCartTotal();
 
   if (cart.length === 0) {
     return (
@@ -157,9 +156,9 @@ const BasketPage = () => {
               <span className="text-gray-300">Subtotal</span>
               <span>£{getCartTotal().toFixed(2)}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-gray-300">Shipping</span>
-              <span>£{deliveryCharge.toFixed(2)}</span>
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-300">Digital Downloads</span>
+              <span className="text-green-400">Instant Delivery</span>
             </div>
           </div>
           

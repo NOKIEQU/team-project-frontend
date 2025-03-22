@@ -295,8 +295,8 @@ function Product() {
                 </div>
               </div>
               
-              <div className="text-2xl font-bold text-[#FFA800] mb-6">
-                ${parseFloat(game.price).toFixed(2)}
+              <div className="text-2xl font-bold text-white mb-6">
+                £{parseFloat(game.price).toFixed(2)}
               </div>
               
               <p className="text-gray-300 mb-8">
@@ -336,7 +336,7 @@ function Product() {
                         Update Cart
                       </button>
                       <Link href="/basket">
-                        <button className="px-6 py-3 bg-[#FFA800] hover:bg-[#e08800] text-black rounded-full font-semibold transition-colors duration-200 flex items-center justify-center">
+                        <button className="px-6 py-3 bg-[#FFA800] hover:bg-[#e08800] text-white rounded-full font-semibold transition-colors duration-200 flex items-center justify-center">
                           View Cart
                         </button>
                       </Link>
@@ -344,7 +344,7 @@ function Product() {
                   ) : (
                     <button
                       onClick={handleAddToCart}
-                      className="w-full px-6 py-3 bg-[#FFA800] hover:bg-[#e08800] text-black rounded-full font-semibold transition-colors duration-200 flex items-center justify-center"
+                      className="w-full px-6 py-3 bg-[#FFA800] hover:bg-[#e08800] text-white rounded-full font-semibold transition-colors duration-200 flex items-center justify-center"
                     >
                       <ShoppingCart size={18} className="mr-2" />
                       Add to Cart
@@ -381,12 +381,12 @@ function Product() {
         
         {/* Reviews Section */}
         <div className="mt-16">
-          <div className="bg-[#252530] rounded-xl border border-[#3A3A4A] p-8">
+          <div className="bg-[#252530] rounded-xl border border-[#3A3A4A] p-2">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
-              <h2 className="text-3xl font-bold text-[#FFA800]">Customer Reviews</h2>
+              <h2 className="text-xl font-bold text-[#FFA800]">Customer Reviews</h2>
               {!showReviewForm && (
                 <button
-                  className="px-6 py-3 bg-[#FFA800] hover:bg-[#FF7A00] text-black rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                  className="px-6 py-3 bg-[#FFA800] hover:bg-[#FF7A00] text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                   onClick={() => setShowReviewForm(true)}
                 >
                   Write a Review
@@ -396,7 +396,7 @@ function Product() {
             
             {/* Review Form */}
             {showReviewForm && (
-              <div className="bg-[#1A1A22] p-6 rounded-lg mb-8 border border-[#3A3A4A]">
+              <div className="bg-[#1A1A22] p-2 rounded-lg mb-8 border border-[#3A3A4A]">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-xl font-semibold">Write Your Review</h3>
                   <button
@@ -447,7 +447,7 @@ function Product() {
                     </button>
                     <button
                       type="submit"
-                      className="px-8 py-3 bg-[#FFA800] hover:bg-[#FF7A00] text-black rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                      className="px-8 py-3 bg-[#FFA800] hover:bg-[#FF7A00] text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                     >
                       Submit Review
                     </button>
