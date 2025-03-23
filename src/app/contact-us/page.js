@@ -8,7 +8,8 @@ function RegisterPage() {
         "w-full px-3 py-2 bg-transparent border-b-2 border-[#F0ECEC] text-white text-sm outline-none";
     const label = "text-white font-bold text-sm mb-1 block";
     const button =
-        "w-full py-3 bg-[#F0ECEC] text-[#1c1c1c] rounded-full font-bold text-lg transition-colors duration-300 hover:bg-[#fff]";
+       "w-full px-3 py-2 bg-[#FF8C00] text-white rounded-full font-bold hover:bg-[#FFA500] hover:shadow-[0_0_10px_rgba(255,140,0,0.5)] transition-all duration-300 transform hover:scale-[1.02]";
+
     const form =
         "flex-1 flex flex-col items-center p-6 sm:p-4 lg:p-8 sm:w-full lg:w-1/2";
 
@@ -65,6 +66,8 @@ function RegisterPage() {
 
     return (
         <div className="flex flex-col font-sans bg-[#1A1A22] min-h-screen">
+                                <div className="absolute w-96 h-96 rounded-full bg-[#FF8C00] filter blur-[100px] opacity-20 animate-pulse top-2/4 -right-48"></div>
+
             <div className="flex flex-1 flex-col lg:flex-row">
                 {/* Left Side */}
                 <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
@@ -100,11 +103,12 @@ function RegisterPage() {
                 {/* openToast */}
                 {openToast === false && (
                     <div className={form} scale-110>
-                        <h2 className="text-white text-2xl font-bold mb-4 text-center pt-12 pb-2">
+                        <h2 className="text-white text-2xl font-bold  text-center pt-12 pb-2">
                             CONTACT US
                         </h2>
-                        <div className="w-24 h-1 bg-[#F0ECEC] mx-auto mb-6"></div>
-                        <p  className="text-white text-left pb-4  justify-left block">
+                        <div className="w-32 h-1 bg-[#FF8C00] rounded-full mb-4 mx-auto transition-all hover:w-1/4"></div>
+
+                        <p  className="text-[#FF8C00] hover:text-[#FFA500] transition-colors duration-300  font-bold text-sm">
                             Fill out this form and our team will contact you shortly
                         </p>
                         <form className="w-full max-w-md mt-3" onSubmit={handleSubmit}>
