@@ -143,7 +143,7 @@ function CheckoutPage() {
 
   if (cart.length === 0 && !isOrderComplete) {
     return (
-      <div className="bg-[#1A1A22] min-h-screen text-white p-6 lg:p-16 flex flex-col items-center justify-center">
+      <div className="bg-[#1A1A22] min-h-screen text-white p-6 lg:p-16 flex flex-col items-center justify-center font-oswald">
         <h1 className="text-3xl font-bold mb-4">Your basket is empty</h1>
         <p className="text-gray-400 mb-8">You need to add games to your basket before checkout.</p>
         <Link href="/shop">
@@ -159,7 +159,7 @@ function CheckoutPage() {
   // Order complete screen
   if (isOrderComplete) {
     return (
-      <div className="bg-[#1A1A22] min-h-screen text-white p-6 lg:p-16 flex flex-col items-center justify-center">
+      <div className="bg-[#1A1A22] min-h-screen text-white p-6 lg:p-16 flex flex-col items-center justify-center font-oswald">
         <div className="bg-[#252530] border border-[#3A3A4A] rounded-lg p-8 max-w-md w-full">
           <div className="flex justify-center mb-6">
             <div className="bg-green-500 p-4 rounded-full">
@@ -198,7 +198,7 @@ function CheckoutPage() {
   }
   
   return (
-    <div className="bg-[#1A1A22] min-h-screen text-white p-6 lg:p-16">
+    <div className="bg-[#1A1A22] min-h-screen text-white p-6 lg:p-16 font-oswald">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center gap-6 mb-8">
           <div className="bg-[#F0ECEC]/10 p-2 rounded-full">
