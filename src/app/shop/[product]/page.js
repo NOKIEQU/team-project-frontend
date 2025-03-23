@@ -728,7 +728,7 @@ function Product() {
                       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
                         <div className="flex items-center">
                           <div className="w-10 h-10 rounded-full bg-[#3A3A4A] flex items-center justify-center text-xl font-bold text-[#FFA800] mr-3">
-                            {review.user?.username?.charAt(0).toUpperCase() || "U"}
+                            {review.user?.firstName?.charAt(0).toUpperCase() || "U"}
                           </div>
                           <div>
                             <div className="font-semibold">{review.user?.firstName || "Anonymous"}</div>
