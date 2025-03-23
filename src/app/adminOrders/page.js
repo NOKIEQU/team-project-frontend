@@ -4,6 +4,7 @@ import {
   LayoutDashboard,
   Gamepad2,
   Layers,
+  Warehouse,
   Users,
   SearchCode,
   ShoppingCart,
@@ -142,6 +143,11 @@ function AdminOrders() {
             href="/adminOrders" 
             icon={<ShoppingCart className="text-[#fa9a00ef]" />} 
             text="Orders" 
+          />
+          <SidebarLink 
+          href="/adminInventory" 
+          icon={<Warehouse className="text-[#fa9a00ef]" />} 
+          text="Inventory" 
           />
         </nav>
       </div>

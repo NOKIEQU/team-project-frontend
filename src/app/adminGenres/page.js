@@ -8,6 +8,7 @@ import {
   SearchCode,
   ShoppingCart,
   Activity,
+  Warehouse,
   Trash2,
   Edit,
 } from "lucide-react";
@@ -216,6 +217,11 @@ function AdminGenres() {
             href="/adminOrders" 
             icon={<ShoppingCart className="text-[#fa9a00ef]" />} 
             text="Orders" 
+          />
+          <SidebarLink 
+          href="/adminInventory" 
+          icon={<Warehouse className="text-[#fa9a00ef]" />} 
+          text="Inventory" 
           />
         </nav>
       </div>
