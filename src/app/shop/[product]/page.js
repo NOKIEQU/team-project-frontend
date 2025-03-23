@@ -806,7 +806,7 @@ function Product() {
             <h2 className="text-2xl font-bold text-white mb-8">You Might Also Like</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedGames.map((relatedGame) => (
-                <Link href={`/shop/product/${relatedGame.id}`} key={relatedGame.id}>
+                <Link href={`/shop/${relatedGame.id}`} key={relatedGame.id}>
                   <div className="group bg-[#252530] rounded-xl border border-[#3A3A4A] overflow-hidden transition-all duration-300 hover:border-[#FFA800] hover:shadow-lg hover:shadow-[#FFA800]/10">
                     <div className="h-48 overflow-hidden">
                       <img
