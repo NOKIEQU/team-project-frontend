@@ -8,6 +8,7 @@ import {
   SearchCode,
   ShoppingCart,
   Activity,
+  ChevronDown,
 } from "lucide-react";
 import SidebarLink from "../components/SidebarLink";
 import { useUser } from "../../context/user-context";
@@ -18,6 +19,7 @@ function AdminOrders() {
   const [isUserLoaded, setIsUserLoaded] = useState(false);
   const [orders, setOrders] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [statusUpdating, setStatusUpdating] = useState(null);
 
   useEffect(() => {
     if (userObject && userObject.token) {
@@ -60,7 +62,55 @@ function AdminOrders() {
 
   const totalRevenue = orders.reduce((sum, order) => sum + order.totalPrice, 0);
 
-  
+  const updateOrderStatus = async (orderId, newStatus) => {
+    if (!userObject || !userObject.token) return;
+    
+    setStatusUpdating(orderId);
+    try {
+      const response = await fetch(`http://51.77.110.253:3001/api/orders/${orderId}/status`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userObject.token}`,
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      if (response.ok) {
+        // Update local state
+        setOrders(prevOrders => 
+          prevOrders.map(order => 
+            order.id === orderId ? { ...order, status: newStatus } : order
+          )
+        );
+      } else {
+        console.error("Failed to update order status:", response.statusText);
+        alert("Failed to update order status. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error updating order status:", error);
+      alert("Error updating order status. Please try again.");
+    } finally {
+      setStatusUpdating(null);
+    }
+  };
+
+  const getStatusColor = (status) => {
+    switch(status) {
+      case 'PENDING':
+        return 'bg-[#fa9a00ef]/20 text-[#fa9a00ef]';
+      case 'PROCESSING':
+        return 'bg-blue-500/20 text-blue-500';
+      case 'SHIPPED':
+        return 'bg-purple-500/20 text-purple-500';
+      case 'DELIVERED':
+        return 'bg-green-500/20 text-green-500';
+      case 'CANCELLED':
+        return 'bg-red-500/20 text-red-500';
+      default:
+        return 'bg-gray-500/20 text-gray-500';
+    }
+  };
 
   return (
     <div className="flex min-h-screen">
@@ -144,15 +194,37 @@ function AdminOrders() {
                       <td className="p-3 text-white">£{order.totalPrice}</td>
                       <td className="p-3 text-gray-400">{new Date(order.createdAt).toLocaleDateString()}</td>
                       <td className="p-3">
-                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                          order.status === 'completed' 
-                            ? 'bg-green-500/20 text-green-500' 
-                            : order.status === 'pending'
-                            ? 'bg-[#fa9a00ef]/20 text-[#fa9a00ef]'
-                            : 'bg-red-500/20 text-red-500'
-                        }`}>
-                          {order.status}
-                        </span>
+                        <div className="relative">
+                          <button 
+                            className={`px-3 py-1 rounded-full text-xs font-bold flex items-center ${getStatusColor(order.status)}`}
+                            onClick={() => document.getElementById(`dropdown-${order.id}`).classList.toggle('hidden')}
+                            disabled={statusUpdating === order.id}
+                          >
+                            {statusUpdating === order.id ? 'Updating...' : order.status}
+                            <ChevronDown className="ml-1 h-4 w-4" />
+                          </button>
+                          <div 
+                            id={`dropdown-${order.id}`} 
+                            className="absolute z-10 mt-1 w-40 bg-[#252530] border border-[#3A3A4A] rounded-lg shadow-lg hidden"
+                          >
+                            {['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED'].map((status) => (
+                              <button
+                                key={status}
+                                className={`block w-full text-left px-4 py-2 text-sm ${
+                                  order.status === status ? 'bg-[#3A3A4A]' : 'hover:bg-[#3A3A4A]/50'
+                                } text-white first:rounded-t-lg last:rounded-b-lg`}
+                                onClick={() => {
+                                  document.getElementById(`dropdown-${order.id}`).classList.add('hidden');
+                                  if (order.status !== status) {
+                                    updateOrderStatus(order.id, status);
+                                  }
+                                }}
+                              >
+                                {status}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
                       </td>
                     </tr>
                   ))
