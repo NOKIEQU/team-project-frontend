@@ -122,7 +122,7 @@ export default function Home() {
                   SHOP NOW
                 </button>
               </Link>
-              <Link href="/Questionnaire">
+              <Link href="/questionnaire">
                 <button className="bg-[#252530] border border-[#3A3A4A] text-white font-bold py-3 px-6 rounded-full hover:bg-[#3A3A4A] transition transform hover:scale-105 shadow-md">
                   FIND YOUR GAME
                 </button>

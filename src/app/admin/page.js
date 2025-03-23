@@ -82,15 +82,19 @@ function AdminPage() {
 
         const usersData = await usersResponse.json();
         setUsers(usersData);
+        console.log(users)
         
         // Generate recent activity by combining the most recent orders and user registrations
-        const recentOrders = ordersData.slice(0, 5).map(order => ({
-          type: 'order',
-          id: order.id,
-          date: new Date(order.createdAt),
-          details: `Order #${order.id} - ${order.totalItems} items - £${order.total.toFixed(2)}`,
-          user: order.user ? `${order.user.firstName} ${order.user.lastName}` : 'Guest'
-        }));
+        const recentOrders = ordersData.slice(0, 5).map(order => {
+          const user = users.find(u => u.id === order.userId);
+          return {
+            type: 'order',
+            id: order.id,
+            date: new Date(order.createdAt),
+            details: `Order Placed: GV-${new Date(order.createdAt).getDate()}-${new Date(order.createdAt).getMonth()}-${new Date(order.createdAt).getFullYear()}-${order.id.substring(order.id.length - 15, 5).toUpperCase()}`,
+            user: user ? `${user.firstName} ${user.lastName}` : 'Unknown User'
+          };
+        });
         
         const recentUsers = usersData
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -160,7 +164,7 @@ function AdminPage() {
                 <StatCard title="Total Users" value={users.length.toString()} icon={<Users />} />
                 <StatCard 
                   title="Total Revenue" 
-                  value={`£${orders.reduce((sum, order) => sum + (order.total || 0), 0).toFixed(2)}`} 
+                  value={`£${orders.reduce((sum, order) => sum + (order.total || 0), 0)}`} 
                   icon={<BarChart />} 
                 />
               </div>

@@ -7,9 +7,9 @@ import QuizForm from './quiz-form';
 export default function QuestionnairePage() {
   const { user } = useUser();
 
-  if (user === null) {
-    redirect('/login');
-  }
+  // if (user === null) {
+  //   redirect('/login');
+  // }
 
   return (
     <main className="min-h-screen bg-[#1A1A22] flex flex-col items-center justify-center p-4">

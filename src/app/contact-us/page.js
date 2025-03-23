@@ -64,8 +64,8 @@ function RegisterPage() {
     };
 
     return (
-        <div className="flex flex-col font-sans bg-[#1A1A22] min-h-screen">
-            <div className="flex flex-1 flex-col lg:flex-row">
+        <div className="flex flex-col font-sans bg-[#1A1A22] min-h-screen font-oswald">
+            <div className="flex flex-1 flex-col lg:flex-row font-oswald">
                 {/* Left Side */}
                 <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
                     <img
@@ -100,7 +100,7 @@ function RegisterPage() {
                 {/* openToast */}
                 {openToast === false && (
                     <div className={form} scale-110>
-                        <h2 className="text-white text-2xl font-bold mb-4 text-center pt-12 pb-2">
+                        <h2 className="text-white text-2xl font-bold mb-4 text-center pt-12 pb-2 font-oswald">
                             CONTACT US
                         </h2>
                         <div className="w-24 h-1 bg-[#F0ECEC] mx-auto mb-6"></div>

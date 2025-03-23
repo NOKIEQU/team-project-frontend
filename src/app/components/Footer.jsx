@@ -22,7 +22,7 @@ function Footer() {
                         <h3 className="font-semibold text-lg mb-4 border-b border-gray-800 pb-2">Legal</h3>
                         <ul className="space-y-2">
                             <li><Link href="/ReturnsPolicy" className="text-sm hover:text-[#FFA800] transition-colors duration-200">Returns Policy</Link></li>
-                            <li><Link href="/T&C" className="text-sm hover:text-[#FFA800] transition-colors duration-200">Terms & Conditions</Link></li>
+                            <li><Link href="/tos" className="text-sm hover:text-[#FFA800] transition-colors duration-200">Terms & Conditions</Link></li>
                             <li><Link href="/PrivacyPolicy" className="text-sm hover:text-[#FFA800] transition-colors duration-200">Privacy Policy</Link></li>
                         </ul>
                     </div>
