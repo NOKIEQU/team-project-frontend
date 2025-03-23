@@ -132,7 +132,7 @@ function AdminGames() {
 
         const gamesData = await gamesResponse.json();
         setGames(gamesData);
-        
+        console.log(gamesData)
         
         const genresResponse = await fetch("http://51.77.110.253:3001/api/genres", {
           headers: {
@@ -219,10 +219,6 @@ function AdminGames() {
   async function updateGame(e) {
     e.preventDefault();
     
-    
-    const stockCount = parseInt(selectedGame.stock) || 0;
-    const stockStatus = updateStockStatus(stockCount);
-    
     try {
       // Create the update data object
       const updateData = {
@@ -230,8 +226,6 @@ function AdminGames() {
         price: editGamePrice,
         genreId: editGameGenre,
         description: editGameDesc,
-        stock: stockCount,
-        stockStatus: stockStatus, // Update the stock status based on count
         ageRating: selectedGame.ageRating
       };
 
@@ -268,51 +262,36 @@ function AdminGames() {
 
   async function addGame(e) {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("title", newGameTitle);
-    formData.append("description", newGameDescription);
-    formData.append("price", newGamePrice);
-    formData.append("rating", newGameRating);
-    formData.append("releaseYear", newGameReleaseYear);
-    formData.append("genreId", newGameGenreId);
-    formData.append("ageRating", newAgeRating);
-    formData.append("stock", 0); // Default to 0 stock
-    formData.append("stockStatus", "OUT_OF_STOCK"); // Default status
     
-    if (newGameImage) {
-      formData.append("product", newGameImage);
-    }
 
     try {
+      // Create a FormData object
+      const formData = new FormData();
+      
+      // Add text/numeric data as individual fields
+      formData.append("title", newGameTitle);
+      formData.append("description", newGameDescription);
+      formData.append("price", newGamePrice);
+      formData.append("rating", newGameRating);
+      formData.append("releaseYear", newGameReleaseYear);
+      formData.append("genreId", newGameGenreId);
+      formData.append("ageRating", newAgeRating);
+      formData.append("product", newGameImage);
+      
       const response = await fetch("http://51.77.110.253:3001/api/products", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${userObject.token}`,
+          
         },
         body: formData,
       });
-
-      if (!response.ok) {
-        throw new Error(`Failed to add game: ${response.statusText}`);
-      }
-
-      const addedGame = await response.json();
-      setGames((prevGames) => [...prevGames, addedGame]);
       
-      // Reset form fields
-      setNewGameTitle("");
-      setNewGameDescription("");
-      setNewGamePrice("");
-      setNewGameRating("");
-      setNewGameReleaseYear("");
-      setNewGameGenreId("");
-      setNewAgeRating("");
-      setNewGameImage(null);
-      
-      setShowAddGamePopup(false); 
+      // Process response
+      const data = await response.json();
+      console.log(data);
     } catch (error) {
-      console.error("Error adding game:", error);
-      alert("Failed to add the game. Please try again.");
+      console.error("Error uploading product:", error);
     }
   }
 
@@ -762,11 +741,11 @@ function AdminGames() {
                     onChange={(e) => setNewAgeRating(e.target.value)}
                   >
                     <option value="">Select Age Rating</option>
-                    <option value="3">3</option>
-                    <option value="7">7</option>
-                    <option value="12">12</option>
-                    <option value="16">16</option>
-                    <option value="18">18</option>
+                    <option value="THREE">3</option>
+                    <option value="SEVEN">7</option>
+                    <option value="TWELVE">12</option>
+                    <option value="SIXTEEN">16</option>
+                    <option value="EIGHTEEN">18</option>
                   </select>
                 </div>
               </div>
