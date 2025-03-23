@@ -112,7 +112,7 @@ function RegisterPage() {
 
             <div className="w-2/5 h-full relative z-0 hidden md:block">
                 <img
-                    src="/"
+                    src="/register.jpg"
                     alt="Background"
                     className="layout-fill h-full object-cover"
                 />
