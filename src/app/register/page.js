@@ -10,8 +10,9 @@ function RegisterPage() {
         "text-white font-bold text-sm mb-1 block";
     const button =
         "w-full px-3 py-2 bg-[#FF8C00] text-white rounded-full font-bold hover:bg-[#FFA500] hover:shadow-[0_0_10px_rgba(255,140,0,0.5)] transition-all duration-300 transform hover:scale-[1.02]";
-    const form =
-        "w-full max-w-md p-6 bg-[#1A1A22] bg-opacity-90 rounded-lg "; 
+   
+    const form = "w-full max-w-md p-4 ";
+    
 
 
     const [firstName, setFirstName] = useState("");
@@ -111,14 +112,14 @@ function RegisterPage() {
 
             <div className="w-2/5 h-full relative z-0 hidden md:block">
                 <img
-                    src="/loginpic28.jpg"
+                    src="/"
                     alt="Background"
                     className="layout-fill h-full object-cover"
                 />
             </div>
 
             {/* Main Form Section */}
-            <div className="w-full md:w-3/5 flex flex-col items-center justify-center p-6 z-20 relative pointer-events-auto max-w-[900px] mx-auto md:mx-0 flex-grow overflow-hidden">
+            <div className="w-full md:w-3/5 flex flex-col items-center justify-center p-6 z-20 relative pointer-events-auto max-w-[900px] ml-[120px]  flex-grow overflow-hidden">
                 {/* Title with Underline */}
                 <h1 className="text-4xl font-bold text-center text-white z-30 pb-2 relative mb-2">
                     CREATE ACCOUNT
@@ -240,9 +241,12 @@ function RegisterPage() {
                     </div>
 
                     {/* Submit Button */}
+                    <a href="/page.js">
+                    
                     <button type="submit"  className={button} onClick={handleRegister}>
                       CREATE ACCOUNT
                     </button>
+                    </a>
 
                     {/* Footer */}
                     <p className="mt-4 text-white text-center text-sm">

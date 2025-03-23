@@ -75,7 +75,6 @@ export default function LoginPage() {
       <div className="relative h-screen bg-[#1A1A22] text-white flex font-oswald">
         {/* Animated background elements */}
         <div className="absolute top-0 right-0 w-3/5 h-full z-10 pointer-events-none overflow-hidden">
-          <div className="absolute w-full h-full bg-gradient-to-br from-[#1A1A22] to-[#2D2D3A] opacity-90"></div>
           <div className="absolute w-96 h-96 rounded-full bg-[#FF8C00] filter blur-[100px] opacity-20 animate-pulse top-1/4 -right-48"></div>
  
         </div>
@@ -127,7 +126,7 @@ export default function LoginPage() {
         <div className="w-2/5 h-full relative z-0 hidden md:block">
           <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A22] to-transparent z-10 opacity-40"></div>
           <Image
-            src="/loginpic.jpg"
+            src="/"
             layout="fill"
             objectFit="cover"
             alt="Login Side Image"
@@ -138,7 +137,7 @@ export default function LoginPage() {
         {/* Login form */}
         <div
           className="w-full md:w-3/5 flex flex-col items-center justify-center p-6 z-20 relative pointer-events-auto 
-            md:border-r-4 md:border-[#1A1A22] md:shadow-[0_0_15px_rgba(255,140,0,0.3)] md:mr-8"
+            md:border-r-4 md:border-[#1A1A22] "
         >
           <h1 className="text-4xl font-bold text-center mb-2">
             LOGIN TO ACCOUNT

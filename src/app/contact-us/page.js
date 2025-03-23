@@ -68,40 +68,32 @@ function RegisterPage() {
         <div className="flex flex-col font-sans bg-[#1A1A22] min-h-screen">
             <div className="flex flex-1 flex-col lg:flex-row">
                 {/* Left Side */}
-                <div className="flex-[1.8] relative overflow-hidden flex justify-start items-center text-white">
-                    <img
-                        src="/back.webp"
-                        alt="Left Side"
-                        className="absolute top-0 left-0 h-full w-full z-10 object-cover"
-                        style={{
-                            clipPath: "polygon(0 0, 100% 0, 80% 100%, 0% 100%)",
-                        }}
-                    />
+                
+                 
                     <div className="absolute top-0 right-0 w-full h-full z-20">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 100 100"
                             preserveAspectRatio="none"
-                            className="w-full h-full"
+                            className="asbolute w-full h-full"
                         >
                             <polygon
                                 points="77.5,0 85,0 65,100 55,100"
-                                fill="rgba(255, 255, 255, 0.4)"
+                                fill="rgba(255, 140, 0, 0.15)"
                             />
                             <polygon
                                 points="90,0 100,0 80,100 70,100"
-                                fill="rgba(255, 255, 255, 0.8)"
+                                fill="rgba(255, 140, 0, 0.15)"
                             />
                         </svg>
                     </div>
-            
-                </div>
+           
 
                 {/* Right Side */}
                 {/* openToast */}
                 {openToast === false && (
-                    <div className={form} scale-110>
-                        <h2 className="text-white text-2xl font-bold mb-4 text-center pt-12 pb-2">
+                  <div className={`${form} scale-110 mx-auto flex flex-col items-center justify-center`}>
+                        <h2 className="text-white text-2xl font-bold mb-4 text-center pt-12 pb-2 ">
                             CONTACT US
                         </h2>
                         <div className="w-32 h-1 bg-[#FF8C00] rounded-full mb-4 mx-auto transition-all hover:w-1/4"></div>
