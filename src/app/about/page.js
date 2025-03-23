@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Shield, Users, Zap, Gift, Headphones, Globe } from "lucide-react";
+import { ChevronLeft, ChevronRight, Shield, Users, Zap, Gift, Headphones, Globe, Star } from "lucide-react";
  
 const About = () => {
   const timeline = [
@@ -32,47 +32,14 @@ const About = () => {
   const stats = [
     { label: "Games Available", value: "250", icon: <Gift size={24} /> },
     { label: "Active Users", value: "800+", icon: <Users size={24} /> },
-    { label: "Game Genres", value: "10+", icon: <Shield size={24} /> },
+    { label: "Game Genres", value: "9", icon: <Shield size={24} /> },
     { label: "Countries Served", value: "80+", icon: <Globe size={24} /> }
   ];
  
-  const testimonials = [
-    {
-      id: 1,
-      name: "James Wilson",
-      role: "Casual Gamer",
-      quote: "GameVault has completely changed how I discover new games. The curation is spot-on and I've found so many hidden gems I would've missed otherwise.",
-      image: "/images/james.jpg"
-    },
-    {
-      id: 2,
-      name: "Elena Kim",
-      role: "Competitive Player",
-      quote: "As someone who takes gaming seriously, I appreciate the detailed information GameVault provides about each title. Their service is reliable and fast.",
-      image: "/images/elena.jpg"
-    },
-    {
-      id: 3,
-      name: "Marcus Thompson",
-      role: "Game Collector",
-      quote: "The collector editions and special releases section on GameVault is unmatched. I've completed collections I've been working on for years.",
-      image: "/images/marcus.jpg"
-    }
-  ];
- 
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
- 
-  useEffect(() => {
-    if (!isPaused) {
-      const interval = setInterval(() => {
-        setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-      }, 5000);
-     
-      return () => clearInterval(interval);
-    }
-  }, [isPaused, testimonials.length]);
- 
+  const [currentRating, setCurrentRating] = useState(0);
+  const [hoveredRating, setHoveredRating] = useState(0);
+  const [hasRated, setHasRated] = useState(false);
+  
   const generatePlaceholderImage = (width, height) => {
     return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='${width}' height='${height}' viewBox='0 0 ${width} ${height}'%3E%3Crect width='${width}' height='${height}' fill='%23252530'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='${Math.min(width, height) / 10}px' fill='%233A3A4A'%3EImage%3C/text%3E%3C/svg%3E`;
   };
@@ -198,75 +165,56 @@ const About = () => {
   </div>
 </div>
  
-      {/* Testimonials */}
+      {/* Rating Section (Replaced Testimonials) */}
       <div className="container mx-auto px-4 py-20">
         <div className="flex flex-col items-center mb-12">
-          <h2 className="text-4xl font-bold text-center">What Gamers Say</h2>
+          <h2 className="text-4xl font-bold text-center">Rate Our Website</h2>
           <div className="bg-[#f6a302] h-2 rounded-full w-44 mt-2 transition-all hover:w-1/5"></div>
         </div>
  
-        <div className="relative max-w-4xl mx-auto"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <div className="overflow-hidden">
-            <div
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
-            >
-              {testimonials.map((testimonial) => (
-                <div key={testimonial.id} className="min-w-full">
-                  <div className="bg-[#252530] border border-[#3A3A4A] rounded-lg p-8 hover:border-[#f6a302] transition-all duration-300">
-                    <div className="flex flex-col md:flex-row items-center mb-6">
-                      <div className="w-20 h-20 rounded-full overflow-hidden mb-4 md:mb-0 md:mr-6 border-2 border-[#f6a302]">
-                        <img
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.target.src = generatePlaceholderImage(100, 100);
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold">{testimonial.name}</h3>
-                        <p className="text-[#f6a302]">{testimonial.role}</p>
-                      </div>
-                    </div>
-                    <p className="text-gray-300 text-lg italic">"{testimonial.quote}"</p>
-                  </div>
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-[#252530] border border-[#3A3A4A] rounded-lg p-8 hover:border-[#f6a302] transition-all duration-300">
+            {!hasRated ? (
+              <>
+                <p className="text-center text-xl mb-8">We'd love to hear your feedback! How would you rate your experience?</p>
+                <div className="flex justify-center space-x-4">
+                  {[1, 2, 3, 4, 5].map((rating) => (
+                    <button
+                      key={rating}
+                      onClick={() => {
+                        setCurrentRating(rating);
+                        setHasRated(true);
+                      }}
+                      onMouseEnter={() => setHoveredRating(rating)}
+                      onMouseLeave={() => setHoveredRating(0)}
+                      className="focus:outline-none transition-transform hover:scale-110"
+                    >
+                      <Star
+                        size={48}
+                        fill={(hoveredRating || currentRating) >= rating ? "#f6a302" : "none"}
+                        stroke={(hoveredRating || currentRating) >= rating ? "#f6a302" : "#9ca3af"}
+                        strokeWidth={2}
+                      />
+                    </button>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
- 
-          <button
-            onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-black bg-opacity-70 hover:bg-opacity-90 text-white p-2 rounded-full z-10 transition"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft size={24} />
-          </button>
-         
-          <button
-            onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-black bg-opacity-70 hover:bg-opacity-90 text-white p-2 rounded-full z-10 transition"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight size={24} />
-          </button>
- 
-          <div className="flex justify-center mt-6 space-x-2">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                className={`h-3 w-3 rounded-full ${
-                  index === currentTestimonial ? 'bg-[#f6a302]' : 'bg-gray-600'
-                }`}
-                onClick={() => setCurrentTestimonial(index)}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
+              </>
+            ) : (
+              <div className="text-center py-6">
+                <div className="flex justify-center mb-6">
+                  {[1, 2, 3, 4, 5].map((rating) => (
+                    <Star
+                      key={rating}
+                      size={36}
+                      fill={currentRating >= rating ? "#f6a302" : "none"}
+                      stroke={currentRating >= rating ? "#f6a302" : "#9ca3af"}
+                    />
+                  ))}
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Thank you for your feedback!</h3>
+                <p className="text-gray-300 text-lg">Your rating helps us improve GameVault for everyone.</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

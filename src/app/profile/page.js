@@ -7,10 +7,11 @@ import { useUser } from '../../context/user-context'
 import { useCart } from '../../context/cart-context'
 import {
   ShoppingBag, Shield, UserCircle, Package,
-  ChevronRight, LogOut, AlertCircle, 
-  Zap, Heart
+  ChevronRight, LogOut, AlertCircle,
+  Zap, Heart,
+  Trash2
 } from 'lucide-react'
- 
+
 function AccountPage() {
   const router = useRouter();
   const { user, logout } = useUser();
@@ -24,7 +25,7 @@ function AccountPage() {
   const [orders, setOrders] = useState([]);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
- 
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -32,11 +33,11 @@ function AccountPage() {
     newPassword: '',
     confirmPassword: ''
   });
- 
+
   useEffect(() => {
     if (user) {
       const userData = user.user || user;
-      
+
       setFormData(prev => ({
         ...prev,
         firstName: userData.firstName || '',
@@ -81,7 +82,7 @@ function AccountPage() {
 
     fetchOrders();
   }, [user]);
- 
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -89,12 +90,12 @@ function AccountPage() {
       [name]: value
     }));
   };
- 
+
   const handleSave = () => {
     console.log('Saving updated profile:', formData);
     showNotificationMessage('Profile updated successfully!', 'success');
   };
- 
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -105,7 +106,7 @@ function AccountPage() {
       reader.readAsDataURL(file);
     }
   };
- 
+
   const handleImageClick = () => {
     fileInputRef.current.click();
   };
@@ -113,11 +114,11 @@ function AccountPage() {
   const toggleOrderDetails = (id) => {
     setExpandedOrder(id === expandedOrder ? null : id);
   };
- 
+
   // Get user display name for welcome message
   const getDisplayName = () => {
     if (!user) return 'Guest';
-    
+
     const userData = user.user || user;
     return userData.firstName || userData.username || userData.email?.split('@')[0] || 'User';
   };
@@ -143,7 +144,7 @@ function AccountPage() {
 
         if (response.ok) {
           showNotificationMessage('Account deleted successfully. Redirecting...', 'success');
-          
+
           // Delay logout to show the notification
           setTimeout(() => {
             logout();
@@ -163,7 +164,28 @@ function AccountPage() {
       setShowDeleteConfirm(false);
     }
   };
- 
+
+  async function handleDeleteOrder (e, id) {
+    e.preventDefault();
+    try {
+      
+      const response = await fetch(`http://51.77.110.253:3001/api/orders/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      setOrders((prevOrders) => prevOrders.filter((order) => order.id !== id));
+      showNotificationMessage('Order returned successfully!', 'success');
+
+    } catch (error) {
+      console.error('Error deleting order:', error);
+      showNotificationMessage('An error occurred. Please try again.', 'error');
+    }
+  }
+
   // Account cards
   const accountCards = [
     {
@@ -189,7 +211,8 @@ function AccountPage() {
       onClick: () => setActiveTab('security')
     }
   ];
- 
+
+
   return (
     <div className="min-h-screen bg-[#1a1a22] text-white">
       {showNotification && (
@@ -198,7 +221,7 @@ function AccountPage() {
           {notificationMessage}
         </div>
       )}
-     
+
       {/* Delete Account Confirmation Modal */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
@@ -207,14 +230,14 @@ function AccountPage() {
               <AlertCircle className="text-red-500 mr-2" size={24} />
               <h2 className="text-xl font-bold">Delete Account</h2>
             </div>
-            
+
             <p className="mb-4">
               Are you sure you want to delete your account? This action <span className="font-bold">cannot be undone</span>.
             </p>
             <p className="text-gray-400 text-sm mb-6">
               All of your data including order history, personal information, and saved preferences will be permanently deleted.
             </p>
-            
+
             <div className="flex justify-end space-x-4">
               <button
                 className="bg-[#3A3A4A] hover:bg-[#4A4A5A] text-white py-2 px-4 rounded-lg transition-colors"
@@ -232,7 +255,7 @@ function AccountPage() {
           </div>
         </div>
       )}
-     
+
       {/* Header Section */}
       <div className="bg-[#252530] border-b border-[#3A3A4A]">
         <div className="container mx-auto px-4 py-8">
@@ -268,7 +291,7 @@ function AccountPage() {
           </div>
         </div>
       </div>
-     
+
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Left Sidebar */}
@@ -279,9 +302,8 @@ function AccountPage() {
                   <button
                     key={card.id}
                     onClick={card.onClick}
-                    className={`w-full px-6 py-5 flex items-center justify-between text-left hover:bg-[#2C2C38] transition-colors ${
-                      activeTab === card.id ? 'bg-[#2C2C38] border-l-4 border-[#FFA800]' : ''
-                    }`}
+                    className={`w-full px-6 py-5 flex items-center justify-between text-left hover:bg-[#2C2C38] transition-colors ${activeTab === card.id ? 'bg-[#2C2C38] border-l-4 border-[#FFA800]' : ''
+                      }`}
                   >
                     <div className="flex items-center gap-4">
                       <div className={`${activeTab === card.id ? 'text-[#FFA800]' : 'text-gray-400'}`}>
@@ -295,11 +317,11 @@ function AccountPage() {
                     <ChevronRight size={18} className="text-gray-400" />
                   </button>
                 ))}
- 
+
                 <button
                   onClick={() => {
                     logout();
-                    router.push('/'); 
+                    router.push('/');
                   }}
                   className="w-full px-6 py-5 flex items-center gap-4 text-left hover:bg-[#2C2C38] transition-colors text-red-400 hover:text-red-300"
                 >
@@ -308,15 +330,15 @@ function AccountPage() {
                 </button>
               </div>
             </div>
- 
+
           </div>
-         
+
           <div className="md:w-2/3 lg:w-3/4">
             {/* Profile Tab */}
             {activeTab === 'profile' && (
               <div className="bg-[#252530] rounded-xl shadow p-6">
                 <h2 className="text-2xl font-bold mb-6">Personal Information</h2>
-               
+
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -329,7 +351,7 @@ function AccountPage() {
                         className="w-full p-3 rounded-lg border border-[#3A3A4A] bg-[#1A1A22] text-white focus:border-[#FFA800] focus:outline-none transition-colors"
                       />
                     </div>
-                   
+
                     <div>
                       <label className="block text-gray-300 mb-2 text-sm">Last Name</label>
                       <input
@@ -341,7 +363,7 @@ function AccountPage() {
                       />
                     </div>
                   </div>
-                 
+
                   <div>
                     <label className="block text-gray-300 mb-2 text-sm">Email Address</label>
                     <input
@@ -352,10 +374,10 @@ function AccountPage() {
                       className="w-full p-3 rounded-lg border border-[#3A3A4A] bg-[#1A1A22] text-white focus:border-[#FFA800] focus:outline-none transition-colors"
                     />
                   </div>
- 
+
                   <div className="pt-4 border-t border-[#3A3A4A]">
                     <h3 className="text-xl font-semibold mb-4">Change Password</h3>
-                   
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-gray-300 mb-2 text-sm">New Password</label>
@@ -368,7 +390,7 @@ function AccountPage() {
                           className="w-full p-3 rounded-lg border border-[#3A3A4A] bg-[#1A1A22] text-white focus:border-[#FFA800] focus:outline-none transition-colors"
                         />
                       </div>
-                     
+
                       <div>
                         <label className="block text-gray-300 mb-2 text-sm">Confirm Password</label>
                         <input
@@ -382,57 +404,58 @@ function AccountPage() {
                       </div>
                     </div>
                   </div>
+
+                  <div className="flex justify-end gap-x-2">
                  
-                  <div className="flex justify-end">
                     <button
                       onClick={handleSave}
                       className="px-6 py-3 bg-[#FFA800] text-white rounded-lg font-semibold hover:bg-[#e08800] transition-colors"
                     >
                       Save Changes
                     </button>
+                    
                   </div>
                 </div>
               </div>
             )}
-           
+
             {/* Orders Tab */}
             {activeTab === 'orders' && (
               <div className="bg-[#252530] rounded-xl shadow p-6">
                 <h2 className="text-2xl font-bold mb-6">My Orders</h2>
-               
+
                 {orders.length > 0 ? (
                   <div className="space-y-6">
-                    {orders.map((order) => (
+                    {orders.map((order, k) => (
                       <div key={order.id} className="bg-[#1A1A22] border border-[#3A3A4A] p-4 rounded-lg shadow-md hover:border-[#FFA800] transition-colors">
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
                           <div className="flex items-center space-x-4 mb-4 md:mb-0">
                             <img src={order.image} alt={order.game} className="w-16 h-16 rounded-md object-cover" />
                             <div>
                               <p className="text-sm text-gray-400">{order.date}</p>
-                              <p className="text-lg font-semibold">{order.game}</p>
+                              <p className="text-lg font-semibold">Order: GV-{new Date(order.date).getDate()}-{new Date(order.date).getMonth()}-{new Date(order.date).getFullYear()}-{order.id.substring(order.id.length - 15, 5).toUpperCase()}</p>
                               <p className="text-sm text-gray-400">Order ID: {order.id}</p>
                               <p className="text-md font-bold mt-1">{order.price}</p>
                             </div>
                           </div>
                           <div className="flex flex-col items-start md:items-end">
-                            <span className={`px-3 py-1 rounded-full text-xs font-bold mb-2 ${
-                              order.status === "Completed" 
-                                ? "bg-green-500/20 text-green-400" 
+                            <span className={`px-3 py-1 rounded-full text-xs font-bold mb-2 ${order.status === "Completed"
+                                ? "bg-green-500/20 text-green-400"
                                 : order.status === "Pending"
                                   ? "bg-[#FFA800]/20 text-[#FFA800]"
                                   : "bg-blue-500/20 text-blue-400"
-                            }`}>
+                              }`}>
                               {order.status}
                             </span>
-                            <button 
-                              onClick={() => toggleOrderDetails(order.id)} 
+                            <button
+                              onClick={() => toggleOrderDetails(order.id)}
                               className="text-sm text-[#FFA800] hover:text-[#e08800] transition-colors"
                             >
                               {expandedOrder === order.id ? "Hide Details" : "View Details"}
                             </button>
                           </div>
                         </div>
-                        
+
                         {expandedOrder === order.id && (
                           <div className="mt-4 pt-4 border-t border-[#3A3A4A]">
                             <h3 className="text-lg font-medium mb-3">Order Details</h3>
@@ -440,9 +463,9 @@ function AccountPage() {
                               {order.orderItems && order.orderItems.map((item, index) => (
                                 <div key={index} className="flex justify-between items-center">
                                   <div className="flex items-center gap-3">
-                                    <img 
-                                      src={item.product.imageUrls?.[0] || "/placeholder.jpg"} 
-                                      alt={item.product.title} 
+                                    <img
+                                      src={item.product.imageUrls?.[0] || "/placeholder.jpg"}
+                                      alt={item.product.title}
                                       className="w-12 h-12 rounded object-cover"
                                     />
                                     <div>
@@ -453,15 +476,19 @@ function AccountPage() {
                                   <p className="font-medium">£{item.price}</p>
                                 </div>
                               ))}
-                              
+
                               <div className="flex justify-between pt-3 border-t border-[#3A3A4A]">
                                 <p className="font-medium">Total</p>
                                 <p className="font-bold">{order.price}</p>
                               </div>
-                              
-                              <div className="text-sm text-gray-400 pt-2">
-                                <p>Payment Method: {order.payment}</p>
-                                <p>Order Status: {order.status}</p>
+
+                              <div className="flex flex-row justify-between items-center text-sm text-gray-400 pt-2">
+                                <div className=''>
+                                  {/* <p>Payment Method: {order.payment}</p> */}
+                                  <p>Order Status: {order.status}</p>
+
+                                </div>
+                                <div className='flex flex-row gap-x-2'><Trash2 className='text-red-400' size={20}/><button onClick={(e) => {handleDeleteOrder(e, order.id)}} className='text-red-400'>Return Item </button></div>
                               </div>
                             </div>
                           </div>
@@ -485,12 +512,12 @@ function AccountPage() {
                 )}
               </div>
             )}
-           
+
             {/* Security Tab */}
             {activeTab === 'security' && (
               <div className="bg-[#252530] rounded-xl shadow p-6">
                 <h2 className="text-2xl font-bold mb-6">Security Settings</h2>
-               
+
                 <div className="space-y-6">
                   <div className="p-4 border border-[#3A3A4A] rounded-lg hover:border-[#FFA800] transition-colors">
                     <div className="flex justify-between items-center">
@@ -504,7 +531,7 @@ function AccountPage() {
                       </label>
                     </div>
                   </div>
-                 
+
                   <div className="p-4 border border-[#3A3A4A] rounded-lg hover:border-[#FFA800] transition-colors">
                     <div className="flex justify-between items-center">
                       <div>
@@ -516,14 +543,14 @@ function AccountPage() {
                       </button>
                     </div>
                   </div>
-                 
+
                   <div className="p-4 border border-[#3A3A4A] rounded-lg hover:border-red-500 transition-colors">
                     <div className="flex justify-between items-center">
                       <div>
                         <h3 className="text-lg font-medium">Delete Account</h3>
                         <p className="text-gray-400 text-sm">Permanently delete your account and all data</p>
                       </div>
-                      <button 
+                      <button
                         className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                         onClick={() => setShowDeleteConfirm(true)}
                       >
@@ -540,5 +567,5 @@ function AccountPage() {
     </div>
   )
 }
- 
+
 export default AccountPage

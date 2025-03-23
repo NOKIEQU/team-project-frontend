@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useCart } from "../../../context/cart-context";
 import { useUser } from "../../../context/user-context";
-import { 
-  ChevronLeft, 
-  ChevronRight, 
-  Minus, 
-  Plus, 
-  Star, 
+import {
+  ChevronLeft,
+  ChevronRight,
+  Minus,
+  Plus,
+  Star,
   ShoppingCart,
   ArrowLeft,
   Gift
@@ -21,19 +21,21 @@ function Product() {
   const params = useParams();
   const { cart, addToCart, updateQuantity } = useCart();
   const { user } = useUser();
-  
+
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [images, setImages] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  
+
   // Reviews states
   const [reviews, setReviews] = useState([]);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [newReview, setNewReview] = useState({ rating: 5, comment: "" });
   const [relatedGames, setRelatedGames] = useState([]);
-  
+  const [reviewLoading, setReviewLoading] = useState(false);
+  const [reviewError, setReviewError] = useState(null);
+
   const averageRating = reviews.length > 0
     ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
     : 0;
@@ -53,7 +55,7 @@ function Product() {
         setGame(data);
         setImages(data.imageUrls || []);
         setLoading(false);
-        
+
         fetchRelatedGames(data.genre.id);
       } catch (error) {
         setError("An error occurred while fetching the product");
@@ -69,14 +71,19 @@ function Product() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
+        setReviewLoading(true);
         const response = await fetch(`http://51.77.110.253:3001/api/reviews/${params.product}`);
         if (!response.ok) {
           throw new Error("Failed to fetch reviews");
         }
         const data = await response.json();
         setReviews(data || []);
+        setReviewError(null);
       } catch (error) {
         console.error("Error fetching reviews:", error);
+        setReviewError("Failed to load reviews. Please try again later.");
+      } finally {
+        setReviewLoading(false);
       }
     };
 
@@ -84,7 +91,7 @@ function Product() {
       fetchReviews();
     }
   }, [params.product]);
-  
+
   const fetchRelatedGames = async (genreId) => {
     try {
       const response = await fetch(`http://51.77.110.253:3001/api/products`);
@@ -92,11 +99,11 @@ function Product() {
         throw new Error("Failed to fetch related games");
       }
       const data = await response.json();
-      
+
       const related = data
         .filter(g => g.genre.id === genreId && g.id !== params.product)
         .slice(0, 4); // Limit to 4 related games
-        
+
       setRelatedGames(related);
     } catch (error) {
       console.error("Error fetching related games:", error);
@@ -137,20 +144,206 @@ function Product() {
     }
   };
 
-  const handleReviewSubmit = (e) => {
+  const handleReviewSubmit = async (e) => {
     e.preventDefault();
-    if (newReview.comment.trim() && user) {
-      const reviewToAdd = {
-        name: user.name || `${user.firstName} ${user.lastName}`,
-        rating: newReview.rating || 5,
-        comment: newReview.comment,
-        date: new Date().toLocaleDateString("en-GB"),
-      };
-      setReviews([reviewToAdd, ...reviews]);
+
+    if (!user) {
+      alert("Please log in to submit a review");
+      return;
+    }
+
+    if (!newReview.comment.trim()) {
+      alert("Please write a review before submitting");
+      return;
+    }
+
+    try {
+      setReviewLoading(true);
+
+      // Get auth token - assuming it's stored in localStorage
+      const token = user.token
+
+      if (!token) {
+        throw new Error("You must be logged in to submit a review");
+      }
+
+      const response = await fetch(`http://51.77.110.253:3001/api/reviews/${params.product}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          content: newReview.comment,
+          rating: newReview.rating
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to submit review");
+      }
+
+      // Refresh the reviews to show the new one
+      const updatedReviewsResponse = await fetch(`http://51.77.110.253:3001/api/reviews/${params.product}`);
+      if (!updatedReviewsResponse.ok) {
+        throw new Error("Failed to fetch updated reviews");
+      }
+
+      const updatedReviews = await updatedReviewsResponse.json();
+      setReviews(updatedReviews || []);
+
+      // Reset form
       setNewReview({ rating: 5, comment: "" });
       setShowReviewForm(false);
-    } else {
-      alert("Please log in to submit a review");
+      setReviewError(null);
+
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      setReviewError(error.message || "Failed to submit review. Please try again.");
+    } finally {
+      setReviewLoading(false);
+    }
+  };
+
+  const handleDeleteReview = async (reviewId) => {
+    if (!user) {
+      alert("You must be logged in to delete a review");
+      return;
+    }
+
+    if (!confirm("Are you sure you want to delete this review?")) {
+      return;
+    }
+
+    try {
+      setReviewLoading(true);
+
+      // Get auth token
+      const token = user.token
+
+      if (!token) {
+        throw new Error("You must be logged in to delete a review");
+      }
+
+      const response = await fetch(`http://51.77.110.253:3001/api/reviews/delete/${reviewId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to delete review");
+      }
+
+      // Remove the deleted review from state
+      setReviews(reviews.filter(review => review.id !== reviewId));
+      setReviewError(null);
+
+    } catch (error) {
+      console.error("Error deleting review:", error);
+      setReviewError(error.message || "Failed to delete review. Please try again.");
+    } finally {
+      setReviewLoading(false);
+    }
+  };
+
+  const handleEditReview = async (reviewId, updatedData) => {
+    if (!user) {
+      alert("You must be logged in to edit a review");
+      return;
+    }
+
+    try {
+      setReviewLoading(true);
+
+      // Get auth token
+      const token = user.token
+
+      if (!token) {
+        throw new Error("You must be logged in to edit a review");
+      }
+
+      const response = await fetch(`http://51.77.110.253:3001/api/reviews/edit/${reviewId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          content: updatedData.comment,
+          rating: updatedData.rating
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to update review");
+      }
+
+      // Refresh the reviews
+      const updatedReviewsResponse = await fetch(`http://51.77.110.253:3001/api/reviews/${params.product}`);
+      if (!updatedReviewsResponse.ok) {
+        throw new Error("Failed to fetch updated reviews");
+      }
+
+      const updatedReviews = await updatedReviewsResponse.json();
+      setReviews(updatedReviews || []);
+      setReviewError(null);
+
+    } catch (error) {
+      console.error("Error updating review:", error);
+      setReviewError(error.message || "Failed to update review. Please try again.");
+    } finally {
+      setReviewLoading(false);
+    }
+  };
+
+  const handleVoteReview = async (reviewId, voteType) => {
+    if (!user) {
+      alert("You must be logged in to vote on a review");
+      return;
+    }
+
+    try {
+      // Get auth token
+      const token = user.token
+
+      console.log("voteType", voteType);
+      console.log("reviewId", reviewId);
+
+      if (!token) {
+        throw new Error("You must be logged in to vote on a review");
+      }
+
+      const response = await fetch(`http://51.77.110.253:3001/api/reviews/vote/${reviewId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ type: voteType })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to vote on review");
+      }
+
+      // Refresh the reviews
+      const updatedReviewsResponse = await fetch(`http://51.77.110.253:3001/api/reviews/${params.product}`);
+      if (!updatedReviewsResponse.ok) {
+        throw new Error("Failed to fetch updated reviews");
+      }
+
+      const updatedReviews = await updatedReviewsResponse.json();
+      setReviews(updatedReviews || []);
+
+    } catch (error) {
+      console.error("Error voting on review:", error);
+      alert(error.message || "Failed to vote on review. Please try again.");
     }
   };
 
@@ -178,7 +371,7 @@ function Product() {
 
   const renderRating = (rating, size = "sm") => {
     const numericRating = Number(rating) || 0;
-    
+
     return (
       <div className={`flex items-center text-yellow-400 ${size === "lg" ? "text-xl" : "text-sm"}`}>
         {Array.from({ length: 5 }).map((_, index) => (
@@ -192,6 +385,11 @@ function Product() {
         <span className="ml-2 text-white">{numericRating.toFixed(1)}</span>
       </div>
     );
+  };
+
+  // Check if a review belongs to the current user
+  const isUserReview = (review) => {
+    return user && review.userId === user.id;
   };
 
   return (
@@ -217,7 +415,7 @@ function Product() {
                 alt={`${game.title} Image`}
                 className="w-full h-full object-cover"
               />
-              
+
               <button
                 onClick={handlePrevImage}
                 className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 p-2 rounded-full text-white transition-all duration-200"
@@ -232,30 +430,28 @@ function Product() {
               >
                 <ChevronRight size={24} />
               </button>
-              
+
               {/* Image */}
               <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
                 {game.imageUrls.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentImageIndex(index)}
-                    className={`h-2 w-2 rounded-full ${
-                      index === currentImageIndex ? "bg-white" : "bg-white/40"
-                    }`}
+                    className={`h-2 w-2 rounded-full ${index === currentImageIndex ? "bg-white" : "bg-white/40"
+                      }`}
                     aria-label={`Go to image ${index + 1}`}
                   />
                 ))}
               </div>
             </div>
-            
+
             <div className="flex mt-4 space-x-2 overflow-x-auto pb-2">
               {game.imageUrls.map((image, index) => (
                 <div
                   key={index}
                   onClick={() => setCurrentImageIndex(index)}
-                  className={`cursor-pointer rounded-md overflow-hidden h-20 w-20 flex-shrink-0 border-2 ${
-                    index === currentImageIndex ? "border-[#FFA800]" : "border-transparent"
-                  }`}
+                  className={`cursor-pointer rounded-md overflow-hidden h-20 w-20 flex-shrink-0 border-2 ${index === currentImageIndex ? "border-[#FFA800]" : "border-transparent"
+                    }`}
                 >
                   <img
                     src={image}
@@ -266,24 +462,24 @@ function Product() {
               ))}
             </div>
           </div>
-          
+
           <div className="w-full lg:w-1/2">
             <div className="bg-[#252530] rounded-xl border border-[#3A3A4A] p-6 h-[500px] md:h-[500px] overflow-y-auto">
               <h1 className="text-3xl font-bold mb-2">{game.title}</h1>
-              
+
               <div className="flex flex-wrap items-center gap-4 mb-4">
                 <div className="flex items-center">
-                  <div className="flex items-center text-[#FFA800]">
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <Star
-                        key={index}
-                        size={16}
-                        fill={index < Math.floor(game.rating) ? "currentColor" : "none"}
-                        className={index < Math.floor(game.rating) ? "text-[#FFA800]" : "text-gray-400"}
-                      />
-                    ))}
-                    <span className="ml-2 text-white">{Number(game.rating).toFixed(1)}</span>
-                  </div>
+                <div className="flex items-center text-[#FFA800]">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                   <Star
+                   key={index}
+                    size={16}
+                    fill={index < Math.floor(averageRating) ? "currentColor" : "none"}
+                     className={index < Math.floor(averageRating) ? "text-[#FFA800]" : "text-gray-400"}
+                    />
+                 ))}
+                 <span className="ml-2 text-white">{Number(averageRating).toFixed(1)}</span>
+                </div>
                 </div>
                 <span className="text-gray-400">|</span>
                 <div className="text-gray-300">
@@ -294,17 +490,17 @@ function Product() {
                   Released: {new Date(game.releaseYear, 0, 1).getFullYear()}
                 </div>
               </div>
-              
+
               <div className="text-2xl font-bold text-white mb-6">
                 £{parseFloat(game.price).toFixed(2)}
               </div>
-              
+
               <p className="text-gray-300 mb-8">
                 {game.description}
               </p>
-              
+
               <div className="border-t border-[#3A3A4A] pt-8 mb-6"></div>
-              
+
               <div className="flex items-center mb-6">
                 <div className="flex bg-[#1A1A22] border border-[#3A3A4A] rounded-full overflow-hidden">
                   <button
@@ -324,7 +520,7 @@ function Product() {
                     <Plus size={16} />
                   </button>
                 </div>
-                
+
                 <div className="ml-4 flex-1">
                   {cartItem ? (
                     <div className="flex space-x-4">
@@ -352,7 +548,7 @@ function Product() {
                   )}
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="flex items-center gap-2 bg-[#1A1A22] p-4 rounded-lg border border-[#3A3A4A]">
                   <Gift size={20} className="text-[#FFA800]" />
@@ -378,25 +574,38 @@ function Product() {
             </div>
           </div>
         </div>
-        
+
         {/* Reviews Section */}
         <div className="mt-16">
-          <div className="bg-[#252530] rounded-xl border border-[#3A3A4A] p-2">
+          <div className="bg-[#252530] rounded-xl border border-[#3A3A4A] p-6">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
               <h2 className="text-xl font-bold text-[#FFA800]">Customer Reviews</h2>
-              {!showReviewForm && (
+              {!showReviewForm && !reviews.some(review => review.userId === (user?.id)) && (
                 <button
                   className="px-6 py-3 bg-[#FFA800] hover:bg-[#FF7A00] text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                  onClick={() => setShowReviewForm(true)}
+                  onClick={() => {
+                    if (!user) {
+                      alert("Please log in to write a review");
+                    } else {
+                      setShowReviewForm(true);
+                    }
+                  }}
                 >
                   Write a Review
                 </button>
               )}
             </div>
-            
+
+            {/* Review Error Message */}
+            {reviewError && (
+              <div className="bg-red-500/10 border border-red-500 text-red-500 p-4 rounded-lg mb-6">
+                <p>{reviewError}</p>
+              </div>
+            )}
+
             {/* Review Form */}
             {showReviewForm && (
-              <div className="bg-[#1A1A22] p-2 rounded-lg mb-8 border border-[#3A3A4A]">
+              <div className="bg-[#1A1A22] p-6 rounded-lg mb-8 border border-[#3A3A4A]">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-xl font-semibold">Write Your Review</h3>
                   <button
@@ -442,14 +651,23 @@ function Product() {
                       type="button"
                       onClick={() => setShowReviewForm(false)}
                       className="px-6 py-3 bg-[#3A3A4A] hover:bg-[#4A4A5A] text-white rounded-full font-semibold transition-all duration-200"
+                      disabled={reviewLoading}
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="px-8 py-3 bg-[#FFA800] hover:bg-[#FF7A00] text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                      className="px-8 py-3 bg-[#FFA800] hover:bg-[#FF7A00] text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                      disabled={reviewLoading}
                     >
-                      Submit Review
+                      {reviewLoading ? (
+                        <div className="flex items-center">
+                          <div className="animate-spin mr-2 h-4 w-4 border-t-2 border-white rounded-full"></div>
+                          Submitting...
+                        </div>
+                      ) : (
+                        "Submit Review"
+                      )}
                     </button>
                   </div>
                 </form>
@@ -469,7 +687,7 @@ function Product() {
                   {[5, 4, 3, 2, 1].map((star) => {
                     const count = reviews.filter(r => Math.floor(r.rating) === star).length;
                     const percentage = reviews.length > 0 ? (count / reviews.length) * 100 : 0;
-                    
+
                     return (
                       <div key={star} className="flex items-center">
                         <div className="flex items-center text-white font-medium w-16">
@@ -489,52 +707,130 @@ function Product() {
               </div>
             </div>
 
+            {/* Review Loading Indicator */}
+            {reviewLoading && !showReviewForm && (
+              <div className="flex justify-center items-center py-8">
+                <div className="animate-spin mr-2 h-6 w-6 border-t-2 border-[#FFA800] rounded-full"></div>
+                <span className="text-white">Loading reviews...</span>
+              </div>
+            )}
+
             <div className="space-y-6">
-              {reviews.length === 0 ? (
+              {!reviewLoading && reviews.length === 0 ? (
                 <div className="text-center py-12 bg-[#1A1A22] rounded-xl border border-[#3A3A4A]">
                   <Star size={48} className="mx-auto mb-4 text-gray-600" />
                   <p className="text-xl text-gray-400 font-medium">No reviews yet. Be the first to review this game!</p>
                 </div>
               ) : (
-                reviews.map((review, index) => (
-                  <div key={index} className="bg-gradient-to-r from-[#1A1A22] to-[#222230] p-6 rounded-xl border border-[#3A3A4A] hover:border-[#FFA800] transition-all duration-200 shadow-md">
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="flex gap-4 items-center">
-                        <div className="bg-gradient-to-r from-[#FFA800] to-[#FF7A00] h-12 w-12 rounded-full flex items-center justify-center text-xl font-bold text-white shadow-md">
-                          {review.name.charAt(0).toUpperCase()}
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-xl text-white">{review.name}</h4>
-                          <div className="flex items-center mt-1">
-                            {Array.from({ length: 5 }).map((_, i) => (
-                              <Star
-                                key={i}
-                                size={16}
-                                fill={i < review.rating ? "#FFA800" : "none"}
-                                className={i < review.rating ? "text-[#FFA800]" : "text-gray-500"}
-                              />
-                            ))}
-                            <span className="ml-2 text-gray-400 text-sm">
-                              {review.date}
-                            </span>
+                reviews.map((review) => (
+                  <div key={review.id} className="bg-gradient-to-r from-[#1A1A22] to-[#222230] p-6 rounded-xl border border-[#3A3A4A] hover:border-[#FFA800] transition-all duration-300">
+                    <div key={review.id} className="bg-gradient-to-r from-[#1A1A22] to-[#222230] p-6 rounded-xl border border-[#3A3A4A] hover:border-[#FFA800] transition-all duration-300">
+                      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
+                        <div className="flex items-center">
+                          <div className="w-10 h-10 rounded-full bg-[#3A3A4A] flex items-center justify-center text-xl font-bold text-[#FFA800] mr-3">
+                            {review.user?.firstName?.charAt(0).toUpperCase() || "U"}
+                          </div>
+                          <div>
+                            <div className="font-semibold">{review.user?.firstName || "Anonymous"}</div>
+                            <div className="text-sm text-gray-400">
+                              {new Date(review.createdAt).toLocaleDateString("en-GB", {
+                                day: "numeric",
+                                month: "long",
+                                year: "numeric",
+                              })}
+                            </div>
                           </div>
                         </div>
+                        <div>{renderRating(review.rating)}</div>
                       </div>
-                      <div className="bg-gradient-to-r from-[#FFA800] to-[#FF7A00] text-white text-xl font-bold h-12 w-12 rounded-full flex items-center justify-center shadow-md">
-                        {review.rating}
+                      <p className="text-gray-300 mb-4">{review.content}</p>
+
+                      <div className="flex justify-between items-center">
+                        <div className="flex space-x-4 items-center">
+                          <button
+                            onClick={() => handleVoteReview(review.id, 'helpful')}
+                            className={`flex items-center text-sm transition-colors duration-200 ${review.userVote === 'helpful' ? 'text-green-500' : 'text-gray-400 hover:text-green-500'
+                              }`}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                              <path d="m5 15 7-7 7 7"></path>
+                            </svg>
+                            <span>{review.helpful || 0}</span>
+                          </button>
+                          <button
+                            onClick={() => handleVoteReview(review.id, 'notHelpful')}
+                            className={`flex items-center text-sm transition-colors duration-200 ${review.userVote === 'notHelpful' ? 'text-red-500' : 'text-gray-400 hover:text-red-500'
+                              }`}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                              <path d="m5 9 7 7 7-7"></path>
+                            </svg>
+                            <span>{review.notHelpful || 0}</span>
+                          </button>
+                        </div>
+
+                        {isUserReview(review) && (
+                          <div className="flex space-x-2">
+                            <button
+                              onClick={() => {
+                                setNewReview({
+                                  rating: review.rating,
+                                  comment: review.content
+                                });
+                                setShowReviewForm(true);
+                              }}
+                              className="text-sm text-gray-400 hover:text-[#FFA800]"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() => handleDeleteReview(review.id)}
+                              className="text-sm text-gray-400 hover:text-red-500"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
-                    <div className="bg-[#1E1E2A] p-4 rounded-lg mt-2">
-                      <p className="text-gray-200 leading-relaxed">{review.comment}</p>
-                    </div>
+
                   </div>
-                ))
-              )}
+                )))}
             </div>
           </div>
         </div>
 
-        <div className="mt-16"></div>
+        {/* Related Games Section */}
+        {relatedGames.length > 0 && (
+          <div className="mt-16">
+            <h2 className="text-2xl font-bold text-white mb-8">You Might Also Like</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {relatedGames.map((relatedGame) => (
+                <Link href={`/shop/${relatedGame.id}`} key={relatedGame.id}>
+                  <div className="group bg-[#252530] rounded-xl border border-[#3A3A4A] overflow-hidden transition-all duration-300 hover:border-[#FFA800] hover:shadow-lg hover:shadow-[#FFA800]/10">
+                    <div className="h-48 overflow-hidden">
+                      <img
+                        src={relatedGame.imageUrls[0]}
+                        alt={relatedGame.title}
+                        className="w-full h-full object-cover transform transition-transform group-hover:scale-110 duration-300"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <div className="flex justify-between items-center mb-2">
+                        <h3 className="font-semibold truncate">{relatedGame.title}</h3>
+                        <div className="flex items-center text-[#FFA800]">
+                          <Star size={14} fill="#FFA800" />
+                          <span className="ml-1 text-sm">{Number(relatedGame.rating).toFixed(1)}</span>
+                        </div>
+                      </div>
+                      <div className="text-[#FFA800] font-bold">£{Number(relatedGame.price).toFixed(2)}</div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
