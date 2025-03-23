@@ -97,7 +97,7 @@ export default function LoginPage() {
             />
             <polygon
               points="0,20 0,22 38,42.5 38,40.5"
-              fill="rgba(255, 140, 0, 0.15)"
+              fill ="rgba(255, 140, 0, 0.15) "
             />
             <polygon
               points="39,41 39,43 100,74 100,72"
@@ -111,10 +111,7 @@ export default function LoginPage() {
               points="39,95 39,100 60,100 60,105"
               fill="rgba(255, 140, 0, 0.1)"
             />
-            <polygon
-              points="0,86 0,88 38,103 38,101"
-              fill="rgba(255, 140, 0, 0.15)"
-            />
+           
             <polygon
               points="39,41 39,43 100,74 100,72"
               fill="rgba(255, 140, 0, 0.1)"
@@ -126,7 +123,7 @@ export default function LoginPage() {
         <div className="w-2/5 h-full relative z-0 hidden md:block">
           <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A22] to-transparent z-10 opacity-40"></div>
           <Image
-            src="/"
+            src="/login.png"
             layout="fill"
             objectFit="cover"
             alt="Login Side Image"
