@@ -3,7 +3,6 @@
 import {
   LayoutDashboard,
   Gamepad2,
-  BarChart,
   Layers,
   Users,
   SearchCode,
@@ -70,10 +69,26 @@ function AdminOrders() {
             icon={<LayoutDashboard className="text-[#fa9a00ef]" />}
             text="Dashboard"
           />
-          <SidebarLink href="/adminGames" icon={<Gamepad2 className="text-[#fa9a00ef]" />} text="Games" />
-          <SidebarLink href="/adminUsers" icon={<BarChart className="text-[#fa9a00ef]" />} text="Users" />
-          <SidebarLink href="/adminGenres" icon={<Layers className="text-[#fa9a00ef]" />} text="Genres" />
-          <SidebarLink href="/adminOrders" icon={<Layers className="text-[#fa9a00ef]" />} text="Orders" />
+          <SidebarLink 
+            href="/adminGames" 
+            icon={<Gamepad2 className="text-[#fa9a00ef]" />} 
+            text="Games" 
+          />
+          <SidebarLink 
+            href="/adminUsers" 
+            icon={<Users className="text-[#fa9a00ef]" />} 
+            text="Users" 
+          />
+          <SidebarLink 
+            href="/adminGenres" 
+            icon={<Layers className="text-[#fa9a00ef]" />} 
+            text="Genres" 
+          />
+          <SidebarLink 
+            href="/adminOrders" 
+            icon={<ShoppingCart className="text-[#fa9a00ef]" />} 
+            text="Orders" 
+          />
         </nav>
       </div>
 
@@ -82,8 +97,7 @@ function AdminOrders() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
           <StatCard title="Total Orders" value={orders.length.toString()} icon={<ShoppingCart />} />
-          <StatCard title="Total Revenue" value={`£${totalRevenue.toFixed(2)}`} icon={<Activity />} />
-
+          <StatCard title="Total Revenue" value={`Â£${totalRevenue.toFixed(2)}`} icon={<Activity />} />
         </div>
 
         {/* Orders Section */}
