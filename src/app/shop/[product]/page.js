@@ -469,17 +469,17 @@ function Product() {
 
               <div className="flex flex-wrap items-center gap-4 mb-4">
                 <div className="flex items-center">
-                  <div className="flex items-center text-[#FFA800]">
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <Star
-                        key={index}
-                        size={16}
-                        fill={index < Math.floor(game.rating) ? "currentColor" : "none"}
-                        className={index < Math.floor(game.rating) ? "text-[#FFA800]" : "text-gray-400"}
-                      />
-                    ))}
-                    <span className="ml-2 text-white">{Number(game.rating).toFixed(1)}</span>
-                  </div>
+                <div className="flex items-center text-[#FFA800]">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                   <Star
+                   key={index}
+                    size={16}
+                    fill={index < Math.floor(averageRating) ? "currentColor" : "none"}
+                     className={index < Math.floor(averageRating) ? "text-[#FFA800]" : "text-gray-400"}
+                    />
+                 ))}
+                 <span className="ml-2 text-white">{Number(averageRating).toFixed(1)}</span>
+                </div>
                 </div>
                 <span className="text-gray-400">|</span>
                 <div className="text-gray-300">
