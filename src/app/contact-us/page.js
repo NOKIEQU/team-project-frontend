@@ -73,7 +73,7 @@ function RegisterPage() {
         <polygon points="96,0 98,0 80,100 77,100" fill="rgba(255, 140, 0, 0.08)" />
         
         
-        <rect x="0" y="0" width="100" height="100" fill="url(#grid)" />
+        <rect x="0" y="0" width="100" height="100" fill="url(#grid)" /> 
     </svg>
 </div>
 
