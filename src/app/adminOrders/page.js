@@ -60,7 +60,10 @@ function AdminOrders() {
     order.user?.lastName?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const totalRevenue = orders.reduce((sum, order) => sum + order.totalPrice, 0);
+  const totalRevenue = orders.reduce((sum, order) => {
+    const orderPrice = order && order.totalPrice ? parseFloat(order.totalPrice) : 0;
+    return sum + (isNaN(orderPrice) ? 0 : orderPrice);
+  }, 0);
 
   const updateOrderStatus = async (orderId, newStatus) => {
     if (!userObject || !userObject.token) return;
@@ -77,7 +80,6 @@ function AdminOrders() {
       });
 
       if (response.ok) {
-        // Update local state
         setOrders(prevOrders => 
           prevOrders.map(order => 
             order.id === orderId ? { ...order, status: newStatus } : order
@@ -149,7 +151,7 @@ function AdminOrders() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
           <StatCard title="Total Orders" value={orders.length.toString()} icon={<ShoppingCart />} />
-          <StatCard title="Total Revenue" value={`£${parseFloat(totalRevenue).toFixed(2)}`} icon={<Activity />} />
+          <StatCard title="Total Revenue" value={`£${totalRevenue.toFixed(2)}`} icon={<Activity />} />
         </div>
 
         {/* Orders Section */}
@@ -189,9 +191,9 @@ function AdminOrders() {
                   filteredOrders.map((order) => (
                     <tr key={order.id} className="border-b border-[#3A3A4A] hover:bg-[#3A3A4A]/30">
                       <td className="p-3 text-white">{order.id}</td>
-                      <td className="p-3 text-white">{order.user.firstName} {order.user.lastName}</td>
+                      <td className="p-3 text-white">{order.user?.firstName} {order.user?.lastName}</td>
                       <td className="p-3 text-white">{order.user?.email}</td>
-                      <td className="p-3 text-white">£{order.totalPrice}</td>
+                      <td className="p-3 text-white">£{parseFloat(order.totalPrice).toFixed(2)}</td>
                       <td className="p-3 text-gray-400">{new Date(order.createdAt).toLocaleDateString()}</td>
                       <td className="p-3">
                         <div className="relative">
@@ -205,7 +207,7 @@ function AdminOrders() {
                           </button>
                           <div 
                             id={`dropdown-${order.id}`} 
-                            className="absolute z-10 mt-1 w-40 bg-[#252530] border border-[#3A3A4A] rounded-lg shadow-lg hidden"
+                            className="absolute z-50 mt-1 w-40 bg-[#252530] border border-[#3A3A4A] rounded-lg shadow-lg hidden right-0"
                           >
                             {['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED'].map((status) => (
                               <button
