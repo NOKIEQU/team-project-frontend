@@ -16,7 +16,7 @@ import Image from "next/image";
 
 function CheckoutPage() {
   const router = useRouter();
-  const { user, login } = useUser();
+  const { user } = useUser();
   const { cart, getCartTotal, clearCart } = useCart();
   
   useEffect(() => {
@@ -45,9 +45,9 @@ function CheckoutPage() {
     if (user) {
       console.log("User data found:", user);
       
-      const firstName = user.firstName || user.first_name || (user.name && user.name.first) || "";
-      const lastName = user.lastName || user.last_name || (user.name && user.name.last) || "";
-      const email = user.email || user.emailAddress || "";
+      const firstName = user.user.firstName || "";
+      const lastName = user.user.lastName || "";
+      const email = user.user.email || "";
       
       setFormData(prev => ({
         ...prev,
@@ -66,6 +66,7 @@ function CheckoutPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isOrderComplete, setIsOrderComplete] = useState(false);
   const [orderId, setOrderId] = useState("");
+  const [orderTotal, setOrderTotal] = useState(0);
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -101,14 +102,37 @@ function CheckoutPage() {
     
     setIsProcessing(true);
     
-    setTimeout(() => {
 
-      const randomOrderId = "GAME-" + Math.floor(Math.random() * 10000000);
-      setOrderId(randomOrderId);
-      setIsProcessing(false);
-      setIsOrderComplete(true);
-      clearCart();
-    }, 2000);
+      try {
+        const response = await fetch(`http://51.77.110.253:3001/api/checkout`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({
+            user: {
+              id: user.user.id,
+            }
+          }),
+        });
+  
+        const data = await response.json();
+        setOrderId(data.id);
+        setOrderTotal(data.totalPrice);
+        setIsProcessing(false);
+        setIsOrderComplete(true);
+        clearCart();
+        if (!response.ok) {
+          throw new Error(`Failed to delete game: ${response.statusText}`);
+        }
+  
+      } catch (error) {
+        console.error("Error submiting:", error);
+      }
+
+      
+      
   };
   
   useEffect(() => {
@@ -153,7 +177,7 @@ function CheckoutPage() {
             </div>
             <div className="flex justify-between mb-2">
               <span className="text-gray-400">Total Amount:</span>
-              <span className="font-medium">£{totalAmount.toFixed(2)}</span>
+              <span className="font-medium">£{orderTotal}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-400">Delivery Email:</span>

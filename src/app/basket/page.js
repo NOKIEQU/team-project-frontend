@@ -7,6 +7,8 @@ import { useCart } from "../../context/cart-context";
 
 const BasketPage = () => {
   const { cart, removeFromCart, updateQuantity, getCartTotal } = useCart();
+
+  
   
   const totalAmount = getCartTotal();
 
