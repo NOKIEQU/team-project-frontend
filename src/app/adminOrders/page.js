@@ -29,7 +29,7 @@ function AdminOrders() {
     const fetchOrders = async () => {
       if (userObject && userObject.token) {
         try {
-          const response = await fetch("http://51.77.110.253:3001/api/orders", {
+          const response = await fetch("http://51.77.110.253:3001/api/orders/all", {
             headers: {
               Authorization: `Bearer ${userObject.token}`,
             },
@@ -59,6 +59,8 @@ function AdminOrders() {
   );
 
   const totalRevenue = orders.reduce((sum, order) => sum + order.totalPrice, 0);
+
+  
 
   return (
     <div className="flex min-h-screen">
@@ -97,7 +99,7 @@ function AdminOrders() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
           <StatCard title="Total Orders" value={orders.length.toString()} icon={<ShoppingCart />} />
-          <StatCard title="Total Revenue" value={`Â£${totalRevenue.toFixed(2)}`} icon={<Activity />} />
+          <StatCard title="Total Revenue" value={`£${parseFloat(totalRevenue).toFixed(2)}`} icon={<Activity />} />
         </div>
 
         {/* Orders Section */}
@@ -137,9 +139,9 @@ function AdminOrders() {
                   filteredOrders.map((order) => (
                     <tr key={order.id} className="border-b border-[#3A3A4A] hover:bg-[#3A3A4A]/30">
                       <td className="p-3 text-white">{order.id}</td>
-                      <td className="p-3 text-white">{`${order.user?.firstName} ${order.user?.lastName}`}</td>
+                      <td className="p-3 text-white">{order.user.firstName} {order.user.lastName}</td>
                       <td className="p-3 text-white">{order.user?.email}</td>
-                      <td className="p-3 text-white">${order.totalPrice.toFixed(2)}</td>
+                      <td className="p-3 text-white">£{order.totalPrice}</td>
                       <td className="p-3 text-gray-400">{new Date(order.createdAt).toLocaleDateString()}</td>
                       <td className="p-3">
                         <span className={`px-3 py-1 rounded-full text-xs font-bold ${
