@@ -7,6 +7,7 @@ import {
   BarChart,
   Layers,
   Users,
+  Warehouse,
   ShoppingCart,
   Activity,
 } from "lucide-react";
@@ -133,15 +134,36 @@ function AdminPage() {
         {/* Sidebar */}
         <div className="bg-[#0F0F15] text-white w-64 flex flex-col p-5 space-y-4 border-r border-[#2A2A35]">
           <nav className="space-y-2">
-            <SidebarLink
-              href="/admin"
-              icon={<LayoutDashboard className="text-[#fa9a00ef]" />}
-              text="Dashboard"
-            />
-            <SidebarLink href="/adminGames" icon={<Gamepad2 className="text-[#fa9a00ef]" />} text="Games" />
-            <SidebarLink href="/adminUsers" icon={<Users className="text-[#fa9a00ef]" />} text="Users" />
-            <SidebarLink href="/adminGenres" icon={<Layers className="text-[#fa9a00ef]" />} text="Genres" />
-            <SidebarLink href="/adminOrders" icon={<ShoppingCart className="text-[#fa9a00ef]" />} text="Orders" />
+          <SidebarLink 
+          href="/admin"
+           icon={<LayoutDashboard className="text-[#fa9a00ef]" />}
+          text="Dashboard"
+          />
+          <SidebarLink 
+          href="/adminGames" 
+          icon={<Gamepad2 className="text-[#fa9a00ef]" />} 
+          text="Games" 
+          />
+          <SidebarLink 
+          href="/adminUsers" 
+          icon={<Users className="text-[#fa9a00ef]" />} 
+          text="Users" 
+          />
+          <SidebarLink 
+          href="/adminGenres" 
+          icon={<Layers className="text-[#fa9a00ef]" />} 
+          text="Genres" 
+          />
+        <SidebarLink 
+        href="/adminOrders" 
+        icon={<ShoppingCart className="text-[#fa9a00ef]" />} 
+        text="Orders" 
+        />
+        <SidebarLink 
+        href="/adminInventory" 
+        icon={<Warehouse className="text-[#fa9a00ef]" />} 
+        text="Inventory" 
+        />
           </nav>
         </div>
 

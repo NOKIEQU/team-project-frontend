@@ -11,6 +11,7 @@ import {
   Plus,
   Tag,
   AlertTriangle,
+  Warehouse,
   Bookmark,
   ArrowUpDown,
   Filter,
@@ -330,6 +331,11 @@ function AdminGames() {
             href="/adminOrders" 
             icon={<ShoppingCart className="text-[#fa9a00ef]" />} 
             text="Orders" 
+          />
+          <SidebarLink 
+          href="/adminInventory" 
+          icon={<Warehouse className="text-[#fa9a00ef]" />} 
+          text="Inventory" 
           />
         </nav>
       </div>
