@@ -13,6 +13,7 @@ export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
+    const [loginError, setLoginError] = useState('');
     const [popupEmail, setPopupEmail] = useState('');
     const [popupEmailError, setPopupEmailError] = useState('');
 
@@ -33,6 +34,7 @@ export default function LoginPage() {
 
     const submitLogin = (e) => {
         e.preventDefault();
+        setLoginError(''); // Clear any previous login errors
         if (validateEmail(email)) {
             checkLogin(email, password)
         } else {
@@ -56,6 +58,8 @@ export default function LoginPage() {
             });
     
             if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                setLoginError(errorData.message || 'Invalid email or password. Please try again.');
                 throw new Error('Login failed');
             }
     
@@ -67,7 +71,10 @@ export default function LoginPage() {
             console.log('Login successful:', data);
         } catch (error) {
             console.error('Error during login:', error);
-            // Handle login error, e.g., show error message
+            // If no error message was set above, set a generic one
+            if (!loginError) {
+                setLoginError('Login failed. Please check your credentials and try again.');
+            }
         }
     };
 
@@ -122,16 +129,25 @@ export default function LoginPage() {
         {/* Character image side */}
         <div className="w-2/5 h-full relative z-0 hidden md:block">
           <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A22] to-transparent z-10 opacity-40"></div>
-          <Image
-            src="/login.png"
-            layout="fill"
-            objectFit="cover"
-            alt="Login Side Image"
-            className="pointer-events-none"
-          />
-        </div>
+         
+          <div className="p-10 flex flex-col justify-center items-center bg-black h-full text-white">
+            <h1 className="text-2xl font-bold mb-4 text-center">
+              Admin Account
+            </h1>
+            <p className="text-sm mb-6 text-center">
+              <span className="font-semibold">Username:</span> admin@gmail.com <br />
+              <span className="font-semibold">Password:</span> 123123123
+            </p>
+            <h1 className="text-2xl font-bold mb-4 text-center">
+              User Account
+            </h1>
+            <p className="text-sm text-center">
+              <span className="font-semibold">Username:</span> user@gmail.com <br />
+              <span className="font-semibold">Password:</span> 123123123
+            </p>
+          </div>
+          </div>
 
-        {/* Login form */}
         <div
           className="w-full md:w-3/5 flex flex-col items-center justify-center p-6 z-20 relative pointer-events-auto 
             md:border-r-4 md:border-[#1A1A22] "
@@ -140,6 +156,14 @@ export default function LoginPage() {
             LOGIN TO ACCOUNT
           </h1>
           <div className="w-40 h-1 bg-[#FF8C00] rounded-full mb-6 mx-auto transition-all hover:w-2/5"></div>
+          
+          {/* Login error message */}
+          {loginError && (
+            <div className="bg-red-500 bg-opacity-20 border border-red-500 text-white px-4 py-2 rounded-lg mb-4 w-full max-w-md">
+              <p className="text-sm font-semibold">{loginError}</p>
+            </div>
+          )}
+          
           <form
             className="flex flex-col space-y-4 w-full max-w-md"
             onSubmit={(e) => {
@@ -154,7 +178,10 @@ export default function LoginPage() {
                 id="email"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setEmailError('');
+                }}
                 className="w-full px-3 py-2 bg-transparent border-b-2 border-white text-sm outline-none text-white 
                             placeholder-white focus:border-[#FF8C00] transition-colors duration-300"
                 placeholder="Enter your email"
@@ -172,7 +199,10 @@ export default function LoginPage() {
                 id="password"
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setLoginError(''); // Clear login error when password changes
+                }}
                 className="w-full px-3 py-2 bg-transparent border-b-2 border-white text-sm outline-none text-white 
                             placeholder-white focus:border-[#FF8C00] transition-colors duration-300"
                 placeholder="Enter your password"

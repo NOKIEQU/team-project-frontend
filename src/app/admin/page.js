@@ -14,6 +14,7 @@ import {
 import SidebarLink from "../components/SidebarLink";
 import { useEffect, useState } from "react";
 import { useUser } from "../../context/user-context";
+import { useRouter } from "next/navigation";
 
 function AdminPage() {
   const [orders, setOrders] = useState([]);
@@ -23,12 +24,20 @@ function AdminPage() {
   const [isLoading, setIsLoading] = useState(true);
   const { user: userObject } = useUser();
   const [isUserLoaded, setIsUserLoaded] = useState(false);
+  const router = useRouter();
 
   // Check if the user is loaded
   useEffect(() => {
     if (userObject && userObject.token) {
       setIsUserLoaded(true);
     }
+
+    console.log(userObject);
+
+    // if (userObject.user.role !== "ADMIN") {
+    //   router.push("/");
+    // }
+
   }, [userObject]);
 
   // Fetch all necessary data when the user is loaded

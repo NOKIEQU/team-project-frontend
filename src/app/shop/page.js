@@ -302,14 +302,6 @@ function ShopPage() {
         <h2 className="text-3xl font-bold text-white mb-8">{title}</h2>
         
         <div className="relative">
-          <button 
-            onClick={() => scrollCarousel(type, 'left')}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-70 hover:bg-opacity-90 text-white p-2 rounded-full transition"
-            aria-label="Previous"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          
           <div 
             ref={carouselRefs[type]} 
             className="flex overflow-x-auto pb-6 scrollbar-hide snap-x scroll-smooth"
@@ -358,14 +350,6 @@ function ShopPage() {
               </div>
             ))}
           </div>
-          
-          <button 
-            onClick={() => scrollCarousel(type, 'right')}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-70 hover:bg-opacity-90 text-white p-2 rounded-full transition"
-            aria-label="Next"
-          >
-            <ChevronRight size={24} />
-          </button>
         </div>
         
         <div className="flex justify-center mt-4 space-x-2">
