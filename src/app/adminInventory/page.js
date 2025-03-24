@@ -117,8 +117,8 @@ function AdminInventory() {
     }
 
     try {
-      const response = await fetch(`http://51.77.110.253:3001/api/inventory/updateStock`, {
-        method: "POST",
+      const response = await fetch(`http://51.77.110.253:3001/api/inventory/update`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${userObject.token}`,
@@ -158,7 +158,7 @@ function AdminInventory() {
         });
       }
     } catch (error) {
-      console.error("Error updating stock:", error);
+      console.error(error);
       setUpdateStatus({ 
         loading: false, 
         success: null, 

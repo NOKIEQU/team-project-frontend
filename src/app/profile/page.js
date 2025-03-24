@@ -91,9 +91,41 @@ function AccountPage() {
     }));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     console.log('Saving updated profile:', formData);
-    showNotificationMessage('Profile updated successfully!', 'success');
+    
+    try {
+      const response = await fetch(`http://51.77.110.253:3001/api/users/update`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          password: formData.newPassword,
+        }),
+      });
+  
+      // Check if response is successful
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to update profile');
+      }
+  
+      // Parse the response
+      const updatedUser = await response.json();
+      
+      // Update the user data in your state/context if needed
+      // updateUser(updatedUser);
+      
+      showNotificationMessage('Profile updated successfully!', 'success');
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      showNotificationMessage(`Update failed: ${error.message}`, 'error');
+    }
   };
 
   const handleImageUpload = (event) => {
@@ -164,6 +196,8 @@ function AccountPage() {
       setShowDeleteConfirm(false);
     }
   };
+
+  
 
   async function handleDeleteOrder (e, id) {
     e.preventDefault();
