@@ -15,6 +15,7 @@ import {
 import SidebarLink from "../components/SidebarLink";
 import { useUser } from "../../context/user-context";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 function AdminGenres() {
   const { user: userObject } = useUser();
@@ -30,7 +31,11 @@ function AdminGenres() {
   const [addNewGenre, setAddNewGenre] = useState("");
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const [genreToDelete, setGenreToDelete] = useState(null);
+  const router = useRouter();
 
+  if (isUserLoaded && userObject.user.role !== "admin") {
+    router.push("/");
+  }
   // Check if the user is loaded
   useEffect(() => {
     if (userObject && userObject.token) {

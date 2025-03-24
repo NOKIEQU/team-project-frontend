@@ -21,6 +21,7 @@ import {
 import SidebarLink from "../components/SidebarLink";
 import { useUser } from "../../context/user-context";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 function AdminGames() {
   const [games, setGames] = useState([]);
@@ -46,6 +47,11 @@ function AdminGames() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [sortBy, setSortBy] = useState("title");
   const [sortDirection, setSortDirection] = useState("asc");
+  const router = useRouter();
+
+  if (isUserLoaded && userObject.user.role !== "admin") {
+    router.push("/");
+  }
   
   // Filter games based on search term and active filter
   const filteredGames = games.filter((game) => {

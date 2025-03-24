@@ -14,6 +14,7 @@ import {
 import SidebarLink from "../components/SidebarLink";
 import { useUser } from "../../context/user-context";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 function AdminOrders() {
   const { user: userObject } = useUser();
@@ -21,7 +22,12 @@ function AdminOrders() {
   const [orders, setOrders] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusUpdating, setStatusUpdating] = useState(null);
+  const router = useRouter();
 
+  if (isUserLoaded && userObject.user.role !== "admin") {
+    router.push("/");
+  }
+  
   useEffect(() => {
     if (userObject && userObject.token) {
       setIsUserLoaded(true);

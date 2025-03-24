@@ -12,7 +12,7 @@ import {
   Activity,
 } from "lucide-react";
 import SidebarLink from "../components/SidebarLink";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import { useUser } from "../../context/user-context";
 import { useRouter } from "next/navigation";
 
@@ -31,14 +31,12 @@ function AdminPage() {
     if (userObject && userObject.token) {
       setIsUserLoaded(true);
     }
-
-    console.log(userObject);
-
-    // if (userObject.user.role !== "ADMIN") {
-    //   router.push("/");
-    // }
-
   }, [userObject]);
+
+
+  if (isUserLoaded && userObject.user.role !== "admin") {
+    router.push("/");
+  }
 
   // Fetch all necessary data when the user is loaded
   useEffect(() => {
@@ -49,7 +47,7 @@ function AdminPage() {
       }
 
       setIsLoading(true);
-      
+
       try {
         // Fetch orders
         const ordersResponse = await fetch("http://51.77.110.253:3001/api/orders", {
@@ -64,7 +62,7 @@ function AdminPage() {
 
         const ordersData = await ordersResponse.json();
         setOrders(ordersData);
-        
+
         // Fetch games/products
         const gamesResponse = await fetch("http://51.77.110.253:3001/api/products", {
           headers: {
@@ -78,7 +76,7 @@ function AdminPage() {
 
         const gamesData = await gamesResponse.json();
         setGames(gamesData);
-        
+
         // Fetch users
         const usersResponse = await fetch("http://51.77.110.253:3001/api/users/all", {
           headers: {
@@ -93,7 +91,7 @@ function AdminPage() {
         const usersData = await usersResponse.json();
         setUsers(usersData);
         console.log(users)
-        
+
         // Generate recent activity by combining the most recent orders and user registrations
         const recentOrders = ordersData.slice(0, 5).map(order => {
           const user = users.find(u => u.id === order.userId);
@@ -105,7 +103,7 @@ function AdminPage() {
             user: user ? `${user.firstName} ${user.lastName}` : 'Unknown User'
           };
         });
-        
+
         const recentUsers = usersData
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
           .slice(0, 5)
@@ -116,12 +114,12 @@ function AdminPage() {
             details: `New user registered`,
             user: `${user.firstName} ${user.lastName}`
           }));
-        
+
         // Combine and sort by date
         const combinedActivity = [...recentOrders, ...recentUsers]
           .sort((a, b) => b.date - a.date)
           .slice(0, 10);
-        
+
         setRecentActivity(combinedActivity);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -143,36 +141,36 @@ function AdminPage() {
         {/* Sidebar */}
         <div className="bg-[#0F0F15] text-white w-64 flex flex-col p-5 space-y-4 border-r border-[#2A2A35]">
           <nav className="space-y-2">
-          <SidebarLink 
-          href="/admin"
-           icon={<LayoutDashboard className="text-[#fa9a00ef]" />}
-          text="Dashboard"
-          />
-          <SidebarLink 
-          href="/adminGames" 
-          icon={<Gamepad2 className="text-[#fa9a00ef]" />} 
-          text="Games" 
-          />
-          <SidebarLink 
-          href="/adminUsers" 
-          icon={<Users className="text-[#fa9a00ef]" />} 
-          text="Users" 
-          />
-          <SidebarLink 
-          href="/adminGenres" 
-          icon={<Layers className="text-[#fa9a00ef]" />} 
-          text="Genres" 
-          />
-        <SidebarLink 
-        href="/adminOrders" 
-        icon={<ShoppingCart className="text-[#fa9a00ef]" />} 
-        text="Orders" 
-        />
-        <SidebarLink 
-        href="/adminInventory" 
-        icon={<Warehouse className="text-[#fa9a00ef]" />} 
-        text="Inventory" 
-        />
+            <SidebarLink
+              href="/admin"
+              icon={<LayoutDashboard className="text-[#fa9a00ef]" />}
+              text="Dashboard"
+            />
+            <SidebarLink
+              href="/adminGames"
+              icon={<Gamepad2 className="text-[#fa9a00ef]" />}
+              text="Games"
+            />
+            <SidebarLink
+              href="/adminUsers"
+              icon={<Users className="text-[#fa9a00ef]" />}
+              text="Users"
+            />
+            <SidebarLink
+              href="/adminGenres"
+              icon={<Layers className="text-[#fa9a00ef]" />}
+              text="Genres"
+            />
+            <SidebarLink
+              href="/adminOrders"
+              icon={<ShoppingCart className="text-[#fa9a00ef]" />}
+              text="Orders"
+            />
+            <SidebarLink
+              href="/adminInventory"
+              icon={<Warehouse className="text-[#fa9a00ef]" />}
+              text="Inventory"
+            />
           </nav>
         </div>
 
@@ -193,10 +191,10 @@ function AdminPage() {
                   icon={<ShoppingCart />}
                 />
                 <StatCard title="Total Users" value={users.length.toString()} icon={<Users />} />
-                <StatCard 
-                  title="Total Revenue" 
-                  value={`£${orders.reduce((sum, order) => sum + (order.total || 0), 0)}`} 
-                  icon={<BarChart />} 
+                <StatCard
+                  title="Total Revenue"
+                  value={`£${orders.reduce((sum, order) => sum + (order.total || 0), 0)}`}
+                  icon={<BarChart />}
                 />
               </div>
 
@@ -218,15 +216,14 @@ function AdminPage() {
                       <tbody>
                         {recentActivity.map((activity, index) => (
                           <tr key={`${activity.type}-${activity.id}`} className="border-b border-[#3A3A4A] hover:bg-[#3A3A4A]/30">
-                            <td className="p-3 text-gray-400">{activity.date.toLocaleDateString()} {activity.date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
+                            <td className="p-3 text-gray-400">{activity.date.toLocaleDateString()} {activity.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
                             <td className="p-3 text-white">{activity.user}</td>
                             <td className="p-3 text-white">{activity.details}</td>
                             <td className="p-3">
-                              <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                                activity.type === 'order' 
-                                  ? 'bg-[#fa9a00ef]/20 text-[#fa9a00ef]' 
+                              <span className={`px-3 py-1 rounded-full text-xs font-bold ${activity.type === 'order'
+                                  ? 'bg-[#fa9a00ef]/20 text-[#fa9a00ef]'
                                   : 'bg-blue-500/20 text-blue-500'
-                              }`}>
+                                }`}>
                                 {activity.type === 'order' ? 'Order' : 'Registration'}
                               </span>
                             </td>
@@ -241,8 +238,8 @@ function AdminPage() {
                     <p className="text-gray-400 text-center">
                       No activity to display yet. Activity will appear here when users interact with your platform.
                     </p>
-                    <button 
-                      onClick={() => window.location.reload()} 
+                    <button
+                      onClick={() => window.location.reload()}
                       className="mt-6 bg-[#fa9a00ef] hover:bg-[#e08800] px-6 py-2 text-white rounded-full font-medium transition-all duration-300"
                     >
                       Refresh Activity

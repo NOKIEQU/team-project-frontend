@@ -20,6 +20,7 @@ import {
 import SidebarLink from "../components/SidebarLink";
 import { useUser } from "../../context/user-context";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 function AdminUsers() {
   const { user: userObject } = useUser();
@@ -40,6 +41,12 @@ function AdminUsers() {
     password: ""
   });
   const [updateError, setUpdateError] = useState("");
+
+  const router = useRouter();
+
+  if (isUserLoaded && userObject.user.role !== "admin") {
+    router.push("/");
+  }
 
   useEffect(() => {
     if (userObject && userObject.token) {

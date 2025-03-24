@@ -24,6 +24,7 @@ import {
 import SidebarLink from "../components/SidebarLink";
 import { useUser } from "../../context/user-context";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 function AdminInventory() {
   const { user: userObject } = useUser();
@@ -39,7 +40,11 @@ function AdminInventory() {
   const [sortDirection, setSortDirection] = useState("asc");
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
   const [updateStatus, setUpdateStatus] = useState({ loading: false, success: null, error: null });
+  const router = useRouter();
 
+  if (isUserLoaded && userObject.user.role !== "admin") {
+    router.push("/");
+  }
   useEffect(() => {
     if (userObject && userObject.token) {
       setIsUserLoaded(true);
